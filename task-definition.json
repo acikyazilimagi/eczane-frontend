@@ -1,0 +1,39 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "container-name",
+      "image": "nginx:latest",
+      "cpu": 512,
+      "memory": 1024,
+      "portMappings": [
+        {
+          "name": "container-name-80-tcp",
+          "containerPort": 80,
+          "hostPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-create-group": "true",
+          "awslogs-group": "/ecs/eczane-front",
+          "awslogs-region": "eu-central-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ],
+  "family": "eczane-front-TD",
+  "executionRoleArn": "arn:aws:iam::366354050833:role/ecsServiceRole",
+  "networkMode": "awsvpc",
+  "volumes": [],
+  "placementConstraints": [],
+  "cpu": "512",
+  "memory": "1024",
+  "tags": []
+}
