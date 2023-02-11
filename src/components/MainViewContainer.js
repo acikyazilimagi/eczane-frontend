@@ -22,6 +22,7 @@ import UpButton from "./UpButton";
 import DownButton from "./DownButton";
 import Header from "./Header";
 import SelectType from "./SelectType";
+import { margin } from "@mui/system";
 
 const MainViewContaier = () => {
   const [visible, setVisible] = useState(false);
@@ -133,13 +134,12 @@ const MainViewContaier = () => {
       
       <Header  alignment={alignment} handleChange={handleChange}></Header>
       
+     
 
-      
-     <SelectType handleChange={handleChange} alignment={alignment}></SelectType>
+    
+        
 
-      
-
-      <Grid container sx={{ margin: "90 0 40 0" }}>
+      <Grid container sx={{width:"100%",margin:"90px 0px 40px 0px",justifyContent:"center" }} >
         
 
         <Grid
@@ -147,18 +147,21 @@ const MainViewContaier = () => {
             display: "flex",
             flexDirection: "row",
             alignItems: "flex-start",
-            justifyContent: "flex-end",
             color: "white",
             maxWidth: "unset",
+            flexBasis:"auto",
+            margin:"10px 0px"
+            
           }}
-          item
-          xs={6}
+          item md={6} sm={12} alignSelf={"self-start"} 
         >
           <Stack
             sx={{
               border: "solid 0.1px",
               padding: "7px",
               borderRadius: "8px",
+              
+              
             }}
             direction="row-reverse"
             spacing={2}
@@ -191,8 +194,21 @@ const MainViewContaier = () => {
             </ToggleButtonGroup>
           </Stack>
         </Grid>
-        <Grid item xs={6}></Grid>
+        <Grid item md={6} sm={12} display="flex">
+        <SelectType handleChange={handleChange} alignment={alignment} ></SelectType>
+        </Grid>
+        
+        
       </Grid>
+      
+ 
+
+      
+   
+
+      
+
+     
 
       {alignment === "harita" && (
         <Box
@@ -285,9 +301,13 @@ const MainViewContaier = () => {
                               </Box>
                             </Stack>
                             <Typography
-                              padding="0px 12px"
-                              display="absolute"
-                              color="#182151"
+                              sx={{
+                                margin: 0,
+  opacity: 0.63,
+  flexWrap:"wrap",
+  padding:"5px"
+                              }}
+
                             >
                               {station.address}
                             </Typography>
@@ -427,6 +447,10 @@ const MainViewContaier = () => {
                       padding="0px 12px"
                       display="absolute"
                       color="#182151"
+                      sx={{
+                        margin: 0,
+opacity: 0.63,
+                      }}
                     >
                       {item.additionalAddressDetails}
                     </Typography>
