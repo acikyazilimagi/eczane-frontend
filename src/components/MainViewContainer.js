@@ -18,64 +18,69 @@ import CallIcon from "@mui/icons-material/Call";
 import axios from "axios";
 import { useState } from "react";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import UpButton from "./UpButton";
+import DownButton from "./DownButton";
+import Header from "./Header";
+import SelectType from "./SelectType";
 
 const MainViewContaier = () => {
   const [visible, setVisible] = useState(false);
   const [visible1, setVisible1] = useState(false);
-
-  const toggleVisible = (event) => {
-    const scrolled = document.body.scrollTop;
-    if (scrolled > 120) {
-      setVisible(true);
-    } else if (scrolled <= 120) {
-      setVisible(false);
-    }
-  };
-
-  const toggleVisible1 = (event) => {
-    const scrolled = document.body.scrollTop;
-    if (scrolled < 120) {
-      setVisible1(true);
-    } else if (scrolled >= 120) {
-      setVisible1(false);
-    }
-  };
-
-  window.addEventListener("scroll", toggleVisible);
-  window.addEventListener("scroll", toggleVisible1);
-
   const [mapRef, setMapRef] = React.useState();
-
   const [alignment, setAlignment] = React.useState("harita");
-  const [alignmentFilter, setAlignmentFilter] = React.useState("hepsi");
+  const [citydata, setCityData] = React.useState(null);
+  const [data, setData] = React.useState(null)
+  const [allData, setAllData] = React.useState(null)
+  const [button,setButton]=React.useState("hepsi")
   const center = [37.683664, 38.322966];
   const zoom = 7;
 
-  const handleChange = (event, newAlignment) => {
+
+  
+  const toggleVisible = (event) => {
+    const scrolled = document.body.scrollTop;
+    if (scrolled > 480) {
+      setVisible(true);
+    } else if (scrolled <= 480) {
+      setVisible(false);
+    }
+  };
+  const toggleVisible1 = (event) => {
+    const scrolled = document.body.scrollTop;
+    if (scrolled < 480) {
+      setVisible1(true);
+    } else if (scrolled >= 480) {
+      setVisible1(false);
+    }
+  };
+  window.addEventListener("scroll", toggleVisible);
+  window.addEventListener("scroll", toggleVisible1);
+
+ 
+  const handleChange = (event, newAlignment) => {  //TODO DEGISTIR
     setAlignment(newAlignment);
   };
 
-  const handleChangeFilter = (event, newAlignment) => {
-    if (newAlignment === "eczane") {
-      setActiveData(dataEczane);
-    } else if (newAlignment === "hastane") {
-      setActiveData(dataHastane);
-    } else if (newAlignment === "hepsi") {
-      setActiveData(allData);
-    }
-    setAlignmentFilter(newAlignment);
+  const handleChangeCity = (city) => {
+    const lat = centers[city]?.lat;
+    const lng = centers[city]?.lng;
+    mapRef.flyTo([lat, lng], 12);
   };
 
-  const CustomToggleButton = styled(ToggleButton)({
-    "&.Mui-selected, &.Mui-selected:hover": {
-      color: "white",
-      backgroundColor: "#FF6464",
-    },
-    "&.MuiButtonBase-root": {
-      textTransform: "none",
-    },
-  });
+   const handleFilterButton = (event) => {
+    setButton(event.target.value);
+        if (event.target.value === 'hepsi') {
+            setData(allData)
+        }
+        
 
+        else {
+            const filteredData = allData?.filter((item) => item.type === event.target.value)
+            setData(filteredData )
+        }
+    }
+
+  
   const CustomToggleButtonFilter = styled(ToggleButton)({
     "&.Mui-selected, &.Mui-selected:hover": {
       color: "white",
@@ -87,50 +92,18 @@ const MainViewContaier = () => {
     },
   });
 
-  const [allData, setAllData] = React.useState(null);
-  const [dataEczane, setEczane] = React.useState(null);
-  const [dataHastane, setHastane] = React.useState(null);
-  const [citydata, setCityData] = React.useState(null);
-  const [activeData, setActiveData] = React.useState(allData);
 
-  useEffect(() => {
-    axios
-      .get("https://eczaneapi.afetharita.com/api?type=Hastane")
-      .then((response) => {
-        setHastane(response.data);
+  
+    useEffect(() => {
+        axios.get("https://eczaneapi.afetharita.com/api").then((response) => {
+            setData(response.data?.data);
+            setAllData(response.data?.data);
+        }).catch((err) => {
+            //setError(err)
+        })
 
-        //setAllData(response.data);
-      })
-      .catch((err) => {
-        return <h2>Error {err}</h2>;
-        //setError(err)
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get("https://eczaneapi.afetharita.com/api?type=Eczane")
-      .then((response) => {
-        setEczane(response.data);
-        //setAllData(response.data);
-      })
-      .catch((err) => {
-        return <h2>Error {err}</h2>;
-        //setError(err)
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get("https://eczaneapi.afetharita.com/api")
-      .then((response) => {
-        setAllData(response.data);
-      })
-      .catch((err) => {
-        //setError(err)
-      });
-  }, []);
-
+    }, []);
+    
   useEffect(() => {
     axios
       .get("https://eczaneapi.afetharita.com/api/cityWithDistricts ")
@@ -142,116 +115,32 @@ const MainViewContaier = () => {
       });
   }, []);
 
-  useEffect(() => {
-    setActiveData(allData);
-  }, [allData]);
-
-  const handleChangeCity = (city) => {
-    const lat = centers[city]?.lat;
-    const lng = centers[city]?.lng;
-    mapRef.flyTo([lat, lng], 12);
-  };
+  if(data===null){
+    return <h2>Loading  </h2>   //LOADBAR EKLE
+  }
+ 
+  
 
   return (
     <Paper
       id="fullheight"
-      sx={{ bgcolor: "#182151", height: "100%", padding: "30px 200 100 200" }}
+      sx={{ bgcolor: "#182151", height: "100%", padding: "0px" }}
       variant="outlined"
     >
-      {/* <Grid sx={{ bgcolor: '#182151', width: '43%', marginLeft: '-51px' }} container>
-                <Grid sx={{ display: 'flex', padding: '0 0 0 0' }} item xs={3}>
-                    <LogoIcon size={'100%'} color="purple" />
-                </Grid>
-                <Grid sx={{ display: 'flex', padding: '21px 255px 0 0' }} item xs={9}>
-                    <Typography sx={{ color: 'white', fontSize: '25', fontFamily: 'sans-serif' }} mt={2}>
-                        Hastaneler ve Eczaneler
-                    </Typography>
-                </Grid>
-            </Grid > */}
 
-      <button
-        style={{ display: visible ? "inline" : "none" }}
-        onClick={() => {
-          document.body.scrollTop = 0; // For Safari
-          document.documentElement.scrollTop = 0;
-        }}
-        id="myBtn"
-        title="Go to top"
-      >
-        <ArrowUpwardIcon></ArrowUpwardIcon>
-      </button>
+      <UpButton visible={visible}></UpButton>
+      <DownButton visible={visible1}></DownButton>
+      
+      <Header  alignment={alignment} handleChange={handleChange}></Header>
+      
 
-      <button
-        style={{ display: visible1 ? "inline" : "none" }}
-        onClick={() => {
-          document.body.scrollTop = 860; // For Safari
-          document.documentElement.scrollTop = 860;
-        }}
-        id="downBtn"
-        title="Go to buttom"
-      >
-        <ArrowDownwardIcon></ArrowDownwardIcon>
-      </button>
+      
+     <SelectType handleChange={handleChange} alignment={alignment}></SelectType>
 
-      <div style={{ display: "flex", alignItems: "center", gap: "7px" }}>
-        <img
-          src="/logo.png"
-          alt="logo"
-          style={{ aspectRatio: "auto", width: "60px" }}
-        />
-        <Typography
-          sx={{ color: "white", fontSize: "25", fontFamily: "sans-serif" }}
-        >
-          Hastaneler ve <br />
-          Eczaneler
-        </Typography>
-      </div>
-
-      <Grid container sx={{ margin: "0 0 0 0" }}>
-        <Typography
-          sx={{ color: "white", fontSize: "50", fontFamily: "sans-serif" }}
-          mt={10}
-        >
-          <span style={{ color: "#F83B3B", fontWeight: "600" }}>
-            Eczaneler{" "}
-          </span>
-          ve{" "}
-          <span style={{ color: "#F83B3B", fontWeight: "600" }}>
-            Hastaneler
-          </span>{" "}
-          <br />
-          Haritası
-        </Typography>
-      </Grid>
+      
 
       <Grid container sx={{ margin: "90 0 40 0" }}>
-        <Grid
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            maxWidth: "unset",
-          }}
-          item
-          xs={6}
-        >
-          <ToggleButtonGroup
-            textTransform={"none"}
-            sx={{
-              backgroundColor: "white",
-              padding: "2",
-            }}
-            color="secondary"
-            value={alignment}
-            exclusive
-            onChange={handleChange}
-            aria-label="Platform"
-          >
-            <CustomToggleButton value="harita">Haritada Gör</CustomToggleButton>
-            <CustomToggleButton value="liste">Listede Gör</CustomToggleButton>
-          </ToggleButtonGroup>
-        </Grid>
+        
 
         <Grid
           sx={{
@@ -285,18 +174,18 @@ const MainViewContaier = () => {
               sx={{
                 padding: "1",
               }}
-              value={alignmentFilter}
+              value={button}
               exclusive
-              onChange={handleChangeFilter}
+              onChange={handleFilterButton}
               aria-label="Platform"
             >
-              <CustomToggleButtonFilter value="hepsi">
+              <CustomToggleButtonFilter value="hepsi" c>
                 Hepsi
               </CustomToggleButtonFilter>
-              <CustomToggleButtonFilter value="hastane">
+              <CustomToggleButtonFilter value="Hastane">
                 Hastane
               </CustomToggleButtonFilter>
-              <CustomToggleButtonFilter value="eczane">
+              <CustomToggleButtonFilter value="Eczane">
                 Eczane
               </CustomToggleButtonFilter>
             </ToggleButtonGroup>
@@ -329,7 +218,7 @@ const MainViewContaier = () => {
             />
 
             <MarkerClusterGroup>
-              {activeData?.data.map((station) => {
+              {data?.map((station) => {
                 return (
                   <Marker
                     key={station.id} //key kısmını da kendi datanıza göre ayarlayın mydaya.id gibi
@@ -464,7 +353,6 @@ const MainViewContaier = () => {
             textAlign: "center",
           }}
         >
-          {/* <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}> */}
           <div
             style={{
               display: "flex",
@@ -473,7 +361,7 @@ const MainViewContaier = () => {
               justifyContent: "center",
             }}
           >
-            {activeData?.data.map((item, index) => (
+            {data?.map((item, index) => (
               <Grid item xs={2} sm={4} md={4} key={index}>
                 <Stack
                   sx={{
