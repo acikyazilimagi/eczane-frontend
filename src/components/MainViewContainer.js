@@ -103,7 +103,6 @@ const MainViewContaier = () => {
         setCityData(response.data);
       })
       .catch((err) => {
-        //setError(err)
       });
   }, []);
 
@@ -437,5 +436,4 @@ const MainViewContaier = () => {
     </Paper>
   );
 };
-
 export default MainViewContaier;
