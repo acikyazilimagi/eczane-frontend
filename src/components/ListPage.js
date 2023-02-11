@@ -83,8 +83,12 @@ const ListPage= ({data})=>{
                         </div>
 
                         <div style={{ display: "flex", alignItems: "center" }}>
-                          <CallIcon></CallIcon>
-                          <a href={item.phone}>{item.phone}</a>
+                          {item.phone && (
+                            <>
+                              <CallIcon></CallIcon>
+                              <a href={item.phone}>{item.phone}</a>
+                            </>
+                        )}
                         </div>
                       </div>
                     </Stack>
@@ -94,7 +98,7 @@ const ListPage= ({data})=>{
                       color="#182151"
                       sx={{
                         margin: 0,
-opacity: 0.63,
+                        opacity: 0.63,
                       }}
                     >
                       {item.additionalAddressDetails}
