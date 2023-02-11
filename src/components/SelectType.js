@@ -15,16 +15,16 @@ const SelectType=({alignment,handleChange})=>{const CustomToggleButton = styled(
 
 
 
-   return( <Grid
+   return( <div
           sx={{
             display: "flex",
+            
             flexDirection: "row",
             justifyContent: "flex-start",
             alignItems: "center",
             maxWidth: "unset",
           }}
-          item
-          xs={6}
+          
         >
           <ToggleButtonGroup
             textTransform={"none"}
@@ -41,7 +41,7 @@ const SelectType=({alignment,handleChange})=>{const CustomToggleButton = styled(
             <CustomToggleButton value="harita" >Haritada Gör</CustomToggleButton>
             <CustomToggleButton value="liste">Listede Gör</CustomToggleButton>
           </ToggleButtonGroup>
-        </Grid>)
+        </div>)
 
 }
 export default SelectType

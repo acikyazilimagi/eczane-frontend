@@ -8,11 +8,12 @@ import ToggleButton from "@mui/material/ToggleButton";
 
 
 const FiltreYer=({button,handleFilterButton,handleChange,alignment})=>{
-
+    //lİSTE DÜĞMESINE TIKLANDIGINDA VE HOVERLANDIGINDAKI DEGISIM
     const CustomToggleButtonFilter = styled(ToggleButton)({
         "&.Mui-selected, &.Mui-selected:hover": {
           color: "white",
           backgroundColor: "#FF6464",
+
         },
         "&.MuiToggleButton-root": {
           textTransform: "none",
