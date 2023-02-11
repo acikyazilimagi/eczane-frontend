@@ -11,7 +11,6 @@ COPY . .
 
 RUN npm run build
 
-CMD ["npm","run","start"]
-
-# FROM nginx:latest
-# COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+FROM nginx:latest
+COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
