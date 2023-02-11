@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
-import {BREAKPOINTS} from "../../utils/styled";
+import { BREAKPOINTS } from "../../utils/styled";
 
 const SHeaderWrapper = styled.div`
-  padding: 1rem 2.25rem;
   display: flex;
-
+  align-items: center;
+  margin-bottom: 1.5rem;
   @media ${BREAKPOINTS.MD.min} {
-    padding: 2.25rem 4.5rem;
+    margin-bottom: 3.625rem;
   }
 `;
 
@@ -34,11 +34,10 @@ const SLogoText = styled.h1`
 
 export const Header = () => {
   return (
-
     <SHeaderWrapper>
-      <SImage src="/logo.png" alt="logo"/>
+      <SImage src="/logo.png" alt="logo" />
       <SLogoText>
-        Hastaneler ve <br/>
+        Hastaneler ve <br />
         Eczaneler
       </SLogoText>
     </SHeaderWrapper>

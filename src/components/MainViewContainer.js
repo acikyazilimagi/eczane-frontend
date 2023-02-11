@@ -1,25 +1,22 @@
-import React, {useEffect} from "react";
-import {styled} from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import {MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
-import centers from "./cityCenters";
-import MarkerClusterGroup from "react-leaflet-markercluster";
-import Divider from "@mui/material/Divider";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CallIcon from "@mui/icons-material/Call";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import { styled } from "@mui/material/styles";
+import ToggleButton from "@mui/material/ToggleButton";
+import Typography from "@mui/material/Typography";
 import axios from "axios";
-import {useState} from "react";
-import UpButton from "./UpButton";
+import React, { useEffect, useState } from "react";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-markercluster";
+import centers from "./cityCenters";
 import DownButton from "./DownButton";
-import { Header } from "./Header/Header";
-import SelectType from "./SelectType";
+import { HeaderCombined } from "./Header/HeaderCombined";
+import UpButton from "./UpButton";
 
 const MainViewContaier = () => {
   const [visible, setVisible] = useState(false);
@@ -27,12 +24,11 @@ const MainViewContaier = () => {
   const [mapRef, setMapRef] = React.useState();
   const [alignment, setAlignment] = React.useState("harita");
   const [citydata, setCityData] = React.useState(null);
-  const [data, setData] = React.useState(null)
-  const [allData, setAllData] = React.useState(null)
-  const [button, setButton] = React.useState("hepsi")
+  const [data, setData] = React.useState(null);
+  const [allData, setAllData] = React.useState(null);
+  const [button, setButton] = React.useState("hepsi");
   const center = [37.683664, 38.322966];
   const zoom = 7;
-
 
   const toggleVisible = (event) => {
     const scrolled = document.body.scrollTop;
@@ -53,7 +49,8 @@ const MainViewContaier = () => {
   window.addEventListener("scroll", toggleVisible);
   window.addEventListener("scroll", toggleVisible1);
 
-  const handleChange = (event, newAlignment) => {  //TODO DEGISTIR
+  const handleChange = (event, newAlignment) => {
+    //TODO DEGISTIR
     setAlignment(newAlignment);
   };
 
@@ -65,14 +62,15 @@ const MainViewContaier = () => {
 
   const handleFilterButton = (event) => {
     setButton(event.target.value);
-    if (event.target.value === 'hepsi') {
-      setData(allData)
+    if (event.target.value === "hepsi") {
+      setData(allData);
     } else {
-      const filteredData = allData?.filter((item) => item.type === event.target.value)
-      setData(filteredData)
+      const filteredData = allData?.filter(
+        (item) => item.type === event.target.value
+      );
+      setData(filteredData);
     }
-  }
-
+  };
 
   const CustomToggleButtonFilter = styled(ToggleButton)({
     "&.Mui-selected, &.Mui-selected:hover": {
@@ -85,15 +83,16 @@ const MainViewContaier = () => {
     },
   });
 
-
   useEffect(() => {
-    axios.get("https://eczaneapi.afetharita.com/api").then((response) => {
-      setData(response.data?.data);
-      setAllData(response.data?.data);
-    }).catch((err) => {
-      //setError(err)
-    })
-
+    axios
+      .get("https://eczaneapi.afetharita.com/api")
+      .then((response) => {
+        setData(response.data?.data);
+        setAllData(response.data?.data);
+      })
+      .catch((err) => {
+        //setError(err)
+      });
   }, []);
 
   useEffect(() => {
@@ -102,85 +101,22 @@ const MainViewContaier = () => {
       .then((response) => {
         setCityData(response.data);
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }, []);
 
   if (data === null) {
-    return <h2>Loading </h2>   //LOADBAR EKLE
+    return <h2>Loading </h2>; //LOADBAR EKLE
   }
 
   return (
     <Paper
       id="fullheight"
-      sx={{bgcolor: "#182151", height: "100%", padding: "0px"}}
+      sx={{ bgcolor: "#182151", height: "100%", padding: "0px" }}
       variant="outlined"
     >
-
       <UpButton visible={visible}></UpButton>
       <DownButton visible={visible1}></DownButton>
-
-      <Header/>
-
-      <Grid container sx={{width: "100%", margin: "90px 0px 40px 0px", justifyContent: "center"}}>
-
-
-        <Grid
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "flex-start",
-            color: "white",
-            maxWidth: "unset",
-            flexBasis: "auto",
-            margin: "10px 0px"
-
-          }}
-          item md={6} sm={12} alignSelf={"self-start"}
-        >
-          <Stack
-            sx={{
-              border: "solid 0.1px",
-              padding: "7px",
-              borderRadius: "8px",
-
-
-            }}
-            direction="row-reverse"
-            spacing={2}
-            divider={
-              <Divider
-                sx={{backgroundColor: "white"}}
-                orientation="vertical"
-                flexItem
-              />
-            }
-          >
-            <ToggleButtonGroup
-              sx={{
-                padding: "1",
-              }}
-              value={button}
-              exclusive
-              onChange={handleFilterButton}
-              aria-label="Platform"
-            >
-              <CustomToggleButtonFilter value="hepsi" c>
-                Hepsi
-              </CustomToggleButtonFilter>
-              <CustomToggleButtonFilter value="Hastane">
-                Hastane
-              </CustomToggleButtonFilter>
-              <CustomToggleButtonFilter value="Eczane">
-                Eczane
-              </CustomToggleButtonFilter>
-            </ToggleButtonGroup>
-          </Stack>
-        </Grid>
-        <Grid item md={6} sm={12} display="flex">
-          <SelectType handleChange={handleChange} alignment={alignment}></SelectType>
-        </Grid>
-      </Grid>
+      <HeaderCombined />
 
       {alignment === "harita" && (
         <Box
@@ -243,7 +179,7 @@ const MainViewContaier = () => {
                           </Typography>
 
                           <Divider
-                            style={{width: "93.5%", margin: "7px 4px"}}
+                            style={{ width: "93.5%", margin: "7px 4px" }}
                           />
 
                           <Stack direction="column">
@@ -253,7 +189,7 @@ const MainViewContaier = () => {
                               justifyContent="space-evenly"
                             >
                               <Box
-                                sx={{display: "flex", alignItems: "center"}}
+                                sx={{ display: "flex", alignItems: "center" }}
                               >
                                 <LocationOnIcon></LocationOnIcon>
                                 <a
@@ -264,7 +200,7 @@ const MainViewContaier = () => {
                               </Box>
 
                               <Box
-                                sx={{display: "flex", alignItems: "center"}}
+                                sx={{ display: "flex", alignItems: "center" }}
                               >
                                 <CallIcon></CallIcon>
                                 <a href={"tel:" + station.phone}>
@@ -277,9 +213,8 @@ const MainViewContaier = () => {
                                 margin: 0,
                                 opacity: 0.63,
                                 flexWrap: "wrap",
-                                padding: "5px"
+                                padding: "5px",
                               }}
-
                             >
                               {station.address}
                             </Typography>
@@ -294,7 +229,6 @@ const MainViewContaier = () => {
           </MapContainer>
         </Box>
       )}
-
       <Box
         sx={{
           flexGrow: 1,
@@ -306,8 +240,8 @@ const MainViewContaier = () => {
       >
         <Grid
           container
-          spacing={{xs: 2, md: 3}}
-          columns={{xs: 4, sm: 12, md: 12}}
+          spacing={{ xs: 2, md: 3 }}
+          columns={{ xs: 4, sm: 12, md: 12 }}
         >
           {citydata?.data.map((city, index) => (
             <Grid item xs={2} sm={4} md={3} key={index}>
@@ -334,7 +268,6 @@ const MainViewContaier = () => {
           ))}
         </Grid>
       </Box>
-
       {alignment === "liste" && (
         <Box
           sx={{
@@ -390,7 +323,7 @@ const MainViewContaier = () => {
                     {item.name}
                   </Typography>
 
-                  <Divider style={{width: "93.5%", margin: "7px 4px"}}/>
+                  <Divider style={{ width: "93.5%", margin: "7px 4px" }} />
 
                   <Stack direction="column">
                     <Stack direction="row" padding="3x">
@@ -400,7 +333,7 @@ const MainViewContaier = () => {
                           justifyContent: "space-evenly",
                         }}
                       >
-                        <div style={{display: "flex", alignItems: "center"}}>
+                        <div style={{ display: "flex", alignItems: "center" }}>
                           <LocationOnIcon></LocationOnIcon>
                           <a
                             href={`https://www.google.com/maps/dir//${item.latitude},${item.longitude}`}
@@ -409,7 +342,7 @@ const MainViewContaier = () => {
                           </a>
                         </div>
 
-                        <div style={{display: "flex", alignItems: "center"}}>
+                        <div style={{ display: "flex", alignItems: "center" }}>
                           <CallIcon></CallIcon>
                           <a href={item.phone}>{item.phone}</a>
                         </div>
