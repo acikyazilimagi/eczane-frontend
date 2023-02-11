@@ -56,7 +56,9 @@ const MainViewContaier = () => {
 
  
   const handleChange = (event, newAlignment) => {  //TODO DEGISTIR
-    setAlignment(newAlignment);
+    if(newAlignment){
+      setAlignment(newAlignment);
+    }
   };
 
   const handleChangeCity = (city) => {
