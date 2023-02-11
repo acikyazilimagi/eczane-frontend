@@ -1,0 +1,184 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#myBtn {
+  z-index: 99;
+  position: fixed; /* Fixed/sticky position */
+  bottom: 5%; /* Place the button at the bottom of the page */
+  right: 5%; /* Place the button 30px from the right */ /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: red; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 30px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+}
+
+#myBtn:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+
+#downBtn {
+  z-index: 99;
+  position: fixed; /* Fixed/sticky position */
+  top: 5%; /* Place the button at the bottom of the page */
+  right: 5%; /* Place the button 30px from the right */ /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: red; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 30px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+}
+
+#downBtn:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+.hazir-map {
+  height: 100%;
+  width: 100%;
+  border-radius: 15px;
+  position: absolute;
+  top: 0;
+}
+
+.leaflet-container {
+  font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+#root {
+  height: 200vh;
+}
+
+.paper-button {
+  text-transform: none;
+}
+
+.leaflet-popup-content p {
+  margin: 0px;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  width: 420px;
+  background: white;
+  color: #333;
+  box-shadow: 0 3px 14px rgb(0 0 0 / 40%);
+}
+
+.css-s39t6n-MuiTypography-root {
+  margin: 0;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+  padding: 0px 1px;
+  display: absolute;
+  text-align: center;
+  color: #182151;
+  font: normal normal normal px/35px Segoe UI;
+  letter-spacing: 0px;
+  color: #182151;
+  opacity: 0.63;
+} /* Bu kısmı eklemeyi unutmayın class adınıza göre değiştirebilirsinizz ancak MapContainera height ve width vermezseniz göremezsiniz*/
+/* Bu kısmı eklemeyi unutmayın class adınıza göre değiştirebilirsinizz ancak MapContainera height ve width vermezseniz göremezsiniz*/
+@media screen and (min-width: 300px) {
+}
+@media screen and (min-width: 576px) {
+}
+@media screen and (min-width: 768px) {
+}
+@media screen and (min-width: 992px) {
+}
+@media screen and (min-width: 1200px) {
+}
+@media screen and (min-width: 1900px) {
+}
+@media screen and (max-width: 1900px) {
+}
+@media screen and (max-width: 1200px) {
+}
+@media screen and (max-width: 993px) {
+}
+@media screen and (max-width: 768px) {
+  .css-1sus3kq-MuiStack-root {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100% !important;
+  }
+  .css-d0gim6-MuiStack-root {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    padding: 3px 0px 0px 7px;
+    -webkit-box-pack: space-evenly;
+    -ms-flex-pack: space-evenly;
+    -webkit-justify-content: space-evenly;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  .leaflet-popup-content {
+    width: 100% !important;
+    display: flex;
+  }
+  .css-1usm8li-MuiGrid-root {
+    flex-direction: column !important;
+    justify-content: center !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  .css-1tvhg63-MuiGrid-root {
+    width: 100% !important;
+  }
+  .leaflet-popup-content-wrapper {
+    max-width: 86vw !important;
+    display: flex !important;
+  }
+  .css-lfv92i-MuiGrid-root {
+    width: 100% !important;
+  }
+
+  .css-f7psx0-MuiPaper-root {
+    padding: 15px 5% !important;
+  }
+
+  .css-1tvhg63-MuiGrid-root {
+    width: 100% !important;
+  }
+  .css-1usm8li-MuiGrid-root {
+    margin: 20px 0 !important;
+  }
+}
+@media screen and (max-width: 576px) {
+}
+@media screen and (max-width: 300px) {
+  /*  Günümüzde yaygın olmasa da kol ekranları gibi minik ekranlar alanı */
+}
+@media screen and (min-width: 300px) and (max-width: 576px) {
+}
+@media screen and (min-width: 576px) and (max-width: 768px) {
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+}
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+}
+@media screen and (min-width: 1200px) and (max-width: 1900px) {
+}
