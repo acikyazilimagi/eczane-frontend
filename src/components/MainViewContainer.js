@@ -1,26 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import centers from "./cityCenters";
-import MarkerClusterGroup from "react-leaflet-markercluster";
-import Divider from "@mui/material/Divider";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+import {
+  Box,
+  Paper,
+  Grid,
+  Typography,
+  Button,
+  Stack,
+  Divider,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
 import CallIcon from "@mui/icons-material/Call";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-markercluster";
+import axios from "axios";
+
+import centers from "./cityCenters";
 import UpButton from "./UpButton";
 import DownButton from "./DownButton";
 import Header from "./Header";
-import axios from "axios";
 import SelectType from "./SelectType";
 import ListPage from "./ListPage";
-import { useState } from "react";
 
 const MainViewContaier = () => {
   const [visible, setVisible] = useState(false);
