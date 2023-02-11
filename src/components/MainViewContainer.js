@@ -10,19 +10,16 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import centers from "./cityCenters";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import Divider from "@mui/material/Divider";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CallIcon from "@mui/icons-material/Call";
-import axios from "axios";
-import { useState } from "react";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import UpButton from "./UpButton";
 import DownButton from "./DownButton";
 import Header from "./Header";
+import axios from "axios";
 import SelectType from "./SelectType";
-import { margin } from "@mui/system";
+import { useState } from "react";
 
 const MainViewContaier = () => {
   const [visible, setVisible] = useState(false);
@@ -59,7 +56,9 @@ const MainViewContaier = () => {
 
  
   const handleChange = (event, newAlignment) => {  //TODO DEGISTIR
-    setAlignment(newAlignment);
+    if(newAlignment){
+      setAlignment(newAlignment);
+    }
   };
 
   const handleChangeCity = (city) => {
@@ -112,7 +111,6 @@ const MainViewContaier = () => {
         setCityData(response.data);
       })
       .catch((err) => {
-        //setError(err)
       });
   }, []);
 
@@ -464,5 +462,4 @@ opacity: 0.63,
     </Paper>
   );
 };
-
 export default MainViewContaier;
