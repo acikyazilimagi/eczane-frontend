@@ -33,7 +33,7 @@ const ListPage = ({ data, cityData, allDistricts }) => {
             padding={"5px"}
             width="320px"
           >
-            <InfoCard key={index} index={index} item={item} cityData={cityData} allDistricts={allDistricts} />
+            <InfoCard key={item.id} item={item} cityData={cityData} allDistricts={allDistricts} />
           </Grid>
         ))}
       </div>

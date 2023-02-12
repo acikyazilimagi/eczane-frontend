@@ -21,17 +21,9 @@ import UpButton from "./UpButton";
 import Control from "react-leaflet-custom-control";
 import {  ButtonGroup,  Tooltip } from "@mui/material";
 import LockIcon from '@mui/icons-material/Lock';
-import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { FullscreenControl } from "react-leaflet-fullscreen";
-import { width } from "@mui/system";
-
-import hospitalIconSvg from '../icons/hospital-marker.png'
-import hospitalIcon2Svg from '../icons/hospital-marker-2.png'
-import pharmacyIconSvg from '../icons/pharmacy-marker.png'
-import pharmacyIcon2Svg from '../icons/pharmacy-marker-2.png'
-
-
+import { Button } from '@mui/material';
 
 const SPaper = styled.div`
   background-color: #fff;
@@ -199,10 +191,12 @@ const MainViewContaier = () => {
   const allDistricts = cityData?.data?.map((city) => city.districts).flat();
 
   const searchFilteredData = typeFilteredData?.filter(
-    (item) =>
-      item.name.toLowerCase().includes(searchBarVal.toLowerCase()) ||
-      item.address.toLowerCase().includes(searchBarVal.toLowerCase()) ||
-      item.district.toLowerCase().includes(searchBarVal.toLowerCase())
+    (item) => {
+      // const cityValues = cityData?.data;
+      return item.name.toLowerCase().includes(searchBarVal.toLowerCase()) ||
+      item.address.toLowerCase().includes(searchBarVal.toLowerCase()) // ||
+      // cityValues?.find(c => c.key.toLowerCase().includes(searchBarVal.toLowerCase()) || c.districts.find(d => d.key.toLowerCase().includes(searchBarVal.toLowerCase())))
+    }
   );
 
   const cityFilteredData =
@@ -293,7 +287,8 @@ const MainViewContaier = () => {
                   >
                     <Popup>
                       <Stack>
-                        <InfoCard item={station} key={index} index={index} />
+                        {/* <InfoCard item={station} key={index} index={index} /> */}
+                        <InfoCard key={station.id} item={station} cityData={cityData} allDistricts={allDistricts} />
                       </Stack>
                     </Popup>
                   </Marker>
