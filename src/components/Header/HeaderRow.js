@@ -89,7 +89,7 @@ const SFilterSvg = styled.img`
   }
 `;
 
-const SEARCH_AT = {
+export const SEARCH_AT = {
   HARITA: "harita",
   LISTE: "liste",
 };
@@ -101,9 +101,7 @@ const FILTER = {
   VETERINER: "veteriner",
 };
 
-export const HeaderRow = () => {
-  const [searchAt, setSearchAt] = useState(SEARCH_AT.HARITA);
-
+export const HeaderRow = ({ searchAt, setSearchAt }) => {
   const [filter, setFilter] = useState(FILTER.HEPSI);
 
   const setHarita = () => setSearchAt(SEARCH_AT.HARITA);
@@ -133,8 +131,9 @@ export const HeaderRow = () => {
             Listede
           </SSearchButton>
         </SToggleGroup>
-
-        <SearchBar />
+        <div style={{ display: "none" }}>
+          <SearchBar />
+        </div>
       </SFlex>
 
       <SFilterWrapper>

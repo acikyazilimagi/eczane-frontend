@@ -8,6 +8,7 @@ import MarkerClusterGroup from "react-leaflet-markercluster";
 import centers from "./cityCenters";
 import DownButton from "./DownButton";
 import { HeaderCombined } from "./Header/HeaderCombined";
+import { SEARCH_AT } from "./Header/HeaderRow";
 import InfoCard from "./InfoCard";
 import ListPage from "./ListPage";
 import UpButton from "./UpButton";
@@ -16,7 +17,8 @@ const MainViewContaier = () => {
   const [visible, setVisible] = useState(false);
   const [visible1, setVisible1] = useState(false);
   const [mapRef, setMapRef] = React.useState();
-  const [alignment, setAlignment] = React.useState("harita");
+
+  const [searchAt, setSearchAt] = useState(SEARCH_AT.HARITA);
   const [citydata, setCityData] = React.useState(null);
   const [data, setData] = React.useState(null);
   const [allData, setAllData] = React.useState(null);
@@ -42,13 +44,6 @@ const MainViewContaier = () => {
   };
   window.addEventListener("scroll", toggleVisible);
   window.addEventListener("scroll", toggleVisible1);
-
-  const handleChange = (event, newAlignment) => {
-    //TODO DEGISTIR
-    if (newAlignment) {
-      setAlignment(newAlignment);
-    }
-  };
 
   const handleChangeCity = (city) => {
     const lat = centers[city]?.lat;
@@ -112,9 +107,9 @@ const MainViewContaier = () => {
     >
       <UpButton visible={visible}></UpButton>
       <DownButton visible={visible1}></DownButton>
-      <HeaderCombined />
+      <HeaderCombined setSearchAt={setSearchAt} searchAt={searchAt} />
 
-      {alignment === "harita" && (
+      {searchAt === SEARCH_AT.HARITA && (
         <Box
           sx={{
             width: "100%",
@@ -196,7 +191,7 @@ const MainViewContaier = () => {
           ))}
         </Grid>
       </Box>
-      {alignment === "liste" && <ListPage data={data} />}
+      {searchAt === SEARCH_AT.LISTE && <ListPage data={data} />}
     </Paper>
   );
 };
