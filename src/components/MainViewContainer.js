@@ -263,7 +263,7 @@ const MainViewContaier = () => {
                                 }
                               </Box>
                               <Typography margin="0px" color={"#F83B3B"}>
-                                Eczane
+                                {station.type}
                               </Typography>
                             </Stack>
                           </Box>
