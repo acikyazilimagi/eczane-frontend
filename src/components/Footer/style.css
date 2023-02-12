@@ -15,12 +15,10 @@
   overflow-x: hidden;
   display: flex;
   min-height: 4.25rem;
-  width: 100%;
 }
 
 .ilce-items {
   padding: 0 15px;
-  display: flex;
   overflow-x: auto;
   flex-wrap: nowrap;
   justify-content: center;
@@ -57,6 +55,11 @@
 .ilce-active {
   background-color: #f83b3b;
   border-radius: 5px;
+}
+
+.ilce-disabled {
+  color: #888;
+  cursor: not-allowed;
 }
 
 .city-item {
@@ -111,8 +114,6 @@
   }
 
   .ilce-items {
-    display: flex;
-    flex-grow: 1;
     overflow-x: auto;
   }
 
@@ -122,7 +123,7 @@
     border: none;
     color: white;
     font-size: 0.75rem;
-    padding: 1rem 1.25rem;
+    padding: 0.5rem 0.75rem;
   }
 
   .cities-box {
@@ -153,5 +154,9 @@
   .ilce-active {
     background-color: #f83b3b;
     border-radius: 5px;
+  }
+  .ilce-disabled {
+    color: #888;
+    cursor: not-allowed;
   }
 }

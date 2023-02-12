@@ -174,6 +174,7 @@ const MainViewContaier = () => {
         handleChangeCity={handleChangeCity}
         selectedDist={selectedDist}
         setSelectedDist={setSelectedDist}
+        allData={allData}
       />
     </Paper>
   );
