@@ -1,5 +1,4 @@
-import { Box, Button, Grid, Paper, Stack, ToggleButton } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { Box, Button, Grid, Paper, Stack } from "@mui/material";
 import axios from "axios";
 import L from "leaflet";
 import React, { useEffect, useState } from "react";
@@ -8,7 +7,7 @@ import MarkerClusterGroup from "react-leaflet-markercluster";
 import centers from "./cityCenters";
 import DownButton from "./DownButton";
 import { HeaderCombined } from "./Header/HeaderCombined";
-import { SEARCH_AT } from "./Header/HeaderRow";
+import { FILTER, SEARCH_AT } from "./Header/HeaderRow";
 import InfoCard from "./InfoCard";
 import ListPage from "./ListPage";
 import UpButton from "./UpButton";
@@ -19,10 +18,12 @@ const MainViewContaier = () => {
   const [mapRef, setMapRef] = React.useState();
 
   const [searchAt, setSearchAt] = useState(SEARCH_AT.HARITA);
+  const [filter, setFilter] = useState(FILTER.HEPSI);
+
   const [citydata, setCityData] = React.useState(null);
   const [data, setData] = React.useState(null);
   const [allData, setAllData] = React.useState(null);
-  const [button, setButton] = React.useState("hepsi");
+
   const center = [37.683664, 38.322966];
   const zoom = 7;
 
@@ -51,28 +52,14 @@ const MainViewContaier = () => {
     mapRef.flyTo([lat, lng], 12);
   };
 
-  const handleFilterButton = (event) => {
-    setButton(event.target.value);
-    if (event.target.value === "hepsi") {
+  useEffect(() => {
+    if (filter === FILTER.HEPSI) {
       setData(allData);
     } else {
-      const filteredData = allData?.filter(
-        (item) => item.type === event.target.value
-      );
+      const filteredData = allData.filter((item) => item.type === filter);
       setData(filteredData);
     }
-  };
-
-  const CustomToggleButtonFilter = styled(ToggleButton)({
-    "&.Mui-selected, &.Mui-selected:hover": {
-      color: "white",
-      backgroundColor: "#FF6464",
-    },
-    "&.MuiToggleButton-root": {
-      textTransform: "none",
-      color: "white !important",
-    },
-  });
+  }, [filter]);
 
   useEffect(() => {
     axios
@@ -107,7 +94,12 @@ const MainViewContaier = () => {
     >
       <UpButton visible={visible}></UpButton>
       <DownButton visible={visible1}></DownButton>
-      <HeaderCombined setSearchAt={setSearchAt} searchAt={searchAt} />
+      <HeaderCombined
+        setSearchAt={setSearchAt}
+        searchAt={searchAt}
+        filter={filter}
+        setFilter={setFilter}
+      />
 
       {searchAt === SEARCH_AT.HARITA && (
         <Box
@@ -152,6 +144,8 @@ const MainViewContaier = () => {
           </MapContainer>
         </Box>
       )}
+      {searchAt === SEARCH_AT.LISTE && <ListPage data={data} />}
+
       <Box
         sx={{
           flexGrow: 1,
@@ -191,7 +185,6 @@ const MainViewContaier = () => {
           ))}
         </Grid>
       </Box>
-      {searchAt === SEARCH_AT.LISTE && <ListPage data={data} />}
     </Paper>
   );
 };

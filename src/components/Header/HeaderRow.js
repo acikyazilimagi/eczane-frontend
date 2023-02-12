@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { useState } from "react";
 import { BREAKPOINTS } from "../../utils/styled";
 import SearchBar from "./SearchBar";
 
@@ -8,7 +7,7 @@ const SHeaderRowWrapper = styled.div``;
 const SFlex = styled.div`
   min-height: 1.875rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 const SButton = styled.button`
@@ -42,7 +41,7 @@ const SToggleGroup = styled.div`
 
 const SFilterWrapper = styled.div`
   display: flex;
-  margin-top: 2rem;
+  margin-top: 1rem;
   justify-content: center;
 
   @media ${BREAKPOINTS.MD.min} {
@@ -65,9 +64,10 @@ const SFilterFlex = styled.div`
 
 const SFilterButton = styled(SButton)`
   border-radius: 0.625rem;
-  color: #fff;
-  background-color: ${(props) => (props.selected ? "F83B3B" : "unset")};
+  color: ${(props) => (props.buttonDisabled ? "#888" : "#fff")};
+  background-color: ${(props) => (props.selected ? "#F83B3B" : "unset")};
   flex-grow: 1;
+  cursor: ${(props) => (props.buttonDisabled ? "not-allowed" : "pointer")};
 `;
 
 const SFilterIconWrapper = styled.div`
@@ -94,16 +94,14 @@ export const SEARCH_AT = {
   LISTE: "liste",
 };
 
-const FILTER = {
-  HEPSI: "hepsi",
-  HASTANE: "hastane",
-  ECZANE: "eczane",
-  VETERINER: "veteriner",
+export const FILTER = {
+  HEPSI: "Hepsi",
+  HASTANE: "Hastane",
+  ECZANE: "Eczane",
+  VETERINER: "Veteriner",
 };
 
-export const HeaderRow = ({ searchAt, setSearchAt }) => {
-  const [filter, setFilter] = useState(FILTER.HEPSI);
-
+export const HeaderRow = ({ searchAt, setSearchAt, filter, setFilter }) => {
   const setHarita = () => setSearchAt(SEARCH_AT.HARITA);
   const setListe = () => setSearchAt(SEARCH_AT.LISTE);
 
@@ -163,6 +161,8 @@ export const HeaderRow = ({ searchAt, setSearchAt }) => {
             type="button"
             onClick={setVeteriner}
             selected={filter === FILTER.VETERINER}
+            disabled
+            buttonDisabled
           >
             Veteriner
           </SFilterButton>

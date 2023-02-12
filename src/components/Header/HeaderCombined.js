@@ -14,11 +14,21 @@ const SHeaderCombinedWrapper = styled.div`
   }
 `;
 
-export const HeaderCombined = ({ searchAt, setSearchAt }) => {
+export const HeaderCombined = ({
+  searchAt,
+  setSearchAt,
+  filter,
+  setFilter,
+}) => {
   return (
     <SHeaderCombinedWrapper>
       <Header />
-      <HeaderRow setSearchAt={setSearchAt} searchAt={searchAt} />
+      <HeaderRow
+        setSearchAt={setSearchAt}
+        searchAt={searchAt}
+        filter={filter}
+        setFilter={setFilter}
+      />
     </SHeaderCombinedWrapper>
   );
 };

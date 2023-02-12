@@ -89,7 +89,7 @@ function SearchBar() {
 
     setInput(keyword);
   };
-  console.log(input, "val");
+
   return (
     <SSearchBoxWrapper>
       <SInput
