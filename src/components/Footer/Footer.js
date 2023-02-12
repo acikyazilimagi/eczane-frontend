@@ -62,10 +62,11 @@ export function Footer({
 
   const allCities = cityData?.data?.map((item) => item.key);
 
+  console.log(allData, selectedCityDistricts);
   const cityDistrictWithData = selectedCityDistricts
     ?.filter((dist) => {
       if (!selectedCityDistricts) return true;
-      const distData = allData.find((d) => d.district === dist.key);
+      const distData = allData?.find((d) => d.districtId === dist.id);
       return !!distData;
     })
     .map((i) => i.key);

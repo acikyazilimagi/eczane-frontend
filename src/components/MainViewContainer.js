@@ -5,6 +5,10 @@ import React, { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import styled from "styled-components";
+import hospitalIcon2Svg from "../icons/hospital-marker-2.png";
+import hospitalIconSvg from "../icons/hospital-marker.png";
+import pharmacyIcon2Svg from "../icons/pharmacy-marker-2.png";
+import pharmacyIconSvg from "../icons/pharmacy-marker.png";
 import { BREAKPOINTS } from "../utils/styled";
 import centers from "./cityCenters";
 import DownButton from "./DownButton";
@@ -14,12 +18,6 @@ import { FILTER, SEARCH_AT } from "./Header/HeaderRow";
 import InfoCard from "./InfoCard";
 import ListPage from "./ListPage";
 import UpButton from "./UpButton";
-import hospitalIconSvg from '../icons/hospital-marker.png'
-import hospitalIcon2Svg from '../icons/hospital-marker-2.png'
-import pharmacyIconSvg from '../icons/pharmacy-marker.png'
-import pharmacyIcon2Svg from '../icons/pharmacy-marker-2.png'
-
-
 
 const SPaper = styled.div`
   background-color: #fff;
@@ -53,8 +51,8 @@ const MainViewContaier = () => {
     iconSize: [32, 42],
     iconAnchor: [32, 64],
     shadowUrl: null,
-    shadowSize: null,// size of the shadow
-    shadowAnchor: null,  // the same for the shadow
+    shadowSize: null, // size of the shadow
+    shadowAnchor: null, // the same for the shadow
     iconUrl: hospitalIconSvg,
   });
 
@@ -62,8 +60,8 @@ const MainViewContaier = () => {
     iconSize: [32, 42],
     iconAnchor: [32, 64],
     shadowUrl: null,
-    shadowSize: null,// size of the shadow
-    shadowAnchor: null,  // the same for the shadow
+    shadowSize: null, // size of the shadow
+    shadowAnchor: null, // the same for the shadow
     iconUrl: hospitalIcon2Svg,
   });
 
@@ -72,7 +70,7 @@ const MainViewContaier = () => {
     iconAnchor: [32, 64],
     shadowUrl: null,
     shadowSize: null, // size of the shadow
-    shadowAnchor: null,  // the same for the shadow
+    shadowAnchor: null, // the same for the shadow
     iconUrl: pharmacyIconSvg,
   });
 
@@ -81,35 +79,26 @@ const MainViewContaier = () => {
     iconAnchor: [32, 64],
     shadowUrl: null,
     shadowSize: null, // size of the shadow
-    shadowAnchor: null,  // the same for the shadow
+    shadowAnchor: null, // the same for the shadow
     iconUrl: pharmacyIcon2Svg,
   });
 
-
   const setIconFn = (type, subType) => {
+    let newicon = hospitalIcon;
 
-    let newicon = hospitalIcon
-
-    if (type === 'hastane' && subType === 'genel') {
-      newicon =  hospitalIcon
-
+    if (type === "hastane" && subType === "genel") {
+      newicon = hospitalIcon;
+    } else if (type === "hastane" && subType === "sahra hastanesi") {
+      newicon = hospitalIcon2;
     }
-    else if (type === 'hastane' && subType === 'sahra hastanesi') {
-      newicon =  hospitalIcon2
-
+    if (type === "eczane" && subType === "genel") {
+      newicon = pharmacyIcon;
+    } else if (type === "eczane" && subType === "sahra eczanesi") {
+      newicon = pharmacyIcon2;
     }
-    if (type === 'eczane' && subType === 'genel') {
-      newicon =  pharmacyIcon
 
-    }
-    else if (type === 'eczane' && subType === 'sahra eczanesi') {
-      newicon =  pharmacyIcon2
-
-    }
- 
-    if(newicon)
-    return newicon
-  }
+    if (newicon) return newicon;
+  };
   const toggleVisible = (event) => {
     const scrolled = document.body.scrollTop;
     if (scrolled > 480) {
@@ -130,7 +119,7 @@ const MainViewContaier = () => {
 
   useEffect(() => {
     axios
-      .get("https://eczaneapi.afetharita.com/api")
+      .get("https://eczaneapi.afetharita.com/api/locations")
       .then((response) => {
         setAllData(response.data?.data);
       })
@@ -145,7 +134,7 @@ const MainViewContaier = () => {
       .then((response) => {
         setCityData(response.data);
       })
-      .catch((err) => { });
+      .catch((err) => {});
   }, []);
 
   if (allData === null) {
@@ -176,17 +165,17 @@ const MainViewContaier = () => {
     selectedCity == null
       ? searchFilteredData
       : searchFilteredData?.filter(
-          (item) => item.city.toLowerCase() === selectedCity.toLowerCase()
+          (item) => item.city?.toLowerCase() === selectedCity?.toLowerCase()
         );
 
   const distFilteredData =
     selectedDist == null
       ? cityFilteredData
       : cityFilteredData?.filter(
-          (item) => item.district.toLowerCase() === selectedDist.toLowerCase()
+          (item) => item.district?.toLowerCase() === selectedDist?.toLowerCase()
         );
 
-  const hasVetData = allData.some((item) => item.type === FILTER.VETERINER);
+  const hasVetData = allData?.some((item) => item.type === FILTER.VETERINER);
 
   return (
     <SPaper>
@@ -219,7 +208,7 @@ const MainViewContaier = () => {
             zoom={zoom} //ZOOM NE KADAR YAKINDA OLMASINI
             maxZoom={17}
             tap={L.Browser.safari && L.Browser.mobile}
-          //maxZoomu kendinize göre ayarlayın
+            //maxZoomu kendinize göre ayarlayın
           >
             <TileLayer //Bu kısımda değişikliğe gerek yok
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -230,7 +219,10 @@ const MainViewContaier = () => {
               {searchFilteredData?.map((station, index) => {
                 return (
                   <Marker
-                    icon = {setIconFn(station.type.toLowerCase(), station.subType.toLowerCase())}
+                    icon={setIconFn(
+                      station.type?.toLowerCase(),
+                      station.subType?.toLowerCase()
+                    )}
                     //icon={station.type.toLowerCase() === 'hastane' ? hospitalIcon : pharmacyIcon}
                     key={station.id} //key kısmını da kendi datanıza göre ayarlayın mydaya.id gibi
                     position={[station.latitude, station.longitude]} //Kendi pozisyonunuzu ekleyin buraya stationı değiştirin mydata.adress.latitude mydata.adress.longitude gibi
