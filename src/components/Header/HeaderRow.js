@@ -11,7 +11,7 @@ const SFlex = styled.div`
 
 const SButton = styled.button`
   background-color: ${(props) => (props.selected ? "F83B3B" : "#fff")};
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   color: ${(props) => (props.selected ? "#fff" : "#111A42")};
   border: none;
   font-size: 0.75rem;
@@ -24,6 +24,7 @@ const SButton = styled.button`
 `;
 
 const SSearchButton = styled(SButton)`
+  padding: 0.5rem 1rem;
   &:first-of-type {
     border-radius: 0.625rem 0 0 0.625rem;
   }
@@ -52,7 +53,9 @@ const SFilterFlex = styled.div`
   border: 1px solid #ffffff;
   display: flex;
   align-self: center;
+  width: 100%;
   @media ${BREAKPOINTS.MD.min} {
+    width: unset;
     padding: 4px;
   }
 `;
@@ -61,6 +64,7 @@ const SFilterButton = styled(SButton)`
   border-radius: 0.625rem;
   color: #fff;
   background-color: ${(props) => (props.selected ? "F83B3B" : "unset")};
+  flex-grow: 1;
 `;
 
 const SFilterIconWrapper = styled.div`
