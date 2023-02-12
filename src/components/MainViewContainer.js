@@ -1,17 +1,18 @@
-import { Box, Stack } from "@mui/material";
+import LockIcon from "@mui/icons-material/Lock";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import { Box, Button, ButtonGroup, Stack, Tooltip } from "@mui/material";
 import axios from "axios";
 import L from "leaflet";
 import React, { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import Control from "react-leaflet-custom-control";
+import { FullscreenControl } from "react-leaflet-fullscreen";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import styled from "styled-components";
-import hospitalIcon2Svg from "../icons/hospital-marker-2.png";
-import hospitalIconSvg from "../icons/hospital-marker.png";
-import pharmacyIcon2Svg from "../icons/pharmacy-marker-2.png";
-import pharmacyIconSvg from "../icons/pharmacy-marker.png";
 import { BREAKPOINTS } from "../utils/styled";
 import centers from "./cityCenters";
-import DownButton from "./DownButton";
+// import DownButton from "./DownButton";
+// import UpButton from "./UpButton";
 import { Footer } from "./Footer/Footer";
 import { HeaderCombined } from "./Header/HeaderCombined";
 import { FILTER, SEARCH_AT } from "./Header/HeaderRow";
@@ -27,6 +28,11 @@ import { FullscreenControl } from "react-leaflet-fullscreen";
 import { width } from "@mui/system";
 
 
+import hospitalIcon2Svg from "../icons/hospital-marker-2.png";
+import hospitalIconSvg from "../icons/hospital-marker.png";
+import pharmacyIcon2Svg from "../icons/pharmacy-marker-2.png";
+import pharmacyIconSvg from "../icons/pharmacy-marker.png";
+
 const SPaper = styled.div`
   background-color: #fff;
   color: rgba(0, 0, 0, 0.87);
@@ -38,6 +44,8 @@ const SPaper = styled.div`
   }
 `;
 
+const CENTER_LAT = 37.683664
+const CENTER_LNG = 38.322966
 const MainViewContaier = () => {
   const [visible, setVisible] = useState(false);
   const [mapRef, setMapRef] = React.useState();
@@ -62,7 +70,7 @@ const MainViewContaier = () => {
 
   const [allData, setAllData] = React.useState(null);
 
-  const center = [37.683664, 38.322966];
+  const center = [CENTER_LAT, CENTER_LNG];
   const zoom = 7;
 
   const hospitalIcon = L.icon({
@@ -146,6 +154,12 @@ const MainViewContaier = () => {
   window.addEventListener("scroll", toggleVisible);
 
   const handleChangeCity = (city) => {
+    if(city == null){
+      setSelectedCity(null);
+      setSelectedDist(null);
+      mapRef.flyTo([CENTER_LAT, CENTER_LNG], 7);
+      return;
+    }
     const lat = centers[city.key]?.lat;
     const lng = centers[city.key]?.lng;
     mapRef.flyTo([lat, lng], 12);
@@ -193,10 +207,12 @@ const MainViewContaier = () => {
   const allDistricts = cityData?.data?.map((city) => city.districts).flat();
 
   const searchFilteredData = typeFilteredData?.filter(
-    (item) =>
-      item.name.toLowerCase().includes(searchBarVal.toLowerCase()) ||
-      item.address.toLowerCase().includes(searchBarVal.toLowerCase()) ||
-      item.district.toLowerCase().includes(searchBarVal.toLowerCase())
+    (item) => {
+      // const cityValues = cityData?.data;
+      return item.name.toLowerCase().includes(searchBarVal.toLowerCase()) ||
+      item.address.toLowerCase().includes(searchBarVal.toLowerCase()) // ||
+      // cityValues?.find(c => c.key.toLowerCase().includes(searchBarVal.toLowerCase()) || c.districts.find(d => d.key.toLowerCase().includes(searchBarVal.toLowerCase())))
+    }
   );
 
   const cityFilteredData =
@@ -213,8 +229,8 @@ const MainViewContaier = () => {
 
   return (
     <SPaper>
-      <UpButton visible={visible}></UpButton>
-      <DownButton visible={!visible}></DownButton>
+      {/* <UpButton visible={visible}></UpButton>
+      <DownButton visible={!visible}></DownButton> */}
       <HeaderCombined
         setSearchAt={setSearchAt}
         searchAt={searchAt}
@@ -313,7 +329,8 @@ const MainViewContaier = () => {
                   >
                     <Popup>
                       <Stack>
-                        <InfoCard item={station} key={index} index={index} />
+                        {/* <InfoCard item={station} key={index} index={index} /> */}
+                        <InfoCard key={station.id} item={station} cityData={cityData} allDistricts={allDistricts} />
                       </Stack>
                     </Popup>
                   </Marker>
@@ -338,6 +355,7 @@ const MainViewContaier = () => {
         selectedDist={selectedDist}
         setSelectedDist={setSelectedDist}
         allData={allData}
+        hideDistrictSelector={searchAt === SEARCH_AT.HARITA}
       />
     </SPaper>
   );

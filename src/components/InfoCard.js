@@ -1,5 +1,4 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import CallIcon from "@mui/icons-material/Call";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Box from "@mui/material/Box";
@@ -18,13 +17,17 @@ const healthSettings = {
   },
   [FILTER.HASTANE]: {
     icon: "./hospital.png",
-    color: "#8CF134",
+    color: "#4bd80e",
+  },
+  [FILTER.VETERINER]: {
+    icon: "./vet.png",
+    color: "#fc6868",
   },
 };
 const fontProps = {
-  fontFamily: "Segoe UI",
-  fontWeight: "600",
-  fontSize: "13px",
+  fontFamily: "SegoeUI",
+  fontWeight: "500",
+  fontSize: "16px",
 };
 const stackProps = {
   direction: "row",
@@ -38,7 +41,7 @@ const InfoCard = ({ item, cityData, allDistricts }) => {
   const districtName = allDistricts?.find((d) => d.id === item.districtId)?.key;
   return (
     <>
-      <Box fontFamily={"Segoe UI"}>
+      <Box paddingTop={"10px"} fontFamily={"SegoeUI"}>
         <Stack
           direction="row"
           spacing={2}
@@ -46,7 +49,7 @@ const InfoCard = ({ item, cityData, allDistricts }) => {
           padding="0px 12px"
           alignItems="center"
         >
-          <Box padding="3px 4px 0px 0px">
+          <Box padding="0 4px 0px 0px">
             <img
               src={healthSettings[item.typeId]?.icon}
               width="16px"
@@ -57,7 +60,8 @@ const InfoCard = ({ item, cityData, allDistricts }) => {
           <Typography
             marginLeft={"2px!important"}
             {...fontProps}
-            color={healthSettings[item.type]?.color}
+            fontWeight="600"
+            color={healthSettings[item.typeId]?.color}
           >
             {item.typeId === 1
               ? "Hastane"
@@ -75,15 +79,24 @@ const InfoCard = ({ item, cityData, allDistricts }) => {
       >
         <Typography
           {...fontProps}
-          marginTop={"10px"}
           textAlign={"left"}
           fontSize="20px"
+          fontWeight="600"
           p="0px 12px"
           color={"#182151"}
         >
           {item.name}
         </Typography>
       </Link>
+
+      {item.phone && (
+        <Stack {...stackProps} marginLeft={"12px"} marginTop={"10px"}>
+          <CallIcon fontSize="12px" />
+          <Link href={`tel:${item.phone}`} fontSize={"16px"} color={"#4f5fb3"}>
+            {item.phone}
+          </Link>
+        </Stack>
+      )}
 
       <Divider
         style={{ width: "93.5%", margin: "7px 4px", fontWeight: "700" }}
@@ -96,44 +109,61 @@ const InfoCard = ({ item, cityData, allDistricts }) => {
           flexWrap={"wrap"}
           direction="row"
           justifyContent={"space-between"}
-          padding="3x"
+          padding="3px"
         >
           <Stack {...stackProps} marginRight={"2px"} marginTop={"2px"}>
             <LocationOnIcon fontSize="12px" />
             <Link
               href={`https://www.google.com/maps/dir//${item.latitude},${item.longitude}`}
               color="#4f5fb3"
-              fontSize={"12px"}
+              fontSize={"16px"}
               fontWeight={"600"}
             >
               {cityName} | {districtName}
             </Link>
           </Stack>
 
-          {item.phone && (
+          {/* {item.phone && (
             <Stack {...stackProps} marginLeft={"2px"} marginTop={"2px"}>
               <CallIcon fontSize="12px" />
               <Link
                 href={`tel:${item.phone}`}
-                fontSize={"11px"}
+                fontSize={"16px"}
                 color={"#4f5fb3"}
               >
                 {item.phone}
               </Link>
             </Stack>
-          )}
+          )} */}
         </Stack>
         <Typography
           {...fontProps}
           marginTop={"10px!important"}
           textAlign={"left"}
-          fontSize="11px"
+          fontSize="16px"
           p="0px 12px"
         >
           {item.address}
         </Typography>
 
         {item.additionalAddressDetails !== "" ? (
+          <Typography
+            {...fontProps}
+            marginTop={"10px!important"}
+            textAlign={"left"}
+            fontSize="16px"
+            p="0px 12px"
+            color={"gray"}
+          >
+            {item.additionalAddressDetails}
+          </Typography>
+        ) : (
+          ""
+        )}
+
+        <div style={{ paddingBottom: "10px" }}></div>
+
+        {/* {item.additionalAddressDetails !== "" ? (
           <Button
             sx={{
               backgroundColor: "#F83B3B",
@@ -152,7 +182,7 @@ const InfoCard = ({ item, cityData, allDistricts }) => {
           </Button>
         ) : (
           ""
-        )}
+        )} */}
 
         <Box
           sx={{

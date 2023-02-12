@@ -38,11 +38,11 @@
 
 .cities-box {
   padding: 14px 0;
-  display: flex;
-  flex-wrap: wrap;
   gap: 10px;
   width: 100%;
   overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
 }
 
 .ilce-active {
@@ -61,10 +61,9 @@
   background-color: inherit;
   outline: hidden;
   color: white;
-  font-size: 37px;
+  font-size: 2.25rem;
   border: 1px white solid;
   border-radius: 10px;
-  width: 328px;
   padding: 15px 0;
   flex-grow: 1;
   user-select: none;
@@ -85,7 +84,31 @@
   border: none;
 }
 
-@media screen and (max-width: 500px) {
+.see-all-wrapper {
+  position: relative;
+}
+
+.see-all-button {
+  display: block;
+  margin-left: auto;
+  padding: 1rem 4rem 1rem 1rem;
+  background: #f83b3b;
+  border: none;
+  border-radius: 0.625rem;
+}
+
+@media screen and (max-width: 1280px) {
+  .cities-box {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media screen and (max-width: 1024px) {
+  .cities-box {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
   .footer-container {
     padding-top: 19px;
     max-width: 375px;
@@ -121,11 +144,7 @@
 
   .cities-box {
     padding: 14px 0;
-    display: flex;
-    flex-wrap: wrap;
     gap: 5px;
-    width: 100%;
-    overflow: hidden;
   }
 
   .city-item {
@@ -151,5 +170,13 @@
   .ilce-disabled {
     color: #888;
     cursor: not-allowed;
+  }
+  .see-all-button {
+    display: block;
+    padding: 0.5rem 2rem 0.5rem 0.5rem;
+    margin-left: auto;
+    background: #f83b3b;
+    border: none;
+    border-radius: 0.625rem;
   }
 }
