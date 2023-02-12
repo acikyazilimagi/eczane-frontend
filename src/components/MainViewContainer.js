@@ -16,6 +16,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import axios from "axios";
+import L from 'leaflet';
 
 import centers from "./cityCenters";
 import UpButton from "./UpButton";
@@ -227,6 +228,7 @@ const MainViewContaier = () => {
             center={center} //CENTER BILGINIZ NEREDE İSE ORAYA KOYUNUZ
             zoom={zoom} //ZOOM NE KADAR YAKINDA OLMASINI
             maxZoom={17}
+            tap={L.Browser.safari && L.Browser.mobile}
             //maxZoomu kendinize göre ayarlayın
           >
             <TileLayer //Bu kısımda değişikliğe gerek yok
