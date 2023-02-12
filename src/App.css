@@ -55,9 +55,6 @@ body{
   font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
-#root {
-  height: 200vh;
-}
 
 .paper-button {
   text-transform: none;

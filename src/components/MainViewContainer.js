@@ -10,6 +10,7 @@ import {
   Divider,
   ToggleButton,
   ToggleButtonGroup,
+  Container,
 } from "@mui/material";
 import CallIcon from "@mui/icons-material/Call";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -26,40 +27,38 @@ import ListPage from "./ListPage";
 
 const MainViewContaier = () => {
   const [visible, setVisible] = useState(false);
-  const [visible1, setVisible1] = useState(false);
+  // const [visible1, setVisible1] = useState(false);
   const [mapRef, setMapRef] = React.useState();
   const [alignment, setAlignment] = React.useState("harita");
   const [citydata, setCityData] = React.useState(null);
-  const [data, setData] = React.useState(null)
-  const [allData, setAllData] = React.useState(null)
-  const [button,setButton]=React.useState("hepsi")
+  const [data, setData] = React.useState(null);
+  const [allData, setAllData] = React.useState(null);
+  const [button, setButton] = React.useState("hepsi");
   const center = [37.683664, 38.322966];
   const zoom = 7;
 
-
-  
   const toggleVisible = (event) => {
     const scrolled = document.body.scrollTop;
-    if (scrolled > 480) {
+    if (scrolled > 96) {
       setVisible(true);
-    } else if (scrolled <= 480) {
+    } else if (scrolled <= 96) {
       setVisible(false);
     }
   };
-  const toggleVisible1 = (event) => {
-    const scrolled = document.body.scrollTop;
-    if (scrolled < 480) {
-      setVisible1(true);
-    } else if (scrolled >= 480) {
-      setVisible1(false);
-    }
-  };
+  // const toggleVisible1 = (event) => {
+  //   const scrolled = document.body.scrollTop;
+  //   if (scrolled < 480) {
+  //     setVisible1(true);
+  //   } else if (scrolled >= 480) {
+  //     setVisible1(false);
+  //   }
+  // };
   window.addEventListener("scroll", toggleVisible);
-  window.addEventListener("scroll", toggleVisible1);
+  // window.addEventListener("scroll", toggleVisible1);
 
- 
-  const handleChange = (event, newAlignment) => {  //TODO DEGISTIR
-    if(newAlignment){
+  const handleChange = (event, newAlignment) => {
+    //TODO DEGISTIR
+    if (newAlignment) {
       setAlignment(newAlignment);
     }
   };
@@ -70,24 +69,22 @@ const MainViewContaier = () => {
     mapRef.flyTo([lat, lng], 12);
   };
 
-   const handleFilterButton = (event) => {
+  const handleFilterButton = (event) => {
     setButton(event.target.value);
-        if (event.target.value === 'hepsi') {
-            setData(allData)
-        }
-        
-
-        else {
-            const filteredData = allData?.filter((item) => item.type === event.target.value)
-            setData(filteredData )
-        }
+    if (event.target.value === "hepsi") {
+      setData(allData);
+    } else {
+      const filteredData = allData?.filter(
+        (item) => item.type === event.target.value
+      );
+      setData(filteredData);
     }
+  };
 
-  
   const CustomToggleButtonFilter = styled(ToggleButton)({
     "&.Mui-selected, &.Mui-selected:hover": {
       color: "white",
-      backgroundColor: "#FF6464",
+      backgroundColor: "#F83B3B",
     },
     "&.MuiToggleButton-root": {
       textTransform: "none",
@@ -95,74 +92,65 @@ const MainViewContaier = () => {
     },
   });
 
+  useEffect(() => {
+    axios
+      .get("https://eczaneapi.afetharita.com/api")
+      .then((response) => {
+        setData(response.data?.data);
+        setAllData(response.data?.data);
+      })
+      .catch((err) => {
+        //setError(err)
+      });
+  }, []);
 
-  
-    useEffect(() => {
-        axios.get("https://eczaneapi.afetharita.com/api").then((response) => {
-            setData(response.data?.data);
-            setAllData(response.data?.data);
-        }).catch((err) => {
-            //setError(err)
-        })
-
-    }, []);
-    
   useEffect(() => {
     axios
       .get("https://eczaneapi.afetharita.com/api/cityWithDistricts ")
       .then((response) => {
         setCityData(response.data);
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }, []);
 
-  if(data===null){
-    return <h2>Loading  </h2>   //LOADBAR EKLE
+  if (data === null) {
+    return <h2>Loading </h2>; //LOADBAR EKLE
   }
- 
-  
 
   return (
-    <Paper
-      id="fullheight"
-      sx={{ bgcolor: "#182151", height: "100%", padding: "0px" }}
-      variant="outlined"
-    >
-
+    <Container id="fullheight" variant="outlined">
       <UpButton visible={visible}></UpButton>
-      <DownButton visible={visible1}></DownButton>
-      
-      <Header  alignment={alignment} handleChange={handleChange}></Header>
-      
-     
+      {/* <DownButton visible={visible1}></DownButton> */}
+      <Header alignment={alignment} handleChange={handleChange}></Header>
+      <SelectType
+        handleChange={handleChange}
+        alignment={alignment}
+      ></SelectType>
 
-    
-        
-
-      <Grid container sx={{width:"100%",margin:"90px 0px 40px 0px",justifyContent:"center" }} >
-        
-
+      <Grid
+        container
+        sx={{
+          width: "100%",
+        }}
+      >
         <Grid
           sx={{
             display: "flex",
             flexDirection: "row",
-            alignItems: "flex-start",
+            alignItems: "center",
+            justifyContent: "center",
             color: "white",
             maxWidth: "unset",
-            flexBasis:"auto",
-            margin:"10px 0px"
-            
+            flexBasis: "auto",
+            margin: "32px auto",
           }}
-          item md={6} sm={12} alignSelf={"self-start"} 
+          item
         >
           <Stack
             sx={{
               border: "solid 0.1px",
-              padding: "7px",
+              padding: "2px",
               borderRadius: "8px",
-              
-              
             }}
             direction="row-reverse"
             spacing={2}
@@ -175,41 +163,43 @@ const MainViewContaier = () => {
             }
           >
             <ToggleButtonGroup
-              sx={{
-                padding: "1",
-              }}
               value={button}
               exclusive
               onChange={handleFilterButton}
               aria-label="Platform"
             >
-              <CustomToggleButtonFilter value="hepsi" c>
+              <CustomToggleButtonFilter
+                sx={{
+                  borderTopLeftRadius: "6px",
+                  borderBottomLeftRadius: "6px",
+                  padding: "5px 10px",
+                }}
+                value="hepsi"
+              >
                 Hepsi
               </CustomToggleButtonFilter>
-              <CustomToggleButtonFilter value="Hastane">
+              <CustomToggleButtonFilter
+                sx={{
+                  padding: "5px 10px",
+                }}
+                value="Hastane"
+              >
                 Hastane
               </CustomToggleButtonFilter>
-              <CustomToggleButtonFilter value="Eczane">
+              <CustomToggleButtonFilter
+                sx={{
+                  borderTopRightRadius: "6px",
+                  borderBottomRightRadius: "6px",
+                  padding: "5px 10px",
+                }}
+                value="Eczane"
+              >
                 Eczane
               </CustomToggleButtonFilter>
             </ToggleButtonGroup>
           </Stack>
         </Grid>
-        <Grid item md={6} sm={12} display="flex">
-        <SelectType handleChange={handleChange} alignment={alignment} ></SelectType>
-        </Grid>
-        
-        
       </Grid>
-      
- 
-
-      
-   
-
-      
-
-     
 
       {alignment === "harita" && (
         <Box
@@ -304,11 +294,10 @@ const MainViewContaier = () => {
                             <Typography
                               sx={{
                                 margin: 0,
-  opacity: 0.63,
-  flexWrap:"wrap",
-  padding:"5px"
+                                opacity: 0.63,
+                                flexWrap: "wrap",
+                                padding: "5px",
                               }}
-
                             >
                               {station.address}
                             </Typography>
@@ -323,6 +312,8 @@ const MainViewContaier = () => {
           </MapContainer>
         </Box>
       )}
+
+      {alignment === "liste" && <ListPage data={data} />}
 
       <Box
         sx={{
@@ -363,11 +354,7 @@ const MainViewContaier = () => {
           ))}
         </Grid>
       </Box>
-
-      {alignment === "liste" && (
-        <ListPage data={data} />
-      )}
-    </Paper>
+    </Container>
   );
 };
 export default MainViewContaier;
