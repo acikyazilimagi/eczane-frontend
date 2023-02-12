@@ -11,6 +11,9 @@ import { FILTER, SEARCH_AT } from "./Header/HeaderRow";
 import InfoCard from "./InfoCard";
 import ListPage from "./ListPage";
 import UpButton from "./UpButton";
+import hospitalIconSvg from '../icons/hospital.svg'
+import pharmacyIconSvg from '../icons/pharmacy.svg'
+
 
 const MainViewContaier = () => {
   const [visible, setVisible] = useState(false);
@@ -26,6 +29,27 @@ const MainViewContaier = () => {
 
   const center = [37.683664, 38.322966];
   const zoom = 7;
+
+
+  const hospitalIcon = L.icon({
+    iconRetinaUrl: hospitalIconSvg,
+    iconSize: [32, 32],
+    iconAnchor: [32, 64],
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+    color: 'blue'
+  });
+
+  const pharmacyIcon = L.icon({
+    iconRetinaUrl: pharmacyIconSvg,
+    iconSize: [32, 32],
+    iconAnchor: [32, 64],
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null
+  });
+
 
   const toggleVisible = (event) => {
     const scrolled = document.body.scrollTop;
@@ -79,7 +103,7 @@ const MainViewContaier = () => {
       .then((response) => {
         setCityData(response.data);
       })
-      .catch((err) => {});
+      .catch((err) => { });
   }, []);
 
   if (data === null) {
@@ -118,7 +142,7 @@ const MainViewContaier = () => {
             zoom={zoom} //ZOOM NE KADAR YAKINDA OLMASINI
             maxZoom={17}
             tap={L.Browser.safari && L.Browser.mobile}
-            //maxZoomu kendinize göre ayarlayın
+          //maxZoomu kendinize göre ayarlayın
           >
             <TileLayer //Bu kısımda değişikliğe gerek yok
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -129,6 +153,7 @@ const MainViewContaier = () => {
               {data?.map((station, index) => {
                 return (
                   <Marker
+                    icon={station.type.toLowerCase() === 'hastane' ? hospitalIcon : pharmacyIcon}
                     key={station.id} //key kısmını da kendi datanıza göre ayarlayın mydaya.id gibi
                     position={[station.latitude, station.longitude]} //Kendi pozisyonunuzu ekleyin buraya stationı değiştirin mydata.adress.latitude mydata.adress.longitude gibi
                   >
