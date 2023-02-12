@@ -34,9 +34,6 @@ const MainViewContaier = () => {
   const center = [37.683664, 38.322966];
   const zoom = 7;
 
-  console.log("data", data)
-
-
   const hospitalIcon = L.icon({
     iconSize: [32, 42],
     iconAnchor: [32, 64],
