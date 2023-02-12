@@ -1,0 +1,158 @@
+.footer-container {
+  padding-top: 59px;
+  max-width: 1399px;
+  width: 85%;
+  min-width: 340px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.ilce-box {
+  padding: 8px 8px;
+  border: 1px solid white;
+  border-radius: 5px;
+  overflow-x: hidden;
+  display: flex;
+  min-height: 4.25rem;
+}
+
+.ilce-items {
+  padding: 0 15px;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.ilce-item {
+  font-family: "SegoeUI";
+  background-color: inherit;
+  outline: none;
+  border: none;
+  color: white;
+  font-size: 2.125rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.625rem;
+  user-select: none;
+  cursor: pointer;
+}
+
+.cities-box {
+  padding: 14px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.ilce-active {
+  background-color: #f83b3b;
+  border-radius: 5px;
+}
+
+.ilce-disabled {
+  color: #888;
+  cursor: not-allowed;
+}
+
+.city-item {
+  font-family: "SegoeUI";
+  border: none;
+  background-color: inherit;
+  outline: hidden;
+  color: white;
+  font-size: 37px;
+  border: 1px white solid;
+  border-radius: 10px;
+  width: 328px;
+  padding: 15px 0;
+  flex-grow: 1;
+  user-select: none;
+  cursor: pointer;
+}
+
+.city-item-active {
+  background-color: white;
+  color: inherit;
+}
+
+.left-arrow {
+  background-color: inherit;
+  border: none;
+}
+.right-arrow {
+  background-color: inherit;
+  border: none;
+}
+
+@media screen and (max-width: 500px) {
+  .footer-container {
+    padding-top: 19px;
+    max-width: 375px;
+    width: 340px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ilce-box {
+    width: 340px;
+    padding: 8px 0;
+    border: 1px solid white;
+    border-radius: 5px;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: space-between;
+    min-height: 2.25rem;
+  }
+
+  .ilce-items {
+    overflow-x: auto;
+  }
+
+  .ilce-item {
+    background-color: inherit;
+    outline: none;
+    border: none;
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .cities-box {
+    padding: 14px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .city-item {
+    border: none;
+    background-color: inherit;
+    outline: hidden;
+    color: white;
+    font-size: 0.75rem;
+    border: 1px white solid;
+    border-radius: 10px;
+    width: 110px;
+    padding: 5px 0;
+  }
+  .city-item-active {
+    background-color: white;
+    color: inherit;
+  }
+
+  .ilce-active {
+    background-color: #f83b3b;
+    border-radius: 5px;
+  }
+  .ilce-disabled {
+    color: #888;
+    cursor: not-allowed;
+  }
+}
