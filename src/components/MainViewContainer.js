@@ -186,7 +186,7 @@ const MainViewContaier = () => {
           (item) => item.district.toLowerCase() === selectedDist.toLowerCase()
         );
 
-  const hasVetData = allData.some((item) => item.type === "Veteriner");
+  const hasVetData = allData.some((item) => item.type === FILTER.VETERINER);
 
   return (
     <SPaper>
