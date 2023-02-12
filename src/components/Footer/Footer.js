@@ -63,7 +63,6 @@ export function Footer({
 
   const allCities = cityData?.data;
 
-  console.log(allData, selectedCityDistricts);
   const cityDistrictWithData = selectedCityDistricts
     ?.filter((dist) => {
       if (!selectedCityDistricts) return true;
