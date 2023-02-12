@@ -54,6 +54,7 @@ export function Footer({
   selectedDist,
   setSelectedDist,
   allData,
+  hideDistrictSelector,
 }) {
   const noCitySelected = !selectedCity;
 
@@ -73,6 +74,7 @@ export function Footer({
 
   return (
     <div className="footer-container">
+      {!hideDistrictSelector && (
       <div className="ilce-box">
         <SIconWrapper>
           <SButton>
@@ -109,8 +111,8 @@ export function Footer({
             <SRightIcon src="/left-icon.svg" />
           </SButton>
         </SIconWrapper>
-        s
       </div>
+      )}
 
       <div className="cities-box">
         {allCities?.map((item) => (

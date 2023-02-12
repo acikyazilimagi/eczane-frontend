@@ -11,15 +11,15 @@ import pharmacyIcon2Svg from "../icons/pharmacy-marker-2.png";
 import pharmacyIconSvg from "../icons/pharmacy-marker.png";
 import { BREAKPOINTS } from "../utils/styled";
 import centers from "./cityCenters";
-import DownButton from "./DownButton";
+// import DownButton from "./DownButton";
+// import UpButton from "./UpButton";
 import { Footer } from "./Footer/Footer";
 import { HeaderCombined } from "./Header/HeaderCombined";
 import { FILTER, SEARCH_AT } from "./Header/HeaderRow";
 import InfoCard from "./InfoCard";
 import ListPage from "./ListPage";
-import UpButton from "./UpButton";
 import Control from "react-leaflet-custom-control";
-import {  ButtonGroup,  Tooltip } from "@mui/material";
+import { ButtonGroup,  Tooltip } from "@mui/material";
 import LockIcon from '@mui/icons-material/Lock';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { FullscreenControl } from "react-leaflet-fullscreen";
@@ -213,8 +213,8 @@ const MainViewContaier = () => {
 
   return (
     <SPaper>
-      <UpButton visible={visible}></UpButton>
-      <DownButton visible={!visible}></DownButton>
+      {/* <UpButton visible={visible}></UpButton>
+      <DownButton visible={!visible}></DownButton> */}
       <HeaderCombined
         setSearchAt={setSearchAt}
         searchAt={searchAt}
@@ -313,6 +313,7 @@ const MainViewContaier = () => {
         selectedDist={selectedDist}
         setSelectedDist={setSelectedDist}
         allData={allData}
+        hideDistrictSelector={searchAt === SEARCH_AT.HARITA}
       />
     </SPaper>
   );
