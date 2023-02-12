@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import L from 'leaflet';
+
 import { styled } from "@mui/material/styles";
 import {
   Box,
@@ -24,6 +26,10 @@ import DownButton from "./DownButton";
 import Header from "./Header";
 import SelectType from "./SelectType";
 import ListPage from "./ListPage";
+import hospitalIconSvg from "../icons/hospital.svg";
+import pharmacyIconSvg from "../icons/pharmacy.svg";
+
+
 
 const MainViewContaier = () => {
   const [visible, setVisible] = useState(false);
@@ -33,12 +39,35 @@ const MainViewContaier = () => {
   const [citydata, setCityData] = React.useState(null);
   const [data, setData] = React.useState(null)
   const [allData, setAllData] = React.useState(null)
-  const [button,setButton]=React.useState("hepsi")
+  const [button, setButton] = React.useState("hepsi")
   const center = [37.683664, 38.322966];
   const zoom = 7;
 
+  const hospitalIcon = L.icon({
+    iconRetinaUrl: hospitalIconSvg,
+    //iconUrl: require('../icons/hospital.svg'),
+    iconSize: [32, 32],
+    iconAnchor: [32, 64],
+    popupAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+    color: 'blue'
+  });
 
-  
+  const pharmacyIcon = L.icon({
+    iconRetinaUrl: pharmacyIconSvg,
+    //iconUrl: require('../icons/hospital.svg'),
+    iconSize: [32, 32],
+    iconAnchor: [32, 64],
+    popupAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null
+  });
+
+
+
   const toggleVisible = (event) => {
     const scrolled = document.body.scrollTop;
     if (scrolled > 480) {
@@ -58,9 +87,9 @@ const MainViewContaier = () => {
   window.addEventListener("scroll", toggleVisible);
   window.addEventListener("scroll", toggleVisible1);
 
- 
+
   const handleChange = (event, newAlignment) => {  //TODO DEGISTIR
-    if(newAlignment){
+    if (newAlignment) {
       setAlignment(newAlignment);
     }
   };
@@ -71,20 +100,20 @@ const MainViewContaier = () => {
     mapRef.flyTo([lat, lng], 12);
   };
 
-   const handleFilterButton = (event) => {
+  const handleFilterButton = (event) => {
     setButton(event.target.value);
-        if (event.target.value === 'hepsi') {
-            setData(allData)
-        }
-        
-
-        else {
-            const filteredData = allData?.filter((item) => item.type === event.target.value)
-            setData(filteredData )
-        }
+    if (event.target.value === 'hepsi') {
+      setData(allData)
     }
 
-  
+
+    else {
+      const filteredData = allData?.filter((item) => item.type === event.target.value)
+      setData(filteredData)
+    }
+  }
+
+
   const CustomToggleButtonFilter = styled(ToggleButton)({
     "&.Mui-selected, &.Mui-selected:hover": {
       color: "white",
@@ -97,17 +126,24 @@ const MainViewContaier = () => {
   });
 
 
-  
-    useEffect(() => {
-        axios.get("https://eczaneapi.afetharita.com/api").then((response) => {
-            setData(response.data?.data);
-            setAllData(response.data?.data);
-        }).catch((err) => {
-            //setError(err)
-        })
 
-    }, []);
-    
+  useEffect(() => {
+    console.log("data", data)
+
+  }, [data]);
+
+
+
+  useEffect(() => {
+    axios.get("https://eczaneapi.afetharita.com/api").then((response) => {
+      setData(response.data?.data);
+      setAllData(response.data?.data);
+    }).catch((err) => {
+      //setError(err)
+    })
+
+  }, []);
+
   useEffect(() => {
     axios
       .get("https://eczaneapi.afetharita.com/api/cityWithDistricts ")
@@ -118,11 +154,11 @@ const MainViewContaier = () => {
       });
   }, []);
 
-  if(data===null){
+  if (data === null) {
     return <h2>Loading  </h2>   //LOADBAR EKLE
   }
- 
-  
+
+
 
   return (
     <Paper
@@ -133,16 +169,16 @@ const MainViewContaier = () => {
 
       <UpButton visible={visible}></UpButton>
       <DownButton visible={visible1}></DownButton>
-      
-      <Header  alignment={alignment} handleChange={handleChange}></Header>
-      
-     
 
-    
-        
+      <Header alignment={alignment} handleChange={handleChange}></Header>
 
-      <Grid container sx={{width:"100%",margin:"90px 0px 40px 0px",justifyContent:"center" }} >
-        
+
+
+
+
+
+      <Grid container sx={{ width: "100%", margin: "90px 0px 40px 0px", justifyContent: "center" }} >
+
 
         <Grid
           sx={{
@@ -151,19 +187,19 @@ const MainViewContaier = () => {
             alignItems: "flex-start",
             color: "white",
             maxWidth: "unset",
-            flexBasis:"auto",
-            margin:"10px 0px"
-            
+            flexBasis: "auto",
+            margin: "10px 0px"
+
           }}
-          item md={6} sm={12} alignSelf={"self-start"} 
+          item md={6} sm={12} alignSelf={"self-start"}
         >
           <Stack
             sx={{
               border: "solid 0.1px",
               padding: "7px",
               borderRadius: "8px",
-              
-              
+
+
             }}
             direction="row-reverse"
             spacing={2}
@@ -197,20 +233,20 @@ const MainViewContaier = () => {
           </Stack>
         </Grid>
         <Grid item md={6} sm={12} display="flex">
-        <SelectType handleChange={handleChange} alignment={alignment} ></SelectType>
+          <SelectType handleChange={handleChange} alignment={alignment} ></SelectType>
         </Grid>
-        
-        
+
+
       </Grid>
-      
- 
 
-      
-   
 
-      
 
-     
+
+
+
+
+
+
 
       {alignment === "harita" && (
         <Box
@@ -240,6 +276,7 @@ const MainViewContaier = () => {
               {data?.map((station) => {
                 return (
                   <Marker
+                    icon={station.type.toLowerCase() === 'hastane' ? hospitalIcon : pharmacyIcon}
                     key={station.id} //key kısmını da kendi datanıza göre ayarlayın mydaya.id gibi
                     position={[station.latitude, station.longitude]} //Kendi pozisyonunuzu ekleyin buraya stationı değiştirin mydata.adress.latitude mydata.adress.longitude gibi
                   >
@@ -310,8 +347,8 @@ const MainViewContaier = () => {
                               sx={{
                                 margin: 0,
                                 opacity: 0.63,
-                                flexWrap:"wrap",
-                                padding:"5px"
+                                flexWrap: "wrap",
+                                padding: "5px"
                               }}
 
                             >
