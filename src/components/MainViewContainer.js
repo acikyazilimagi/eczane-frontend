@@ -197,10 +197,12 @@ const MainViewContaier = () => {
   const allDistricts = cityData?.data?.map((city) => city.districts).flat();
 
   const searchFilteredData = typeFilteredData?.filter(
-    (item) =>
-      item.name.toLowerCase().includes(searchBarVal.toLowerCase()) ||
-      item.address.toLowerCase().includes(searchBarVal.toLowerCase()) ||
-      item.district.toLowerCase().includes(searchBarVal.toLowerCase())
+    (item) => {
+      // const cityValues = cityData?.data;
+      return item.name.toLowerCase().includes(searchBarVal.toLowerCase()) ||
+      item.address.toLowerCase().includes(searchBarVal.toLowerCase()) // ||
+      // cityValues?.find(c => c.key.toLowerCase().includes(searchBarVal.toLowerCase()) || c.districts.find(d => d.key.toLowerCase().includes(searchBarVal.toLowerCase())))
+    }
   );
 
   const cityFilteredData =
@@ -291,7 +293,8 @@ const MainViewContaier = () => {
                   >
                     <Popup>
                       <Stack>
-                        <InfoCard item={station} key={index} index={index} />
+                        {/* <InfoCard item={station} key={index} index={index} /> */}
+                        <InfoCard key={station.id} item={station} cityData={cityData} allDistricts={allDistricts} />
                       </Stack>
                     </Popup>
                   </Marker>
