@@ -263,7 +263,7 @@ const MainViewContaier = () => {
                                 }
                               </Box>
                               <Typography margin="0px" color={"#F83B3B"}>
-                                Eczane
+                                {station.type}
                               </Typography>
                             </Stack>
                           </Box>
@@ -292,21 +292,24 @@ const MainViewContaier = () => {
                                 </a>
                               </Box>
 
-                              <Box
-                                sx={{ display: "flex", alignItems: "center" }}
-                              >
-                                <CallIcon></CallIcon>
-                                <a href={"tel:" + station.phone}>
-                                  {station.phone}
-                                </a>
-                              </Box>
+                              {station.phone && (
+                                <Box
+                                  sx={{ display: "flex", alignItems: "center" }}
+                                >
+                                  <CallIcon></CallIcon>
+                                  <a href={"tel:" + station.phone}>
+                                    {station.phone}
+                                  </a>
+                                </Box>
+                              )}
+
                             </Stack>
                             <Typography
                               sx={{
                                 margin: 0,
-  opacity: 0.63,
-  flexWrap:"wrap",
-  padding:"5px"
+                                opacity: 0.63,
+                                flexWrap:"wrap",
+                                padding:"5px"
                               }}
 
                             >
