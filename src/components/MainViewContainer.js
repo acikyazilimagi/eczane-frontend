@@ -1,11 +1,18 @@
-import { Box, Button, Grid, Paper, Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import axios from "axios";
 import L from "leaflet";
 import React, { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
+import styled from "styled-components";
+import hospitalIcon2Svg from "../icons/hospital-marker-2.png";
+import hospitalIconSvg from "../icons/hospital-marker.png";
+import pharmacyIcon2Svg from "../icons/pharmacy-marker-2.png";
+import pharmacyIconSvg from "../icons/pharmacy-marker.png";
+import { BREAKPOINTS } from "../utils/styled";
 import centers from "./cityCenters";
 import DownButton from "./DownButton";
+import { Footer } from "./Footer/Footer";
 import { HeaderCombined } from "./Header/HeaderCombined";
 import { FILTER, SEARCH_AT } from "./Header/HeaderRow";
 import InfoCard from "./InfoCard";
@@ -19,6 +26,23 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { FullscreenControl } from "react-leaflet-fullscreen";
 import { width } from "@mui/system";
 
+import hospitalIconSvg from '../icons/hospital-marker.png'
+import hospitalIcon2Svg from '../icons/hospital-marker-2.png'
+import pharmacyIconSvg from '../icons/pharmacy-marker.png'
+import pharmacyIcon2Svg from '../icons/pharmacy-marker-2.png'
+
+
+
+const SPaper = styled.div`
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  background-color: #182151;
+  margin-bottom: 1.5rem;
+  @media ${BREAKPOINTS.MD.min} {
+    margin-bottom: 3rem;
+  }
+`;
 
 const MainViewContaier = () => {
   const [visible, setVisible] = useState(false);
@@ -38,14 +62,69 @@ const MainViewContaier = () => {
   const [filter, setFilter] = useState(FILTER.HEPSI);
   const [searchBarVal, setSearchbarVal] = useState("");
   const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedDist, setSelectedDist] = useState(null);
 
-  const [citydata, setCityData] = React.useState(null);
+  const [cityData, setCityData] = React.useState(null);
 
   const [allData, setAllData] = React.useState(null);
 
   const center = [37.683664, 38.322966];
   const zoom = 7;
 
+  const hospitalIcon = L.icon({
+    iconSize: [32, 42],
+    iconAnchor: [32, 64],
+    shadowUrl: null,
+    shadowSize: null, // size of the shadow
+    shadowAnchor: null, // the same for the shadow
+    iconUrl: hospitalIconSvg,
+  });
+
+  const hospitalIcon2 = L.icon({
+    iconSize: [32, 42],
+    iconAnchor: [32, 64],
+    shadowUrl: null,
+    shadowSize: null, // size of the shadow
+    shadowAnchor: null, // the same for the shadow
+    iconUrl: hospitalIcon2Svg,
+  });
+
+  const pharmacyIcon = L.icon({
+    iconSize: [32, 42],
+    iconAnchor: [32, 64],
+    shadowUrl: null,
+    shadowSize: null, // size of the shadow
+    shadowAnchor: null, // the same for the shadow
+    iconUrl: pharmacyIconSvg,
+  });
+
+  const pharmacyIcon2 = L.icon({
+    iconSize: [32, 42],
+    iconAnchor: [32, 64],
+    shadowUrl: null,
+    shadowSize: null, // size of the shadow
+    shadowAnchor: null, // the same for the shadow
+    iconUrl: pharmacyIcon2Svg,
+  });
+
+  const setIconFn = (type, subType) => {
+    let newicon = hospitalIcon;
+
+    if (type === FILTER.HASTANE) {
+      newicon = hospitalIcon;
+    }
+    // else if (type === FILTER.HASTANE && subType === "sahra hastanesi") {
+    //   newicon = hospitalIcon2;
+    // }
+    if (type === FILTER.ECZANE) {
+      newicon = pharmacyIcon;
+    }
+    // else if (type === FILTER.ECZANE && subType === "sahra eczanesi") {
+    //   newicon = pharmacyIcon2;
+    // }
+
+    if (newicon) return newicon;
+  };
   const toggleVisible = (event) => {
     const scrolled = document.body.scrollTop;
     if (scrolled > 480) {
@@ -73,15 +152,16 @@ const MainViewContaier = () => {
   window.addEventListener("scroll", toggleVisible);
 
   const handleChangeCity = (city) => {
-    const lat = centers[city]?.lat;
-    const lng = centers[city]?.lng;
+    const lat = centers[city.key]?.lat;
+    const lng = centers[city.key]?.lng;
     mapRef.flyTo([lat, lng], 12);
-    setSelectedCity(city);
+    setSelectedCity(city.id);
+    setSelectedDist(null);
   };
 
   useEffect(() => {
     axios
-      .get("https://eczaneapi.afetharita.com/api")
+      .get("https://eczaneapi.afetharita.com/api/locations")
       .then((response) => {
         setAllData(response.data?.data);
       })
@@ -100,12 +180,23 @@ const MainViewContaier = () => {
   }, []);
 
   if (allData === null) {
-    return <h2>Loading </h2>; //LOADBAR EKLE
+    return (
+      <div className="loading-container">
+        <div className="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    ); //LOADBAR EKLE
   }
 
   const typeFilteredData = allData?.filter(
-    (item) => filter === FILTER.HEPSI || item.type === filter
+    (item) => filter === FILTER.HEPSI || item.typeId === filter
   );
+
+  const allDistricts = cityData?.data?.map((city) => city.districts).flat();
 
   const searchFilteredData = typeFilteredData?.filter(
     (item) =>
@@ -117,16 +208,17 @@ const MainViewContaier = () => {
   const cityFilteredData =
     selectedCity == null
       ? searchFilteredData
-      : searchFilteredData?.filter(
-          (item) => item.city.toLowerCase() === selectedCity.toLowerCase()
-        );
+      : searchFilteredData?.filter((item) => item.cityId === selectedCity);
+
+  const distFilteredData =
+    selectedDist == null
+      ? cityFilteredData
+      : cityFilteredData?.filter((item) => item.districtId === selectedDist);
+
+  const hasVetData = allData?.some((item) => item.type === FILTER.VETERINER);
 
   return (
-    <Paper
-      id="fullheight"
-      sx={{ bgcolor: "#182151", height: "100%", padding: "0px" }}
-      variant="outlined"
-    >
+    <SPaper>
       <UpButton visible={visible}></UpButton>
       <DownButton visible={!visible}></DownButton>
       <HeaderCombined
@@ -136,6 +228,7 @@ const MainViewContaier = () => {
         setFilter={setFilter}
         searchBarVal={searchBarVal}
         setSearchbarVal={setSearchbarVal}
+        hasVetData={hasVetData}
       />
 
       {searchAt === SEARCH_AT.HARITA && (
@@ -223,6 +316,8 @@ const MainViewContaier = () => {
               {searchFilteredData?.map((station, index) => {
                 return (
                   <Marker
+                    icon={setIconFn(station.typeId, station.subTypeId)}
+                    //icon={station.type.toLowerCase() === 'hastane' ? hospitalIcon : pharmacyIcon}
                     key={station.id} //key kısmını da kendi datanıza göre ayarlayın mydaya.id gibi
                     position={[station.latitude, station.longitude]} //Kendi pozisyonunuzu ekleyin buraya stationı değiştirin mydata.adress.latitude mydata.adress.longitude gibi
                   >
@@ -238,48 +333,23 @@ const MainViewContaier = () => {
           </MapContainer>
         </Box>
       )}
-      {searchAt === SEARCH_AT.LISTE && <ListPage data={cityFilteredData} />}
+      {searchAt === SEARCH_AT.LISTE && (
+        <ListPage
+          data={distFilteredData}
+          cityData={cityData}
+          allDistricts={allDistricts}
+        />
+      )}
 
-      <Box
-        sx={{
-          flexGrow: 1,
-          marginTop: "30px",
-          height: "auto",
-          overflow: "auto",
-          textAlign: "center",
-        }}
-      >
-        <Grid
-          container
-          spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 12, md: 12 }}
-        >
-          {citydata?.data.map((city, index) => (
-            <Grid item xs={2} sm={4} md={3} key={index}>
-              <Button
-                onClick={() => handleChangeCity(city.key)}
-                sx={{
-                  color: "white",
-                  border: "solid 0.5px",
-                  height: "50px",
-                  width: "150px",
-                }}
-                variant="outlined"
-              >
-                <span
-                  style={{
-                    display: "block",
-                    overflow: "hidden",
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                  }}
-                >{`${city.key}`}</span>
-              </Button>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
-    </Paper>
+      <Footer
+        cityData={cityData}
+        selectedCity={selectedCity}
+        handleChangeCity={handleChangeCity}
+        selectedDist={selectedDist}
+        setSelectedDist={setSelectedDist}
+        allData={allData}
+      />
+    </SPaper>
   );
 };
 export default MainViewContaier;

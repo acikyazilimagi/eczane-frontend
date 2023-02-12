@@ -96,9 +96,9 @@ export const SEARCH_AT = {
 
 export const FILTER = {
   HEPSI: "Hepsi",
-  HASTANE: "Hastane",
-  ECZANE: "Eczane",
-  VETERINER: "Veteriner",
+  HASTANE: 1,
+  ECZANE: 2,
+  VETERINER: 4,
 };
 
 export const HeaderRow = ({
@@ -108,6 +108,7 @@ export const HeaderRow = ({
   setFilter,
   searchBarVal,
   setSearchbarVal,
+  hasVetData,
 }) => {
   const setHarita = () => setSearchAt(SEARCH_AT.HARITA);
   const setListe = () => setSearchAt(SEARCH_AT.LISTE);
@@ -170,8 +171,8 @@ export const HeaderRow = ({
             type="button"
             onClick={setVeteriner}
             selected={filter === FILTER.VETERINER}
-            disabled
-            buttonDisabled
+            disabled={!hasVetData}
+            buttonDisabled={!hasVetData}
           >
             Veteriner
           </SFilterButton>
