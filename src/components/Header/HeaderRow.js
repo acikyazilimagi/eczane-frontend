@@ -15,6 +15,7 @@ const SButton = styled.button`
   color: ${(props) => (props.selected ? "#fff" : "#111A42")};
   border: none;
   font-size: 0.75rem;
+  cursor: pointer;
 
   @media ${BREAKPOINTS.MD.min} {
     padding: 1rem 2rem;
@@ -47,15 +48,38 @@ const SFilterWrapper = styled.div`
 
 const SFilterFlex = styled.div`
   border-radius: 0.625rem;
-  padding: 4px 2px;
+  padding: 2px;
   border: 1px solid #ffffff;
   display: flex;
+  align-self: center;
+  @media ${BREAKPOINTS.MD.min} {
+    padding: 4px;
+  }
 `;
 
 const SFilterButton = styled(SButton)`
   border-radius: 0.625rem;
   color: #fff;
   background-color: ${(props) => (props.selected ? "F83B3B" : "unset")};
+`;
+
+const SFilterIconWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 0.75rem;
+  @media ${BREAKPOINTS.MD.min} {
+    margin: 0 1.5rem;
+  }
+`;
+
+const SFilterSvg = styled.img`
+  height: 0.75rem;
+  width: 0.75rem;
+  @media ${BREAKPOINTS.MD.min} {
+    height: 2rem;
+    width: 2rem;
+  }
 `;
 
 const SEARCH_AT = {
@@ -137,6 +161,9 @@ export const HeaderRow = () => {
           >
             Veteriner
           </SFilterButton>
+          <SFilterIconWrapper>
+            <SFilterSvg src="/filter-icon.svg" />
+          </SFilterIconWrapper>
         </SFilterFlex>
       </SFilterWrapper>
     </SHeaderRowWrapper>

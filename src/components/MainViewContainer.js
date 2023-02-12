@@ -1,30 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { Box, Button, Grid, Paper, Stack, ToggleButton } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import {
-  Box,
-  Paper,
-  Grid,
-  Typography,
-  Button,
-  Stack,
-  Divider,
-  ToggleButton,
-  ToggleButtonGroup,
-} from "@mui/material";
-import CallIcon from "@mui/icons-material/Call";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import MarkerClusterGroup from "react-leaflet-markercluster";
 import axios from "axios";
-import L from 'leaflet';
-
+import L from "leaflet";
+import React, { useEffect, useState } from "react";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-markercluster";
 import centers from "./cityCenters";
-import UpButton from "./UpButton";
 import DownButton from "./DownButton";
-import Header from "./Header";
-import SelectType from "./SelectType";
-import ListPage from "./ListPage";
+import { HeaderCombined } from "./Header/HeaderCombined";
 import InfoCard from "./InfoCard";
+import ListPage from "./ListPage";
+import UpButton from "./UpButton";
 
 const MainViewContaier = () => {
   const [visible, setVisible] = useState(false);
@@ -57,9 +43,9 @@ const MainViewContaier = () => {
   window.addEventListener("scroll", toggleVisible);
   window.addEventListener("scroll", toggleVisible1);
 
- 
-  const handleChange = (event, newAlignment) => {  //TODO DEGISTIR
-    if(newAlignment){
+  const handleChange = (event, newAlignment) => {
+    //TODO DEGISTIR
+    if (newAlignment) {
       setAlignment(newAlignment);
     }
   };
@@ -117,7 +103,6 @@ const MainViewContaier = () => {
   if (data === null) {
     return <h2>Loading </h2>; //LOADBAR EKLE
   }
- 
 
   return (
     <Paper
@@ -154,15 +139,15 @@ const MainViewContaier = () => {
             />
 
             <MarkerClusterGroup>
-              {data?.map((station,index) => {
+              {data?.map((station, index) => {
                 return (
                   <Marker
                     key={station.id} //key kısmını da kendi datanıza göre ayarlayın mydaya.id gibi
                     position={[station.latitude, station.longitude]} //Kendi pozisyonunuzu ekleyin buraya stationı değiştirin mydata.adress.latitude mydata.adress.longitude gibi
                   >
                     <Popup>
-                    <Stack>
-                      <InfoCard item={station} key={index} index={index}/>
+                      <Stack>
+                        <InfoCard item={station} key={index} index={index} />
                       </Stack>
                     </Popup>
                   </Marker>
@@ -211,9 +196,7 @@ const MainViewContaier = () => {
           ))}
         </Grid>
       </Box>
-      {alignment === "liste" && (
-        <ListPage data={data} />
-      )}
+      {alignment === "liste" && <ListPage data={data} />}
     </Paper>
   );
 };
