@@ -19,6 +19,14 @@ import { FILTER, SEARCH_AT } from "./Header/HeaderRow";
 import InfoCard from "./InfoCard";
 import ListPage from "./ListPage";
 import UpButton from "./UpButton";
+import Control from "react-leaflet-custom-control";
+import {  ButtonGroup,  Tooltip } from "@mui/material";
+import LockIcon from '@mui/icons-material/Lock';
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import { FullscreenControl } from "react-leaflet-fullscreen";
+import { width } from "@mui/system";
+
 
 import hospitalIcon2Svg from "../icons/hospital-marker-2.png";
 import hospitalIconSvg from "../icons/hospital-marker.png";
@@ -50,6 +58,7 @@ const MainViewContaier = () => {
       setActive(name);
     }
   };
+  
 
   const [searchAt, setSearchAt] = useState(SEARCH_AT.HARITA);
   const [filter, setFilter] = useState(FILTER.HEPSI);
@@ -245,17 +254,32 @@ const MainViewContaier = () => {
             whenCreated={setMapRef}
             className="hazir-map" //class adı kendinize göre ayarlayabilirsiniz isterseniz
             center={center} //CENTER BILGINIZ NEREDE İSE ORAYA KOYUNUZ
-            zoom={zoom} //ZOOM NE KADAR YAKINDA OLMASINI
-            maxZoom={17}
+            zoom={6} //ZOOM NE KADAR YAKINDA OLMASINI
+            minZoom={7}
             tap={L.Browser.safari && L.Browser.mobile}
+            maxBounds={[
+              [34.325514, 28.939165],
+              [41.57364, 42.770324]]}
             //maxZoomu kendinize göre ayarlayın
           >
 
-              <Control position="topright">
-              <ButtonGroup orientation="vertical" variant="contained">
+              <Control position="topright" >
+              <ButtonGroup orientation="vertical" variant="contained" >
                 <Tooltip placement="left" title={active==="cast"?"Aç":"Kilitle"}>
-                  <Button
-                    color={active === "cast" ? "primary" : "inherit"}
+                  <button style={{
+                    
+                    width:'30px',
+                height:'30px',
+                borderBottomLeftRadius: '2px',
+                borderBottomRightRadius: '2px',
+                pointerEvents: 'auto',
+                cursor: 'pointer',
+                backgroundPosition: '50% 50%',
+                backgroundRepeat: 'no-repeat',
+                display: 'block',
+                border: '2px solid rgba(0,0,0,0.2)',
+                  }}
+                    
                     onClick={() => {handleClick("cast");
                     
                     handleLock(active)
@@ -268,12 +292,23 @@ const MainViewContaier = () => {
                     variant="contained"
                   >
                     {(active === "cast") ? <LockIcon></LockIcon>:<LockOpenIcon></LockOpenIcon>}
-                  </Button>
+                  </button>
                 </Tooltip>
               </ButtonGroup>
             </Control>
             <Control position="topright">
-            <FullscreenControl forceSeparateButton={true} position="topright" content="<img src='./fullscreen.png'></img>" title="Tam Ekran"/>
+            <FullscreenControl   forceSeparateButton={true} position="topright" content="
+              <style>
+              .fullscreen-img{
+                width:30px;
+                height:30px;
+                
+                pointer-events: auto;
+                cursor: pointer;
+
+              }
+              </style>
+              <img src='./fullscreen.png' class='fullscreen-img'></img>" title="Tam Ekran"/>
             </Control>
            
              
