@@ -26,12 +26,6 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { FullscreenControl } from "react-leaflet-fullscreen";
 import { width } from "@mui/system";
 
-import hospitalIconSvg from '../icons/hospital-marker.png'
-import hospitalIcon2Svg from '../icons/hospital-marker-2.png'
-import pharmacyIconSvg from '../icons/pharmacy-marker.png'
-import pharmacyIcon2Svg from '../icons/pharmacy-marker-2.png'
-
-
 
 const SPaper = styled.div`
   background-color: #fff;
@@ -245,16 +239,12 @@ const MainViewContaier = () => {
             whenCreated={setMapRef}
             className="hazir-map" //class adı kendinize göre ayarlayabilirsiniz isterseniz
             center={center} //CENTER BILGINIZ NEREDE İSE ORAYA KOYUNUZ
-            zoom={zoom} //ZOOM NE KADAR YAKINDA OLMASINI
-            minZoom={zoom}
+            zoom={6} //ZOOM NE KADAR YAKINDA OLMASINI
+            minZoom={7}
             tap={L.Browser.safari && L.Browser.mobile}
             maxBounds={[
-              [32, 32],
-              [50, 50],[
-                36,36
-              ],
-              [36,36]
-          ]}
+              [34.325514, 28.939165],
+              [41.57364, 42.770324]]}
             //maxZoomu kendinize göre ayarlayın
           >
 
