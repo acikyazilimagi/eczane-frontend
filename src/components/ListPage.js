@@ -22,16 +22,24 @@ const healthSettings = {
     color: "#8CF134"
   }
 }
-const ListPage= ({data})=>{
+const fontProps = {
+  fontFamily: "Segoe UI",
+  fontWeight: "600",
+  fontSize: "13px",
+}
+const stackProps = {
+  direction:"row", flexWrap:"wrap", alignItems:"center"
 
+}
+const ListPage= ({data})=>{
     return(<Box
           sx={{
             flexGrow: 1,
             marginTop: "30px",
             height: "500px",
             overflow: "auto",
-            textAlign: "center",
           }}
+          fontFamily={"Segoe UI"}
         >
           <div
             style={{
@@ -42,19 +50,11 @@ const ListPage= ({data})=>{
             }}
           >
             {data?.map((item, index) => (
-              <Grid item xs={2} sm={4} md={4} key={index}>
-                <Stack
-                  sx={{
-                    backgroundColor: "white",
-                    borderRadius: "10px",
-                    padding: "5px",
-                  }}
-                  width="320px"
-                >
+              <Grid item xs={2} sm={4} md={4} key={index} backgroundColor="white" borderRadius={"10px"} padding={"5px"}  width="320px">
                   <Box>
                     <Stack
                       direction="row"
-                      spacing={0}
+                      spacing={2}
                       margin="0px"
                       padding="0px 12px"
                     >
@@ -64,60 +64,55 @@ const ListPage= ({data})=>{
                           width="16px"
                           height="16px"
                           alt="./pill.png"
-                        ></img>{" "}
+                        ></img>
                       </Box>
-                      <Typography margin="0px" color={healthSettings[item.type]?.color}>
+                      <Typography  marginLeft={"2px!important"} {...fontProps}  color={healthSettings[item.type]?.color}>
                         {item.type}
                       </Typography>
                     </Stack>
                   </Box>
-                  <Typography fontSize="24px" p="0px 12px">
+                  <Typography {...fontProps} marginTop={"10px"}  textAlign={"left"}  fontSize="20px" p="0px 12px" color={"#182151"}>
                     {item.name}
                   </Typography>
 
-                  <Divider style={{ width: "93.5%", margin: "7px 4px" }} />
+                  <Divider style={{ width: "93.5%", margin: "7px 4px",fontWeight:"700" }}/>
 
                   <Stack direction="column">
-                    <Stack direction="row" padding="3x">
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-evenly",
-                        }}
-                      >
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <LocationOnIcon></LocationOnIcon>
+                    <Stack marginLeft={"6px"} direction="row" justifyContent={"space-between"} padding="3x">
+                        <Stack {...stackProps} >
+                          <LocationOnIcon />
                           <Link 
                             href={`https://www.google.com/maps/dir//${item.latitude},${item.longitude}`} 
-                            underline="none">
+                            underline="none"
+                            color="#182151"
+                            fontSize={"12px"}
+                            >
                               {item.city} | {item.district}
                           </Link>
                           
-                        </div>
+                        </Stack>
 
-                        <div style={{ display: "flex", alignItems: "center" }}>
+                        <Stack {...stackProps} marginRight={"2px"}>
                           {item.phone && (
                             <>
-                              <CallIcon></CallIcon>
-                              <a href={item.phone}>{item.phone}</a>
+                              <CallIcon />
+                              <Link href={`tel:${item.phone}`} 
+                                    underline="none"
+                                    color="gray"
+                                    fontSize={"9px"}
+                                    
+                            >{item.phone}</Link>
                             </>
                         )}
-                        </div>
-                      </div>
+                        </Stack>
                     </Stack>
                     <Typography
-                      padding="0px 12px"
-                      display="absolute"
-                      color="#182151"
-                      sx={{
-                        margin: 0,
-                        opacity: 0.63,
-                      }}
+                    {...fontProps}
+                      marginTop={"10px"} textAlign={"left"}   fontSize="10px" p="0px 12px" color={"gray"}
                     >
-                      {item.additionalAddressDetails}
+                      {item.address}
                     </Typography>
                   </Stack>
-                </Stack>
               </Grid>
             ))}
           </div>
