@@ -11,7 +11,8 @@ import MarkerClusterGroup from "react-leaflet-markercluster";
 import styled from "styled-components";
 import { BREAKPOINTS } from "../utils/styled";
 import centers from "./cityCenters";
-import DownButton from "./DownButton";
+// import DownButton from "./DownButton";
+// import UpButton from "./UpButton";
 import { Footer } from "./Footer/Footer";
 import { HeaderCombined } from "./Header/HeaderCombined";
 import { FILTER, SEARCH_AT } from "./Header/HeaderRow";
@@ -219,8 +220,8 @@ const MainViewContaier = () => {
 
   return (
     <SPaper>
-      <UpButton visible={visible}></UpButton>
-      <DownButton visible={!visible}></DownButton>
+      {/* <UpButton visible={visible}></UpButton>
+      <DownButton visible={!visible}></DownButton> */}
       <HeaderCombined
         setSearchAt={setSearchAt}
         searchAt={searchAt}
@@ -319,6 +320,7 @@ const MainViewContaier = () => {
         selectedDist={selectedDist}
         setSelectedDist={setSelectedDist}
         allData={allData}
+        hideDistrictSelector={searchAt === SEARCH_AT.HARITA}
       />
     </SPaper>
   );
