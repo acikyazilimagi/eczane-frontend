@@ -30,28 +30,65 @@ const MainViewContaier = () => {
   const center = [37.683664, 38.322966];
   const zoom = 7;
 
-
-  const hospitalIcon = L.icon({
-    //iconRetinaUrl: hospitalIconSvg,
-    iconSize: [32, 32],
-    iconAnchor: [32, 64],
-    shadowUrl: null,
-    shadowSize: null,// size of the shadow
-    shadowAnchor: null,  // the same for the shadow
-    iconUrl: hospitalIconSvg,
-  });
-
-  const pharmacyIcon = L.icon({
-    // iconRetinaUrl: pharmacyIconSvg,
-    iconSize: [32, 32],
-    iconAnchor: [32, 64],
-    shadowUrl: null,
-    shadowSize: null, // size of the shadow
-    shadowAnchor: null,  // the same for the shadow
-    iconUrl: pharmacyIconSvg,
-  });
+  console.log("data", data)
 
 
+  // const hospitalIcon = L.icon({
+  //   //iconRetinaUrl: hospitalIconSvg,
+  //   iconSize: [32, 32],
+  //   iconAnchor: [32, 64],
+  //   shadowUrl: null,
+  //   shadowSize: null,// size of the shadow
+  //   shadowAnchor: null,  // the same for the shadow
+  //   iconUrl: hospitalIconSvg,
+  // });
+
+  // const pharmacyIcon = L.icon({
+  //   // iconRetinaUrl: pharmacyIconSvg,
+  //   iconSize: [32, 32],
+  //   iconAnchor: [32, 64],
+  //   shadowUrl: null,
+  //   shadowSize: null, // size of the shadow
+  //   shadowAnchor: null,  // the same for the shadow
+  //   iconUrl: pharmacyIconSvg,
+  // });
+
+  const setIcon = (type, subType) => {
+    let customIcon = hospitalIconSvg
+    let finalType = type?.toLowerCase()
+    let finalSubType = subType?.toLowerCase()
+
+    console.log('%cMainViewContainer.js line:59 finalType', 'color: #007acc;', finalType);
+
+    if (finalType === 'hastane' && finalSubType === 'Genel') {
+      customIcon = hospitalIconSvg
+
+    }
+    else if (finalType === 'eczane' && finalSubType === 'Genel') {
+      customIcon = pharmacyIconSvg
+
+    }
+
+    if (finalType === 'hastane' && finalSubType === 'Sahra Eczanesi') {
+      customIcon = hospitalIconSvg
+
+    }
+    else if (finalType === 'eczane' && finalSubType === 'Sahra Eczanesi') {
+      customIcon = pharmacyIconSvg
+
+    }
+    const icon = L.icon({
+      iconSize: [32, 32],
+      iconAnchor: [32, 64],
+      shadowUrl: null,
+      shadowSize: null, // size of the shadow
+      shadowAnchor: null,  // the same for the shadow
+      iconUrl: customIcon,
+    });
+
+    return icon
+
+  }
   const toggleVisible = (event) => {
     const scrolled = document.body.scrollTop;
     if (scrolled > 480) {
@@ -154,7 +191,8 @@ const MainViewContaier = () => {
               {data?.map((station, index) => {
                 return (
                   <Marker
-                    icon={station.type.toLowerCase() === 'hastane' ? hospitalIcon : pharmacyIcon}
+                    //icon={station.type.toLowerCase() === 'hastane' ? hospitalIcon : pharmacyIcon}
+                    icon={setIcon( station.type, station.subType)}
                     key={station.id} //key kısmını da kendi datanıza göre ayarlayın mydaya.id gibi
                     position={[station.latitude, station.longitude]} //Kendi pozisyonunuzu ekleyin buraya stationı değiştirin mydata.adress.latitude mydata.adress.longitude gibi
                   >
