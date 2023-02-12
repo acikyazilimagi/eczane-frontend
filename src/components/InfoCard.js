@@ -64,7 +64,7 @@ const InfoCard = ({item,index}) => {
 
                   <Stack direction="column">
                     <Stack marginLeft={"6px"} marginRight={"2px"} flexWrap={"wrap"} direction="row" justifyContent={"space-between"} padding="3x">
-                        <Stack {...stackProps} marginRight={"2px"}>
+                        <Stack {...stackProps} marginRight={"2px"} marginTop={"2px"}>
                           <LocationOnIcon fontSize="12px"/>
                           <Link 
                             href={`https://www.google.com/maps/dir//${item.latitude},${item.longitude}`} 
@@ -79,7 +79,7 @@ const InfoCard = ({item,index}) => {
                         </Stack>
 
                           {item.phone && (
-                            <Stack {...stackProps} marginLeft={"2px"}>
+                            <Stack {...stackProps} marginLeft={"2px"} marginTop={"2px"}>
                               <CallIcon fontSize="12px"/>
                               <Link 
                                 href={`tel:${item.phone}`} 
