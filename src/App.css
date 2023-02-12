@@ -1,8 +1,35 @@
+@font-face {
+  font-family: "SegoeUI";
+  src: url("../public/fonts/SegoeUI.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SegoeUIBold";
+  src: url("../public/fonts/SegoeUIBold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SegoeUIItalic";
+  src: url("../public/fonts/SegoeUIItalic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: "SegoeUIBoldItalic";
+  src: url("../public/fonts/SegoeUIBoldItalic.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+}
+
 * {
   margin: 0;
   padding: 0;
 }
-body{
+body {
   background-color: #182151;
 }
 
@@ -96,25 +123,15 @@ body{
 @media screen and (max-width: 993px) {
 }
 @media screen and (max-width: 768px) {
-  
-  
   .leaflet-popup-content {
     width: 100% !important;
     display: flex;
   }
-  
 
-  
   .leaflet-popup-content-wrapper {
     max-width: 95vw !important;
     display: flex !important;
   }
-  
-
-
-
- 
-  
 }
 @media screen and (max-width: 576px) {
 }
