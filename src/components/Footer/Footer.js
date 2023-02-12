@@ -62,7 +62,6 @@ export function Footer({
 
   const allCities = cityData?.data?.map((item) => item.key);
 
-  console.log(allData, "all", selectedCityDistricts);
   const cityDistrictWithData = selectedCityDistricts
     ?.filter((dist) => {
       if (!selectedCityDistricts) return true;
@@ -70,8 +69,6 @@ export function Footer({
       return !!distData;
     })
     .map((i) => i.key);
-
-  console.log(cityDistrictWithData, "cityDistrictWithData");
 
   return (
     <div className="footer-container">
@@ -97,7 +94,6 @@ export function Footer({
                   : "ilce-item"
               }
               onClick={() => {
-                console.log("click");
                 setSelectedDist(item.key);
               }}
               key={item.id}
