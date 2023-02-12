@@ -1,40 +1,123 @@
-import React, { useEffect } from "react";
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import centers from "./cityCenters";
-import MarkerClusterGroup from "react-leaflet-markercluster";
-import Divider from "@mui/material/Divider";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import CallIcon from "@mui/icons-material/Call";
-import UpButton from "./UpButton";
-import DownButton from "./DownButton";
-import Header from "./Header";
+import LockIcon from "@mui/icons-material/Lock";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import { Box, Button, ButtonGroup, Stack, Tooltip } from "@mui/material";
 import axios from "axios";
-import SelectType from "./SelectType";
-import { useState } from "react";
+import L from "leaflet";
+import React, { useEffect, useState } from "react";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import Control from "react-leaflet-custom-control";
+import { FullscreenControl } from "react-leaflet-fullscreen";
+import MarkerClusterGroup from "react-leaflet-markercluster";
+import styled from "styled-components";
+import { BREAKPOINTS } from "../utils/styled";
+import centers from "./cityCenters";
+// import DownButton from "./DownButton";
+// import UpButton from "./UpButton";
+import { Footer } from "./Footer/Footer";
+import { HeaderCombined } from "./Header/HeaderCombined";
+import { FILTER, SEARCH_AT } from "./Header/HeaderRow";
+import InfoCard from "./InfoCard";
+import ListPage from "./ListPage";
+import UpButton from "./UpButton";
 
+import hospitalIcon2Svg from "../icons/hospital-marker-2.png";
+import hospitalIconSvg from "../icons/hospital-marker.png";
+import pharmacyIcon2Svg from "../icons/pharmacy-marker-2.png";
+import pharmacyIconSvg from "../icons/pharmacy-marker.png";
+
+const SPaper = styled.div`
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  background-color: #182151;
+  margin-bottom: 1.5rem;
+  @media ${BREAKPOINTS.MD.min} {
+    margin-bottom: 3rem;
+  }
+`;
+
+const CENTER_LAT = 37.683664
+const CENTER_LNG = 38.322966
 const MainViewContaier = () => {
   const [visible, setVisible] = useState(false);
-  const [visible1, setVisible1] = useState(false);
   const [mapRef, setMapRef] = React.useState();
-  const [alignment, setAlignment] = React.useState("harita");
-  const [citydata, setCityData] = React.useState(null);
-  const [data, setData] = React.useState(null)
-  const [allData, setAllData] = React.useState(null)
-  const [button,setButton]=React.useState("hepsi")
-  const center = [37.683664, 38.322966];
+  const [active, setActive] = React.useState(null);
+
+  const handleClick = (name) => {
+    if (active === name) {
+      setActive(null);
+    } else {
+      setActive(name);
+    }
+  };
+
+  const [searchAt, setSearchAt] = useState(SEARCH_AT.HARITA);
+  const [filter, setFilter] = useState(FILTER.HEPSI);
+  const [searchBarVal, setSearchbarVal] = useState("");
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedDist, setSelectedDist] = useState(null);
+
+  const [cityData, setCityData] = React.useState(null);
+
+  const [allData, setAllData] = React.useState(null);
+
+  const center = [CENTER_LAT, CENTER_LNG];
   const zoom = 7;
 
+  const hospitalIcon = L.icon({
+    iconSize: [32, 42],
+    iconAnchor: [32, 64],
+    shadowUrl: null,
+    shadowSize: null, // size of the shadow
+    shadowAnchor: null, // the same for the shadow
+    iconUrl: hospitalIconSvg,
+  });
 
-  
+  const hospitalIcon2 = L.icon({
+    iconSize: [32, 42],
+    iconAnchor: [32, 64],
+    shadowUrl: null,
+    shadowSize: null, // size of the shadow
+    shadowAnchor: null, // the same for the shadow
+    iconUrl: hospitalIcon2Svg,
+  });
+
+  const pharmacyIcon = L.icon({
+    iconSize: [32, 42],
+    iconAnchor: [32, 64],
+    shadowUrl: null,
+    shadowSize: null, // size of the shadow
+    shadowAnchor: null, // the same for the shadow
+    iconUrl: pharmacyIconSvg,
+  });
+
+  const pharmacyIcon2 = L.icon({
+    iconSize: [32, 42],
+    iconAnchor: [32, 64],
+    shadowUrl: null,
+    shadowSize: null, // size of the shadow
+    shadowAnchor: null, // the same for the shadow
+    iconUrl: pharmacyIcon2Svg,
+  });
+
+  const setIconFn = (type, subType) => {
+    let newicon = hospitalIcon;
+
+    if (type === FILTER.HASTANE) {
+      newicon = hospitalIcon;
+    }
+    // else if (type === FILTER.HASTANE && subType === "sahra hastanesi") {
+    //   newicon = hospitalIcon2;
+    // }
+    if (type === FILTER.ECZANE) {
+      newicon = pharmacyIcon;
+    }
+    // else if (type === FILTER.ECZANE && subType === "sahra eczanesi") {
+    //   newicon = pharmacyIcon2;
+    // }
+
+    if (newicon) return newicon;
+  };
   const toggleVisible = (event) => {
     const scrolled = document.body.scrollTop;
     if (scrolled > 480) {
@@ -43,172 +126,112 @@ const MainViewContaier = () => {
       setVisible(false);
     }
   };
-  const toggleVisible1 = (event) => {
-    const scrolled = document.body.scrollTop;
-    if (scrolled < 480) {
-      setVisible1(true);
-    } else if (scrolled >= 480) {
-      setVisible1(false);
-    }
-  };
-  window.addEventListener("scroll", toggleVisible);
-  window.addEventListener("scroll", toggleVisible1);
+  const handleLock=(locked)=>{
 
- 
-  const handleChange = (event, newAlignment) => {  //TODO DEGISTIR
-    if(newAlignment){
-      setAlignment(newAlignment);
+    if(locked==="cast") {
+      mapRef.dragging.enable();
+      mapRef.zoomControl.enable()
+      mapRef.scrollWheelZoom.enable()
+    
     }
-  };
+    else {
+      mapRef.dragging.disable()
+      mapRef.zoomControl.disable()
+      mapRef.scrollWheelZoom.disable()
+    
+    }
+
+  }
+  window.addEventListener("scroll", toggleVisible);
 
   const handleChangeCity = (city) => {
-    const lat = centers[city]?.lat;
-    const lng = centers[city]?.lng;
+    if(city == null){
+      setSelectedCity(null);
+      setSelectedDist(null);
+      mapRef.flyTo([CENTER_LAT, CENTER_LNG], 7);
+      return;
+    }
+    const lat = centers[city.key]?.lat;
+    const lng = centers[city.key]?.lng;
     mapRef.flyTo([lat, lng], 12);
+    setSelectedCity(city.id);
+    setSelectedDist(null);
   };
 
-   const handleFilterButton = (event) => {
-    setButton(event.target.value);
-        if (event.target.value === 'hepsi') {
-            setData(allData)
-        }
-        
+  useEffect(() => {
+    axios
+      .get("https://eczaneapi.afetharita.com/api/locations")
+      .then((response) => {
+        setAllData(response.data?.data);
+      })
+      .catch((err) => {
+      });
+  }, []);
 
-        else {
-            const filteredData = allData?.filter((item) => item.type === event.target.value)
-            setData(filteredData )
-        }
-    }
-
-  
-  const CustomToggleButtonFilter = styled(ToggleButton)({
-    "&.Mui-selected, &.Mui-selected:hover": {
-      color: "white",
-      backgroundColor: "#FF6464",
-    },
-    "&.MuiToggleButton-root": {
-      textTransform: "none",
-      color: "white !important",
-    },
-  });
-
-
-  
-    useEffect(() => {
-        axios.get("https://eczaneapi.afetharita.com/api").then((response) => {
-            setData(response.data?.data);
-            setAllData(response.data?.data);
-        }).catch((err) => {
-            //setError(err)
-        })
-
-    }, []);
-    
   useEffect(() => {
     axios
       .get("https://eczaneapi.afetharita.com/api/cityWithDistricts ")
       .then((response) => {
         setCityData(response.data);
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }, []);
 
-  if(data===null){
-    return <h2>Loading  </h2>   //LOADBAR EKLE
+  if (allData === null) {
+    return (
+      <div className="loading-container">
+        <div className="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    ); //LOADBAR EKLE
   }
- 
-  
+
+  const typeFilteredData = allData?.filter(
+    (item) => filter === FILTER.HEPSI || item.typeId === filter
+  );
+
+  const allDistricts = cityData?.data?.map((city) => city.districts).flat();
+
+  const searchFilteredData = typeFilteredData?.filter(
+    (item) => {
+      // const cityValues = cityData?.data;
+      return item.name.toLowerCase().includes(searchBarVal.toLowerCase()) ||
+      item.address.toLowerCase().includes(searchBarVal.toLowerCase()) // ||
+      // cityValues?.find(c => c.key.toLowerCase().includes(searchBarVal.toLowerCase()) || c.districts.find(d => d.key.toLowerCase().includes(searchBarVal.toLowerCase())))
+    }
+  );
+
+  const cityFilteredData =
+    selectedCity == null
+      ? searchFilteredData
+      : searchFilteredData?.filter((item) => item.cityId === selectedCity);
+
+  const distFilteredData =
+    selectedDist == null
+      ? cityFilteredData
+      : cityFilteredData?.filter((item) => item.districtId === selectedDist);
+
+  const hasVetData = allData?.some((item) => item.type === FILTER.VETERINER);
 
   return (
-    <Paper
-      id="fullheight"
-      sx={{ bgcolor: "#182151", height: "100%", padding: "0px" }}
-      variant="outlined"
-    >
+    <SPaper>
+      {/* <UpButton visible={visible}></UpButton>
+      <DownButton visible={!visible}></DownButton> */}
+      <HeaderCombined
+        setSearchAt={setSearchAt}
+        searchAt={searchAt}
+        filter={filter}
+        setFilter={setFilter}
+        searchBarVal={searchBarVal}
+        setSearchbarVal={setSearchbarVal}
+        hasVetData={hasVetData}
+      />
 
-      <UpButton visible={visible}></UpButton>
-      <DownButton visible={visible1}></DownButton>
-      
-      <Header  alignment={alignment} handleChange={handleChange}></Header>
-      
-     
-
-    
-        
-
-      <Grid container sx={{width:"100%",margin:"90px 0px 40px 0px",justifyContent:"center" }} >
-        
-
-        <Grid
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "flex-start",
-            color: "white",
-            maxWidth: "unset",
-            flexBasis:"auto",
-            margin:"10px 0px"
-            
-          }}
-          item md={6} sm={12} alignSelf={"self-start"} 
-        >
-          <Stack
-            sx={{
-              border: "solid 0.1px",
-              padding: "7px",
-              borderRadius: "8px",
-              
-              
-            }}
-            direction="row-reverse"
-            spacing={2}
-            divider={
-              <Divider
-                sx={{ backgroundColor: "white" }}
-                orientation="vertical"
-                flexItem
-              />
-            }
-          >
-            <ToggleButtonGroup
-              sx={{
-                padding: "1",
-              }}
-              value={button}
-              exclusive
-              onChange={handleFilterButton}
-              aria-label="Platform"
-            >
-              <CustomToggleButtonFilter value="hepsi" c>
-                Hepsi
-              </CustomToggleButtonFilter>
-              <CustomToggleButtonFilter value="Hastane">
-                Hastane
-              </CustomToggleButtonFilter>
-              <CustomToggleButtonFilter value="Eczane">
-                Eczane
-              </CustomToggleButtonFilter>
-            </ToggleButtonGroup>
-          </Stack>
-        </Grid>
-        <Grid item md={6} sm={12} display="flex">
-        <SelectType handleChange={handleChange} alignment={alignment} ></SelectType>
-        </Grid>
-        
-        
-      </Grid>
-      
- 
-
-      
-   
-
-      
-
-     
-
-      {alignment === "harita" && (
+      {searchAt === SEARCH_AT.HARITA && (
         <Box
           sx={{
             width: "100%",
@@ -224,94 +247,55 @@ const MainViewContaier = () => {
             center={center} //CENTER BILGINIZ NEREDE İSE ORAYA KOYUNUZ
             zoom={zoom} //ZOOM NE KADAR YAKINDA OLMASINI
             maxZoom={17}
+            tap={L.Browser.safari && L.Browser.mobile}
             //maxZoomu kendinize göre ayarlayın
           >
+
+              <Control position="topright">
+              <ButtonGroup orientation="vertical" variant="contained">
+                <Tooltip placement="left" title={active==="cast"?"Aç":"Kilitle"}>
+                  <Button
+                    color={active === "cast" ? "primary" : "inherit"}
+                    onClick={() => {handleClick("cast");
+                    
+                    handleLock(active)
+                  
+                  }}
+                  sx={{
+                    width:"1px",
+                    height:"40px",
+                  }}
+                    variant="contained"
+                  >
+                    {(active === "cast") ? <LockIcon></LockIcon>:<LockOpenIcon></LockOpenIcon>}
+                  </Button>
+                </Tooltip>
+              </ButtonGroup>
+            </Control>
+            <Control position="topright">
+            <FullscreenControl forceSeparateButton={true} position="topright" content="<img src='./fullscreen.png'></img>" title="Tam Ekran"/>
+            </Control>
+           
+             
             <TileLayer //Bu kısımda değişikliğe gerek yok
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
 
             <MarkerClusterGroup>
-              {data?.map((station) => {
+              {searchFilteredData?.map((station, index) => {
                 return (
                   <Marker
+                    icon={setIconFn(station.typeId, station.subTypeId)}
+                    //icon={station.type.toLowerCase() === 'hastane' ? hospitalIcon : pharmacyIcon}
                     key={station.id} //key kısmını da kendi datanıza göre ayarlayın mydaya.id gibi
                     position={[station.latitude, station.longitude]} //Kendi pozisyonunuzu ekleyin buraya stationı değiştirin mydata.adress.latitude mydata.adress.longitude gibi
                   >
                     <Popup>
-                      <Box>
-                        <Stack width="400px">
-                          <Box>
-                            <Stack
-                              direction="row"
-                              spacing={0}
-                              margin="0px"
-                              padding="0px 12px"
-                            >
-                              <Box padding="3px 4px 0px 0px">
-                                <img
-                                  src="./pill.png "
-                                  width="16px"
-                                  height="16px"
-                                  alt="./pill.png"
-                                ></img>{" "}
-                                {
-                                  //Alternatif image eklenebilir
-                                }
-                              </Box>
-                              <Typography margin="0px" color={"#F83B3B"}>
-                                Eczane
-                              </Typography>
-                            </Stack>
-                          </Box>
-                          <Typography fontSize="24px" p="0px 12px">
-                            {station.name}
-                          </Typography>
-
-                          <Divider
-                            style={{ width: "93.5%", margin: "7px 4px" }}
-                          />
-
-                          <Stack direction="column">
-                            <Stack
-                              direction="row"
-                              padding="3px 0px 0px 7px"
-                              justifyContent="space-evenly"
-                            >
-                              <Box
-                                sx={{ display: "flex", alignItems: "center" }}
-                              >
-                                <LocationOnIcon></LocationOnIcon>
-                                <a
-                                  href={`https://www.google.com/maps/dir//${station.latitude},${station.longitude}`}
-                                >
-                                  {station.city} {station.district}
-                                </a>
-                              </Box>
-
-                              <Box
-                                sx={{ display: "flex", alignItems: "center" }}
-                              >
-                                <CallIcon></CallIcon>
-                                <a href={"tel:" + station.phone}>
-                                  {station.phone}
-                                </a>
-                              </Box>
-                            </Stack>
-                            <Typography
-                              sx={{
-                                margin: 0,
-  opacity: 0.63,
-  flexWrap:"wrap",
-  padding:"5px"
-                              }}
-
-                            >
-                              {station.address}
-                            </Typography>
-                          </Stack>
-                        </Stack>
-                      </Box>
+                      <Stack>
+                        {/* <InfoCard item={station} key={index} index={index} /> */}
+                        <InfoCard key={station.id} item={station} cityData={cityData} allDistricts={allDistricts} />
+                      </Stack>
                     </Popup>
                   </Marker>
                 );
@@ -320,146 +304,24 @@ const MainViewContaier = () => {
           </MapContainer>
         </Box>
       )}
-
-      <Box
-        sx={{
-          flexGrow: 1,
-          marginTop: "30px",
-          height: "500px",
-          overflow: "auto",
-          textAlign: "center",
-        }}
-      >
-        <Grid
-          container
-          spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 12, md: 12 }}
-        >
-          {citydata?.data.map((city, index) => (
-            <Grid item xs={2} sm={4} md={3} key={index}>
-              <Button
-                onClick={() => handleChangeCity(city.key)}
-                sx={{
-                  color: "white",
-                  border: "solid 0.5px",
-                  height: "50px",
-                  width: "150px",
-                }}
-                variant="outlined"
-              >
-                <span
-                  style={{
-                    display: "block",
-                    overflow: "hidden",
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                  }}
-                >{`${city.key}`}</span>
-              </Button>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
-
-      {alignment === "liste" && (
-        <Box
-          sx={{
-            flexGrow: 1,
-            marginTop: "30px",
-            height: "500px",
-            overflow: "auto",
-            textAlign: "center",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "7.5px",
-              justifyContent: "center",
-            }}
-          >
-            {data?.map((item, index) => (
-              <Grid item xs={2} sm={4} md={4} key={index}>
-                <Stack
-                  sx={{
-                    backgroundColor: "white",
-                    borderRadius: "10px",
-                    padding: "5px",
-                  }}
-                  width="320px"
-                >
-                  <Box>
-                    <Stack
-                      direction="row"
-                      spacing={0}
-                      margin="0px"
-                      padding="0px 12px"
-                    >
-                      <Box padding="3px 4px 0px 0px">
-                        <img
-                          src="./pill.png"
-                          width="16px"
-                          height="16px"
-                          alt="./pill.png"
-                        ></img>{" "}
-                        {
-                          // Alternaif image eklenebilir
-                        }
-                      </Box>
-                      <Typography margin="0px" color={"#F83B3B"}>
-                        Eczane
-                      </Typography>
-                    </Stack>
-                  </Box>
-                  <Typography fontSize="24px" p="0px 12px">
-                    {item.name}
-                  </Typography>
-
-                  <Divider style={{ width: "93.5%", margin: "7px 4px" }} />
-
-                  <Stack direction="column">
-                    <Stack direction="row" padding="3x">
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-evenly",
-                        }}
-                      >
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <LocationOnIcon></LocationOnIcon>
-                          <a
-                            href={`https://www.google.com/maps/dir//${item.latitude},${item.longitude}`}
-                          >
-                            {item.city} | {item.district}
-                          </a>
-                        </div>
-
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <CallIcon></CallIcon>
-                          <a href={item.phone}>{item.phone}</a>
-                        </div>
-                      </div>
-                    </Stack>
-                    <Typography
-                      padding="0px 12px"
-                      display="absolute"
-                      color="#182151"
-                      sx={{
-                        margin: 0,
-opacity: 0.63,
-                      }}
-                    >
-                      {item.additionalAddressDetails}
-                    </Typography>
-                  </Stack>
-                </Stack>
-              </Grid>
-            ))}
-          </div>
-        </Box>
+      {searchAt === SEARCH_AT.LISTE && (
+        <ListPage
+          data={distFilteredData}
+          cityData={cityData}
+          allDistricts={allDistricts}
+        />
       )}
-    </Paper>
+
+      <Footer
+        cityData={cityData}
+        selectedCity={selectedCity}
+        handleChangeCity={handleChangeCity}
+        selectedDist={selectedDist}
+        setSelectedDist={setSelectedDist}
+        allData={allData}
+        hideDistrictSelector={searchAt === SEARCH_AT.HARITA}
+      />
+    </SPaper>
   );
 };
 export default MainViewContaier;
