@@ -1,22 +1,30 @@
+import React, { useEffect, useState } from "react";
+import { styled } from "@mui/material/styles";
+import {
+  Box,
+  Paper,
+  Grid,
+  Typography,
+  Button,
+  Stack,
+  Divider,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
 import CallIcon from "@mui/icons-material/Call";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
-import { styled } from "@mui/material/styles";
-import ToggleButton from "@mui/material/ToggleButton";
-import Typography from "@mui/material/Typography";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
+import axios from "axios";
+import L from 'leaflet';
+
 import centers from "./cityCenters";
-import DownButton from "./DownButton";
-import { HeaderCombined } from "./Header/HeaderCombined";
 import UpButton from "./UpButton";
+import DownButton from "./DownButton";
+import Header from "./Header";
+import SelectType from "./SelectType";
+import ListPage from "./ListPage";
+import InfoCard from "./InfoCard";
 
 const MainViewContaier = () => {
   const [visible, setVisible] = useState(false);
@@ -49,9 +57,11 @@ const MainViewContaier = () => {
   window.addEventListener("scroll", toggleVisible);
   window.addEventListener("scroll", toggleVisible1);
 
-  const handleChange = (event, newAlignment) => {
-    //TODO DEGISTIR
-    setAlignment(newAlignment);
+ 
+  const handleChange = (event, newAlignment) => {  //TODO DEGISTIR
+    if(newAlignment){
+      setAlignment(newAlignment);
+    }
   };
 
   const handleChangeCity = (city) => {
@@ -107,6 +117,7 @@ const MainViewContaier = () => {
   if (data === null) {
     return <h2>Loading </h2>; //LOADBAR EKLE
   }
+ 
 
   return (
     <Paper
@@ -134,6 +145,7 @@ const MainViewContaier = () => {
             center={center} //CENTER BILGINIZ NEREDE İSE ORAYA KOYUNUZ
             zoom={zoom} //ZOOM NE KADAR YAKINDA OLMASINI
             maxZoom={17}
+            tap={L.Browser.safari && L.Browser.mobile}
             //maxZoomu kendinize göre ayarlayın
           >
             <TileLayer //Bu kısımda değişikliğe gerek yok
@@ -142,85 +154,16 @@ const MainViewContaier = () => {
             />
 
             <MarkerClusterGroup>
-              {data?.map((station) => {
+              {data?.map((station,index) => {
                 return (
                   <Marker
                     key={station.id} //key kısmını da kendi datanıza göre ayarlayın mydaya.id gibi
                     position={[station.latitude, station.longitude]} //Kendi pozisyonunuzu ekleyin buraya stationı değiştirin mydata.adress.latitude mydata.adress.longitude gibi
                   >
                     <Popup>
-                      <Box>
-                        <Stack width="400px">
-                          <Box>
-                            <Stack
-                              direction="row"
-                              spacing={0}
-                              margin="0px"
-                              padding="0px 12px"
-                            >
-                              <Box padding="3px 4px 0px 0px">
-                                <img
-                                  src="./pill.png "
-                                  width="16px"
-                                  height="16px"
-                                  alt="./pill.png"
-                                ></img>{" "}
-                                {
-                                  //Alternatif image eklenebilir
-                                }
-                              </Box>
-                              <Typography margin="0px" color={"#F83B3B"}>
-                                Eczane
-                              </Typography>
-                            </Stack>
-                          </Box>
-                          <Typography fontSize="24px" p="0px 12px">
-                            {station.name}
-                          </Typography>
-
-                          <Divider
-                            style={{ width: "93.5%", margin: "7px 4px" }}
-                          />
-
-                          <Stack direction="column">
-                            <Stack
-                              direction="row"
-                              padding="3px 0px 0px 7px"
-                              justifyContent="space-evenly"
-                            >
-                              <Box
-                                sx={{ display: "flex", alignItems: "center" }}
-                              >
-                                <LocationOnIcon></LocationOnIcon>
-                                <a
-                                  href={`https://www.google.com/maps/dir//${station.latitude},${station.longitude}`}
-                                >
-                                  {station.city} {station.district}
-                                </a>
-                              </Box>
-
-                              <Box
-                                sx={{ display: "flex", alignItems: "center" }}
-                              >
-                                <CallIcon></CallIcon>
-                                <a href={"tel:" + station.phone}>
-                                  {station.phone}
-                                </a>
-                              </Box>
-                            </Stack>
-                            <Typography
-                              sx={{
-                                margin: 0,
-                                opacity: 0.63,
-                                flexWrap: "wrap",
-                                padding: "5px",
-                              }}
-                            >
-                              {station.address}
-                            </Typography>
-                          </Stack>
-                        </Stack>
-                      </Box>
+                    <Stack>
+                      <InfoCard item={station} key={index} index={index}/>
+                      </Stack>
                     </Popup>
                   </Marker>
                 );
@@ -269,102 +212,7 @@ const MainViewContaier = () => {
         </Grid>
       </Box>
       {alignment === "liste" && (
-        <Box
-          sx={{
-            flexGrow: 1,
-            marginTop: "30px",
-            height: "500px",
-            overflow: "auto",
-            textAlign: "center",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "7.5px",
-              justifyContent: "center",
-            }}
-          >
-            {data?.map((item, index) => (
-              <Grid item xs={2} sm={4} md={4} key={index}>
-                <Stack
-                  sx={{
-                    backgroundColor: "white",
-                    borderRadius: "10px",
-                    padding: "5px",
-                  }}
-                  width="320px"
-                >
-                  <Box>
-                    <Stack
-                      direction="row"
-                      spacing={0}
-                      margin="0px"
-                      padding="0px 12px"
-                    >
-                      <Box padding="3px 4px 0px 0px">
-                        <img
-                          src="./pill.png"
-                          width="16px"
-                          height="16px"
-                          alt="./pill.png"
-                        ></img>{" "}
-                        {
-                          // Alternaif image eklenebilir
-                        }
-                      </Box>
-                      <Typography margin="0px" color={"#F83B3B"}>
-                        Eczane
-                      </Typography>
-                    </Stack>
-                  </Box>
-                  <Typography fontSize="24px" p="0px 12px">
-                    {item.name}
-                  </Typography>
-
-                  <Divider style={{ width: "93.5%", margin: "7px 4px" }} />
-
-                  <Stack direction="column">
-                    <Stack direction="row" padding="3x">
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-evenly",
-                        }}
-                      >
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <LocationOnIcon></LocationOnIcon>
-                          <a
-                            href={`https://www.google.com/maps/dir//${item.latitude},${item.longitude}`}
-                          >
-                            {item.city} | {item.district}
-                          </a>
-                        </div>
-
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <CallIcon></CallIcon>
-                          <a href={item.phone}>{item.phone}</a>
-                        </div>
-                      </div>
-                    </Stack>
-                    <Typography
-                      padding="0px 12px"
-                      display="absolute"
-                      color="#182151"
-                      sx={{
-                        margin: 0,
-                        opacity: 0.63,
-                      }}
-                    >
-                      {item.additionalAddressDetails}
-                    </Typography>
-                  </Stack>
-                </Stack>
-              </Grid>
-            ))}
-          </div>
-        </Box>
+        <ListPage data={data} />
       )}
     </Paper>
   );
