@@ -108,6 +108,7 @@ export const HeaderRow = ({
   setFilter,
   searchBarVal,
   setSearchbarVal,
+  hasVetData,
 }) => {
   const setHarita = () => setSearchAt(SEARCH_AT.HARITA);
   const setListe = () => setSearchAt(SEARCH_AT.LISTE);
@@ -170,8 +171,8 @@ export const HeaderRow = ({
             type="button"
             onClick={setVeteriner}
             selected={filter === FILTER.VETERINER}
-            disabled
-            buttonDisabled
+            disabled={!hasVetData}
+            buttonDisabled={!hasVetData}
           >
             Veteriner
           </SFilterButton>
