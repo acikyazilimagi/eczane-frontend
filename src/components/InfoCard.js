@@ -127,13 +127,28 @@ const InfoCard = ({ item, cityData, allDistricts }) => {
           {...fontProps}
           marginTop={"10px!important"}
           textAlign={"left"}
-          fontSize="11px"
+          fontSize="14px"
           p="0px 12px"
         >
           {item.address}
         </Typography>
 
         {item.additionalAddressDetails !== "" ? (
+          <Typography
+            {...fontProps}
+            marginTop={"10px!important"}
+            textAlign={"left"}
+            fontSize="14px"
+            p="0px 12px"
+            color={"gray"}
+          >
+            {item.additionalAddressDetails}
+          </Typography>
+        ) : (
+          ""
+        )}
+
+        {/* {item.additionalAddressDetails !== "" ? (
           <Button
             sx={{
               backgroundColor: "#F83B3B",
@@ -152,7 +167,7 @@ const InfoCard = ({ item, cityData, allDistricts }) => {
           </Button>
         ) : (
           ""
-        )}
+        )} */}
 
         <Box
           sx={{
