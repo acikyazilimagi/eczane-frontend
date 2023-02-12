@@ -38,16 +38,17 @@ const MainViewContaier = () => {
     shadowUrl: null,
     shadowSize: null,
     shadowAnchor: null,
-    color: 'blue'
+    iconUrl: null,
   });
 
   const pharmacyIcon = L.icon({
-    iconRetinaUrl: pharmacyIconSvg,
+   iconRetinaUrl: pharmacyIconSvg,
     iconSize: [32, 32],
     iconAnchor: [32, 64],
     shadowUrl: null,
     shadowSize: null,
-    shadowAnchor: null
+    shadowAnchor: null,
+    iconUrl: null,
   });
 
 
