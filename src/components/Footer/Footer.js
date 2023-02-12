@@ -33,9 +33,10 @@ const SRightIcon = styled(SLeftIcon)`
 `;
 
 const SParagWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  top: 50%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 const SParag = styled.p`
   font-family: "SegoeUI";
