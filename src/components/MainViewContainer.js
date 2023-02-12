@@ -110,10 +110,10 @@ const MainViewContaier = () => {
   window.addEventListener("scroll", toggleVisible);
 
   const handleChangeCity = (city) => {
-    const lat = centers[city]?.lat;
-    const lng = centers[city]?.lng;
+    const lat = centers[city.key]?.lat;
+    const lng = centers[city.key]?.lng;
     mapRef.flyTo([lat, lng], 12);
-    setSelectedCity(city);
+    setSelectedCity(city.id);
     setSelectedDist(null);
   };
 
@@ -164,16 +164,12 @@ const MainViewContaier = () => {
   const cityFilteredData =
     selectedCity == null
       ? searchFilteredData
-      : searchFilteredData?.filter(
-          (item) => item.city?.toLowerCase() === selectedCity?.toLowerCase()
-        );
+      : searchFilteredData?.filter((item) => item.cityId === selectedCity);
 
   const distFilteredData =
     selectedDist == null
       ? cityFilteredData
-      : cityFilteredData?.filter(
-          (item) => item.district?.toLowerCase() === selectedDist?.toLowerCase()
-        );
+      : cityFilteredData?.filter((item) => item.districtId === selectedDist);
 
   const hasVetData = allData?.some((item) => item.type === FILTER.VETERINER);
 

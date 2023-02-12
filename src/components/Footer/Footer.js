@@ -56,11 +56,11 @@ export function Footer({
 }) {
   const noCitySelected = !selectedCity;
 
-  const selectedCityData = cityData?.data?.find((a) => a.key === selectedCity);
+  const selectedCityData = cityData?.data?.find((a) => a.id === selectedCity);
 
   const selectedCityDistricts = selectedCityData?.districts;
 
-  const allCities = cityData?.data?.map((item) => item.key);
+  const allCities = cityData?.data;
 
   console.log(allData, selectedCityDistricts);
   const cityDistrictWithData = selectedCityDistricts
@@ -90,12 +90,12 @@ export function Footer({
               className={
                 cityDistrictWithData.indexOf(item.key) === -1
                   ? "ilce-item ilce-disabled"
-                  : selectedDist === item.key
+                  : selectedDist === item.id
                   ? "ilce-item ilce-active"
                   : "ilce-item"
               }
               onClick={() => {
-                setSelectedDist(item.key);
+                setSelectedDist(item.id);
               }}
               key={item.id}
               disabled={cityDistrictWithData.indexOf(item.key) === -1}
@@ -116,12 +116,14 @@ export function Footer({
         {allCities?.map((item) => (
           <button
             className={
-              selectedCity === item ? "city-item city-item-active" : "city-item"
+              selectedCity === item.id
+                ? "city-item city-item-active"
+                : "city-item"
             }
-            key={item}
+            key={item.id}
             onClick={() => handleChangeCity(item)}
           >
-            {item}
+            {item.key}
           </button>
         ))}
       </div>
