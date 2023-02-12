@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Paper, Stack } from "@mui/material";
+import { Box, Paper, Stack } from "@mui/material";
 import axios from "axios";
 import L from "leaflet";
 import React, { useEffect, useState } from "react";
@@ -6,6 +6,7 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import centers from "./cityCenters";
 import DownButton from "./DownButton";
+import { Footer } from "./Footer/Footer";
 import { HeaderCombined } from "./Header/HeaderCombined";
 import { FILTER, SEARCH_AT } from "./Header/HeaderRow";
 import InfoCard from "./InfoCard";
@@ -20,8 +21,9 @@ const MainViewContaier = () => {
   const [filter, setFilter] = useState(FILTER.HEPSI);
   const [searchBarVal, setSearchbarVal] = useState("");
   const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedDist, setSelectedDist] = useState(null);
 
-  const [citydata, setCityData] = React.useState(null);
+  const [cityData, setCityData] = React.useState(null);
 
   const [allData, setAllData] = React.useState(null);
 
@@ -43,6 +45,7 @@ const MainViewContaier = () => {
     const lng = centers[city]?.lng;
     mapRef.flyTo([lat, lng], 12);
     setSelectedCity(city);
+    setSelectedDist(null);
   };
 
   useEffect(() => {
@@ -94,6 +97,13 @@ const MainViewContaier = () => {
       ? searchFilteredData
       : searchFilteredData?.filter(
           (item) => item.city.toLowerCase() === selectedCity.toLowerCase()
+        );
+
+  const distFilteredData =
+    selectedDist == null
+      ? cityFilteredData
+      : cityFilteredData?.filter(
+          (item) => item.district.toLowerCase() === selectedDist.toLowerCase()
         );
 
   return (
@@ -156,47 +166,15 @@ const MainViewContaier = () => {
           </MapContainer>
         </Box>
       )}
-      {searchAt === SEARCH_AT.LISTE && <ListPage data={cityFilteredData} />}
+      {searchAt === SEARCH_AT.LISTE && <ListPage data={distFilteredData} />}
 
-      <Box
-        sx={{
-          flexGrow: 1,
-          marginTop: "30px",
-          height: "auto",
-          overflow: "auto",
-          textAlign: "center",
-        }}
-      >
-        <Grid
-          container
-          spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 12, md: 12 }}
-        >
-          {citydata?.data.map((city, index) => (
-            <Grid item xs={2} sm={4} md={3} key={index}>
-              <Button
-                onClick={() => handleChangeCity(city.key)}
-                sx={{
-                  color: "white",
-                  border: "solid 0.5px",
-                  height: "50px",
-                  width: "150px",
-                }}
-                variant="outlined"
-              >
-                <span
-                  style={{
-                    display: "block",
-                    overflow: "hidden",
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                  }}
-                >{`${city.key}`}</span>
-              </Button>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
+      <Footer
+        cityData={cityData}
+        selectedCity={selectedCity}
+        handleChangeCity={handleChangeCity}
+        selectedDist={selectedDist}
+        setSelectedDist={setSelectedDist}
+      />
     </Paper>
   );
 };
