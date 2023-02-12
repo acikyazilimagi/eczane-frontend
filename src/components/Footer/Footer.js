@@ -18,6 +18,20 @@ const SLeftIcon = styled.img`
   margin: 0 0.5rem;
 `;
 
+const SShowAllIcon = styled.img`
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 0.75rem;
+  width: 0.75rem;
+  @media ${BREAKPOINTS.MD.min} {
+    height: 1.5rem;
+    width: 1.5rem;
+    right: 1rem;
+  }
+`;
+
 const SButton = styled.button`
   background: none;
   color: inherit;
@@ -128,6 +142,10 @@ export function Footer({
             {item.key}
           </button>
         ))}
+      </div>
+      <div className="see-all-wrapper" onClick={() => handleChangeCity(null)}>
+        <button className={"city-item see-all-button"}>Tümünü Gör</button>
+        <SShowAllIcon src="/show-all-icon.svg" />
       </div>
     </div>
   );
