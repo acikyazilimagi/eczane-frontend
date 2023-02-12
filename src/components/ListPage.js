@@ -55,7 +55,7 @@ const ListPage= ({data})=>{
                         }
                       </Box>
                       <Typography margin="0px" color={"#F83B3B"}>
-                        Eczane
+                        {item.type}
                       </Typography>
                     </Stack>
                   </Box>
