@@ -5,8 +5,23 @@ import Typography from "@mui/material/Typography";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CallIcon from "@mui/icons-material/Call";
 import Divider from "@mui/material/Divider";
+import Link from '@mui/material/Link';
 
+const healthTypes ={
+  "Pharmacy": 'Eczane',
+  "Hospital": 'Hastane',
+}
 
+const healthSettings = {
+  [healthTypes.Pharmacy]: {
+    icon: "./pill.png",
+    color: "#F83B3B"
+  },
+  [healthTypes.Hospital]: {
+    icon: "./hospital.png",
+    color: "#8CF134"
+  }
+}
 const ListPage= ({data})=>{
 
     return(<Box
@@ -45,17 +60,14 @@ const ListPage= ({data})=>{
                     >
                       <Box padding="3px 4px 0px 0px">
                         <img
-                          src="./pill.png"
+                          src={healthSettings[item.type]?.icon}
                           width="16px"
                           height="16px"
                           alt="./pill.png"
                         ></img>{" "}
-                        {
-                          // Alternaif image eklenebilir
-                        }
                       </Box>
-                      <Typography margin="0px" color={"#F83B3B"}>
-                        Eczane
+                      <Typography margin="0px" color={healthSettings[item.type]?.color}>
+                        {item.type}
                       </Typography>
                     </Stack>
                   </Box>
@@ -75,11 +87,12 @@ const ListPage= ({data})=>{
                       >
                         <div style={{ display: "flex", alignItems: "center" }}>
                           <LocationOnIcon></LocationOnIcon>
-                          <a
-                            href={`https://www.google.com/maps/dir//${item.latitude},${item.longitude}`}
-                          >
-                            {item.city} | {item.district}
-                          </a>
+                          <Link 
+                            href={`https://www.google.com/maps/dir//${item.latitude},${item.longitude}`} 
+                            underline="none">
+                              {item.city} | {item.district}
+                          </Link>
+                          
                         </div>
 
                         <div style={{ display: "flex", alignItems: "center" }}>
