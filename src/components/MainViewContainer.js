@@ -1,14 +1,14 @@
-import { Box, Stack } from "@mui/material";
+import LockIcon from "@mui/icons-material/Lock";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import { Box, Button, ButtonGroup, Stack, Tooltip } from "@mui/material";
 import axios from "axios";
 import L from "leaflet";
 import React, { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import Control from "react-leaflet-custom-control";
+import { FullscreenControl } from "react-leaflet-fullscreen";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import styled from "styled-components";
-import hospitalIcon2Svg from "../icons/hospital-marker-2.png";
-import hospitalIconSvg from "../icons/hospital-marker.png";
-import pharmacyIcon2Svg from "../icons/pharmacy-marker-2.png";
-import pharmacyIconSvg from "../icons/pharmacy-marker.png";
 import { BREAKPOINTS } from "../utils/styled";
 import centers from "./cityCenters";
 import DownButton from "./DownButton";
@@ -18,20 +18,11 @@ import { FILTER, SEARCH_AT } from "./Header/HeaderRow";
 import InfoCard from "./InfoCard";
 import ListPage from "./ListPage";
 import UpButton from "./UpButton";
-import Control from "react-leaflet-custom-control";
-import {  ButtonGroup,  Tooltip } from "@mui/material";
-import LockIcon from '@mui/icons-material/Lock';
-import FullscreenIcon from '@mui/icons-material/Fullscreen';
-import LockOpenIcon from '@mui/icons-material/LockOpen';
-import { FullscreenControl } from "react-leaflet-fullscreen";
-import { width } from "@mui/system";
 
-import hospitalIconSvg from '../icons/hospital-marker.png'
-import hospitalIcon2Svg from '../icons/hospital-marker-2.png'
-import pharmacyIconSvg from '../icons/pharmacy-marker.png'
-import pharmacyIcon2Svg from '../icons/pharmacy-marker-2.png'
-
-
+import hospitalIcon2Svg from "../icons/hospital-marker-2.png";
+import hospitalIconSvg from "../icons/hospital-marker.png";
+import pharmacyIcon2Svg from "../icons/pharmacy-marker-2.png";
+import pharmacyIconSvg from "../icons/pharmacy-marker.png";
 
 const SPaper = styled.div`
   background-color: #fff;
@@ -44,6 +35,8 @@ const SPaper = styled.div`
   }
 `;
 
+const CENTER_LAT = 37.683664
+const CENTER_LNG = 38.322966
 const MainViewContaier = () => {
   const [visible, setVisible] = useState(false);
   const [mapRef, setMapRef] = React.useState();
@@ -56,7 +49,6 @@ const MainViewContaier = () => {
       setActive(name);
     }
   };
-  
 
   const [searchAt, setSearchAt] = useState(SEARCH_AT.HARITA);
   const [filter, setFilter] = useState(FILTER.HEPSI);
@@ -68,7 +60,7 @@ const MainViewContaier = () => {
 
   const [allData, setAllData] = React.useState(null);
 
-  const center = [37.683664, 38.322966];
+  const center = [CENTER_LAT, CENTER_LNG];
   const zoom = 7;
 
   const hospitalIcon = L.icon({
@@ -152,6 +144,12 @@ const MainViewContaier = () => {
   window.addEventListener("scroll", toggleVisible);
 
   const handleChangeCity = (city) => {
+    if(city == null){
+      setSelectedCity(null);
+      setSelectedDist(null);
+      mapRef.flyTo([CENTER_LAT, CENTER_LNG], 7);
+      return;
+    }
     const lat = centers[city.key]?.lat;
     const lng = centers[city.key]?.lng;
     mapRef.flyTo([lat, lng], 12);

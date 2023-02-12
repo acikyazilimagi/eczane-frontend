@@ -109,7 +109,6 @@ export function Footer({
             <SRightIcon src="/left-icon.svg" />
           </SButton>
         </SIconWrapper>
-        s
       </div>
 
       <div className="cities-box">
@@ -126,6 +125,9 @@ export function Footer({
             {item.key}
           </button>
         ))}
+      </div>
+      <div className="see-all-wrapper" onClick={() => handleChangeCity(null)}>
+        <button className={"city-item see-all-button"}>Tümünü Gör</button>
       </div>
     </div>
   );
