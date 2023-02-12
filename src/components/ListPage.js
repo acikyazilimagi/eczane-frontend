@@ -78,30 +78,34 @@ const ListPage= ({data})=>{
                   <Divider style={{ width: "93.5%", margin: "7px 4px",fontWeight:"700" }}/>
 
                   <Stack direction="column">
-                    <Stack marginLeft={"6px"} direction="row" justifyContent={"space-between"} padding="3x">
-                        <Stack {...stackProps} >
-                          <LocationOnIcon />
+                    <Stack marginLeft={"6px"} marginRight={"2px"} flexWrap={"wrap"} direction="row" justifyContent={"space-between"} padding="3x">
+                        <Stack {...stackProps} marginRight={"2px"}>
+                          <LocationOnIcon fontSize="12px"/>
                           <Link 
                             href={`https://www.google.com/maps/dir//${item.latitude},${item.longitude}`} 
                             underline="none"
                             color="#182151"
                             fontSize={"12px"}
+                            fontWeight={"600"}
                             >
-                              {item.city} | {item.district}
+                              {item.city && item.district
+                              && `${item.city} | ${item.district}`.toLocaleUpperCase()}
                           </Link>
                           
                         </Stack>
 
-                        <Stack {...stackProps} marginRight={"2px"}>
+                        <Stack {...stackProps} marginLeft={"2px"}>
                           {item.phone && (
                             <>
-                              <CallIcon />
-                              <Link href={`tel:${item.phone}`} 
-                                    underline="none"
-                                    color="gray"
-                                    fontSize={"9px"}
-                                    
-                            >{item.phone}</Link>
+                              <CallIcon fontSize="12px"/>
+                              <Link 
+                                href={`tel:${item.phone}`} 
+                                underline="none"
+                                color="gray"
+                                fontSize={"10px"}
+                              >
+                                {item.phone}
+                              </Link>
                             </>
                         )}
                         </Stack>
