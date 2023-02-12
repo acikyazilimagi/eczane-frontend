@@ -260,7 +260,7 @@ const MainViewContaier = () => {
         sx={{
           flexGrow: 1,
           marginTop: "30px",
-          height: "500px",
+          height: "auto",
           overflow: "auto",
           textAlign: "center",
         }}
