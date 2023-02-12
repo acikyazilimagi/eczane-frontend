@@ -1,9 +1,11 @@
-import { Box, Paper, Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import axios from "axios";
 import L from "leaflet";
 import React, { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
+import styled from "styled-components";
+import { BREAKPOINTS } from "../utils/styled";
 import centers from "./cityCenters";
 import DownButton from "./DownButton";
 import { Footer } from "./Footer/Footer";
@@ -12,6 +14,17 @@ import { FILTER, SEARCH_AT } from "./Header/HeaderRow";
 import InfoCard from "./InfoCard";
 import ListPage from "./ListPage";
 import UpButton from "./UpButton";
+
+const SPaper = styled.div`
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  background-color: #182151;
+  margin-bottom: 1.5rem;
+  @media ${BREAKPOINTS.MD.min} {
+    margin-bottom: 3rem;
+  }
+`;
 
 const MainViewContaier = () => {
   const [visible, setVisible] = useState(false);
@@ -107,11 +120,7 @@ const MainViewContaier = () => {
         );
 
   return (
-    <Paper
-      id="fullheight"
-      sx={{ bgcolor: "#182151", height: "100%", padding: "0px" }}
-      variant="outlined"
-    >
+    <SPaper>
       <UpButton visible={visible}></UpButton>
       <DownButton visible={!visible}></DownButton>
       <HeaderCombined
@@ -176,7 +185,7 @@ const MainViewContaier = () => {
         setSelectedDist={setSelectedDist}
         allData={allData}
       />
-    </Paper>
+    </SPaper>
   );
 };
 export default MainViewContaier;

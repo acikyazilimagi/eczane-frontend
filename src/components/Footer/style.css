@@ -39,10 +39,6 @@
   cursor: pointer;
 }
 
-.ilce-item:not(:last-of-type) {
-  margin-right: 0.625rem;
-}
-
 .cities-box {
   padding: 14px 0;
   display: flex;
