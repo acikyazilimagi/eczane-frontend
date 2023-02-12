@@ -19,8 +19,8 @@ const SImage = styled.img`
 `;
 
 const SLogoText = styled.h1`
-  font-family: "sans-serif";
-  color: white;
+  font-family: "SegoeUI";
+  color: #fff;
   font-size: 1rem;
   max-width: 8.75rem;
   margin-left: 0.75rem;

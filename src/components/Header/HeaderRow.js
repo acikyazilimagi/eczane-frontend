@@ -16,6 +16,7 @@ const SButton = styled.button`
   border: none;
   font-size: 0.75rem;
   cursor: pointer;
+  font-family: "SegoeUI";
 
   @media ${BREAKPOINTS.MD.min} {
     padding: 1rem 2rem;
