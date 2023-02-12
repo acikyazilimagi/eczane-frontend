@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import InfoCard from "./InfoCard";
 
-const ListPage = ({ data }) => {
+const ListPage = ({ data, cityData, allDistricts }) => {
   return (
     <Box
       sx={{
@@ -33,7 +33,7 @@ const ListPage = ({ data }) => {
             padding={"5px"}
             width="320px"
           >
-            <InfoCard key={index} index={index} item={item} />
+            <InfoCard key={index} index={index} item={item} cityData={cityData} allDistricts={allDistricts} />
           </Grid>
         ))}
       </div>

@@ -5,6 +5,10 @@ import React, { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import styled from "styled-components";
+import hospitalIcon2Svg from "../icons/hospital-marker-2.png";
+import hospitalIconSvg from "../icons/hospital-marker.png";
+import pharmacyIcon2Svg from "../icons/pharmacy-marker-2.png";
+import pharmacyIconSvg from "../icons/pharmacy-marker.png";
 import { BREAKPOINTS } from "../utils/styled";
 import centers from "./cityCenters";
 import DownButton from "./DownButton";
@@ -71,8 +75,8 @@ const MainViewContaier = () => {
     iconSize: [32, 42],
     iconAnchor: [32, 64],
     shadowUrl: null,
-    shadowSize: null,// size of the shadow
-    shadowAnchor: null,  // the same for the shadow
+    shadowSize: null, // size of the shadow
+    shadowAnchor: null, // the same for the shadow
     iconUrl: hospitalIconSvg,
   });
 
@@ -80,8 +84,8 @@ const MainViewContaier = () => {
     iconSize: [32, 42],
     iconAnchor: [32, 64],
     shadowUrl: null,
-    shadowSize: null,// size of the shadow
-    shadowAnchor: null,  // the same for the shadow
+    shadowSize: null, // size of the shadow
+    shadowAnchor: null, // the same for the shadow
     iconUrl: hospitalIcon2Svg,
   });
 
@@ -90,7 +94,7 @@ const MainViewContaier = () => {
     iconAnchor: [32, 64],
     shadowUrl: null,
     shadowSize: null, // size of the shadow
-    shadowAnchor: null,  // the same for the shadow
+    shadowAnchor: null, // the same for the shadow
     iconUrl: pharmacyIconSvg,
   });
 
@@ -99,35 +103,28 @@ const MainViewContaier = () => {
     iconAnchor: [32, 64],
     shadowUrl: null,
     shadowSize: null, // size of the shadow
-    shadowAnchor: null,  // the same for the shadow
+    shadowAnchor: null, // the same for the shadow
     iconUrl: pharmacyIcon2Svg,
   });
 
-
   const setIconFn = (type, subType) => {
+    let newicon = hospitalIcon;
 
-    let newicon = hospitalIcon
-
-    if (type === 'hastane' && subType === 'genel') {
-      newicon =  hospitalIcon
-
+    if (type === FILTER.HASTANE) {
+      newicon = hospitalIcon;
     }
-    else if (type === 'hastane' && subType === 'sahra hastanesi') {
-      newicon =  hospitalIcon2
-
+    // else if (type === FILTER.HASTANE && subType === "sahra hastanesi") {
+    //   newicon = hospitalIcon2;
+    // }
+    if (type === FILTER.ECZANE) {
+      newicon = pharmacyIcon;
     }
-    if (type === 'eczane' && subType === 'genel') {
-      newicon =  pharmacyIcon
+    // else if (type === FILTER.ECZANE && subType === "sahra eczanesi") {
+    //   newicon = pharmacyIcon2;
+    // }
 
-    }
-    else if (type === 'eczane' && subType === 'sahra eczanesi') {
-      newicon =  pharmacyIcon2
-
-    }
- 
-    if(newicon)
-    return newicon
-  }
+    if (newicon) return newicon;
+  };
   const toggleVisible = (event) => {
     const scrolled = document.body.scrollTop;
     if (scrolled > 480) {
@@ -155,16 +152,16 @@ const MainViewContaier = () => {
   window.addEventListener("scroll", toggleVisible);
 
   const handleChangeCity = (city) => {
-    const lat = centers[city]?.lat;
-    const lng = centers[city]?.lng;
+    const lat = centers[city.key]?.lat;
+    const lng = centers[city.key]?.lng;
     mapRef.flyTo([lat, lng], 12);
-    setSelectedCity(city);
+    setSelectedCity(city.id);
     setSelectedDist(null);
   };
 
   useEffect(() => {
     axios
-      .get("https://eczaneapi.afetharita.com/api")
+      .get("https://eczaneapi.afetharita.com/api/locations")
       .then((response) => {
         setAllData(response.data?.data);
       })
@@ -179,7 +176,7 @@ const MainViewContaier = () => {
       .then((response) => {
         setCityData(response.data);
       })
-      .catch((err) => { });
+      .catch((err) => {});
   }, []);
 
   if (allData === null) {
@@ -196,8 +193,10 @@ const MainViewContaier = () => {
   }
 
   const typeFilteredData = allData?.filter(
-    (item) => filter === FILTER.HEPSI || item.type === filter
+    (item) => filter === FILTER.HEPSI || item.typeId === filter
   );
+
+  const allDistricts = cityData?.data?.map((city) => city.districts).flat();
 
   const searchFilteredData = typeFilteredData?.filter(
     (item) =>
@@ -209,18 +208,14 @@ const MainViewContaier = () => {
   const cityFilteredData =
     selectedCity == null
       ? searchFilteredData
-      : searchFilteredData?.filter(
-          (item) => item.city.toLowerCase() === selectedCity.toLowerCase()
-        );
+      : searchFilteredData?.filter((item) => item.cityId === selectedCity);
 
   const distFilteredData =
     selectedDist == null
       ? cityFilteredData
-      : cityFilteredData?.filter(
-          (item) => item.district.toLowerCase() === selectedDist.toLowerCase()
-        );
+      : cityFilteredData?.filter((item) => item.districtId === selectedDist);
 
-  const hasVetData = allData.some((item) => item.type === FILTER.VETERINER);
+  const hasVetData = allData?.some((item) => item.type === FILTER.VETERINER);
 
   return (
     <SPaper>
@@ -253,7 +248,7 @@ const MainViewContaier = () => {
             zoom={zoom} //ZOOM NE KADAR YAKINDA OLMASINI
             maxZoom={17}
             tap={L.Browser.safari && L.Browser.mobile}
-          //maxZoomu kendinize göre ayarlayın
+            //maxZoomu kendinize göre ayarlayın
           >
 
               <Control position="topright">
@@ -291,7 +286,7 @@ const MainViewContaier = () => {
               {searchFilteredData?.map((station, index) => {
                 return (
                   <Marker
-                    icon = {setIconFn(station.type.toLowerCase(), station.subType.toLowerCase())}
+                    icon={setIconFn(station.typeId, station.subTypeId)}
                     //icon={station.type.toLowerCase() === 'hastane' ? hospitalIcon : pharmacyIcon}
                     key={station.id} //key kısmını da kendi datanıza göre ayarlayın mydaya.id gibi
                     position={[station.latitude, station.longitude]} //Kendi pozisyonunuzu ekleyin buraya stationı değiştirin mydata.adress.latitude mydata.adress.longitude gibi
@@ -308,7 +303,13 @@ const MainViewContaier = () => {
           </MapContainer>
         </Box>
       )}
-      {searchAt === SEARCH_AT.LISTE && <ListPage data={distFilteredData} />}
+      {searchAt === SEARCH_AT.LISTE && (
+        <ListPage
+          data={distFilteredData}
+          cityData={cityData}
+          allDistricts={allDistricts}
+        />
+      )}
 
       <Footer
         cityData={cityData}
