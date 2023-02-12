@@ -86,16 +86,18 @@ const MainViewContaier = () => {
   const setIconFn = (type, subType) => {
     let newicon = hospitalIcon;
 
-    if (type === "hastane" && subType === "genel") {
+    if (type === FILTER.HASTANE) {
       newicon = hospitalIcon;
-    } else if (type === "hastane" && subType === "sahra hastanesi") {
-      newicon = hospitalIcon2;
     }
-    if (type === "eczane" && subType === "genel") {
+    // else if (type === FILTER.HASTANE && subType === "sahra hastanesi") {
+    //   newicon = hospitalIcon2;
+    // }
+    if (type === FILTER.ECZANE) {
       newicon = pharmacyIcon;
-    } else if (type === "eczane" && subType === "sahra eczanesi") {
-      newicon = pharmacyIcon2;
     }
+    // else if (type === FILTER.ECZANE && subType === "sahra eczanesi") {
+    //   newicon = pharmacyIcon2;
+    // }
 
     if (newicon) return newicon;
   };
@@ -151,8 +153,10 @@ const MainViewContaier = () => {
   }
 
   const typeFilteredData = allData?.filter(
-    (item) => filter === FILTER.HEPSI || item.type === filter
+    (item) => filter === FILTER.HEPSI || item.typeId === filter
   );
+
+  const allDistricts = cityData?.data?.map((city) => city.districts).flat();
 
   const searchFilteredData = typeFilteredData?.filter(
     (item) =>
@@ -215,10 +219,7 @@ const MainViewContaier = () => {
               {searchFilteredData?.map((station, index) => {
                 return (
                   <Marker
-                    icon={setIconFn(
-                      station.type?.toLowerCase(),
-                      station.subType?.toLowerCase()
-                    )}
+                    icon={setIconFn(station.typeId, station.subTypeId)}
                     //icon={station.type.toLowerCase() === 'hastane' ? hospitalIcon : pharmacyIcon}
                     key={station.id} //key kısmını da kendi datanıza göre ayarlayın mydaya.id gibi
                     position={[station.latitude, station.longitude]} //Kendi pozisyonunuzu ekleyin buraya stationı değiştirin mydata.adress.latitude mydata.adress.longitude gibi
@@ -235,7 +236,13 @@ const MainViewContaier = () => {
           </MapContainer>
         </Box>
       )}
-      {searchAt === SEARCH_AT.LISTE && <ListPage data={distFilteredData} />}
+      {searchAt === SEARCH_AT.LISTE && (
+        <ListPage
+          data={distFilteredData}
+          cityData={cityData}
+          allDistricts={allDistricts}
+        />
+      )}
 
       <Footer
         cityData={cityData}
