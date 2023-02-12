@@ -46,7 +46,7 @@ const MainViewContaier = () => {
   });
 
   const hospitalIcon2 = L.icon({
-    iconSize: [32, 32],
+    iconSize: [32, 42],
     iconAnchor: [32, 64],
     shadowUrl: null,
     shadowSize: null,// size of the shadow
@@ -64,7 +64,7 @@ const MainViewContaier = () => {
   });
 
   const pharmacyIcon2 = L.icon({
-    iconSize: [32, 32],
+    iconSize: [32, 42],
     iconAnchor: [32, 64],
     shadowUrl: null,
     shadowSize: null, // size of the shadow
@@ -73,6 +73,30 @@ const MainViewContaier = () => {
   });
 
 
+  const setIconFn = (type, subType) => {
+
+    let newicon = hospitalIcon
+
+    if (type === 'hastane' && subType === 'genel') {
+      newicon =  hospitalIcon
+
+    }
+    else if (type === 'hastane' && subType === 'sahra hastanesi') {
+      newicon =  hospitalIcon2
+
+    }
+    if (type === 'eczane' && subType === 'genel') {
+      newicon =  pharmacyIcon
+
+    }
+    else if (type === 'eczane' && subType === 'sahra eczanesi') {
+      newicon =  pharmacyIcon2
+
+    }
+ 
+    if(newicon)
+    return newicon
+  }
   const toggleVisible = (event) => {
     const scrolled = document.body.scrollTop;
     if (scrolled > 480) {
@@ -175,7 +199,8 @@ const MainViewContaier = () => {
               {data?.map((station, index) => {
                 return (
                   <Marker
-                    icon={station.type.toLowerCase() === 'hastane'  ? hospitalIcon : pharmacyIcon}
+                    icon = {setIconFn(station.type.toLowerCase(), station.subType.toLowerCase())}
+                    //icon={station.type.toLowerCase() === 'hastane' ? hospitalIcon : pharmacyIcon}
                     key={station.id} //key kısmını da kendi datanıza göre ayarlayın mydaya.id gibi
                     position={[station.latitude, station.longitude]} //Kendi pozisyonunuzu ekleyin buraya stationı değiştirin mydata.adress.latitude mydata.adress.longitude gibi
                   >
