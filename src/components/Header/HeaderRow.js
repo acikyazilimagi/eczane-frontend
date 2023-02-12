@@ -1,10 +1,12 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { BREAKPOINTS } from "../../utils/styled";
+import SearchBar from "./SearchBar";
 
 const SHeaderRowWrapper = styled.div``;
 
 const SFlex = styled.div`
+  min-height: 1.875rem;
   display: flex;
   justify-content: space-between;
 `;
@@ -132,8 +134,7 @@ export const HeaderRow = () => {
           </SSearchButton>
         </SToggleGroup>
 
-        {/* Farkli bir task'la halledilecek  */}
-        <input style={{ marginLeft: "0.625rem" }} />
+        <SearchBar />
       </SFlex>
 
       <SFilterWrapper>
