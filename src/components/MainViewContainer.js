@@ -66,7 +66,16 @@ const MainViewContaier = () => {
   }, []);
 
   if (allData === null) {
-    return <h2>Loading </h2>; //LOADBAR EKLE
+    return (
+      <div className="loading-container">
+        <div className="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    ); //LOADBAR EKLE
   }
 
   const typeFilteredData = allData?.filter(
