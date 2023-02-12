@@ -32,23 +32,23 @@ const MainViewContaier = () => {
 
 
   const hospitalIcon = L.icon({
-    iconRetinaUrl: hospitalIconSvg,
+    //iconRetinaUrl: hospitalIconSvg,
     iconSize: [32, 32],
     iconAnchor: [32, 64],
     shadowUrl: null,
-    shadowSize: null,
-    shadowAnchor: null,
-    iconUrl: null,
+    shadowSize: null,// size of the shadow
+    shadowAnchor: null,  // the same for the shadow
+    iconUrl: hospitalIconSvg,
   });
 
   const pharmacyIcon = L.icon({
-   iconRetinaUrl: pharmacyIconSvg,
+    // iconRetinaUrl: pharmacyIconSvg,
     iconSize: [32, 32],
     iconAnchor: [32, 64],
     shadowUrl: null,
-    shadowSize: null,
-    shadowAnchor: null,
-    iconUrl: null,
+    shadowSize: null, // size of the shadow
+    shadowAnchor: null,  // the same for the shadow
+    iconUrl: pharmacyIconSvg,
   });
 
 
