@@ -85,12 +85,13 @@
 }
 
 .see-all-wrapper {
+  position: relative;
 }
 
 .see-all-button {
   display: block;
   margin-left: auto;
-  padding: 1rem;
+  padding: 1rem 4rem 1rem 1rem;
   background: #f83b3b;
   border: none;
   border-radius: 0.625rem;
@@ -172,8 +173,8 @@
   }
   .see-all-button {
     display: block;
+    padding: 0.5rem 2rem 0.5rem 0.5rem;
     margin-left: auto;
-    padding: 0.5rem;
     background: #f83b3b;
     border: none;
     border-radius: 0.625rem;
