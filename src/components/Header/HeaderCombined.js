@@ -19,6 +19,8 @@ export const HeaderCombined = ({
   setSearchAt,
   filter,
   setFilter,
+  searchBarVal,
+  setSearchbarVal,
 }) => {
   return (
     <SHeaderCombinedWrapper>
@@ -28,6 +30,8 @@ export const HeaderCombined = ({
         searchAt={searchAt}
         filter={filter}
         setFilter={setFilter}
+        searchBarVal={searchBarVal}
+        setSearchbarVal={setSearchbarVal}
       />
     </SHeaderCombinedWrapper>
   );

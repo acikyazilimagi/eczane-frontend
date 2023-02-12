@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { BREAKPOINTS } from "../../utils/styled";
 
 const SSearchBoxWrapper = styled.div`
@@ -60,43 +58,14 @@ const SSearchIconWrapper = styled.div`
   }
 `;
 
-function SearchBar() {
-  const [input, setInput] = useState();
-  const [filteredEczane, setfilteredEczane] = useState([]);
-  const [eczaneData, setEczaneData] = useState();
-
-  useEffect(() => {
-    axios
-      .get("https://eczaneapi.afetharita.com/api")
-      .then((response) => {
-        setEczaneData(response.data?.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [filteredEczane]);
-  const filter = (e) => {
-    const keyword = e.target.value;
-
-    if (keyword !== "") {
-      const results = eczaneData.filter((eczane) => {
-        return eczane.name.toLowerCase().startsWith(keyword.toLowerCase());
-      });
-      setfilteredEczane(results);
-    } else {
-      setfilteredEczane(eczaneData);
-    }
-
-    setInput(keyword);
-  };
-
+function SearchBar({ searchBarVal, setSearchBarVal }) {
   return (
     <SSearchBoxWrapper>
       <SInput
         type="text"
         placeholder="Ara"
-        value={input}
-        onInput={(e) => setInput(e.target.value)}
+        value={searchBarVal}
+        onInput={(e) => setSearchBarVal(e.target.value)}
       />
       <SSearchIconWrapper>
         <SNoStyleButton>

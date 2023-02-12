@@ -7,7 +7,7 @@ const SHeaderRowWrapper = styled.div``;
 const SFlex = styled.div`
   min-height: 1.875rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 `;
 
 const SButton = styled.button`
@@ -101,7 +101,14 @@ export const FILTER = {
   VETERINER: "Veteriner",
 };
 
-export const HeaderRow = ({ searchAt, setSearchAt, filter, setFilter }) => {
+export const HeaderRow = ({
+  searchAt,
+  setSearchAt,
+  filter,
+  setFilter,
+  searchBarVal,
+  setSearchbarVal,
+}) => {
   const setHarita = () => setSearchAt(SEARCH_AT.HARITA);
   const setListe = () => setSearchAt(SEARCH_AT.LISTE);
 
@@ -129,9 +136,11 @@ export const HeaderRow = ({ searchAt, setSearchAt, filter, setFilter }) => {
             Listede
           </SSearchButton>
         </SToggleGroup>
-        <div style={{ display: "none" }}>
-          <SearchBar />
-        </div>
+
+        <SearchBar
+          searchBarVal={searchBarVal}
+          setSearchBarVal={setSearchbarVal}
+        />
       </SFlex>
 
       <SFilterWrapper>
