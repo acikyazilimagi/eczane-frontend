@@ -173,8 +173,6 @@ const MainViewContaier = () => {
 
   const hasVetData = allData?.some((item) => item.type === FILTER.VETERINER);
 
-  const hasVetData = allData.some((item) => item.type === FILTER.VETERINER);
-
   return (
     <SPaper>
       <UpButton visible={visible}></UpButton>
