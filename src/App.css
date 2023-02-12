@@ -4,6 +4,11 @@
   font-weight: normal;
   font-style: normal;
 }
+.btnWrapper {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
 
 @font-face {
   font-family: "SegoeUIBold";

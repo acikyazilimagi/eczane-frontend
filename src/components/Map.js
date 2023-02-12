@@ -9,8 +9,17 @@ import { Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CallIcon from "@mui/icons-material/Call";
+import Button from "@mui/material";
+import InfoCard from "./InfoCard";
+import BootstrapButton from "./lockButton";
+import { useMap } from "react-leaflet";
+import { useEffect } from "react";
+import L from "react-leaflet"
+
 
 const Map =({setMapRef,center,zoom,data})=>{
+ 
+  
     
    return( <Box
     sx={{
@@ -35,6 +44,7 @@ const Map =({setMapRef,center,zoom,data})=>{
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
+    
 
       <MarkerClusterGroup>
         {data?.map((station,index) => {

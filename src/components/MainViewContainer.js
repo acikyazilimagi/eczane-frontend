@@ -18,6 +18,20 @@ import { FILTER, SEARCH_AT } from "./Header/HeaderRow";
 import InfoCard from "./InfoCard";
 import ListPage from "./ListPage";
 import UpButton from "./UpButton";
+import Control from "react-leaflet-custom-control";
+import {  ButtonGroup,  Tooltip } from "@mui/material";
+import LockIcon from '@mui/icons-material/Lock';
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import { FullscreenControl } from "react-leaflet-fullscreen";
+import { width } from "@mui/system";
+
+import hospitalIconSvg from '../icons/hospital-marker.png'
+import hospitalIcon2Svg from '../icons/hospital-marker-2.png'
+import pharmacyIconSvg from '../icons/pharmacy-marker.png'
+import pharmacyIcon2Svg from '../icons/pharmacy-marker-2.png'
+
+
 
 const SPaper = styled.div`
   background-color: #fff;
@@ -33,6 +47,16 @@ const SPaper = styled.div`
 const MainViewContaier = () => {
   const [visible, setVisible] = useState(false);
   const [mapRef, setMapRef] = React.useState();
+  const [active, setActive] = React.useState(null);
+
+  const handleClick = (name) => {
+    if (active === name) {
+      setActive(null);
+    } else {
+      setActive(name);
+    }
+  };
+  
 
   const [searchAt, setSearchAt] = useState(SEARCH_AT.HARITA);
   const [filter, setFilter] = useState(FILTER.HEPSI);
@@ -109,6 +133,22 @@ const MainViewContaier = () => {
       setVisible(false);
     }
   };
+  const handleLock=(locked)=>{
+
+    if(locked==="cast") {
+      mapRef.dragging.enable();
+      mapRef.zoomControl.enable()
+      mapRef.scrollWheelZoom.enable()
+    
+    }
+    else {
+      mapRef.dragging.disable()
+      mapRef.zoomControl.disable()
+      mapRef.scrollWheelZoom.disable()
+    
+    }
+
+  }
   window.addEventListener("scroll", toggleVisible);
 
   const handleChangeCity = (city) => {
@@ -210,6 +250,33 @@ const MainViewContaier = () => {
             tap={L.Browser.safari && L.Browser.mobile}
             //maxZoomu kendinize göre ayarlayın
           >
+
+              <Control position="topright">
+              <ButtonGroup orientation="vertical" variant="contained">
+                <Tooltip placement="left" title={active==="cast"?"Aç":"Kilitle"}>
+                  <Button
+                    color={active === "cast" ? "primary" : "inherit"}
+                    onClick={() => {handleClick("cast");
+                    
+                    handleLock(active)
+                  
+                  }}
+                  sx={{
+                    width:"1px",
+                    height:"40px",
+                  }}
+                    variant="contained"
+                  >
+                    {(active === "cast") ? <LockIcon></LockIcon>:<LockOpenIcon></LockOpenIcon>}
+                  </Button>
+                </Tooltip>
+              </ButtonGroup>
+            </Control>
+            <Control position="topright">
+            <FullscreenControl forceSeparateButton={true} position="topright" content="<img src='./fullscreen.png'></img>" title="Tam Ekran"/>
+            </Control>
+           
+             
             <TileLayer //Bu kısımda değişikliğe gerek yok
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
