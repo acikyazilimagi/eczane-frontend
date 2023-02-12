@@ -22,7 +22,7 @@ const MainViewContaier = () => {
   const [selectedCity, setSelectedCity] = useState(null);
 
   const [citydata, setCityData] = React.useState(null);
-  const [data, setData] = React.useState(null);
+
   const [allData, setAllData] = React.useState(null);
 
   const center = [37.683664, 38.322966];
