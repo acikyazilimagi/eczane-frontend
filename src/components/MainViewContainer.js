@@ -20,14 +20,15 @@ import pharmacyIcon2Svg from '../icons/pharmacy-marker-2.png'
 
 const MainViewContaier = () => {
   const [visible, setVisible] = useState(false);
-  const [visible1, setVisible1] = useState(false);
   const [mapRef, setMapRef] = React.useState();
 
   const [searchAt, setSearchAt] = useState(SEARCH_AT.HARITA);
   const [filter, setFilter] = useState(FILTER.HEPSI);
+  const [searchBarVal, setSearchbarVal] = useState("");
+  const [selectedCity, setSelectedCity] = useState(null);
 
   const [citydata, setCityData] = React.useState(null);
-  const [data, setData] = React.useState(null);
+
   const [allData, setAllData] = React.useState(null);
 
   const center = [37.683664, 38.322966];
@@ -105,37 +106,19 @@ const MainViewContaier = () => {
       setVisible(false);
     }
   };
-  const toggleVisible1 = (event) => {
-    const scrolled = document.body.scrollTop;
-    if (scrolled < 480) {
-      setVisible1(true);
-    } else if (scrolled >= 480) {
-      setVisible1(false);
-    }
-  };
   window.addEventListener("scroll", toggleVisible);
-  window.addEventListener("scroll", toggleVisible1);
 
   const handleChangeCity = (city) => {
     const lat = centers[city]?.lat;
     const lng = centers[city]?.lng;
     mapRef.flyTo([lat, lng], 12);
+    setSelectedCity(city);
   };
-
-  useEffect(() => {
-    if (filter === FILTER.HEPSI) {
-      setData(allData);
-    } else {
-      const filteredData = allData.filter((item) => item.type === filter);
-      setData(filteredData);
-    }
-  }, [filter]);
 
   useEffect(() => {
     axios
       .get("https://eczaneapi.afetharita.com/api")
       .then((response) => {
-        setData(response.data?.data);
         setAllData(response.data?.data);
       })
       .catch((err) => {
@@ -152,9 +135,36 @@ const MainViewContaier = () => {
       .catch((err) => { });
   }, []);
 
-  if (data === null) {
-    return <h2>Loading </h2>; //LOADBAR EKLE
+  if (allData === null) {
+    return (
+      <div className="loading-container">
+        <div className="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    ); //LOADBAR EKLE
   }
+
+  const typeFilteredData = allData?.filter(
+    (item) => filter === FILTER.HEPSI || item.type === filter
+  );
+
+  const searchFilteredData = typeFilteredData?.filter(
+    (item) =>
+      item.name.toLowerCase().includes(searchBarVal.toLowerCase()) ||
+      item.address.toLowerCase().includes(searchBarVal.toLowerCase()) ||
+      item.district.toLowerCase().includes(searchBarVal.toLowerCase())
+  );
+
+  const cityFilteredData =
+    selectedCity == null
+      ? searchFilteredData
+      : searchFilteredData?.filter(
+          (item) => item.city.toLowerCase() === selectedCity.toLowerCase()
+        );
 
   return (
     <Paper
@@ -163,12 +173,14 @@ const MainViewContaier = () => {
       variant="outlined"
     >
       <UpButton visible={visible}></UpButton>
-      <DownButton visible={visible1}></DownButton>
+      <DownButton visible={!visible}></DownButton>
       <HeaderCombined
         setSearchAt={setSearchAt}
         searchAt={searchAt}
         filter={filter}
         setFilter={setFilter}
+        searchBarVal={searchBarVal}
+        setSearchbarVal={setSearchbarVal}
       />
 
       {searchAt === SEARCH_AT.HARITA && (
@@ -196,7 +208,7 @@ const MainViewContaier = () => {
             />
 
             <MarkerClusterGroup>
-              {data?.map((station, index) => {
+              {searchFilteredData?.map((station, index) => {
                 return (
                   <Marker
                     icon = {setIconFn(station.type.toLowerCase(), station.subType.toLowerCase())}
@@ -216,7 +228,7 @@ const MainViewContaier = () => {
           </MapContainer>
         </Box>
       )}
-      {searchAt === SEARCH_AT.LISTE && <ListPage data={data} />}
+      {searchAt === SEARCH_AT.LISTE && <ListPage data={cityFilteredData} />}
 
       <Box
         sx={{
