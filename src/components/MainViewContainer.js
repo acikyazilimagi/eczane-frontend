@@ -186,6 +186,8 @@ const MainViewContaier = () => {
           (item) => item.district.toLowerCase() === selectedDist.toLowerCase()
         );
 
+  const hasVetData = allData.some((item) => item.type === FILTER.VETERINER);
+
   return (
     <SPaper>
       <UpButton visible={visible}></UpButton>
@@ -197,6 +199,7 @@ const MainViewContaier = () => {
         setFilter={setFilter}
         searchBarVal={searchBarVal}
         setSearchbarVal={setSearchbarVal}
+        hasVetData={hasVetData}
       />
 
       {searchAt === SEARCH_AT.HARITA && (
