@@ -6,6 +6,12 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CallIcon from "@mui/icons-material/Call";
 import Divider from "@mui/material/Divider";
 import Link from '@mui/material/Link';
+import Button from '@mui/material/Button';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useState, useEffect } from "react";
+import { display } from "@mui/system";
+import { right } from "@popperjs/core";
 const healthTypes ={
     "Pharmacy": 'Eczane',
     "Hospital": 'Hastane',
@@ -30,7 +36,10 @@ const healthTypes ={
     direction:"row", flexWrap:"wrap", alignItems:"center"
   
   }
+
+
 const InfoCard = ({item,index}) => {
+    const [show, setShow] = useState(false);
     return(
     <>
                   <Box  fontFamily={"Segoe UI"}>
@@ -42,14 +51,14 @@ const InfoCard = ({item,index}) => {
                     >
                       <Box padding="3px 4px 0px 0px">
                         <img
-                          src={healthSettings[item.type]?.icon}
+                          src={healthSettings[item.subType == "Sahra Eczanesi" ? item.subType : item.type]?.icon}
                           width="16px"
                           height="16px"
                           alt="./pill.png"
                         ></img>
                       </Box>
                       <Typography  marginLeft={"2px!important"} {...fontProps}  color={healthSettings[item.type]?.color}>
-                        {item.type}
+                        {item.subType == "Sahra Eczanesi" ? item.subType : item.type}
                       </Typography>
                     </Stack>
                   </Box>
@@ -95,8 +104,90 @@ const InfoCard = ({item,index}) => {
                     {...fontProps}
                       marginTop={"10px!important"} textAlign={"left"}   fontSize="11px" p="0px 12px" 
                     >
-                      {item.address}
+                      {item.address} 
                     </Typography>
+
+                    {item.additionalAddressDetails !== '' ? <Button
+                        sx={{
+                          backgroundColor: '#F83B3B',
+                          width: 125,
+                          position: 'relative',
+                          right:'-200px'
+                        }} 
+                        variant="contained" 
+                        size="small" 
+                        endIcon={<ArrowRightAltIcon/>}
+                    onClick={() => {
+
+                      setShow(!show)
+                    
+                    }}>Detayı Gör </Button> : ''}
+                    
+                    <Box
+                      sx={{
+                        width: 300,
+                        height: 300,
+                        display: show ? 'block' : 'none',
+                        backgroundColor: '#fff',
+                        position: "absolute",
+                        width: "100%",
+                        height: "12vh",
+                        top: "63px",
+                        left: "0px",
+                        right: "0px",
+                        borderRadius: "5px",
+                        zIndex: 999,
+                      }}
+                    >
+                      <Box component="span" sx={{ p: 2, display:'inline-block' }}>
+                        {item.additionalAddressDetails}
+                      </Box>
+                      <Button
+                        sx={{ 
+                          position: "absolute", 
+                          top:'-30px',
+                          right: '10px',
+                          backgroundColor: '#F83B3B'
+                        }} 
+                        component="span"
+                        variant="contained" 
+                        color="error" 
+                        size="small" 
+                        startIcon={<ArrowBackIcon/>}
+                        onClick={() => {
+                      setShow(!show)
+                      }}>Geri </Button>
+                      <hr/>
+                      <Stack marginLeft={"6px"} marginRight={"2px"} flexWrap={"wrap"} direction="row" justifyContent={"space-between"} padding="3x">
+                        <Stack {...stackProps} marginRight={"2px"} marginTop={"2px"}>
+                          <LocationOnIcon fontSize="12px"/>
+                          <Link 
+                            href={`https://www.google.com/maps/dir//${item.latitude},${item.longitude}`} 
+                            color="#4f5fb3"
+                            fontSize={"12px"}
+                            fontWeight={"600"}
+                            >
+                              {item.city && item.district
+                              && `${item.city} | ${item.district}`.toLocaleUpperCase()}
+                          </Link>
+                          
+                        </Stack>
+
+                          {item.phone && (
+                            <Stack {...stackProps} marginLeft={"2px"} marginTop={"2px"}>
+                              <CallIcon fontSize="12px"/>
+                              <Link 
+                                href={`tel:${item.phone}`} 
+                                fontSize={"11px"}
+                                color={"#4f5fb3"}
+                              >
+                                {item.phone}
+                              </Link>
+                            </Stack>
+                        )}
+                      </Stack>
+                      
+                    </Box>
                   </Stack>
                   </>
     )

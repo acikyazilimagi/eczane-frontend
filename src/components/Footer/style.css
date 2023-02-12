@@ -18,11 +18,8 @@
 }
 
 .ilce-items {
+  position: relative;
   padding: 0 15px;
-  overflow-x: auto;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
   flex-grow: 1;
 }
 
