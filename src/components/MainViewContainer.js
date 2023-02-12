@@ -153,16 +153,35 @@ const MainViewContaier = () => {
             className="hazir-map" //class adı kendinize göre ayarlayabilirsiniz isterseniz
             center={center} //CENTER BILGINIZ NEREDE İSE ORAYA KOYUNUZ
             zoom={zoom} //ZOOM NE KADAR YAKINDA OLMASINI
-            maxZoom={17}
+            minZoom={zoom}
             tap={L.Browser.safari && L.Browser.mobile}
+            maxBounds={[
+              [32, 32],
+              [50, 50],[
+                36,36
+              ],
+              [36,36]
+          ]}
             //maxZoomu kendinize göre ayarlayın
           >
 
-              <Control position="topright">
-              <ButtonGroup orientation="vertical" variant="contained">
+              <Control position="topright" >
+              <ButtonGroup orientation="vertical" variant="contained" >
                 <Tooltip placement="left" title={active==="cast"?"Aç":"Kilitle"}>
-                  <Button
-                    color={active === "cast" ? "primary" : "inherit"}
+                  <button style={{
+                    
+                    width:'30px',
+                height:'30px',
+                borderBottomLeftRadius: '2px',
+                borderBottomRightRadius: '2px',
+                pointerEvents: 'auto',
+                cursor: 'pointer',
+                backgroundPosition: '50% 50%',
+                backgroundRepeat: 'no-repeat',
+                display: 'block',
+                border: '2px solid rgba(0,0,0,0.2)',
+                  }}
+                    
                     onClick={() => {handleClick("cast");
                     
                     handleLock(active)
@@ -175,12 +194,23 @@ const MainViewContaier = () => {
                     variant="contained"
                   >
                     {(active === "cast") ? <LockIcon></LockIcon>:<LockOpenIcon></LockOpenIcon>}
-                  </Button>
+                  </button>
                 </Tooltip>
               </ButtonGroup>
             </Control>
             <Control position="topright">
-            <FullscreenControl forceSeparateButton={true} position="topright" content="<img src='./fullscreen.png'></img>" title="Tam Ekran"/>
+            <FullscreenControl   forceSeparateButton={true} position="topright" content="
+              <style>
+              .fullscreen-img{
+                width:30px;
+                height:30px;
+                
+                pointer-events: auto;
+                cursor: pointer;
+
+              }
+              </style>
+              <img src='./fullscreen.png' class='fullscreen-img'></img>" title="Tam Ekran"/>
             </Control>
            
              
