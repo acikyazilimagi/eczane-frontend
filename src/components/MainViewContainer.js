@@ -165,7 +165,6 @@ const MainViewContaier = () => {
         setAllData(response.data?.data);
       })
       .catch((err) => {
-        //setError(err)
       });
   }, []);
 
