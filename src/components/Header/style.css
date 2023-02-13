@@ -1,0 +1,105 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.header-container{
+
+}
+.header-top{
+  display: flex;
+  height: 90px;
+  justify-content:space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.logo-wrapper{
+ display: flex;
+ gap: 10px;
+}
+.logo-wrapper img{
+  width: 75px;
+  height: 75px;
+}
+
+.logo-wrapper h1{
+  font-family: "SegoeUI";
+  color: #fff;
+  font-size: 30px;
+  max-width: 300px
+}
+
+.logo-wrapper{
+    display: flex;
+    padding: 0 !important;
+}
+
+/*? yardım siteleri */
+.others{
+    display: flex;
+    position: relative;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+  }
+.others h4{
+  font-family: "SegoeUi";
+  text-align: center;
+  color: white;
+  font-size: 25px; 
+  font-weight: 500;
+  white-space: nowrap;
+
+}
+.description{
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    min-width: 300px;
+    max-width: 500px;
+    max-height: 50px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    position: absolute;
+    top: 100;
+    z-index: 100;
+  }
+.logo-container{
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.5px);
+-webkit-backdrop-filter: blur(5.5px);
+    border-radius: 10px;
+    height: 100%;
+    gap: 20px;
+    padding: 0 17px;
+  }
+.logo-container a{
+    background-color: white;
+    border-radius: 50%;
+}
+.logo-container img{
+    width: 60px;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+.logo-container a:nth-child(3){
+    padding: 0;
+}
+.logo-container a:nth-child(3) img{
+    scale: 1.1;
+}
+.logo-container a:nth-child(3) img:hover{
+    scale: 1.2;
+}
+
+  
+.logo-container img:hover{
+  scale: 1.1;
+}  

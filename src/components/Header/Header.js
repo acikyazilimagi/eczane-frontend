@@ -1,45 +1,17 @@
-import styled from "@emotion/styled";
-import { BREAKPOINTS } from "../../utils/styled";
-
-const SHeaderWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  @media ${BREAKPOINTS.MD.min} {
-    margin-bottom: 3.625rem;
-  }
-`;
-
-const SImage = styled.img`
-  aspect-ratio: auto;
-  width: 40px;
-  @media ${BREAKPOINTS.MD.min} {
-    width: 110px;
-  }
-`;
-
-const SLogoText = styled.h1`
-  font-family: "SegoeUI";
-  color: #fff;
-  font-size: 1rem;
-  max-width: 8.75rem;
-  margin-left: 0.75rem;
-
-  @media ${BREAKPOINTS.MD.min} {
-    font-size: 3rem;
-    max-width: 18.75rem;
-    margin-left: 2rem;
-  }
-`;
+import Others from "./Others";
+import logo from "../../icons/eczane-logo.png"
 
 export const Header = () => {
   return (
-    <SHeaderWrapper>
-      <SImage src="/logo.png" alt="logo" />
-      <SLogoText>
-        Hastaneler ve <br />
-        Eczaneler
-      </SLogoText>
-    </SHeaderWrapper>
+    <div className="header-top">
+      <div className="logo-wrapper">
+      <img src={logo} alt="logo" />
+      <h1>
+        Hastaneler, Eczaneler <br/> 
+       <span> Ve Veterinerler </span> 
+      </h1>
+      </div>
+      <Others />
+    </div>
   );
 };

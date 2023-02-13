@@ -3,7 +3,7 @@ import { BREAKPOINTS } from "../../utils/styled";
 
 const SSearchBoxWrapper = styled.div`
   position: relative;
-  flex-grow: 1;
+  flex: 1 0 0;
 `;
 
 const SInput = styled.input`
@@ -12,8 +12,7 @@ const SInput = styled.input`
   padding: 0.5rem;
   outline: none;
   border: 1px solid white;
-  width: 90%;
-  margin-left: 10%;
+  width: 100%;
   font-size: 0.625rem;
   font-family: "SegoeUI";
   &::placeholder {

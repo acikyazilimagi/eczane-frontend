@@ -95,8 +95,8 @@
   background: #f83b3b;
   border: none;
   border-radius: 0.625rem;
+  white-space: nowrap;
 }
-
 @media screen and (max-width: 1280px) {
   .cities-box {
     grid-template-columns: repeat(4, 1fr);

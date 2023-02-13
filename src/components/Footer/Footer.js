@@ -143,8 +143,8 @@ export function Footer({
           </button>
         ))}
       </div>
-      <div className="see-all-wrapper" onClick={() => handleChangeCity(null)}>
-        <button className={"city-item see-all-button"}>Tümünü Gör</button>
+      <div className="see-all-wrapper" >
+        <button className={"city-item see-all-button"} onClick={() => handleChangeCity(null)}>Tümünü Gör</button>
         <SShowAllIcon src="/show-all-icon.svg" />
       </div>
     </div>

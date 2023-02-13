@@ -2,11 +2,18 @@ import styled from "@emotion/styled";
 import { BREAKPOINTS } from "../../utils/styled";
 import SearchBar from "./SearchBar";
 
-const SHeaderRowWrapper = styled.div``;
+const SHeaderRowWrapper = styled.div`
+height:80px;
+display:flex;
+align-items:center;
+
+`;
 
 const SFlex = styled.div`
   min-height: 1.875rem;
   display: flex;
+  width: 100%;
+  gap:30px;
   justify-content: space-between;
 `;
 
@@ -41,11 +48,10 @@ const SToggleGroup = styled.div`
 
 const SFilterWrapper = styled.div`
   display: flex;
-  margin-top: 1rem;
   justify-content: center;
 
   @media ${BREAKPOINTS.MD.min} {
-    margin-top: 3.375rem;
+
   }
 `;
 
@@ -137,14 +143,8 @@ export const HeaderRow = ({
             Listede
           </SSearchButton>
         </SToggleGroup>
-
-        <SearchBar
-          searchBarVal={searchBarVal}
-          setSearchBarVal={setSearchbarVal}
-        />
-      </SFlex>
-
-      <SFilterWrapper>
+{/* FİLTRE HEPSİ,HASTANE */}
+        <SFilterWrapper>
         <SFilterFlex>
           <SFilterButton
             type="button"
@@ -181,6 +181,15 @@ export const HeaderRow = ({
           </SFilterIconWrapper>
         </SFilterFlex>
       </SFilterWrapper>
+
+        <SearchBar
+          searchBarVal={searchBarVal}
+          setSearchBarVal={setSearchbarVal}
+        />
+      </SFlex>
+
+      
+
     </SHeaderRowWrapper>
   );
 };
