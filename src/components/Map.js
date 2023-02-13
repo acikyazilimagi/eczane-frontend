@@ -4,7 +4,7 @@ import MarkerClusterGroup from "react-leaflet-markercluster";
 import Stack from "@mui/material/Stack";
 import InfoCard from "./InfoCard";
 
-const Map = ({ setMapRef, center, zoom, data }) => {
+const Map = ({ setMapRef, center, zoom, data, districtMap }) => {
   return (
     <Box
       sx={{
