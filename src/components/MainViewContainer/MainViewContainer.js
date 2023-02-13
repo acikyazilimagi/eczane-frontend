@@ -148,7 +148,6 @@ const MainViewContaier = () => {
     toggleDragActive();
   };
 
-  console.log("rerend");
   return (
     <SPaper>
       <HeaderCombined
