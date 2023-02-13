@@ -11,20 +11,13 @@ import MarkerClusterGroup from "react-leaflet-markercluster";
 import styled from "styled-components";
 import { BREAKPOINTS } from "../utils/styled";
 import centers from "./cityCenters";
-// import DownButton from "./DownButton";
-// import UpButton from "./UpButton";
 import { Footer } from "./Footer/Footer";
 import { HeaderCombined } from "./Header/HeaderCombined";
 import { FILTER, SEARCH_AT } from "./Header/HeaderRow";
 import InfoCard from "./InfoCard";
 import ListPage from "./ListPage";
 import UpButton from "./UpButton";
-import Control from "react-leaflet-custom-control";
-import {  ButtonGroup,  Tooltip } from "@mui/material";
-import LockIcon from '@mui/icons-material/Lock';
-import FullscreenIcon from '@mui/icons-material/Fullscreen';
-import LockOpenIcon from '@mui/icons-material/LockOpen';
-import { FullscreenControl } from "react-leaflet-fullscreen";
+import FullscreenIcon from '@mui/icons-material/Fullscreen'
 import { width } from "@mui/system";
 
 
