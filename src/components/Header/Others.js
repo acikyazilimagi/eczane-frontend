@@ -1,8 +1,8 @@
+import styled from "@emotion/styled";
 import React, { useState } from "react";
 import haritaLogo from "../../icons/afet-harita.svg";
 import ioLogo from "../../icons/deprem-io.svg";
 import yardimLogo from "../../icons/deprem-yardim.svg";
-import styled from "@emotion/styled";
 import { BREAKPOINTS } from "../../utils/styled";
 
 const SOtherWrapper = styled.div`
@@ -77,11 +77,14 @@ const SLogoContainer = styled.div`
 `;
 
 const SDescription = styled.div`
+  position: absolute;
+  bottom: -4rem;
+  left: -4rem;
   background: white;
   padding: 0.625rem;
   border-radius: 0.625rem;
   box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
-
+  z-index: 1;
   & > p {
     font-family: SegoeUI, sans-serif;
   }
