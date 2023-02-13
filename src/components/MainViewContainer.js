@@ -19,6 +19,7 @@ import { FILTER, SEARCH_AT } from "./Header/HeaderRow";
 import InfoCard from "./InfoCard";
 import ListPage from "./ListPage";
 import UpButton from "./UpButton";
+import '../test.css';
 
 import hospitalIcon2Svg from "../icons/hospital-marker-2.png";
 import hospitalIconSvg from "../icons/hospital-marker.png";
@@ -230,6 +231,10 @@ const MainViewContaier = () => {
         setSearchbarVal={setSearchbarVal}
         hasVetData={hasVetData}
       />
+
+      <div className="test-class">
+        <button onClick={() => console.log('this is a test clg msg')}>test</button>
+      </div>
 
       {searchAt === SEARCH_AT.HARITA && (
         <Box
