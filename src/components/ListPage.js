@@ -1,18 +1,39 @@
-import Box from "@mui/material/Box";
+import styled from "@emotion/styled";
 import Grid from "@mui/material/Grid";
 import InfoCard from "./InfoCard";
 
+const SWrapper = styled.div`
+  font-family: "Segoe UI";
+  flex-grow: 1;
+  margin: 1.875rem 1rem 0;
+  padding-right: 0.5rem;
+  height: 500px;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #888;
+    border-radius: 1rem;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    background: #f1f1f1;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+`;
+
 const ListPage = ({ data, cityData, allDistricts }) => {
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        marginTop: "30px",
-        height: "500px",
-        overflow: "auto",
-      }}
-      fontFamily={"Segoe UI"}
-    >
+    <SWrapper>
       <div
         style={{
           display: "flex",
@@ -33,11 +54,16 @@ const ListPage = ({ data, cityData, allDistricts }) => {
             padding={"5px"}
             width="320px"
           >
-            <InfoCard key={item.id} item={item} cityData={cityData} allDistricts={allDistricts} />
+            <InfoCard
+              key={item.id}
+              item={item}
+              cityData={cityData}
+              allDistricts={allDistricts}
+            />
           </Grid>
         ))}
       </div>
-    </Box>
+    </SWrapper>
   );
 };
 export default ListPage;

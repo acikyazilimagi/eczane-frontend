@@ -4,6 +4,17 @@ import { BREAKPOINTS } from "../../utils/styled";
 const SSearchBoxWrapper = styled.div`
   position: relative;
   flex-grow: 1;
+  @media ${BREAKPOINTS.MD.min} {
+    flex-grow: 0;
+    min-width: 350px;
+  }
+  @media ${BREAKPOINTS.LG.min} {
+    min-width: 500px;
+  }
+  @media ${BREAKPOINTS.XL.min} {
+    min-width: unset;
+    flex-grow: 1;
+  }
 `;
 
 const SInput = styled.input`
@@ -12,14 +23,15 @@ const SInput = styled.input`
   padding: 0.5rem;
   outline: none;
   border: 1px solid white;
-  width: 90%;
-  margin-left: 10%;
+  width: 100%;
   font-size: 0.625rem;
-  font-family: "SegoeUI";
+  font-family: SegoeUI, sans-serif;
+
   &::placeholder {
-    font-family: "SegoeUI";
+    font-family: SegoeUI, sans-serif;
     font-size: 0.625rem;
   }
+
   @media ${BREAKPOINTS.MD.min} {
     font-size: 1.625rem;
     padding: 1.25rem 1.875rem 1.25rem 1.25rem;
@@ -75,4 +87,5 @@ function SearchBar({ searchBarVal, setSearchBarVal }) {
     </SSearchBoxWrapper>
   );
 }
+
 export default SearchBar;

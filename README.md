@@ -1,4 +1,43 @@
-# eczane-user-frontend
+# eczane-frontend
 
-# YARDIM
-Kodda güncelleme yapmak isterseniz [bu rehberi](./AcikKaynakPrKilavuzu.md) inceleyebilirsiniz.
+## Kullanılan Teknoloji ve Sistemler
+- React 17
+- LeafletJS
+- NodeJS v16
+- MaterialUI (kullanıldı ancak yavaş yavaş tüm importları kaldırıyoruz)
+- TODO: Prettier & ESLint
+
+## Quick Start
+### Repoyu klonlama
+
+```
+git clone https://github.com/acikkaynak/eczane-frontend
+```
+
+### Gereksinimler
+Proje için bilgisayarınızda [NodeJS (v16 sürümü)](https://nodejs.org/en/download/) kurulu olmalıdır.
+Proje klonlandiktan sonra gerekli kütüphaneleri kurmak için:
+
+```
+npm install
+```
+
+``yarn.lock`` dosyası mevcut olmasına rağmen, yarn kullanmayınız. Yarn ile kurmak hata vermektedir.
+
+### Başlatma
+Projeyi başlatmak için:
+
+```
+npm start
+```
+
+## Docker
+Aşağıdaki kısımdan portu, kendi bilgisayarınızda hangi portta açmak istiyorsanız onunla değiştirin. Örneğin: 3000
+
+```
+docker build -t eczane-frontend
+docker run -dp <port>:80 --rm --name eczane-frontend eczane-frontend
+```
+
+## Back-End Projesi: [eczane-backend](https://github.com/acikkaynak/eczane-backend)
+## Admin Front-End Projesi: [eczane-admin-frontend](https://github.com/acikkaynak/eczane-admin-frontend)

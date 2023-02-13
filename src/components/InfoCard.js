@@ -25,7 +25,7 @@ const healthSettings = {
   },
 };
 const fontProps = {
-  fontFamily: "SegoeUI",
+  fontFamily: "SegoeUI, sans-serif",
   fontWeight: "500",
   fontSize: "16px",
 };
@@ -41,7 +41,7 @@ const InfoCard = ({ item, cityData, allDistricts }) => {
   const districtName = allDistricts?.find((d) => d.id === item.districtId)?.key;
   return (
     <>
-      <Box paddingTop={"10px"} fontFamily={"SegoeUI"}>
+      <Box paddingTop={"10px"} fontFamily={"SegoeUI, sans-serif"}>
         <Stack
           direction="row"
           spacing={2}
@@ -162,27 +162,6 @@ const InfoCard = ({ item, cityData, allDistricts }) => {
         )}
 
         <div style={{ paddingBottom: "10px" }}></div>
-
-        {/* {item.additionalAddressDetails !== "" ? (
-          <Button
-            sx={{
-              backgroundColor: "#F83B3B",
-              width: 125,
-              position: "relative",
-              right: "-200px",
-            }}
-            variant="contained"
-            size="small"
-            endIcon={<ArrowRightAltIcon />}
-            onClick={() => {
-              setShow(!show);
-            }}
-          >
-            Detayı Gör{" "}
-          </Button>
-        ) : (
-          ""
-        )} */}
 
         <Box
           sx={{
