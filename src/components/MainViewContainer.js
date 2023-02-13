@@ -19,12 +19,7 @@ import { FILTER, SEARCH_AT } from "./Header/HeaderRow";
 import InfoCard from "./InfoCard";
 import ListPage from "./ListPage";
 import UpButton from "./UpButton";
-import Control from "react-leaflet-custom-control";
-import {  ButtonGroup,  Tooltip } from "@mui/material";
-import LockIcon from '@mui/icons-material/Lock';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
-import LockOpenIcon from '@mui/icons-material/LockOpen';
-import { FullscreenControl } from "react-leaflet-fullscreen";
 import { width } from "@mui/system";
 
 
