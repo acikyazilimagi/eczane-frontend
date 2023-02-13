@@ -17,6 +17,7 @@ import { FILTER, SEARCH_AT } from "../Header/HeaderRow";
 import InfoCard from "../InfoCard";
 import ListPage from "../ListPage";
 import { SButton, SPaper } from "./MainViewController.styled";
+import { TestFooter } from "../Footer/TestFooter";
 
 const CENTER_LAT = 37.683664;
 const CENTER_LNG = 38.322966;
@@ -239,6 +240,7 @@ const MainViewContaier = () => {
         allData={allData}
         hideDistrictSelector={searchAt === SEARCH_AT.HARITA}
       />
+      <TestFooter />
     </SPaper>
   );
 };
