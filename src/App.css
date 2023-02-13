@@ -30,7 +30,6 @@
   font-style: italic;
 }
 
-
 * {
   margin: 0;
   padding: 0;
@@ -197,4 +196,11 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.fullscreen-img {
+  width: 30px;
+  height: 30px;
+  pointer-events: auto;
+  cursor: pointer;
 }

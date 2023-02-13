@@ -15,9 +15,9 @@ const SInput = styled.input`
   width: 90%;
   margin-left: 10%;
   font-size: 0.625rem;
-  font-family: "SegoeUI";
+  font-family: SegoeUI, sans-serif;
   &::placeholder {
-    font-family: "SegoeUI";
+    font-family: SegoeUI, sans-serif;
     font-size: 0.625rem;
   }
   @media ${BREAKPOINTS.MD.min} {

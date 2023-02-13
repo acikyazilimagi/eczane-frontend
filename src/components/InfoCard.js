@@ -25,7 +25,7 @@ const healthSettings = {
   },
 };
 const fontProps = {
-  fontFamily: "SegoeUI",
+  fontFamily: "SegoeUI, sans-serif",
   fontWeight: "500",
   fontSize: "16px",
 };
@@ -41,7 +41,7 @@ const InfoCard = ({ item, cityData, allDistricts }) => {
   const districtName = allDistricts?.find((d) => d.id === item.districtId)?.key;
   return (
     <>
-      <Box paddingTop={"10px"} fontFamily={"SegoeUI"}>
+      <Box paddingTop={"10px"} fontFamily={"SegoeUI, sans-serif"}>
         <Stack
           direction="row"
           spacing={2}
