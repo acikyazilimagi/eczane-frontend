@@ -4,6 +4,7 @@
   font-weight: normal;
   font-style: normal;
 }
+
 .btnWrapper {
   width: 100vw;
   display: flex;
@@ -23,6 +24,7 @@
   font-weight: normal;
   font-style: italic;
 }
+
 @font-face {
   font-family: "SegoeUIBoldItalic";
   src: url("../public/fonts/SegoeUIBoldItalic.woff") format("woff");
@@ -34,6 +36,7 @@
   margin: 0;
   padding: 0;
 }
+
 body {
   background-color: #182151;
 }
@@ -75,10 +78,10 @@ body {
 #downBtn:hover {
   background-color: #555; /* Add a dark-grey background on hover */
 }
+
 .hazir-map {
   height: 100%;
   width: 100%;
-  border-radius: 15px;
   position: absolute;
   top: 0;
 }
@@ -111,22 +114,35 @@ body {
 /* Bu kısmı eklemeyi unutmayın class adınıza göre değiştirebilirsinizz ancak MapContainera height ve width vermezseniz göremezsiniz*/
 @media screen and (min-width: 300px) {
 }
+
 @media screen and (min-width: 576px) {
 }
+
 @media screen and (min-width: 768px) {
+  .hazir-map {
+    width: calc(100% - 12rem);
+    border-radius: 15px;
+  }
 }
+
 @media screen and (min-width: 992px) {
 }
+
 @media screen and (min-width: 1200px) {
 }
+
 @media screen and (min-width: 1900px) {
 }
+
 @media screen and (max-width: 1900px) {
 }
+
 @media screen and (max-width: 1200px) {
 }
+
 @media screen and (max-width: 993px) {
 }
+
 @media screen and (max-width: 768px) {
   .leaflet-popup-content {
     width: 100% !important;
@@ -138,19 +154,26 @@ body {
     display: flex !important;
   }
 }
+
 @media screen and (max-width: 576px) {
 }
+
 @media screen and (max-width: 300px) {
   /*  Günümüzde yaygın olmasa da kol ekranları gibi minik ekranlar alanı */
 }
+
 @media screen and (min-width: 300px) and (max-width: 576px) {
 }
+
 @media screen and (min-width: 576px) and (max-width: 768px) {
 }
+
 @media screen and (min-width: 768px) and (max-width: 992px) {
 }
+
 @media screen and (min-width: 992px) and (max-width: 1200px) {
 }
+
 @media screen and (min-width: 1200px) and (max-width: 1900px) {
 }
 
@@ -168,6 +191,7 @@ body {
   width: 80px;
   height: 80px;
 }
+
 .lds-ring div {
   box-sizing: border-box;
   display: block;
@@ -180,15 +204,19 @@ body {
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: #fff transparent transparent transparent;
 }
+
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;
 }
+
 .lds-ring div:nth-child(2) {
   animation-delay: -0.3s;
 }
+
 .lds-ring div:nth-child(3) {
   animation-delay: -0.15s;
 }
+
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg);

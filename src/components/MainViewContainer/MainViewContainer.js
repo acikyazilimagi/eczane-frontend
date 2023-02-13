@@ -1,6 +1,6 @@
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import { Box, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import axios from "axios";
 import L from "leaflet";
 import React, { useEffect, useState } from "react";
@@ -16,7 +16,7 @@ import { HeaderCombined } from "../Header/HeaderCombined";
 import { FILTER, SEARCH_AT } from "../Header/HeaderRow";
 import InfoCard from "../InfoCard";
 import ListPage from "../ListPage";
-import { SButton, SPaper } from "./MainViewController.styled";
+import { SButton, SMapContainer, SPaper } from "./MainViewController.styled";
 
 const CENTER_LAT = 37.683664;
 const CENTER_LNG = 38.322966;
@@ -154,15 +154,7 @@ const MainViewContaier = () => {
       />
 
       {searchAt === SEARCH_AT.HARITA && (
-        <Box
-          sx={{
-            width: "100%",
-            display: "flex",
-            height: "500px",
-            borderRadius: "17px",
-            position: "relative",
-          }}
-        >
+        <SMapContainer>
           <MapContainer
             whenCreated={setMapRef}
             className="hazir-map" //class adı kendinize göre ayarlayabilirsiniz isterseniz
@@ -214,7 +206,7 @@ const MainViewContaier = () => {
               })}
             </MarkerClusterGroup>
           </MapContainer>
-        </Box>
+        </SMapContainer>
       )}
       {searchAt === SEARCH_AT.LISTE && (
         <ListPage
