@@ -179,7 +179,7 @@ const MainViewContaier = () => {
             maxBounds={[LEFT_TOP_BOUND, RIGHT_BOTTOM_BOUND]}
           >
             <Control position="topright">
-              <SButton onClick={debounce(onLockClick, 300)}>
+              <SButton onClick={debounce(onLockClick, 150)}>
                 {!dragActive ? <LockIcon /> : <LockOpenIcon />}
               </SButton>
             </Control>
