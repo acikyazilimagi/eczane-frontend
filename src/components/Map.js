@@ -14,62 +14,51 @@ import InfoCard from "./InfoCard";
 import BootstrapButton from "./lockButton";
 import { useMap } from "react-leaflet";
 import { useEffect } from "react";
-import L from "react-leaflet"
+import L from "react-leaflet";
 
-
-const Map =({setMapRef,center,zoom,data})=>{
- 
-  
-    
-   return( <Box
-    sx={{
-      width: "100%",
-      display: "flex",
-      height: "500px",
-      borderRadius: "17px",
-      position: "relative",
-    }}
-  >
-    
-       
-    <MapContainer
-      whenCreated={setMapRef}
-      className="hazir-map" //class adı kendinize göre ayarlayabilirsiniz isterseniz
-      center={center} //CENTER BILGINIZ NEREDE İSE ORAYA KOYUNUZ
-      zoom={zoom} //ZOOM NE KADAR YAKINDA OLMASINI
-      maxZoom={17}
-      //maxZoomu kendinize göre ayarlayın
+const Map = ({ setMapRef, center, zoom, data }) => {
+  return (
+    <Box
+      sx={{
+        width: "100%",
+        display: "flex",
+        height: "500px",
+        borderRadius: "17px",
+        position: "relative",
+      }}
     >
-      <TileLayer //Bu kısımda değişikliğe gerek yok
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      />
-    
+      <MapContainer
+        whenCreated={setMapRef}
+        className="hazir-map" //class adı kendinize göre ayarlayabilirsiniz isterseniz
+        center={center} //CENTER BILGINIZ NEREDE İSE ORAYA KOYUNUZ
+        zoom={zoom} //ZOOM NE KADAR YAKINDA OLMASINI
+        maxZoom={17}
+        //maxZoomu kendinize göre ayarlayın
+      >
+        <TileLayer //Bu kısımda değişikliğe gerek yok
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        />
 
-      <MarkerClusterGroup>
-        {data?.map((station,index) => {
-          return (
-            <Marker
-              key={station.id} //key kısmını da kendi datanıza göre ayarlayın mydaya.id gibi
-              position={[station.latitude, station.longitude]} //Kendi pozisyonunuzu ekleyin buraya stationı değiştirin mydata.adress.latitude mydata.adress.longitude gibi
-            >
-              <Popup>
-                <Stack >
-                  <InfoCard item={station} key={index} index={index}/>
-                </Stack>
-              </Popup>
-            </Marker>
-          );
-        })}
-      </MarkerClusterGroup>
-    </MapContainer>
-  </Box>)
+        <MarkerClusterGroup>
+          {data?.map((station, index) => {
+            return (
+              <Marker
+                key={station.id} //key kısmını da kendi datanıza göre ayarlayın mydaya.id gibi
+                position={[station.latitude, station.longitude]} //Kendi pozisyonunuzu ekleyin buraya stationı değiştirin mydata.adress.latitude mydata.adress.longitude gibi
+              >
+                <Popup>
+                  <Stack>
+                    <InfoCard item={station} key={index} index={index} />
+                  </Stack>
+                </Popup>
+              </Marker>
+            );
+          })}
+        </MarkerClusterGroup>
+      </MapContainer>
+    </Box>
+  );
+};
 
-
-
-
-
-}
-
-
-export default Map
+export default Map;

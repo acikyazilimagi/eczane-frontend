@@ -89,43 +89,43 @@ export function Footer({
   return (
     <div className="footer-container">
       {!hideDistrictSelector && (
-      <div className="ilce-box">
-        <SIconWrapper>
-          <SButton>
-            <SLeftIcon src="/left-icon.svg" />
-          </SButton>
-        </SIconWrapper>
-        <div className="ilce-items">
-          {noCitySelected && (
-            <SParagWrapper>
-              <SParag>Şehir Seçiniz</SParag>
-            </SParagWrapper>
-          )}
-          {selectedCityDistricts?.map((item) => (
-            <button
-              className={
-                cityDistrictWithData.indexOf(item.key) === -1
-                  ? "ilce-item ilce-disabled"
-                  : selectedDist === item.id
-                  ? "ilce-item ilce-active"
-                  : "ilce-item"
-              }
-              onClick={() => {
-                setSelectedDist(item.id);
-              }}
-              key={item.id}
-              disabled={cityDistrictWithData.indexOf(item.key) === -1}
-            >
-              {item.key}
-            </button>
-          ))}
+        <div className="ilce-box">
+          <SIconWrapper>
+            <SButton>
+              <SLeftIcon src="/left-icon.svg" />
+            </SButton>
+          </SIconWrapper>
+          <div className="ilce-items">
+            {noCitySelected && (
+              <SParagWrapper>
+                <SParag>Şehir Seçiniz</SParag>
+              </SParagWrapper>
+            )}
+            {selectedCityDistricts?.map((item) => (
+              <button
+                className={
+                  cityDistrictWithData.indexOf(item.key) === -1
+                    ? "ilce-item ilce-disabled"
+                    : selectedDist === item.id
+                    ? "ilce-item ilce-active"
+                    : "ilce-item"
+                }
+                onClick={() => {
+                  setSelectedDist(item.id);
+                }}
+                key={item.id}
+                disabled={cityDistrictWithData.indexOf(item.key) === -1}
+              >
+                {item.key}
+              </button>
+            ))}
+          </div>
+          <SIconWrapper>
+            <SButton>
+              <SRightIcon src="/left-icon.svg" />
+            </SButton>
+          </SIconWrapper>
         </div>
-        <SIconWrapper>
-          <SButton>
-            <SRightIcon src="/left-icon.svg" />
-          </SButton>
-        </SIconWrapper>
-      </div>
       )}
 
       <div className="cities-box">
