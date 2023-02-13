@@ -1,13 +1,10 @@
 import styled from "@emotion/styled";
 import { BREAKPOINTS } from "../../utils/styled";
+import Others from "./Others";
 
 const SHeaderWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 1.5rem;
-  @media ${BREAKPOINTS.MD.min} {
-    margin-bottom: 3.625rem;
-  }
 `;
 
 const SImage = styled.img`
@@ -26,20 +23,35 @@ const SLogoText = styled.h1`
   margin-left: 0.75rem;
 
   @media ${BREAKPOINTS.MD.min} {
-    font-size: 3rem;
+    font-size: 2rem;
     max-width: 18.75rem;
     margin-left: 2rem;
+  }
+  @media ${BREAKPOINTS.LG.min} {
+    font-size: 3rem;
+  }
+`;
+
+const SHeaderRowWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  @media ${BREAKPOINTS.MD.min} {
+    margin-bottom: 3.625rem;
   }
 `;
 
 export const Header = () => {
   return (
-    <SHeaderWrapper>
-      <SImage src="/logo.png" alt="logo" />
-      <SLogoText>
-        Hastaneler ve <br />
-        Eczaneler
-      </SLogoText>
-    </SHeaderWrapper>
+    <SHeaderRowWrapper>
+      <SHeaderWrapper>
+        <SImage src="/logo.png" alt="logo" />
+        <SLogoText>
+          Hastaneler ve <br />
+          Eczaneler
+        </SLogoText>
+      </SHeaderWrapper>
+      <Others />
+    </SHeaderRowWrapper>
   );
 };
