@@ -78,13 +78,14 @@ const SLogoContainer = styled.div`
 
 const SDescription = styled.div`
   position: absolute;
-  bottom: -4rem;
-  left: -4rem;
+  top: 6rem;
+  right: 0rem;
   background: white;
   padding: 0.625rem;
   border-radius: 0.625rem;
   box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
   z-index: 1;
+
   & > p {
     font-family: SegoeUI, sans-serif;
   }
