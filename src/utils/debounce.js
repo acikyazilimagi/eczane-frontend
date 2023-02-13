@@ -4,7 +4,6 @@ export function debounce(func, delay) {
     const context = this;
     const args = arguments;
     clearTimeout(debounceTimer);
-    console.log("returning func");
     debounceTimer = setTimeout(() => func.apply(context, args), delay);
   };
 }
