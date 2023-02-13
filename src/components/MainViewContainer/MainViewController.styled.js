@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import { BREAKPOINTS } from "../../utils/styled";
 
 export const SPaper = styled.div`
-  background-color: #fff;
   color: rgba(0, 0, 0, 0.87);
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   background-color: #182151;
@@ -23,4 +22,15 @@ export const SButton = styled.button`
   background-repeat: no-repeat;
   display: block;
   border: 2px solid rgba(0, 0, 0, 0.2);
+`;
+
+export const SMapContainer = styled.div`
+  width: 100%;
+  display: flex;
+  height: 500px;
+  border-radius: 17px;
+  position: relative;
+  @media ${BREAKPOINTS.MD.min} {
+    padding: 0 3rem;
+  }
 `;
