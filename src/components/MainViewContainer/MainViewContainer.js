@@ -8,7 +8,7 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import Control from "react-leaflet-custom-control";
 import { FullscreenControl } from "react-leaflet-fullscreen";
 import MarkerClusterGroup from "react-leaflet-markercluster";
-import { hospitalIcon, pharmacyIcon } from "../../lib/Icons";
+import { hospitalIcon, pharmacyIcon, vetIcon } from "../../lib/Icons";
 import { debounce } from "../../utils/debounce";
 import centers from "../cityCenters";
 import { Footer } from "../Footer/Footer";
@@ -46,22 +46,16 @@ const MainViewContaier = () => {
   const center = [CENTER_LAT, CENTER_LNG];
 
   const setIconFn = (type, subType) => {
-    let newicon = hospitalIcon;
-
-    if (type === FILTER.HASTANE) {
-      newicon = hospitalIcon;
+    switch (type) {
+      case FILTER.HASTANE:
+        return hospitalIcon;
+      case FILTER.ECZANE:
+        return pharmacyIcon;
+      case FILTER.VETERINER:
+        return vetIcon;
+      default:
+        return hospitalIcon;
     }
-    // else if (type === FILTER.HASTANE && subType === "sahra hastanesi") {
-    //   newicon = hospitalIcon2;
-    // }
-    if (type === FILTER.ECZANE) {
-      newicon = pharmacyIcon;
-    }
-    // else if (type === FILTER.ECZANE && subType === "sahra eczanesi") {
-    //   newicon = pharmacyIcon2;
-    // }
-
-    if (newicon) return newicon;
   };
   const handleLock = () => {
     if (mapRef.dragging.enabled()) {

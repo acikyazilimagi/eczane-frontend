@@ -9,26 +9,23 @@ const SHeaderWrapper = styled.div`
 
 const SImage = styled.img`
   aspect-ratio: auto;
-  width: 40px;
+  height: 40px;
   @media ${BREAKPOINTS.MD.min} {
-    width: 110px;
+    height: 86px;
   }
 `;
 
 const SLogoText = styled.h1`
   font-family: SegoeUI, sans-serif;
   color: #fff;
-  font-size: 1rem;
+  font-size: 1.5rem;
   max-width: 8.75rem;
   margin-left: 0.75rem;
 
   @media ${BREAKPOINTS.MD.min} {
-    font-size: 2rem;
+    font-size: 3rem;
     max-width: 18.75rem;
     margin-left: 2rem;
-  }
-  @media ${BREAKPOINTS.LG.min} {
-    font-size: 3rem;
   }
 `;
 
@@ -37,7 +34,7 @@ const SHeaderRowWrapper = styled.div`
   justify-content: space-between;
   margin-bottom: 1.5rem;
   @media ${BREAKPOINTS.MD.min} {
-    margin-bottom: 3.625rem;
+    margin-bottom: 2.5rem;
   }
 `;
 
@@ -46,10 +43,7 @@ export const Header = () => {
     <SHeaderRowWrapper>
       <SHeaderWrapper>
         <SImage src="/logo.png" alt="logo" />
-        <SLogoText>
-          Hastaneler ve <br />
-          Eczaneler
-        </SLogoText>
+        <SLogoText>Afet Yardım</SLogoText>
       </SHeaderWrapper>
       <Others />
     </SHeaderRowWrapper>

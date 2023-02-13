@@ -15,7 +15,7 @@ export const SFlex = styled.div`
 
 export const SButton = styled.button`
   background-color: ${(props) => (props.selected ? "F83B3B" : "#fff")};
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   color: ${(props) => (props.selected ? "#fff" : "#111A42")};
   border: none;
   font-size: 0.75rem;
@@ -58,7 +58,6 @@ export const SFilterFlex = styled.div`
   border: 1px solid #ffffff;
   display: flex;
   align-self: center;
-  width: 100%;
   @media ${BREAKPOINTS.MD.min} {
     width: unset;
     padding: 4px;
