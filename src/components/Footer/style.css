@@ -24,7 +24,7 @@
 }
 
 .ilce-item {
-  font-family: "SegoeUI";
+  font-family: SegoeUI, sans-serif;
   background-color: inherit;
   outline: none;
   border: none;
@@ -56,7 +56,7 @@
 }
 
 .city-item {
-  font-family: "SegoeUI";
+  font-family: SegoeUI, sans-serif;
   border: none;
   background-color: inherit;
   outline: hidden;
