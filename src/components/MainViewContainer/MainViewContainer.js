@@ -1,6 +1,6 @@
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import { Box, ButtonGroup, Stack, Tooltip } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import axios from "axios";
 import L from "leaflet";
 import React, { useEffect, useState } from "react";
@@ -9,6 +9,7 @@ import Control from "react-leaflet-custom-control";
 import { FullscreenControl } from "react-leaflet-fullscreen";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import { hospitalIcon, pharmacyIcon } from "../../lib/Icons";
+import { debounce } from "../../utils/debounce";
 import centers from "../cityCenters";
 import { Footer } from "../Footer/Footer";
 import { HeaderCombined } from "../Header/HeaderCombined";
@@ -27,14 +28,10 @@ const RIGHT_BOTTOM_BOUND = [41.57364, 42.770324];
 
 const MainViewContaier = () => {
   const [mapRef, setMapRef] = React.useState();
-  const [active, setActive] = React.useState(null);
+  const [dragActive, setDragActive] = React.useState(true);
 
-  const handleClick = (name) => {
-    if (active === name) {
-      setActive(null);
-    } else {
-      setActive(name);
-    }
+  const toggleDragActive = () => {
+    setDragActive((active) => !active);
   };
 
   const [searchAt, setSearchAt] = useState(SEARCH_AT.HARITA);
@@ -66,16 +63,15 @@ const MainViewContaier = () => {
 
     if (newicon) return newicon;
   };
-
-  const handleLock = (locked) => {
-    if (locked === "cast") {
-      mapRef.dragging.enable();
-      mapRef.zoomControl.enable();
-      mapRef.scrollWheelZoom.enable();
-    } else {
+  const handleLock = () => {
+    if (mapRef.dragging.enabled()) {
       mapRef.dragging.disable();
       mapRef.zoomControl.disable();
       mapRef.scrollWheelZoom.disable();
+    } else {
+      mapRef.dragging.enable();
+      mapRef.zoomControl.enable();
+      mapRef.scrollWheelZoom.enable();
     }
   };
 
@@ -146,6 +142,11 @@ const MainViewContaier = () => {
 
   const hasVetData = allData?.some((item) => item.typeId === FILTER.VETERINER);
 
+  const onLockClick = () => {
+    handleLock();
+    toggleDragActive();
+  };
+
   return (
     <SPaper>
       <HeaderCombined
@@ -178,21 +179,9 @@ const MainViewContaier = () => {
             maxBounds={[LEFT_TOP_BOUND, RIGHT_BOTTOM_BOUND]}
           >
             <Control position="topright">
-              <ButtonGroup orientation="vertical" variant="contained">
-                <Tooltip
-                  placement="left"
-                  title={active === "cast" ? "Aç" : "Kilitle"}
-                >
-                  <SButton
-                    onClick={() => {
-                      handleClick("cast");
-                      handleLock(active);
-                    }}
-                  >
-                    {active === "cast" ? <LockIcon /> : <LockOpenIcon />}
-                  </SButton>
-                </Tooltip>
-              </ButtonGroup>
+              <SButton onClick={debounce(onLockClick, 300)}>
+                {!dragActive ? <LockIcon /> : <LockOpenIcon />}
+              </SButton>
             </Control>
             <Control position="topright">
               <FullscreenControl
