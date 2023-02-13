@@ -22,6 +22,9 @@ const CENTER_LNG = 38.322966;
 const ZOOM = 6;
 const MIN_ZOOM = 7;
 
+const LEFT_TOP_BOUND = [34.325514, 28.939165];
+const RIGHT_BOTTOM_BOUND = [41.57364, 42.770324];
+
 const MainViewContaier = () => {
   const [mapRef, setMapRef] = React.useState();
   const [active, setActive] = React.useState(null);
@@ -172,11 +175,7 @@ const MainViewContaier = () => {
             zoom={ZOOM} //ZOOM NE KADAR YAKINDA OLMASINI
             minZoom={MIN_ZOOM}
             tap={L.Browser.safari && L.Browser.mobile}
-            maxBounds={[
-              [34.325514, 28.939165],
-              [41.57364, 42.770324],
-            ]}
-            //maxZoomu kendinize göre ayarlayın
+            maxBounds={[LEFT_TOP_BOUND, RIGHT_BOTTOM_BOUND]}
           >
             <Control position="topright">
               <ButtonGroup orientation="vertical" variant="contained">
@@ -197,20 +196,9 @@ const MainViewContaier = () => {
             </Control>
             <Control position="topright">
               <FullscreenControl
-                forceSeparateButton={true}
+                forceSeparateButton
                 position="topright"
-                content="
-                <style>
-                .fullscreen-img{
-                  width:30px;
-                  height:30px;
-                  
-                  pointer-events: auto;
-                  cursor: pointer;
-
-                }
-                </style>
-                <img src='./fullscreen.png' class='fullscreen-img'></img>"
+                content="<img src='./fullscreen.png' class='fullscreen-img'></img>"
                 title="Tam Ekran"
               />
             </Control>
