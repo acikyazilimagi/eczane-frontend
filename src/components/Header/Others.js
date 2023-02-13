@@ -93,7 +93,6 @@ const SDescription = styled.div`
 
 const Others = () => {
   const [isHovering, setIsHovering] = useState("");
-  console.log(isHovering);
 
   const handleMouseOver = (event) => {
     setIsHovering(event.target.id);
@@ -110,13 +109,13 @@ const Others = () => {
         onMouseOut={handleMouseOut}
       >
         <a href="https://afetharita.com/">
-          <img id="harita" src={haritaLogo} />
+          <img id="harita" src={haritaLogo} alt="harita-logo" />
         </a>
         <a href="https://deprem.io/">
-          <img id="io" src={ioLogo} />
+          <img id="io" src={ioLogo} alt="deprem-logo" />
         </a>
         <a href="https://depremyardim.com/">
-          <img id="yardim" src={yardimLogo} />
+          <img id="yardim" src={yardimLogo} alt="deprem-yardim-logo" />
         </a>
       </SLogoContainer>
       {isHovering === "harita" ? (

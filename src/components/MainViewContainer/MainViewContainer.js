@@ -3,7 +3,7 @@ import LockOpenIcon from "@mui/icons-material/LockOpen";
 import { Stack } from "@mui/material";
 import axios from "axios";
 import L from "leaflet";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import Control from "react-leaflet-custom-control";
 import { FullscreenControl } from "react-leaflet-fullscreen";
@@ -101,6 +101,15 @@ const MainViewContaier = () => {
       .catch((err) => {});
   }, []);
 
+  const districtMap = useMemo(() => {
+    const theMap = new Map();
+    const allDistricts = cityData?.data?.map((city) => city.districts).flat();
+    allDistricts?.forEach((district) => {
+      theMap.set(district.id, district.key);
+    });
+    return theMap;
+  }, [cityData]);
+
   if (allData === null) {
     return (
       <div className="loading-container">
@@ -113,8 +122,6 @@ const MainViewContaier = () => {
       </div>
     ); //LOADBAR EKLE
   }
-
-  const allDistricts = cityData?.data?.map((city) => city.districts).flat();
 
   const typeFilteredData = allData?.filter(
     (item) => filter === FILTER.HEPSI || item.typeId === filter
@@ -141,6 +148,7 @@ const MainViewContaier = () => {
     toggleDragActive();
   };
 
+  console.log("rerend");
   return (
     <SPaper>
       <HeaderCombined
@@ -196,8 +204,7 @@ const MainViewContaier = () => {
                         <InfoCard
                           key={station.id}
                           item={station}
-                          cityData={cityData}
-                          allDistricts={allDistricts}
+                          districtMap={districtMap}
                         />
                       </Stack>
                     </Popup>
@@ -212,7 +219,7 @@ const MainViewContaier = () => {
         <ListPage
           data={distFilteredData}
           cityData={cityData}
-          allDistricts={allDistricts}
+          districtMap={districtMap}
         />
       )}
 

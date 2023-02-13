@@ -9,29 +9,33 @@ const SWrapper = styled.div`
   padding-right: 0.5rem;
   height: 500px;
   overflow: auto;
+
   &::-webkit-scrollbar {
     width: 10px;
   }
 
   /* Track */
+
   &::-webkit-scrollbar-track {
     background: #888;
     border-radius: 1rem;
   }
 
   /* Handle */
+
   &::-webkit-scrollbar-thumb {
     border-radius: 1rem;
     background: #f1f1f1;
   }
 
   /* Handle on hover */
+
   &::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
 `;
 
-const ListPage = ({ data, cityData, allDistricts }) => {
+const ListPage = ({ data, districtMap }) => {
   return (
     <SWrapper>
       <div
@@ -54,12 +58,7 @@ const ListPage = ({ data, cityData, allDistricts }) => {
             padding={"5px"}
             width="320px"
           >
-            <InfoCard
-              key={item.id}
-              item={item}
-              cityData={cityData}
-              allDistricts={allDistricts}
-            />
+            <InfoCard key={item.id} item={item} districtMap={districtMap} />
           </Grid>
         ))}
       </div>

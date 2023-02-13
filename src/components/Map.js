@@ -1,20 +1,8 @@
 import { Box } from "@mui/system";
-import { MapContainer } from "react-leaflet";
-import { TileLayer } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
-import { Marker } from "react-leaflet";
-import { Popup } from "react-leaflet";
 import Stack from "@mui/material/Stack";
-import { Typography } from "@mui/material";
-import Divider from "@mui/material/Divider";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import CallIcon from "@mui/icons-material/Call";
-import Button from "@mui/material";
 import InfoCard from "./InfoCard";
-import BootstrapButton from "./lockButton";
-import { useMap } from "react-leaflet";
-import { useEffect } from "react";
-import L from "react-leaflet";
 
 const Map = ({ setMapRef, center, zoom, data }) => {
   return (
@@ -41,7 +29,7 @@ const Map = ({ setMapRef, center, zoom, data }) => {
         />
 
         <MarkerClusterGroup>
-          {data?.map((station, index) => {
+          {data?.map((station) => {
             return (
               <Marker
                 key={station.id} //key kısmını da kendi datanıza göre ayarlayın mydaya.id gibi
@@ -49,7 +37,12 @@ const Map = ({ setMapRef, center, zoom, data }) => {
               >
                 <Popup>
                   <Stack>
-                    <InfoCard item={station} key={index} index={index} />
+                    <InfoCard
+                      item={station}
+                      key={index}
+                      index={station.id}
+                      districtMap={districtMap}
+                    />
                   </Stack>
                 </Popup>
               </Marker>
