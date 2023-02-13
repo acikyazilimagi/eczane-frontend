@@ -25,7 +25,6 @@ export const SButton = styled.button`
 `;
 
 export const SMapContainer = styled.div`
-  width: 100%;
   display: flex;
   height: 500px;
   border-radius: 17px;
