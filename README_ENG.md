@@ -24,8 +24,6 @@ To install libraries after cloning project:
 npm install
 ```
 
-``yarn.lock`` are present but dont use yarn. Using yarn may or may not give errors.
-
 ### To start
 To run the project:
 
@@ -42,4 +40,4 @@ docker run -dp <port>:80 --rm --name eczane-frontend eczane-frontend
 ```
 
 ## Back-End Project: [eczane-backend](https://github.com/acikkaynak/eczane-backend)
-## Admin Front-End Project
+## Admin Front-End Project [eczane-admin-frontend](https://github.com/acikkaynak/eczane-admin-frontend)

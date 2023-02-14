@@ -24,8 +24,6 @@ Proje klonlandiktan sonra gerekli kütüphaneleri kurmak için:
 npm install
 ```
 
-``yarn.lock`` dosyası mevcut olmasına rağmen, yarn kullanmayınız. Yarn ile kurmak hata vermektedir.
-
 ### Başlatma
 Projeyi başlatmak için:
 
@@ -42,4 +40,4 @@ docker run -dp <port>:80 --rm --name eczane-frontend eczane-frontend
 ```
 
 ## Back-End Projesi: [eczane-backend](https://github.com/acikkaynak/eczane-backend)
-## Admin Front-End Projesi: [eczane-admin-frontend](https://github.com/acikkaynak/eczane-admin-frontend): [eczane-admin-frontend](https://github.com/acikkaynak/eczane-admin-frontend)
+## Admin Front-End Projesi: [eczane-admin-frontend](https://github.com/acikkaynak/eczane-admin-frontend)
