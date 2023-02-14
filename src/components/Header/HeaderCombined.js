@@ -10,7 +10,7 @@ const SHeaderCombinedWrapper = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  @media ${BREAKPOINTS.MD.min} {
+  @media (min-width: 768px) {
     padding: 2.25rem 3rem;
     background-image: none;
   }
