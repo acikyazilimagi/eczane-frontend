@@ -31,6 +31,12 @@ const SWrapper = styled.div`
   }
 `;
 
+const SNotFound = styled.h2`
+  color: #f1f1f1;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 1.5rem;
+`;
+
 const ListPage = ({ data, cityData, allDistricts }) => {
   return (
     <SWrapper>
@@ -42,26 +48,30 @@ const ListPage = ({ data, cityData, allDistricts }) => {
           justifyContent: "center",
         }}
       >
-        {data?.map((item, index) => (
-          <Grid
-            item
-            xs={2}
-            sm={4}
-            md={4}
-            key={index}
-            backgroundColor="white"
-            borderRadius={"10px"}
-            padding={"5px"}
-            width="320px"
-          >
-            <InfoCard
-              key={item.id}
-              item={item}
-              cityData={cityData}
-              allDistricts={allDistricts}
-            />
-          </Grid>
-        ))}
+        {data?.length ? (
+          data?.map((item, index) => (
+            <Grid
+              item
+              xs={2}
+              sm={4}
+              md={4}
+              key={index}
+              backgroundColor="white"
+              borderRadius={"10px"}
+              padding={"5px"}
+              width="320px"
+            >
+              <InfoCard
+                key={item.id}
+                item={item}
+                cityData={cityData}
+                allDistricts={allDistricts}
+              />
+            </Grid>
+          ))
+        ) : (
+          <SNotFound>Aranılan kriterlere uygun sonuç bulunamadı.</SNotFound>
+        )}
       </div>
     </SWrapper>
   );
