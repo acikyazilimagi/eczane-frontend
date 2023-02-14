@@ -34,12 +34,14 @@
 
 .flexWrapper {
   display: grid;
-  gap: 7.5px;
+  gap: 1rem;
   grid-template-columns: 1fr;
   @media (min-width: 768px) {
+    gap: 1.25rem;
     grid-template-columns: 1fr 1fr;
   }
   @media (min-width: 1200px) {
+    gap: 1.875rem;
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
