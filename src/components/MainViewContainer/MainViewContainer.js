@@ -1,21 +1,21 @@
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import { Stack } from "@mui/material";
-import axios from "axios";
 import L from "leaflet";
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import Control from "react-leaflet-custom-control";
 import { FullscreenControl } from "react-leaflet-fullscreen";
+import "react-leaflet-fullscreen/dist/styles.css";
 import MarkerClusterGroup from "react-leaflet-markercluster";
+import centers from "../../lib/cityCenters";
 import { hospitalIcon, pharmacyIcon, vetIcon } from "../../lib/Icons";
 import { debounce } from "../../utils/debounce";
-import centers from "../cityCenters";
+import { useFetch } from "../../utils/hooks";
 import { Footer } from "../Footer/Footer";
 import { HeaderCombined } from "../Header/HeaderCombined";
 import { FILTER, SEARCH_AT } from "../Header/HeaderRow";
-import InfoCard from "../InfoCard";
-import ListPage from "../ListPage";
+import InfoCard from "../InfoCard/InfoCard";
+import ListPage from "../ListPage/ListPage";
 import { SButton, SMapContainer, SPaper } from "./MainViewController.styled";
 
 const CENTER_LAT = 37.683664;
@@ -27,6 +27,14 @@ const LEFT_TOP_BOUND = [34.325514, 28.939165];
 const RIGHT_BOTTOM_BOUND = [41.57364, 42.770324];
 
 const MainViewContaier = () => {
+  const { data: fetchedData } = useFetch(
+    "https://eczaneapi.afetharita.com/api/locations"
+  );
+  const allData = fetchedData?.data;
+  const { data: cityData } = useFetch(
+    "https://eczaneapi.afetharita.com/api/cityWithDistricts"
+  );
+
   const [mapRef, setMapRef] = React.useState();
   const [dragActive, setDragActive] = React.useState(true);
 
@@ -39,9 +47,6 @@ const MainViewContaier = () => {
   const [searchBarVal, setSearchbarVal] = useState("");
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedDist, setSelectedDist] = useState(null);
-
-  const [cityData, setCityData] = React.useState(null);
-  const [allData, setAllData] = React.useState(null);
 
   const center = [CENTER_LAT, CENTER_LNG];
 
@@ -83,23 +88,15 @@ const MainViewContaier = () => {
     setSelectedDist(null);
   };
 
-  useEffect(() => {
-    axios
-      .get("https://eczaneapi.afetharita.com/api/locations")
-      .then((response) => {
-        setAllData(response.data?.data);
-      })
-      .catch((err) => {});
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get("https://eczaneapi.afetharita.com/api/cityWithDistricts ")
-      .then((response) => {
-        setCityData(response.data);
-      })
-      .catch((err) => {});
-  }, []);
+  const districtMap = useMemo(() => {
+    console.log("this runs");
+    const theMap = new Map();
+    const allDistricts = cityData?.data?.map((city) => city.districts).flat();
+    allDistricts?.forEach((district) => {
+      theMap.set(district.id, district.key);
+    });
+    return theMap;
+  }, [cityData]);
 
   if (allData === null) {
     return (
@@ -113,8 +110,6 @@ const MainViewContaier = () => {
       </div>
     ); //LOADBAR EKLE
   }
-
-  const allDistricts = cityData?.data?.map((city) => city.districts).flat();
 
   const typeFilteredData = allData?.filter(
     (item) => filter === FILTER.HEPSI || item.typeId === filter
@@ -152,7 +147,6 @@ const MainViewContaier = () => {
         setSearchbarVal={setSearchbarVal}
         hasVetData={hasVetData}
       />
-
       {searchAt === SEARCH_AT.HARITA && (
         <SMapContainer>
           <MapContainer
@@ -173,7 +167,7 @@ const MainViewContaier = () => {
               <FullscreenControl
                 forceSeparateButton
                 position="topright"
-                content="<img src='./fullscreen.png' class='fullscreen-img'></img>"
+                content="<img src='fullscreen.png' class='fullscreen-img'/>"
                 title="Tam Ekran"
               />
             </Control>
@@ -192,14 +186,11 @@ const MainViewContaier = () => {
                     position={[station.latitude, station.longitude]} //Kendi pozisyonunuzu ekleyin buraya stationı değiştirin mydata.adress.latitude mydata.adress.longitude gibi
                   >
                     <Popup>
-                      <Stack>
-                        <InfoCard
-                          key={station.id}
-                          item={station}
-                          cityData={cityData}
-                          allDistricts={allDistricts}
-                        />
-                      </Stack>
+                      <InfoCard
+                        key={station.id}
+                        item={station}
+                        districtMap={districtMap}
+                      />
                     </Popup>
                   </Marker>
                 );
@@ -212,7 +203,7 @@ const MainViewContaier = () => {
         <ListPage
           data={distFilteredData}
           cityData={cityData}
-          allDistricts={allDistricts}
+          districtMap={districtMap}
         />
       )}
 

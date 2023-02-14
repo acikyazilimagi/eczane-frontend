@@ -1,4 +1,4 @@
-.footer-container {
+.footerContainer {
   padding-top: 59px;
   max-width: 1399px;
   width: 85%;
@@ -8,7 +8,7 @@
   flex-direction: column;
 }
 
-.ilce-box {
+.ilceBox {
   padding: 8px 8px;
   border: 1px solid white;
   border-radius: 5px;
@@ -17,14 +17,14 @@
   min-height: 4.25rem;
 }
 
-.ilce-items {
+.ilceItems {
   position: relative;
   padding: 0 15px;
   flex-grow: 1;
 }
 
-.ilce-item {
-  font-family: SegoeUI, sans-serif;
+.ilceItem {
+  font-family: "Roboto", sans-serif;
   background-color: inherit;
   outline: none;
   border: none;
@@ -36,7 +36,7 @@
   cursor: pointer;
 }
 
-.cities-box {
+.citiesBox {
   padding: 14px 0;
   gap: 10px;
   width: 100%;
@@ -45,50 +45,51 @@
   grid-template-columns: repeat(5, 1fr);
 }
 
-.ilce-active {
+.ilceActive {
   background-color: #f83b3b;
   border-radius: 5px;
 }
 
-.ilce-disabled {
+.ilceDisabled {
   color: #888;
   cursor: not-allowed;
 }
 
-.city-item {
-  font-family: SegoeUI, sans-serif;
+.cityItem {
+  font-family: "Roboto", sans-serif;
   border: none;
   background-color: inherit;
   outline: hidden;
   color: white;
-  font-size: 2.25rem;
+  font-size: 2rem;
   border: 1px white solid;
   border-radius: 10px;
-  padding: 1rem;
+  padding: 0.6rem;
   flex-grow: 1;
+  -webkit-user-select: none;
   user-select: none;
   cursor: pointer;
 }
 
-.city-item-active {
+.cityItemActive {
   background-color: white;
   color: inherit;
 }
 
-.left-arrow {
+.leftArrow {
   background-color: inherit;
   border: none;
 }
-.right-arrow {
+.rightArrow {
   background-color: inherit;
   border: none;
 }
 
-.see-all-wrapper {
+.seeAllWrapper {
   position: relative;
 }
 
-.see-all-button {
+.seeAllButton {
   display: block;
   margin-left: auto;
   padding: 1rem 4rem 1rem 1rem;
@@ -98,18 +99,18 @@
 }
 
 @media screen and (max-width: 1280px) {
-  .cities-box {
+  .citiesBox {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 @media screen and (max-width: 1024px) {
-  .cities-box {
+  .citiesBox {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media screen and (max-width: 768px) {
-  .footer-container {
+  .footerContainer {
     padding-top: 19px;
     max-width: 375px;
     width: 340px;
@@ -118,7 +119,7 @@
     flex-direction: column;
   }
 
-  .ilce-box {
+  .ilceBox {
     width: 340px;
     padding: 8px 0;
     border: 1px solid white;
@@ -129,11 +130,11 @@
     min-height: 2.25rem;
   }
 
-  .ilce-items {
+  .ilceItems {
     overflow-x: auto;
   }
 
-  .ilce-item {
+  .ilceItem {
     background-color: inherit;
     outline: none;
     border: none;
@@ -142,12 +143,12 @@
     padding: 0.5rem 0.75rem;
   }
 
-  .cities-box {
+  .citiesBox {
     padding: 14px 0;
     gap: 5px;
   }
 
-  .city-item {
+  .cityItem {
     border: none;
     background-color: inherit;
     outline: hidden;
@@ -158,20 +159,20 @@
     width: 110px;
     padding: 0.325rem;
   }
-  .city-item-active {
+  .cityItemActive {
     background-color: white;
     color: inherit;
   }
 
-  .ilce-active {
+  .ilceActive {
     background-color: #f83b3b;
     border-radius: 5px;
   }
-  .ilce-disabled {
+  .ilceDisabled {
     color: #888;
     cursor: not-allowed;
   }
-  .see-all-button {
+  .seeAllButton {
     display: block;
     padding: 0.5rem 2rem 0.5rem 0.5rem;
     margin-left: auto;
