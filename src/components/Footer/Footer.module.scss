@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .footerContainer {
   padding-top: 59px;
   max-width: 1399px;
@@ -8,13 +14,77 @@
   flex-direction: column;
 }
 
+.IconWrapper {
+  display: none;
+  align-items: center;
+}
+
+.button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.leftIcon {
+  height: 0.75rem;
+  width: 0.75rem;
+  @media (min-width: "768px") {
+    height: 2rem;
+    width: 2rem;
+  }
+  margin: 0 0.5rem;
+}
+
+.rightIcon {
+  @extend .leftIcon;
+  transform: rotate(180deg);
+}
+
+.paragWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (min-width: "768px") {
+    font-size: 2.25rem;
+  }
+}
+
+.parag {
+  font-family: SegoeUI, sans-serif;
+  font-size: 0.75rem;
+  color: white;
+  @media (min-width: "768px") {
+    font-size: 2.25rem;
+  }
+}
+
+.showAllIcon {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 0.75rem;
+  width: 0.75rem;
+  @media (min-width: "768px") {
+    height: 1.5rem;
+    width: 1.5rem;
+    right: 1rem;
+  }
+}
+
 .ilceBox {
   padding: 8px 8px;
   border: 1px solid white;
   border-radius: 5px;
   overflow-x: hidden;
   display: flex;
-  min-height: 4.25rem;
+  width: 100%;
+  align-items: center;
+  margin: 0 auto;
 }
 
 .ilceItems {
@@ -30,7 +100,7 @@
   border: none;
   color: white;
   font-size: 2.125rem;
-  padding: 0.75rem 1.25rem;
+  padding: 0.5rem 1.25rem;
   border-radius: 0.625rem;
   user-select: none;
   cursor: pointer;
@@ -40,8 +110,8 @@
   padding: 14px 0;
   gap: 10px;
   width: 100%;
-  overflow: hidden;
   display: grid;
+  overflow: hidden;
   grid-template-columns: repeat(5, 1fr);
 }
 
@@ -64,7 +134,7 @@
   font-size: 2rem;
   border: 1px white solid;
   border-radius: 10px;
-  padding: 0.6rem;
+  padding: 0.4rem;
   flex-grow: 1;
   -webkit-user-select: none;
   user-select: none;
@@ -90,9 +160,11 @@
 }
 
 .seeAllButton {
+  @extend .cityItem;
   display: block;
   margin-left: auto;
-  padding: 1rem 4rem 1rem 1rem;
+  padding-right: 4rem;
+  white-space: nowrap;
   background: #f83b3b;
   border: none;
   border-radius: 0.625rem;
@@ -103,24 +175,30 @@
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
 @media screen and (max-width: 1024px) {
   .citiesBox {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+.seeAllMobile {
+  @extend .cityItem;
+  padding: 0;
+  background-color: red !important;
+  border: none !important;
+  outline: none !important;
+}
 
 @media screen and (max-width: 768px) {
   .footerContainer {
     padding-top: 19px;
-    max-width: 375px;
-    width: 340px;
+    min-width: 325px;
+    max-width: 500px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
   }
-
   .ilceBox {
-    width: 340px;
     padding: 8px 0;
     border: 1px solid white;
     border-radius: 5px;
@@ -144,12 +222,16 @@
   }
 
   .citiesBox {
-    padding: 14px 0;
-    gap: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
   }
 
   .cityItem {
     border: none;
+    flex: 0 1 30%;
+    max-width: 450px;
     background-color: inherit;
     outline: hidden;
     color: white;
@@ -172,12 +254,15 @@
     color: #888;
     cursor: not-allowed;
   }
-  .seeAllButton {
-    display: block;
-    padding: 0.5rem 2rem 0.5rem 0.5rem;
-    margin-left: auto;
-    background: #f83b3b;
-    border: none;
-    border-radius: 0.625rem;
+}
+@media (min-width: 310px) and (max-width: 510px) {
+  .citiesBox {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .cityItem {
+    max-width: 100px;
+    font-size: 11px;
+    overflow: hidden;
   }
 }
