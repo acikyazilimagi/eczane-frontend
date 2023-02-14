@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import Control from "react-leaflet-custom-control";
 import { FullscreenControl } from "react-leaflet-fullscreen";
+import "react-leaflet-fullscreen/dist/styles.css";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import { hospitalIcon, pharmacyIcon, vetIcon } from "../../lib/Icons";
 import { debounce } from "../../utils/debounce";
@@ -173,7 +174,7 @@ const MainViewContaier = () => {
               <FullscreenControl
                 forceSeparateButton
                 position="topright"
-                content="<img src='./fullscreen.png' class='fullscreen-img'></img>"
+                content="<img src='fullscreen.png' class='fullscreen-img'/>"
                 title="Tam Ekran"
               />
             </Control>
