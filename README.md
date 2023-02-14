@@ -1,5 +1,5 @@
 # eczane-frontend
-[For english](https://github.com/acikkaynak/eczane-backend/blob/main/README_ENG.md)
+[For english](README_ENG.md)
 
 ## Kullanılan Teknoloji ve Sistemler
 - React 17
