@@ -1,13 +1,15 @@
 # eczane-frontend
+[For english](https://github.com/acikkaynak/eczane-backend/blob/main/README_ENG.md)
 
 ## Kullanılan Teknoloji ve Sistemler
 - React 17
 - LeafletJS
 - NodeJS v16
 - MaterialUI (kullanıldı ancak yavaş yavaş tüm importları kaldırıyoruz)
-- TODO: Prettier & ESLint
+- Prettier
+- TODO: ESLint
 
-## Quick Start
+## Kurulum
 ### Repoyu klonlama
 
 ```
@@ -15,7 +17,7 @@ git clone https://github.com/acikkaynak/eczane-frontend
 ```
 
 ### Gereksinimler
-Proje için bilgisayarınızda [NodeJS (v16 sürümü)](https://nodejs.org/en/download/) kurulu olmalıdır.
+Proje için bilgisayarınızda [NodeJS (v16)](https://nodejs.org/en/download/) kurulu olmalıdır.
 Proje klonlandiktan sonra gerekli kütüphaneleri kurmak için:
 
 ```
@@ -40,4 +42,4 @@ docker run -dp <port>:80 --rm --name eczane-frontend eczane-frontend
 ```
 
 ## Back-End Projesi: [eczane-backend](https://github.com/acikkaynak/eczane-backend)
-## Admin Front-End Projesi: [eczane-admin-frontend](https://github.com/acikkaynak/eczane-admin-frontend)
+## Admin Front-End Projesi: [eczane-admin-frontend](https://github.com/acikkaynak/eczane-admin-frontend): [eczane-admin-frontend](https://github.com/acikkaynak/eczane-admin-frontend)
