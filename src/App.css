@@ -104,13 +104,15 @@ body {
 
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
-  width: 420px;
   background: white;
   color: #333;
   box-shadow: 0 3px 14px rgb(0 0 0 / 40%);
 }
 
-/* Bu kısmı eklemeyi unutmayın class adınıza göre değiştirebilirsinizz ancak MapContainera height ve width vermezseniz göremezsiniz*/
+.leaflet-popup-content {
+  margin: 0 2rem 0.5rem 0;
+}
+
 /* Bu kısmı eklemeyi unutmayın class adınıza göre değiştirebilirsinizz ancak MapContainera height ve width vermezseniz göremezsiniz*/
 @media screen and (min-width: 300px) {
 }

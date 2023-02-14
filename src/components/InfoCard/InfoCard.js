@@ -8,7 +8,9 @@ import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
-import { FILTER } from "./Header/HeaderRow";
+import { FILTER } from "../Header/HeaderRow";
+import { CITIES } from "../../lib/city";
+import styles from "./InfoCard.module.scss";
 
 const healthSettings = {
   [FILTER.ECZANE]: {
@@ -35,12 +37,13 @@ const stackProps = {
   alignItems: "center",
 };
 
-const InfoCard = ({ item, cityData, allDistricts }) => {
+const InfoCard = ({ item, districtMap }) => {
   const [show, setShow] = useState(false);
-  const cityName = cityData?.data?.find((city) => city.id === item.cityId)?.key;
-  const districtName = allDistricts?.find((d) => d.id === item.districtId)?.key;
+  const cityName = CITIES?.[item.cityId]?.key;
+  const districtName = districtMap?.get(item.districtId);
+
   return (
-    <>
+    <div className={styles.cardWrapper}>
       <Box paddingTop={"10px"} fontFamily={"SegoeUI, sans-serif"}>
         <Stack
           direction="row"
@@ -223,7 +226,7 @@ const InfoCard = ({ item, cityData, allDistricts }) => {
           </Stack>
         </Box>
       </Stack>
-    </>
+    </div>
   );
 };
 export default InfoCard;
