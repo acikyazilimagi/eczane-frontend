@@ -1,13 +1,15 @@
 # eczane-frontend
+[For english](README_ENG.md)
 
 ## Kullanılan Teknoloji ve Sistemler
 - React 17
 - LeafletJS
 - NodeJS v16
 - MaterialUI (kullanıldı ancak yavaş yavaş tüm importları kaldırıyoruz)
-- TODO: Prettier & ESLint
+- Prettier
+- TODO: ESLint
 
-## Quick Start
+## Kurulum
 ### Repoyu klonlama
 
 ```
@@ -15,14 +17,12 @@ git clone https://github.com/acikkaynak/eczane-frontend
 ```
 
 ### Gereksinimler
-Proje için bilgisayarınızda [NodeJS (v16 sürümü)](https://nodejs.org/en/download/) kurulu olmalıdır.
+Proje için bilgisayarınızda [NodeJS (v16)](https://nodejs.org/en/download/) kurulu olmalıdır.
 Proje klonlandiktan sonra gerekli kütüphaneleri kurmak için:
 
 ```
 npm install
 ```
-
-``yarn.lock`` dosyası mevcut olmasına rağmen, yarn kullanmayınız. Yarn ile kurmak hata vermektedir.
 
 ### Başlatma
 Projeyi başlatmak için:
