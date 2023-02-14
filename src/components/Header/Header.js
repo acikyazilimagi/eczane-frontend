@@ -43,7 +43,7 @@ export const Header = () => {
     <SHeaderRowWrapper>
       <SHeaderWrapper>
         <SImage src="/logo.png" alt="logo" />
-        <SLogoText>Afet Yardım</SLogoText>
+        <SLogoText>Afet Sağlık</SLogoText>
       </SHeaderWrapper>
       <Others />
     </SHeaderRowWrapper>
