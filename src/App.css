@@ -229,6 +229,4 @@ body {
 .fullscreen-img {
   width: 30px;
   height: 30px;
-  pointer-events: auto;
-  cursor: pointer;
 }
