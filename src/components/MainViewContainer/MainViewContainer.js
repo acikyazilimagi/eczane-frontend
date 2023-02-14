@@ -1,6 +1,5 @@
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import { Stack } from "@mui/material";
 import L from "leaflet";
 import React, { useMemo, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
@@ -187,13 +186,11 @@ const MainViewContaier = () => {
                     position={[station.latitude, station.longitude]} //Kendi pozisyonunuzu ekleyin buraya stationı değiştirin mydata.adress.latitude mydata.adress.longitude gibi
                   >
                     <Popup>
-                      <Stack>
-                        <InfoCard
-                          key={station.id}
-                          item={station}
-                          districtMap={districtMap}
-                        />
-                      </Stack>
+                      <InfoCard
+                        key={station.id}
+                        item={station}
+                        districtMap={districtMap}
+                      />
                     </Popup>
                   </Marker>
                 );
