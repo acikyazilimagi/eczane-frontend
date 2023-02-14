@@ -1,6 +1,5 @@
-import { useMap } from "react-leaflet";
 import { useEffect } from "react";
-import L from "react-leaflet";
+import L, { useMap } from "react-leaflet";
 
 function BootstrapButton() {
   const map = useMap();
@@ -29,3 +28,5 @@ function BootstrapButton() {
 
   return null;
 }
+
+export default BootstrapButton;
