@@ -105,9 +105,9 @@ export function Footer({
               <button
                 className={
                   cityDistrictWithData.indexOf(item.key) === -1
-                    ? styles("ilceItem", "ilceDisabled")
+                    ? `${styles.ilceItem} ${styles.ilceDisabled}`
                     : selectedDist === item.id
-                    ? styles("ilceItem", "ilceActive")
+                    ? `${styles.ilceItem} ${styles.ilceActive}`
                     : styles.ilceItem
                 }
                 onClick={() => {
