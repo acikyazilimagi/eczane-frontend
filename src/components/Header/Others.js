@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import haritaLogo from "../../icons/afet-harita.svg";
 import ioLogo from "../../icons/deprem-io.svg";
 import yardimLogo from "../../icons/deprem-yardim.svg";
 import { BREAKPOINTS } from "../../utils/styled";
+import { useWindowSize } from "./../../utils/hooks";
 
 const SOtherWrapper = styled.div`
   display: flex;
@@ -93,10 +94,14 @@ const SDescription = styled.div`
 
 const Others = () => {
   const [isHovering, setIsHovering] = useState("");
-  console.log(isHovering);
+  const { isDesktop } = useWindowSize();
 
   const handleMouseOver = (event) => {
-    setIsHovering(event.target.id);
+    if (isDesktop) {
+      setIsHovering(event.target.id);
+    } else {
+      setIsHovering("");
+    }
   };
   const handleMouseOut = () => {
     setIsHovering("");
@@ -109,14 +114,14 @@ const Others = () => {
         onMouseOver={(event) => handleMouseOver(event)}
         onMouseOut={handleMouseOut}
       >
-        <a href="https://afetharita.com/">
-          <img id="harita" src={haritaLogo} />
+        <a href="https://afetharita.com/" target="_blank">
+          <img id="harita" src={haritaLogo} alt="afet-harita" />
         </a>
-        <a href="https://deprem.io/">
-          <img id="io" src={ioLogo} />
+        <a href="https://deprem.io/" target="_blank">
+          <img id="io" src={ioLogo} alt="deprem-io" />
         </a>
-        <a href="https://depremyardim.com/">
-          <img id="yardim" src={yardimLogo} />
+        <a href="https://depremyardim.com/" target="_blank">
+          <img id="yardim" src={yardimLogo} alt="deprem-yardim" />
         </a>
       </SLogoContainer>
       {isHovering === "harita" ? (
