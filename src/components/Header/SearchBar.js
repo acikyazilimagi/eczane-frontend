@@ -9,11 +9,7 @@ const SSearchBoxWrapper = styled.div`
     min-width: 350px;
   }
   @media ${BREAKPOINTS.LG.min} {
-    min-width: 500px;
-  }
-  @media ${BREAKPOINTS.XL.min} {
-    min-width: unset;
-    flex-grow: 1;
+    min-width: 600px;
   }
 `;
 

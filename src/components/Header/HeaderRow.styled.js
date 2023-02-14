@@ -15,7 +15,8 @@ export const SFlex = styled.div`
 
 export const SButton = styled.button`
   background-color: ${(props) => (props.selected ? "F83B3B" : "#fff")};
-  padding: 0.5rem 1rem;
+  padding: 0.25rem;
+
   color: ${(props) => (props.selected ? "#fff" : "#111A42")};
   border: none;
   font-size: 0.75rem;
@@ -23,8 +24,8 @@ export const SButton = styled.button`
   font-family: "Roboto", sans-serif;
 
   @media ${BREAKPOINTS.MD.min} {
-    padding: 1rem 1.5rem;
-    font-size: 1.75rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 1.5rem;
   }
 `;
 

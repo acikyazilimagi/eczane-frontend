@@ -22,14 +22,24 @@ export const FILTER = {
   HEPSI: "Hepsi",
   HASTANE: 1,
   ECZANE: 2,
+  PSIKOLOJIK_DESTEK: 3,
   VETERINER: 4,
+  DIYALIZ: 5,
 };
 
-const FilterRow = ({ filter, setFilter, hasVetData }) => {
+const FilterRow = ({
+  filter,
+  setFilter,
+  hasVetData,
+  hasPsychData,
+  hasDiyalizData,
+}) => {
   const setHepsi = () => setFilter(FILTER.HEPSI);
   const setHastane = () => setFilter(FILTER.HASTANE);
   const setEczane = () => setFilter(FILTER.ECZANE);
   const setVeteriner = () => setFilter(FILTER.VETERINER);
+  const setPsikolojikDestek = () => setFilter(FILTER.PSIKOLOJIK_DESTEK);
+  const setDiyaliz = () => setFilter(FILTER.DIYALIZ);
   return (
     <SFilterWrapper>
       <SFilterFlex>
@@ -63,6 +73,26 @@ const FilterRow = ({ filter, setFilter, hasVetData }) => {
         >
           Veteriner
         </SFilterButton>
+        <SFilterButton
+          type="button"
+          onClick={setPsikolojikDestek}
+          selected={filter === FILTER.PSIKOLOJIK_DESTEK}
+          disabled={!hasPsychData}
+          buttonDisabled={!hasPsychData}
+        >
+          Psikolojik
+          <br />
+          Destek
+        </SFilterButton>
+        <SFilterButton
+          type="button"
+          onClick={setDiyaliz}
+          selected={filter === FILTER.DIYALIZ}
+          disabled={!hasDiyalizData}
+          buttonDisabled={!hasDiyalizData}
+        >
+          Diyaliz
+        </SFilterButton>
         <SFilterIconWrapper>
           <SFilterSvg src="/filter-icon.svg" />
         </SFilterIconWrapper>
@@ -79,11 +109,11 @@ export const HeaderRow = ({
   searchBarVal,
   setSearchbarVal,
   hasVetData,
+  hasPsychData,
+  hasDiyalizData,
 }) => {
   const setHarita = () => setSearchAt(SEARCH_AT.HARITA);
   const setListe = () => setSearchAt(SEARCH_AT.LISTE);
-
-  const { isXLarge } = useWindowSize();
 
   return (
     <SHeaderRowWrapper>
@@ -104,27 +134,21 @@ export const HeaderRow = ({
             Listede
           </SSearchButton>
         </SToggleGroup>
-        {isXLarge && (
-          <FilterRow
-            filter={filter}
-            setFilter={setFilter}
-            hasVetData={hasVetData}
-          />
-        )}
         <SearchBar
           searchBarVal={searchBarVal}
           setSearchBarVal={setSearchbarVal}
         />
       </SFlex>
-      {!isXLarge && (
-        <SFilterNextRowWrapper>
-          <FilterRow
-            filter={filter}
-            setFilter={setFilter}
-            hasVetData={hasVetData}
-          />
-        </SFilterNextRowWrapper>
-      )}
+
+      <SFilterNextRowWrapper>
+        <FilterRow
+          filter={filter}
+          setFilter={setFilter}
+          hasVetData={hasVetData}
+          hasPsychData={hasPsychData}
+          hasDiyalizData={hasDiyalizData}
+        />
+      </SFilterNextRowWrapper>
     </SHeaderRowWrapper>
   );
 };

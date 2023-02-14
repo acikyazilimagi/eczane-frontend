@@ -130,6 +130,12 @@ const MainViewContaier = () => {
       : cityFilteredData?.filter((item) => item.districtId === selectedDist);
 
   const hasVetData = allData?.some((item) => item.typeId === FILTER.VETERINER);
+  const hasPsychData = allData?.some(
+    (item) => item.typeId === FILTER.PSIKOLOJIK_DESTEK
+  );
+  const hasDiyalizData = allData?.some(
+    (item) => item.typeId === FILTER.DIYALIZ
+  );
 
   const onLockClick = () => {
     handleLock();
@@ -146,6 +152,8 @@ const MainViewContaier = () => {
         searchBarVal={searchBarVal}
         setSearchbarVal={setSearchbarVal}
         hasVetData={hasVetData}
+        hasPsychData={hasPsychData}
+        hasDiyalizData={hasDiyalizData}
       />
       {searchAt === SEARCH_AT.HARITA && (
         <SMapContainer>

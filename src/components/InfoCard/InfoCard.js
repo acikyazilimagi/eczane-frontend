@@ -25,6 +25,14 @@ const healthSettings = {
     icon: "./vet.png",
     color: "#fc6868",
   },
+  [FILTER.PSIKOLOJIK_DESTEK]: {
+    icon: "./hospital.png",
+    color: "#4bd80e",
+  },
+  [FILTER.DIYALIZ]: {
+    icon: "./hospital.png",
+    color: "#4bd80e",
+  },
 };
 const fontProps = {
   fontFamily: "'Roboto', sans-serif",
