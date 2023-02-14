@@ -2,7 +2,7 @@ import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import { Stack } from "@mui/material";
 import L from "leaflet";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import Control from "react-leaflet-custom-control";
 import { FullscreenControl } from "react-leaflet-fullscreen";
@@ -15,8 +15,8 @@ import { useFetch } from "../../utils/hooks";
 import { Footer } from "../Footer/Footer";
 import { HeaderCombined } from "../Header/HeaderCombined";
 import { FILTER, SEARCH_AT } from "../Header/HeaderRow";
-import InfoCard from "../InfoCard";
-import ListPage from "../ListPage";
+import InfoCard from "../InfoCard/InfoCard";
+import ListPage from "../ListPage/ListPage";
 import { SButton, SMapContainer, SPaper } from "./MainViewController.styled";
 
 const CENTER_LAT = 37.683664;
@@ -89,6 +89,16 @@ const MainViewContaier = () => {
     setSelectedDist(null);
   };
 
+  const districtMap = useMemo(() => {
+    console.log("this runs");
+    const theMap = new Map();
+    const allDistricts = cityData?.data?.map((city) => city.districts).flat();
+    allDistricts?.forEach((district) => {
+      theMap.set(district.id, district.key);
+    });
+    return theMap;
+  }, [cityData]);
+
   if (allData === null) {
     return (
       <div className="loading-container">
@@ -138,7 +148,6 @@ const MainViewContaier = () => {
         setSearchbarVal={setSearchbarVal}
         hasVetData={hasVetData}
       />
-
       {searchAt === SEARCH_AT.HARITA && (
         <SMapContainer>
           <MapContainer
