@@ -33,7 +33,7 @@ const SWrapper = styled.div`
 
 const SNotFound = styled.h2`
   color: #f1f1f1;
-  font-family: "Segoe UI", sans-serif;
+  font-family: SegoeUI, sans-serif;
   font-size: 1.5rem;
 `;
 
