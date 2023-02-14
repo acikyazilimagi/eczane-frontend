@@ -1,20 +1,8 @@
-import { Box } from "@mui/system";
-import { MapContainer } from "react-leaflet";
-import { TileLayer } from "react-leaflet";
-import MarkerClusterGroup from "react-leaflet-markercluster";
-import { Marker } from "react-leaflet";
-import { Popup } from "react-leaflet";
 import Stack from "@mui/material/Stack";
-import { Typography } from "@mui/material";
-import Divider from "@mui/material/Divider";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import CallIcon from "@mui/icons-material/Call";
-import Button from "@mui/material";
+import { Box } from "@mui/system";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-markercluster";
 import InfoCard from "./InfoCard";
-import BootstrapButton from "./lockButton";
-import { useMap } from "react-leaflet";
-import { useEffect } from "react";
-import L from "react-leaflet";
 
 const Map = ({ setMapRef, center, zoom, data }) => {
   return (
