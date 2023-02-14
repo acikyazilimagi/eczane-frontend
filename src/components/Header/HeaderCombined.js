@@ -12,8 +12,7 @@ const SHeaderCombinedWrapper = styled.div`
   background-size: cover;
   @media ${BREAKPOINTS.MD.min} {
     padding: 2.25rem 3rem;
-    background-image: linear-gradient(to bottom, transparent 80%, #182151 100%),
-      url("header-bg-desktop.jpg");
+    background-image: none;
   }
 `;
 

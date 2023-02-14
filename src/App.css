@@ -96,6 +96,14 @@ body {
 }
 
 @media screen and (min-width: 768px) {
+  body {
+    background-color: none;
+    background-image: linear-gradient(to bottom, transparent 80%, #182151 100%),
+      url("/public/header-bg-desktop.jpg");
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+  }
   .hazir-map {
     width: calc(100% - 6rem);
     border-radius: 15px;

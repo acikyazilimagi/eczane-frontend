@@ -4,7 +4,6 @@ import { BREAKPOINTS } from "../../utils/styled";
 export const SPaper = styled.div`
   color: rgba(0, 0, 0, 0.87);
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  background-color: #182151;
   margin-bottom: 1.5rem;
   @media ${BREAKPOINTS.MD.min} {
     margin-bottom: 3rem;
