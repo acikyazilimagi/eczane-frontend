@@ -53,7 +53,7 @@ const SParagWrapper = styled.div`
   transform: translate(-50%, -50%);
 `;
 const SParag = styled.p`
-  font-family: SegoeUI, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 0.75rem;
   color: white;
   @media ${BREAKPOINTS.MD.min} {

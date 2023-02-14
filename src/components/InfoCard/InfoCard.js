@@ -27,7 +27,7 @@ const healthSettings = {
   },
 };
 const fontProps = {
-  fontFamily: "SegoeUI, sans-serif",
+  fontFamily: "'Roboto', sans-serif",
   fontWeight: "500",
   fontSize: "16px",
 };
@@ -44,7 +44,7 @@ const InfoCard = ({ item, districtMap }) => {
 
   return (
     <div className={styles.cardWrapper}>
-      <Box paddingTop={"10px"} fontFamily={"SegoeUI, sans-serif"}>
+      <Box paddingTop={"10px"} fontFamily={"Roboto, sans-serif"}>
         <Stack
           direction="row"
           spacing={2}
