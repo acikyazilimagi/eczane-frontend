@@ -1,0 +1,35 @@
+.headerWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.headerRowWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  @media (min-width: 768px) {
+    margin-bottom: 2.5rem;
+  }
+}
+
+.logo {
+  aspect-ratio: auto;
+  height: 40px;
+  @media (min-width: 768px) {
+    height: 86px;
+  }
+}
+
+.logoText {
+  font-family: SegoeUI, sans-serif;
+  color: #fff;
+  font-size: 1.5rem;
+  max-width: 8.75rem;
+  margin-left: 0.75rem;
+
+  @media (min-width: 768px) {
+    font-size: 3rem;
+    max-width: 18.75rem;
+    margin-left: 2rem;
+  }
+}
