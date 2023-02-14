@@ -122,19 +122,6 @@ const InfoCard = ({ item, cityData, allDistricts }) => {
               {cityName} | {districtName}
             </Link>
           </Stack>
-
-          {/* {item.phone && (
-            <Stack {...stackProps} marginLeft={"2px"} marginTop={"2px"}>
-              <CallIcon fontSize="12px" />
-              <Link
-                href={`tel:${item.phone}`}
-                fontSize={"16px"}
-                color={"#4f5fb3"}
-              >
-                {item.phone}
-              </Link>
-            </Stack>
-          )} */}
         </Stack>
         <Typography
           {...fontProps}
@@ -165,8 +152,6 @@ const InfoCard = ({ item, cityData, allDistricts }) => {
 
         <Box
           sx={{
-            width: 300,
-            height: 300,
             display: show ? "block" : "none",
             backgroundColor: "#fff",
             position: "absolute",
