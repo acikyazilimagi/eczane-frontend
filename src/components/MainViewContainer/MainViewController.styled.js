@@ -28,7 +28,7 @@ export const SMapContainer = styled.div`
   height: 500px;
   border-radius: 17px;
   position: relative;
-  @media ${BREAKPOINTS.MD.min} {
+  @media (min-width: 768px) {
     padding: 0 3rem;
   }
 `;
