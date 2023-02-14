@@ -20,7 +20,7 @@ export const SButton = styled.button`
   border: none;
   font-size: 0.75rem;
   cursor: pointer;
-  font-family: SegoeUI, sans-serif;
+  font-family: "Roboto", sans-serif;
 
   @media ${BREAKPOINTS.MD.min} {
     padding: 1rem 1.5rem;

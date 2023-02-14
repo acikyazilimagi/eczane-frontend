@@ -14,7 +14,7 @@ const SOtherWrapper = styled.div`
 `;
 
 const SOtherTitle = styled.h4`
-  font-family: SegoeUi, sans-serif;
+  font-family: "Roboto", sans-serif;
   text-align: center;
   color: white;
   font-size: 1.5rem;
@@ -88,7 +88,7 @@ const SDescription = styled.div`
   z-index: 1;
 
   & > p {
-    font-family: SegoeUI, sans-serif;
+    font-family: "Roboto", sans-serif;
   }
 `;
 
