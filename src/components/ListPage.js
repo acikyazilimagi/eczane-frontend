@@ -31,9 +31,10 @@ const SWrapper = styled.div`
   }
 `;
 
-const SNotFound = styled.h1`
+const SNotFound = styled.h2`
   color: #f1f1f1;
   font-family: "Segoe UI", sans-serif;
+  font-size: 1.5rem;
 `;
 
 const ListPage = ({ data, cityData, allDistricts }) => {
@@ -47,7 +48,7 @@ const ListPage = ({ data, cityData, allDistricts }) => {
           justifyContent: "center",
         }}
       >
-        {data.length ? (
+        {data?.length ? (
           data?.map((item, index) => (
             <Grid
               item
