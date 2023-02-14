@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { BREAKPOINTS } from "../../utils/styled";
-import "./style.css";
+import styles from "./Footer.module.scss";
 
 const SIconWrapper = styled.div`
   display: none;
@@ -53,7 +53,7 @@ const SParagWrapper = styled.div`
   transform: translate(-50%, -50%);
 `;
 const SParag = styled.p`
-  font-family: SegoeUI, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 0.75rem;
   color: white;
   @media ${BREAKPOINTS.MD.min} {
@@ -87,15 +87,15 @@ export function Footer({
     .map((i) => i.key);
 
   return (
-    <div className="footer-container">
+    <div className={styles.footerContainer}>
       {!hideDistrictSelector && (
-        <div className="ilce-box">
+        <div className={styles.ilceBox}>
           <SIconWrapper>
             <SButton>
               <SLeftIcon src="/left-icon.svg" />
             </SButton>
           </SIconWrapper>
-          <div className="ilce-items">
+          <div className={styles.ilceItems}>
             {noCitySelected && (
               <SParagWrapper>
                 <SParag>Şehir Seçiniz</SParag>
@@ -105,10 +105,10 @@ export function Footer({
               <button
                 className={
                   cityDistrictWithData.indexOf(item.key) === -1
-                    ? "ilce-item ilce-disabled"
+                    ? `${styles.ilceItem} ${styles.ilceDisabled}`
                     : selectedDist === item.id
-                    ? "ilce-item ilce-active"
-                    : "ilce-item"
+                    ? `${styles.ilceItem} ${styles.ilceActive}`
+                    : styles.ilceItem
                 }
                 onClick={() => {
                   setSelectedDist(item.id);
@@ -128,13 +128,13 @@ export function Footer({
         </div>
       )}
 
-      <div className="cities-box">
+      <div className={styles.citiesBox}>
         {allCities?.map((item) => (
           <button
             className={
               selectedCity === item.id
-                ? "city-item city-item-active"
-                : "city-item"
+                ? `${styles.cityItem} ${styles.cityItemActive}`
+                : styles.cityItem
             }
             key={item.id}
             onClick={() => handleChangeCity(item)}
@@ -143,8 +143,13 @@ export function Footer({
           </button>
         ))}
       </div>
-      <div className="see-all-wrapper" onClick={() => handleChangeCity(null)}>
-        <button className={"city-item see-all-button"}>Tümünü Gör</button>
+      <div
+        className={styles.seeAllWrapper}
+        onClick={() => handleChangeCity(null)}
+      >
+        <button className={`${styles.cityItem} ${styles.seeAllButton}`}>
+          Tümünü Gör
+        </button>
         <SShowAllIcon src="/show-all-icon.svg" />
       </div>
     </div>

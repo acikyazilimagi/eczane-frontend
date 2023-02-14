@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import haritaLogo from "../../icons/afet-harita.svg";
 import ioLogo from "../../icons/deprem-io.svg";
 import yardimLogo from "../../icons/deprem-yardim.svg";
@@ -14,7 +14,7 @@ const SOtherWrapper = styled.div`
 `;
 
 const SOtherTitle = styled.h4`
-  font-family: SegoeUi, sans-serif;
+  font-family: "Roboto", sans-serif;
   text-align: center;
   color: white;
   font-size: 1.5rem;
@@ -88,7 +88,7 @@ const SDescription = styled.div`
   z-index: 1;
 
   & > p {
-    font-family: SegoeUI, sans-serif;
+    font-family: "Roboto", sans-serif;
   }
 `;
 
@@ -114,13 +114,18 @@ const Others = () => {
         onMouseOver={(event) => handleMouseOver(event)}
         onMouseOut={handleMouseOut}
       >
-        <a href="https://afetharita.com/" target="_blank">
-          <img id="harita" src={haritaLogo} alt="afet-harita" />
+        <a href="https://afetharita.com/" target="_blank" rel="noreferrer">
+          <img
+            id="harita"
+            src={haritaLogo}
+            alt="afet-harita"
+            rel="noreferrer"
+          />
         </a>
-        <a href="https://deprem.io/" target="_blank">
+        <a href="https://deprem.io/" target="_blank" rel="noreferrer">
           <img id="io" src={ioLogo} alt="deprem-io" />
         </a>
-        <a href="https://depremyardim.com/" target="_blank">
+        <a href="https://depremyardim.com/" target="_blank" rel="noreferrer">
           <img id="yardim" src={yardimLogo} alt="deprem-yardim" />
         </a>
       </SLogoContainer>

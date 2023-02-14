@@ -8,7 +8,9 @@ import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
-import { FILTER } from "./Header/HeaderRow";
+import { FILTER } from "../Header/HeaderRow";
+import { CITIES } from "../../lib/city";
+import styles from "./InfoCard.module.scss";
 
 const healthSettings = {
   [FILTER.ECZANE]: {
@@ -25,7 +27,7 @@ const healthSettings = {
   },
 };
 const fontProps = {
-  fontFamily: "SegoeUI, sans-serif",
+  fontFamily: "'Roboto', sans-serif",
   fontWeight: "500",
   fontSize: "16px",
 };
@@ -35,13 +37,14 @@ const stackProps = {
   alignItems: "center",
 };
 
-const InfoCard = ({ item, cityData, allDistricts }) => {
+const InfoCard = ({ item, districtMap }) => {
   const [show, setShow] = useState(false);
-  const cityName = cityData?.data?.find((city) => city.id === item.cityId)?.key;
-  const districtName = allDistricts?.find((d) => d.id === item.districtId)?.key;
+  const cityName = CITIES?.[item.cityId]?.key;
+  const districtName = districtMap?.get(item.districtId);
+
   return (
-    <>
-      <Box paddingTop={"10px"} fontFamily={"SegoeUI, sans-serif"}>
+    <div className={styles.cardWrapper}>
+      <Box paddingTop={"10px"} fontFamily={"Roboto, sans-serif"}>
         <Stack
           direction="row"
           spacing={2}
@@ -122,19 +125,6 @@ const InfoCard = ({ item, cityData, allDistricts }) => {
               {cityName} | {districtName}
             </Link>
           </Stack>
-
-          {/* {item.phone && (
-            <Stack {...stackProps} marginLeft={"2px"} marginTop={"2px"}>
-              <CallIcon fontSize="12px" />
-              <Link
-                href={`tel:${item.phone}`}
-                fontSize={"16px"}
-                color={"#4f5fb3"}
-              >
-                {item.phone}
-              </Link>
-            </Stack>
-          )} */}
         </Stack>
         <Typography
           {...fontProps}
@@ -165,8 +155,6 @@ const InfoCard = ({ item, cityData, allDistricts }) => {
 
         <Box
           sx={{
-            width: 300,
-            height: 300,
             display: show ? "block" : "none",
             backgroundColor: "#fff",
             position: "absolute",
@@ -238,7 +226,7 @@ const InfoCard = ({ item, cityData, allDistricts }) => {
           </Stack>
         </Box>
       </Stack>
-    </>
+    </div>
   );
 };
 export default InfoCard;
