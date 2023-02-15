@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { BREAKPOINTS } from "../../utils/styled";
 import { Header } from "./Header/Header";
 import { HeaderRow } from "./HeaderRow";
 
