@@ -1,4 +1,5 @@
 import React from "react";
+import { useWindowSize } from "../../utils/hooks";
 import styles from "./Footer.module.scss";
 
 export function Footer({
