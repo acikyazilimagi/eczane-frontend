@@ -1,65 +1,6 @@
 import React from "react";
-import styled from "styled-components";
-import { BREAKPOINTS } from "../../utils/styled";
+import { useWindowSize } from "../../utils/hooks";
 import styles from "./Footer.module.scss";
-
-const SIconWrapper = styled.div`
-  display: none;
-  align-items: center;
-`;
-
-const SLeftIcon = styled.img`
-  height: 0.75rem;
-  width: 0.75rem;
-  @media ${BREAKPOINTS.MD.min} {
-    height: 2rem;
-    width: 2rem;
-  }
-  margin: 0 0.5rem;
-`;
-
-const SShowAllIcon = styled.img`
-  position: absolute;
-  right: 0.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 0.75rem;
-  width: 0.75rem;
-  @media ${BREAKPOINTS.MD.min} {
-    height: 1.5rem;
-    width: 1.5rem;
-    right: 1rem;
-  }
-`;
-
-const SButton = styled.button`
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-`;
-
-const SRightIcon = styled(SLeftIcon)`
-  transform: rotate(180deg);
-`;
-
-const SParagWrapper = styled.div`
-  top: 50%;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
-const SParag = styled.p`
-  font-family: "Roboto", sans-serif;
-  font-size: 0.75rem;
-  color: white;
-  @media ${BREAKPOINTS.MD.min} {
-    font-size: 2.25rem;
-  }
-`;
 
 export function Footer({
   cityData,
@@ -70,6 +11,8 @@ export function Footer({
   allData,
   hideDistrictSelector,
 }) {
+  const { isDesktop } = useWindowSize();
+
   const noCitySelected = !selectedCity;
 
   const selectedCityData = cityData?.data?.find((a) => a.id === selectedCity);
@@ -90,24 +33,28 @@ export function Footer({
     <div className={styles.footerContainer}>
       {!hideDistrictSelector && (
         <div className={styles.ilceBox}>
-          <SIconWrapper>
-            <SButton>
-              <SLeftIcon src="/left-icon.svg" />
-            </SButton>
-          </SIconWrapper>
+          <div className={styles.IconWrapper}>
+            <div className={styles.button}>
+              <img
+                className={styles.leftIcon}
+                src="/left-icon.svg"
+                alt="sol-ok"
+              />
+            </div>
+          </div>
           <div className={styles.ilceItems}>
             {noCitySelected && (
-              <SParagWrapper>
-                <SParag>Şehir Seçiniz</SParag>
-              </SParagWrapper>
+              <div className={styles.paragWrapper}>
+                <p className={styles.parag}>Şehir Seçiniz</p>
+              </div>
             )}
             {selectedCityDistricts?.map((item) => (
               <button
                 className={
                   cityDistrictWithData.indexOf(item.key) === -1
-                    ? styles("ilceItem", "ilceDisabled")
+                    ? `${styles.ilceItem} ${styles.ilceDisabled}`
                     : selectedDist === item.id
-                    ? styles("ilceItem", "ilceActive")
+                    ? `${styles.ilceItem} ${styles.ilceActive}`
                     : styles.ilceItem
                 }
                 onClick={() => {
@@ -120,11 +67,15 @@ export function Footer({
               </button>
             ))}
           </div>
-          <SIconWrapper>
-            <SButton>
-              <SRightIcon src="/left-icon.svg" />
-            </SButton>
-          </SIconWrapper>
+          <div className={styles.IconWrapper}>
+            <div className={styles.button}>
+              <img
+                className={styles.rightIcon}
+                src="/left-icon.svg"
+                alt="sol-ok"
+              />
+            </div>
+          </div>
         </div>
       )}
 
@@ -142,16 +93,30 @@ export function Footer({
             {item.key}
           </button>
         ))}
+        {!isDesktop && (
+          <button
+            className={`{styles.cityItem} ${styles.seeAllMobile}`}
+            onClick={() => handleChangeCity(null)}
+          >
+            Tümünü Gör
+          </button>
+        )}
       </div>
-      <div
-        className={styles.seeAllWrapper}
-        onClick={() => handleChangeCity(null)}
-      >
-        <button className={`${styles.cityItem} ${styles.seeAllButton}`}>
-          Tümünü Gör
-        </button>
-        <SShowAllIcon src="/show-all-icon.svg" />
-      </div>
+      {isDesktop && (
+        <div
+          className={styles.seeAllWrapper}
+          onClick={() => handleChangeCity(null)}
+        >
+          <button className={`${styles.cityItem} ${styles.seeAllButton}`}>
+            Tümünü Gör
+          </button>
+          <img
+            className={styles.showAllIcon}
+            src="/show-all-icon.svg"
+            alt="hepsini-gör-icon"
+          />
+        </div>
+      )}
     </div>
   );
 }
