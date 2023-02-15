@@ -1,12 +1,12 @@
 import { CITIES } from "../../lib/city";
 import styles from "./InfoCard.module.scss";
 
-const InfoCard = ({ item, districtMap }) => {
+const InfoCard = ({ item, districtMap, styleName }) => {
   const cityName = CITIES?.[item.cityId]?.key;
   const districtName = districtMap?.get(item.districtId);
 
   return (
-    <div className={styles.cardWrapper}>
+    <div className={`${styles.cardWrapper} ${styleName}`}>
       <div className={styles.cardHeader}>
         <span
           className={`
