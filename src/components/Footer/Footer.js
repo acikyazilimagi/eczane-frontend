@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Footer.module.scss";
-import { useWindowSize } from "../../utils/hooks";
 
 export function Footer({
   cityData,
@@ -102,7 +101,7 @@ export function Footer({
           </button>
         )}
       </div>
-      {isDesktop ? (
+      {isDesktop && (
         <div
           className={styles.seeAllWrapper}
           onClick={() => handleChangeCity(null)}
@@ -116,8 +115,6 @@ export function Footer({
             alt="hepsini-gör-icon"
           />
         </div>
-      ) : (
-        ""
       )}
     </div>
   );
