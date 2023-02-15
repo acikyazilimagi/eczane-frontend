@@ -193,6 +193,7 @@ const MainViewContaier = () => {
                         key={station.id}
                         item={station}
                         districtMap={districtMap}
+                        styleName = {'popup'}
                       />
                     </Popup>
                   </Marker>
