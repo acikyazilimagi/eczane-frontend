@@ -1,5 +1,3 @@
-import SearchBar from "./SearchBar";
-import { useWindowSize } from "../../utils/hooks";
 import {
   SFilterButton,
   SFilterFlex,
@@ -12,6 +10,7 @@ import {
   SSearchButton,
   SToggleGroup,
 } from "./HeaderRow.styled";
+import SearchBar from "./SearchBar";
 
 export const SEARCH_AT = {
   HARITA: "harita",
@@ -64,7 +63,22 @@ const FilterRow = ({
       disabled: !hasVetData,
       buttonDisabled: !hasVetData,
     },
+    {
+      label: "Psikolojik Destek",
+      click: setPsikolojikDestek,
+      selected: filter === FILTER.PSIKOLOJIK_DESTEK,
+      disabled: !hasPsychData,
+      buttonDisabled: !hasPsychData,
+    },
+    {
+      label: "Diyaliz",
+      click: setDiyaliz,
+      selected: filter === FILTER.DIYALIZ,
+      disabled: !hasDiyalizData,
+      buttonDisabled: !hasDiyalizData,
+    },
   ];
+
   return (
     <SFilterWrapper>
       <SFilterFlex>
