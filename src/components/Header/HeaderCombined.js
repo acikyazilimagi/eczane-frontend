@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { BREAKPOINTS } from "../../utils/styled";
 import { Header } from "./Header/Header";
 import { HeaderRow } from "./HeaderRow";
 
@@ -10,7 +9,7 @@ const SHeaderCombinedWrapper = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
     padding: 2.25rem 3rem;
     background-image: none;
   }

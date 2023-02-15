@@ -4,7 +4,7 @@ import haritaLogo from "../../icons/afet-harita.svg";
 import ioLogo from "../../icons/deprem-io.svg";
 import yardimLogo from "../../icons/deprem-yardim.svg";
 import { BREAKPOINTS } from "../../utils/styled";
-import { useWindowSize } from "./../../utils/hooks";
+import { useWindowSize } from "../../utils/hooks";
 
 const SOtherWrapper = styled.div`
   display: flex;

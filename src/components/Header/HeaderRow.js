@@ -40,59 +40,49 @@ const FilterRow = ({
   const setVeteriner = () => setFilter(FILTER.VETERINER);
   const setPsikolojikDestek = () => setFilter(FILTER.PSIKOLOJIK_DESTEK);
   const setDiyaliz = () => setFilter(FILTER.DIYALIZ);
+
+  const SFilterButtons = [
+    {
+      label: "Hepsi",
+      click: setHepsi,
+      selected: filter === FILTER.HEPSI,
+    },
+    {
+      label: "Hastane",
+      click: setHastane,
+      selected: filter === FILTER.HASTANE,
+    },
+    {
+      label: "Eczane",
+      click: setEczane,
+      selected: filter === FILTER.ECZANE,
+    },
+    {
+      label: "Veteriner",
+      click: setVeteriner,
+      selected: filter === FILTER.VETERINER,
+      disabled: !hasVetData,
+      buttonDisabled: !hasVetData,
+    },
+  ];
   return (
     <SFilterWrapper>
       <SFilterFlex>
-        <SFilterButton
-          type="button"
-          onClick={setHepsi}
-          selected={filter === FILTER.HEPSI}
-        >
-          Hepsi
-        </SFilterButton>
-        <SFilterButton
-          type="button"
-          onClick={setHastane}
-          selected={filter === FILTER.HASTANE}
-        >
-          Hastane
-        </SFilterButton>
-        <SFilterButton
-          type="button"
-          onClick={setEczane}
-          selected={filter === FILTER.ECZANE}
-        >
-          Eczane
-        </SFilterButton>
-        <SFilterButton
-          type="button"
-          onClick={setVeteriner}
-          selected={filter === FILTER.VETERINER}
-          disabled={!hasVetData}
-          buttonDisabled={!hasVetData}
-        >
-          Veteriner
-        </SFilterButton>
-        <SFilterButton
-          type="button"
-          onClick={setPsikolojikDestek}
-          selected={filter === FILTER.PSIKOLOJIK_DESTEK}
-          disabled={!hasPsychData}
-          buttonDisabled={!hasPsychData}
-        >
-          Psikolojik
-          <br />
-          Destek
-        </SFilterButton>
-        <SFilterButton
-          type="button"
-          onClick={setDiyaliz}
-          selected={filter === FILTER.DIYALIZ}
-          disabled={!hasDiyalizData}
-          buttonDisabled={!hasDiyalizData}
-        >
-          Diyaliz
-        </SFilterButton>
+        {SFilterButtons.map((item) => {
+          const { label, click, selected } = item;
+          return (
+            <SFilterButton
+              type="button"
+              onClick={click}
+              selected={selected}
+              disabled={item.disabled || false}
+              buttonDisabled={item.buttonDisabled || false}
+            >
+              {label}
+            </SFilterButton>
+          );
+        })}
+
         <SFilterIconWrapper>
           <SFilterSvg src="/filter-icon.svg" />
         </SFilterIconWrapper>

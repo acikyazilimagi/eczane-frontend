@@ -16,7 +16,7 @@ import { HeaderCombined } from "../Header/HeaderCombined";
 import { FILTER, SEARCH_AT } from "../Header/HeaderRow";
 import InfoCard from "../InfoCard/InfoCard";
 import ListPage from "../ListPage/ListPage";
-import { SButton, SMapContainer, SPaper } from "./MainViewController.styled";
+import styles from "./MainViewContainer.module.scss";
 
 const CENTER_LAT = 37.683664;
 const CENTER_LNG = 38.322966;
@@ -143,7 +143,7 @@ const MainViewContaier = () => {
   };
 
   return (
-    <SPaper>
+    <div className={styles.mainViewContainerPaper}>
       <HeaderCombined
         setSearchAt={setSearchAt}
         searchAt={searchAt}
@@ -156,7 +156,7 @@ const MainViewContaier = () => {
         hasDiyalizData={hasDiyalizData}
       />
       {searchAt === SEARCH_AT.HARITA && (
-        <SMapContainer>
+        <div className={styles.mainViewContainerMapContainer}>
           <MapContainer
             whenCreated={setMapRef}
             className="hazir-map" //class adı kendinize göre ayarlayabilirsiniz isterseniz
@@ -167,9 +167,12 @@ const MainViewContaier = () => {
             maxBounds={[LEFT_TOP_BOUND, RIGHT_BOTTOM_BOUND]}
           >
             <Control position="topright">
-              <SButton onClick={debounce(onLockClick, 150)}>
+              <button
+                className={styles.mainViewContainerButton}
+                onClick={debounce(onLockClick, 150)}
+              >
                 {!dragActive ? <LockIcon /> : <LockOpenIcon />}
-              </SButton>
+              </button>
             </Control>
             <Control position="topright">
               <FullscreenControl
@@ -205,7 +208,7 @@ const MainViewContaier = () => {
               })}
             </MarkerClusterGroup>
           </MapContainer>
-        </SMapContainer>
+        </div>
       )}
       {searchAt === SEARCH_AT.LISTE && (
         <ListPage
@@ -224,7 +227,7 @@ const MainViewContaier = () => {
         allData={allData}
         hideDistrictSelector={searchAt === SEARCH_AT.HARITA}
       />
-    </SPaper>
+    </div>
   );
 };
 export default MainViewContaier;
