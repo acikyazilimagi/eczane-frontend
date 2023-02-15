@@ -93,15 +93,13 @@ export function Footer({
             {item.key}
           </button>
         ))}
-        {!isDesktop ? (
+        {!isDesktop && (
           <button
             className={`{styles.cityItem} ${styles.seeAllMobile}`}
             onClick={() => handleChangeCity(null)}
           >
             Tümünü Gör
           </button>
-        ) : (
-          ""
         )}
       </div>
       {isDesktop ? (
