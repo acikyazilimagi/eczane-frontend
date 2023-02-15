@@ -5,7 +5,7 @@
   height: 500px;
   overflow: auto;
 
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
     margin: 1.875rem 3rem 0;
     padding-right: 1rem;
   }
@@ -36,7 +36,7 @@
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr;
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
     gap: 1.25rem;
     grid-template-columns: 1fr 1fr;
   }
