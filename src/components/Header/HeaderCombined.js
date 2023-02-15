@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { BREAKPOINTS } from "../../utils/styled";
 import { Header } from "./Header/Header";
 import { HeaderRow } from "./HeaderRow";
 
@@ -10,10 +9,9 @@ const SHeaderCombinedWrapper = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  @media ${BREAKPOINTS.MD.min} {
+  @media (min-width: 768px) {
     padding: 2.25rem 3rem;
-    background-image: linear-gradient(to bottom, transparent 80%, #182151 100%),
-      url("header-bg-desktop.jpg");
+    background-image: none;
   }
 `;
 
