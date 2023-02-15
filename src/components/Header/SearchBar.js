@@ -25,10 +25,10 @@ const SInput = styled.input`
   border: 1px solid white;
   width: 100%;
   font-size: 0.625rem;
-  font-family: SegoeUI, sans-serif;
+  font-family: "Roboto", sans-serif;
 
   &::placeholder {
-    font-family: SegoeUI, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 0.625rem;
   }
 
