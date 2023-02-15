@@ -1,19 +1,6 @@
-import styled from "@emotion/styled";
 import { Header } from "./Header/Header";
 import { HeaderRow } from "./HeaderRow";
-
-const SHeaderCombinedWrapper = styled.div`
-  padding: 1rem 1.5rem;
-  background-image: linear-gradient(to bottom, transparent 80%, #182151 100%),
-    url("header-bg-mobile.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  @media (min-width: 769px) {
-    padding: 2.25rem 3rem;
-    background-image: none;
-  }
-`;
+import styles from "./HeaderCombined.module.scss";
 
 export const HeaderCombined = ({
   searchAt,
@@ -25,7 +12,7 @@ export const HeaderCombined = ({
   hasVetData,
 }) => {
   return (
-    <SHeaderCombinedWrapper>
+    <div className={styles.HeaderCombinedWrapper}>
       <Header />
       <HeaderRow
         setSearchAt={setSearchAt}
@@ -36,6 +23,6 @@ export const HeaderCombined = ({
         setSearchbarVal={setSearchbarVal}
         hasVetData={hasVetData}
       />
-    </SHeaderCombinedWrapper>
+    </div>
   );
 };

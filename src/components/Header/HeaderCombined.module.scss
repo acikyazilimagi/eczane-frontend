@@ -1,0 +1,20 @@
+$header-color: #182151;
+$transparent: transparent;
+
+.HeaderCombinedWrapper {
+  padding: 1rem 1.5rem;
+  background-image: linear-gradient(
+      to bottom,
+      $transparent 80%,
+      $header-color 100%
+    ),
+    url("../../../public/header-bg-mobile.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  @media (min-width: 769px) {
+    padding: 2.25rem 3rem;
+    background-image: none;
+  }
+}
