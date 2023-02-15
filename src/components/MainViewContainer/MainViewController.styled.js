@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import { BREAKPOINTS } from "../../utils/styled";
+import styled from '@emotion/styled';
+import { BREAKPOINTS } from '../../utils/styled';
 
 export const SPaper = styled.div`
   color: rgba(0, 0, 0, 0.87);

@@ -1,42 +1,42 @@
 export const CITIES = {
   1: {
     id: 1,
-    key: "Adana",
+    key: 'Adana',
   },
   2: {
     id: 2,
-    key: "Adiyaman",
+    key: 'Adiyaman',
   },
   21: {
     id: 21,
-    key: "Diyarbakır",
+    key: 'Diyarbakır',
   },
   27: {
     id: 27,
-    key: "Gaziantep",
+    key: 'Gaziantep',
   },
   31: {
     id: 31,
-    key: "Hatay",
+    key: 'Hatay',
   },
   44: {
     id: 44,
-    key: "Malatya",
+    key: 'Malatya',
   },
   46: {
     id: 46,
-    key: "Kahramanmaraş",
+    key: 'Kahramanmaraş',
   },
   63: {
     id: 63,
-    key: "Şanlıurfa",
+    key: 'Şanlıurfa',
   },
   79: {
     id: 79,
-    key: "Kilis",
+    key: 'Kilis',
   },
   80: {
     id: 80,
-    key: "Osmaniye",
+    key: 'Osmaniye',
   },
 };

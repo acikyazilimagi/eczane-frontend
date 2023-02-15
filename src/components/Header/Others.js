@@ -1,10 +1,10 @@
-import styled from "@emotion/styled";
-import React, { useState } from "react";
-import haritaLogo from "../../icons/afet-harita.svg";
-import ioLogo from "../../icons/deprem-io.svg";
-import yardimLogo from "../../icons/deprem-yardim.svg";
-import { BREAKPOINTS } from "../../utils/styled";
-import { useWindowSize } from "./../../utils/hooks";
+import styled from '@emotion/styled';
+import React, { useState } from 'react';
+import haritaLogo from '../../icons/afet-harita.svg';
+import ioLogo from '../../icons/deprem-io.svg';
+import yardimLogo from '../../icons/deprem-yardim.svg';
+import { BREAKPOINTS } from '../../utils/styled';
+import { useWindowSize } from '../../utils/hooks';
 
 const SOtherWrapper = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ const SOtherWrapper = styled.div`
 `;
 
 const SOtherTitle = styled.h4`
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   text-align: center;
   color: white;
   font-size: 1.5rem;
@@ -88,39 +88,31 @@ const SDescription = styled.div`
   z-index: 1;
 
   & > p {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
   }
 `;
 
 const Others = () => {
-  const [isHovering, setIsHovering] = useState("");
+  const [isHovering, setIsHovering] = useState('');
   const { isDesktop } = useWindowSize();
 
   const handleMouseOver = (event) => {
     if (isDesktop) {
       setIsHovering(event.target.id);
     } else {
-      setIsHovering("");
+      setIsHovering('');
     }
   };
   const handleMouseOut = () => {
-    setIsHovering("");
+    setIsHovering('');
   };
 
   return (
     <SOtherWrapper>
       <SOtherTitle>Yardımcı Siteler:</SOtherTitle>
-      <SLogoContainer
-        onMouseOver={(event) => handleMouseOver(event)}
-        onMouseOut={handleMouseOut}
-      >
+      <SLogoContainer onMouseOver={(event) => handleMouseOver(event)} onMouseOut={handleMouseOut}>
         <a href="https://afetharita.com/" target="_blank" rel="noreferrer">
-          <img
-            id="harita"
-            src={haritaLogo}
-            alt="afet-harita"
-            rel="noreferrer"
-          />
+          <img id="harita" src={haritaLogo} alt="afet-harita" rel="noreferrer" />
         </a>
         <a href="https://deprem.io/" target="_blank" rel="noreferrer">
           <img id="io" src={ioLogo} alt="deprem-io" />
@@ -129,18 +121,15 @@ const Others = () => {
           <img id="yardim" src={yardimLogo} alt="deprem-yardim" />
         </a>
       </SLogoContainer>
-      {isHovering === "harita" ? (
+      {isHovering === 'harita' ? (
         <SDescription>
           <p>Depremzedeleri aramak ve yardım etmek için kullandığımız site.</p>
         </SDescription>
-      ) : isHovering === "io" ? (
+      ) : isHovering === 'io' ? (
         <SDescription>
-          <p>
-            Afetle ilgili çeşitli konularda bilgi almak için kullandığımız web
-            sitesi.
-          </p>
+          <p>Afetle ilgili çeşitli konularda bilgi almak için kullandığımız web sitesi.</p>
         </SDescription>
-      ) : isHovering === "yardim" ? (
+      ) : isHovering === 'yardim' ? (
         <SDescription>
           <p>Depremzedelere erzak yardımı için kullandığımız site.</p>
         </SDescription>

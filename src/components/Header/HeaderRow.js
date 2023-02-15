@@ -1,5 +1,5 @@
-import SearchBar from "./SearchBar";
-import { useWindowSize } from "../../utils/hooks";
+import SearchBar from './SearchBar';
+import { useWindowSize } from '../../utils/hooks';
 import {
   SFilterButton,
   SFilterFlex,
@@ -11,15 +11,15 @@ import {
   SHeaderRowWrapper,
   SSearchButton,
   SToggleGroup,
-} from "./HeaderRow.styled";
+} from './HeaderRow.styled';
 
 export const SEARCH_AT = {
-  HARITA: "harita",
-  LISTE: "liste",
+  HARITA: 'harita',
+  LISTE: 'liste',
 };
 
 export const FILTER = {
-  HEPSI: "Hepsi",
+  HEPSI: 'Hepsi',
   HASTANE: 1,
   ECZANE: 2,
   VETERINER: 4,
@@ -33,22 +33,22 @@ const FilterRow = ({ filter, setFilter, hasVetData }) => {
 
   const SFilterButtons = [
     {
-      label: "Hepsi",
+      label: 'Hepsi',
       click: setHepsi,
       selected: filter === FILTER.HEPSI,
     },
     {
-      label: "Hastane",
+      label: 'Hastane',
       click: setHastane,
       selected: filter === FILTER.HASTANE,
     },
     {
-      label: "Eczane",
+      label: 'Eczane',
       click: setEczane,
       selected: filter === FILTER.ECZANE,
     },
     {
-      label: "Veteriner",
+      label: 'Veteriner',
       click: setVeteriner,
       selected: filter === FILTER.VETERINER,
       disabled: !hasVetData,
@@ -82,13 +82,7 @@ const FilterRow = ({ filter, setFilter, hasVetData }) => {
 };
 
 export const HeaderRow = ({
-  searchAt,
-  setSearchAt,
-  filter,
-  setFilter,
-  searchBarVal,
-  setSearchbarVal,
-  hasVetData,
+  searchAt, setSearchAt, filter, setFilter, searchBarVal, setSearchbarVal, hasVetData,
 }) => {
   const setHarita = () => setSearchAt(SEARCH_AT.HARITA);
   const setListe = () => setSearchAt(SEARCH_AT.LISTE);
@@ -99,40 +93,19 @@ export const HeaderRow = ({
     <SHeaderRowWrapper>
       <SFlex>
         <SToggleGroup>
-          <SSearchButton
-            type="button"
-            onClick={setHarita}
-            selected={searchAt === SEARCH_AT.HARITA}
-          >
+          <SSearchButton type="button" onClick={setHarita} selected={searchAt === SEARCH_AT.HARITA}>
             Haritada
           </SSearchButton>
-          <SSearchButton
-            type="button"
-            onClick={setListe}
-            selected={searchAt === SEARCH_AT.LISTE}
-          >
+          <SSearchButton type="button" onClick={setListe} selected={searchAt === SEARCH_AT.LISTE}>
             Listede
           </SSearchButton>
         </SToggleGroup>
-        {isXLarge && (
-          <FilterRow
-            filter={filter}
-            setFilter={setFilter}
-            hasVetData={hasVetData}
-          />
-        )}
-        <SearchBar
-          searchBarVal={searchBarVal}
-          setSearchBarVal={setSearchbarVal}
-        />
+        {isXLarge && <FilterRow filter={filter} setFilter={setFilter} hasVetData={hasVetData} />}
+        <SearchBar searchBarVal={searchBarVal} setSearchBarVal={setSearchbarVal} />
       </SFlex>
       {!isXLarge && (
         <SFilterNextRowWrapper>
-          <FilterRow
-            filter={filter}
-            setFilter={setFilter}
-            hasVetData={hasVetData}
-          />
+          <FilterRow filter={filter} setFilter={setFilter} hasVetData={hasVetData} />
         </SFilterNextRowWrapper>
       )}
     </SHeaderRowWrapper>

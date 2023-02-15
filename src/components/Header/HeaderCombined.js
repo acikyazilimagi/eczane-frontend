@@ -1,11 +1,10 @@
-import styled from "@emotion/styled";
-import { Header } from "./Header/Header";
-import { HeaderRow } from "./HeaderRow";
+import styled from '@emotion/styled';
+import { Header } from './Header/Header';
+import { HeaderRow } from './HeaderRow';
 
 const SHeaderCombinedWrapper = styled.div`
   padding: 1rem 1.5rem;
-  background-image: linear-gradient(to bottom, transparent 80%, #182151 100%),
-    url("header-bg-mobile.jpg");
+  background-image: linear-gradient(to bottom, transparent 80%, #182151 100%), url('header-bg-mobile.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -23,8 +22,7 @@ export const HeaderCombined = ({
   searchBarVal,
   setSearchbarVal,
   hasVetData,
-}) => {
-  return (
+}) => (
     <SHeaderCombinedWrapper>
       <Header />
       <HeaderRow
@@ -37,5 +35,4 @@ export const HeaderCombined = ({
         hasVetData={hasVetData}
       />
     </SHeaderCombinedWrapper>
-  );
-};
+);

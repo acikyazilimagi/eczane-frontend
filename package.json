@@ -59,6 +59,7 @@
     "eslint-plugin-eslint-plugin": "^5.0.8",
     "eslint-plugin-react": "^7.32.2",
     "husky": "^8.0.3",
-    "prettier": "^2.8.4"
+    "prettier": "^2.8.4",
+    "prettier-airbnb-config": "^1.0.0"
   }
 }

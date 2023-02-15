@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 .btnWrapper {
   width: 100vw;
@@ -13,7 +13,7 @@
 
 body {
   background-color: #182151;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 #myBtn {
@@ -62,7 +62,7 @@ body {
 }
 
 .leaflet-container {
-  font: 12px/1.5 "Roboto", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font: 12px/1.5 'Roboto', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 
 #root {
@@ -99,8 +99,7 @@ body {
 @media screen and (min-width: 768px) {
   body {
     background-color: none;
-    background-image: linear-gradient(to bottom, transparent 80%, #182151 100%),
-      url("/public/header-bg-desktop.jpg");
+    background-image: linear-gradient(to bottom, transparent 80%, #182151 100%), url('/public/header-bg-desktop.jpg');
     background-repeat: no-repeat;
     background-position: bottom;
     background-size: cover;

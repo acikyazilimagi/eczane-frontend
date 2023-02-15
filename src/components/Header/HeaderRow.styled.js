@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import { BREAKPOINTS } from "../../utils/styled";
+import styled from '@emotion/styled';
+import { BREAKPOINTS } from '../../utils/styled';
 
 export const SHeaderRowWrapper = styled.div``;
 
@@ -14,13 +14,13 @@ export const SFlex = styled.div`
 `;
 
 export const SButton = styled.button`
-  background-color: ${(props) => (props.selected ? "F83B3B" : "#fff")};
+  background-color: ${(props) => (props.selected ? 'F83B3B' : '#fff')};
   padding: 0.5rem 1rem;
-  color: ${(props) => (props.selected ? "#fff" : "#111A42")};
+  color: ${(props) => (props.selected ? '#fff' : '#111A42')};
   border: none;
   font-size: 0.75rem;
   cursor: pointer;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 
   @media ${BREAKPOINTS.MD.min} {
     padding: 1rem 1.5rem;
@@ -66,10 +66,10 @@ export const SFilterFlex = styled.div`
 
 export const SFilterButton = styled(SButton)`
   border-radius: 0.625rem;
-  color: ${(props) => (props.buttonDisabled ? "#888" : "#fff")};
-  background-color: ${(props) => (props.selected ? "#F83B3B" : "unset")};
+  color: ${(props) => (props.buttonDisabled ? '#888' : '#fff')};
+  background-color: ${(props) => (props.selected ? '#F83B3B' : 'unset')};
   flex-grow: 1;
-  cursor: ${(props) => (props.buttonDisabled ? "not-allowed" : "pointer")};
+  cursor: ${(props) => (props.buttonDisabled ? 'not-allowed' : 'pointer')};
 `;
 
 export const SFilterIconWrapper = styled.div`

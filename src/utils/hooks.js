@@ -1,12 +1,7 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import {
-  largeThreshold,
-  mobileThreshold,
-  xLargeThreshold,
-  xxxLargeThreshold,
-} from "../utils/styled";
-import { debounce } from "./debounce";
+import axios from 'axios';
+import {useEffect, useState} from 'react';
+import {largeThreshold, mobileThreshold, xLargeThreshold, xxxLargeThreshold} from '../utils/styled';
+import {debounce} from './debounce';
 
 export function useWindowSize(initial) {
   const [windowSize, setWindowSize] = useState({
@@ -41,9 +36,9 @@ export function useWindowSize(initial) {
     }
 
     const debouncedResize = debounce(handleResize, 50);
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
     handleResize();
-    return () => window.removeEventListener("resize", debouncedResize);
+    return () => window.removeEventListener('resize', debouncedResize);
   }, []);
 
   return windowSize;
@@ -57,10 +52,10 @@ export function useFetch(url) {
     setLoading(true);
     axios
       .get(url)
-      .then((response) => {
+      .then(response => {
         setData(response?.data);
       })
-      .catch((err) => {
+      .catch(err => {
         setError(err);
       })
       .finally(() => {
@@ -68,5 +63,5 @@ export function useFetch(url) {
       });
   }, [url]);
 
-  return { data, loading, error };
+  return {data, loading, error};
 }

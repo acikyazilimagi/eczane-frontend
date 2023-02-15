@@ -1,22 +1,22 @@
-import LockIcon from "@mui/icons-material/Lock";
-import LockOpenIcon from "@mui/icons-material/LockOpen";
-import L from "leaflet";
-import React, { useMemo, useState } from "react";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import Control from "react-leaflet-custom-control";
-import { FullscreenControl } from "react-leaflet-fullscreen";
-import "react-leaflet-fullscreen/dist/styles.css";
-import MarkerClusterGroup from "react-leaflet-markercluster";
-import centers from "../../lib/cityCenters";
-import { hospitalIcon, pharmacyIcon, vetIcon } from "../../lib/Icons";
-import { debounce } from "../../utils/debounce";
-import { useFetch } from "../../utils/hooks";
-import { Footer } from "../Footer/Footer";
-import { HeaderCombined } from "../Header/HeaderCombined";
-import { FILTER, SEARCH_AT } from "../Header/HeaderRow";
-import InfoCard from "../InfoCard/InfoCard";
-import ListPage from "../ListPage/ListPage";
-import { SButton, SMapContainer, SPaper } from "./MainViewController.styled";
+import LockIcon from '@mui/icons-material/Lock';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import L from 'leaflet';
+import React, {useMemo, useState} from 'react';
+import {MapContainer, Marker, Popup, TileLayer} from 'react-leaflet';
+import Control from 'react-leaflet-custom-control';
+import {FullscreenControl} from 'react-leaflet-fullscreen';
+import 'react-leaflet-fullscreen/dist/styles.css';
+import MarkerClusterGroup from 'react-leaflet-markercluster';
+import centers from '../../lib/cityCenters';
+import {hospitalIcon, pharmacyIcon, vetIcon} from '../../lib/Icons';
+import {debounce} from '../../utils/debounce';
+import {useFetch} from '../../utils/hooks';
+import {Footer} from '../Footer/Footer';
+import {HeaderCombined} from '../Header/HeaderCombined';
+import {FILTER, SEARCH_AT} from '../Header/HeaderRow';
+import InfoCard from '../InfoCard/InfoCard';
+import ListPage from '../ListPage/ListPage';
+import {SButton, SMapContainer, SPaper} from './MainViewController.styled';
 
 const CENTER_LAT = 37.683664;
 const CENTER_LNG = 38.322966;
@@ -27,24 +27,20 @@ const LEFT_TOP_BOUND = [34.325514, 28.939165];
 const RIGHT_BOTTOM_BOUND = [41.57364, 42.770324];
 
 const MainViewContaier = () => {
-  const { data: fetchedData } = useFetch(
-    "https://eczaneapi.afetharita.com/api/locations"
-  );
+  const {data: fetchedData} = useFetch('https://eczaneapi.afetharita.com/api/locations');
   const allData = fetchedData?.data;
-  const { data: cityData } = useFetch(
-    "https://eczaneapi.afetharita.com/api/cityWithDistricts"
-  );
+  const {data: cityData} = useFetch('https://eczaneapi.afetharita.com/api/cityWithDistricts');
 
   const [mapRef, setMapRef] = React.useState();
   const [dragActive, setDragActive] = React.useState(true);
 
   const toggleDragActive = () => {
-    setDragActive((active) => !active);
+    setDragActive(active => !active);
   };
 
   const [searchAt, setSearchAt] = useState(SEARCH_AT.HARITA);
   const [filter, setFilter] = useState(FILTER.HEPSI);
-  const [searchBarVal, setSearchbarVal] = useState("");
+  const [searchBarVal, setSearchbarVal] = useState('');
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedDist, setSelectedDist] = useState(null);
 
@@ -74,7 +70,7 @@ const MainViewContaier = () => {
     }
   };
 
-  const handleChangeCity = (city) => {
+  const handleChangeCity = city => {
     if (city == null) {
       setSelectedCity(null);
       setSelectedDist(null);
@@ -89,10 +85,10 @@ const MainViewContaier = () => {
   };
 
   const districtMap = useMemo(() => {
-    console.log("this runs");
+    console.log('this runs');
     const theMap = new Map();
-    const allDistricts = cityData?.data?.map((city) => city.districts).flat();
-    allDistricts?.forEach((district) => {
+    const allDistricts = cityData?.data?.map(city => city.districts).flat();
+    allDistricts?.forEach(district => {
       theMap.set(district.id, district.key);
     });
     return theMap;
@@ -111,25 +107,19 @@ const MainViewContaier = () => {
     ); //LOADBAR EKLE
   }
 
-  const typeFilteredData = allData?.filter(
-    (item) => filter === FILTER.HEPSI || item.typeId === filter
-  );
+  const typeFilteredData = allData?.filter(item => filter === FILTER.HEPSI || item.typeId === filter);
   const searchFilteredData = typeFilteredData?.filter(
-    (item) =>
+    item =>
       item.name.toLowerCase().includes(searchBarVal.toLowerCase()) ||
       item.address.toLowerCase().includes(searchBarVal.toLowerCase())
   );
   const cityFilteredData =
-    selectedCity == null
-      ? searchFilteredData
-      : searchFilteredData?.filter((item) => item.cityId === selectedCity);
+    selectedCity == null ? searchFilteredData : searchFilteredData?.filter(item => item.cityId === selectedCity);
 
   const distFilteredData =
-    selectedDist == null
-      ? cityFilteredData
-      : cityFilteredData?.filter((item) => item.districtId === selectedDist);
+    selectedDist == null ? cityFilteredData : cityFilteredData?.filter(item => item.districtId === selectedDist);
 
-  const hasVetData = allData?.some((item) => item.typeId === FILTER.VETERINER);
+  const hasVetData = allData?.some(item => item.typeId === FILTER.VETERINER);
 
   const onLockClick = () => {
     handleLock();
@@ -159,9 +149,7 @@ const MainViewContaier = () => {
             maxBounds={[LEFT_TOP_BOUND, RIGHT_BOTTOM_BOUND]}
           >
             <Control position="topright">
-              <SButton onClick={debounce(onLockClick, 150)}>
-                {!dragActive ? <LockIcon /> : <LockOpenIcon />}
-              </SButton>
+              <SButton onClick={debounce(onLockClick, 150)}>{!dragActive ? <LockIcon /> : <LockOpenIcon />}</SButton>
             </Control>
             <Control position="topright">
               <FullscreenControl
@@ -186,11 +174,7 @@ const MainViewContaier = () => {
                     position={[station.latitude, station.longitude]} //Kendi pozisyonunuzu ekleyin buraya stationı değiştirin mydata.adress.latitude mydata.adress.longitude gibi
                   >
                     <Popup>
-                      <InfoCard
-                        key={station.id}
-                        item={station}
-                        districtMap={districtMap}
-                      />
+                      <InfoCard key={station.id} item={station} districtMap={districtMap} />
                     </Popup>
                   </Marker>
                 );
@@ -200,11 +184,7 @@ const MainViewContaier = () => {
         </SMapContainer>
       )}
       {searchAt === SEARCH_AT.LISTE && (
-        <ListPage
-          data={distFilteredData}
-          cityData={cityData}
-          districtMap={districtMap}
-        />
+        <ListPage data={distFilteredData} cityData={cityData} districtMap={districtMap} />
       )}
 
       <Footer

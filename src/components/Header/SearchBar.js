@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import { BREAKPOINTS } from "../../utils/styled";
+import styled from '@emotion/styled';
+import { BREAKPOINTS } from '../../utils/styled';
 
 const SSearchBoxWrapper = styled.div`
   position: relative;
@@ -25,10 +25,10 @@ const SInput = styled.input`
   border: 1px solid white;
   width: 100%;
   font-size: 0.625rem;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 
   &::placeholder {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 0.625rem;
   }
 
@@ -73,12 +73,7 @@ const SSearchIconWrapper = styled.div`
 function SearchBar({ searchBarVal, setSearchBarVal }) {
   return (
     <SSearchBoxWrapper>
-      <SInput
-        type="text"
-        placeholder="Ara"
-        value={searchBarVal}
-        onInput={(e) => setSearchBarVal(e.target.value)}
-      />
+      <SInput type="text" placeholder="Ara" value={searchBarVal} onInput={(e) => setSearchBarVal(e.target.value)} />
       <SSearchIconWrapper>
         <SNoStyleButton>
           <SSearchIcon src="/search-icon.svg" />

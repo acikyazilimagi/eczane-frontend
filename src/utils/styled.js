@@ -1,9 +1,9 @@
 function getMediaQuery(size) {
   class MediaQuery {
     size = 0;
-    min = "";
-    max = "";
-    gt = "";
+    min = '';
+    max = '';
+    gt = '';
 
     constructor(size) {
       this.size = size;

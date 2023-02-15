@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import { BREAKPOINTS } from "../../utils/styled";
-import styles from "./Footer.module.scss";
+import React from 'react';
+import styled from 'styled-components';
+import {BREAKPOINTS} from '../../utils/styled';
+import styles from './Footer.module.scss';
 
 const SIconWrapper = styled.div`
   display: none;
@@ -53,7 +53,7 @@ const SParagWrapper = styled.div`
   transform: translate(-50%, -50%);
 `;
 const SParag = styled.p`
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 0.75rem;
   color: white;
   @media ${BREAKPOINTS.MD.min} {
@@ -72,19 +72,19 @@ export function Footer({
 }) {
   const noCitySelected = !selectedCity;
 
-  const selectedCityData = cityData?.data?.find((a) => a.id === selectedCity);
+  const selectedCityData = cityData?.data?.find(a => a.id === selectedCity);
 
   const selectedCityDistricts = selectedCityData?.districts;
 
   const allCities = cityData?.data;
 
   const cityDistrictWithData = selectedCityDistricts
-    ?.filter((dist) => {
+    ?.filter(dist => {
       if (!selectedCityDistricts) return true;
-      const distData = allData?.find((d) => d.districtId === dist.id);
+      const distData = allData?.find(d => d.districtId === dist.id);
       return !!distData;
     })
-    .map((i) => i.key);
+    .map(i => i.key);
 
   return (
     <div className={styles.footerContainer}>
@@ -101,7 +101,7 @@ export function Footer({
                 <SParag>Şehir Seçiniz</SParag>
               </SParagWrapper>
             )}
-            {selectedCityDistricts?.map((item) => (
+            {selectedCityDistricts?.map(item => (
               <button
                 className={
                   cityDistrictWithData.indexOf(item.key) === -1
@@ -129,13 +129,9 @@ export function Footer({
       )}
 
       <div className={styles.citiesBox}>
-        {allCities?.map((item) => (
+        {allCities?.map(item => (
           <button
-            className={
-              selectedCity === item.id
-                ? `${styles.cityItem} ${styles.cityItemActive}`
-                : styles.cityItem
-            }
+            className={selectedCity === item.id ? `${styles.cityItem} ${styles.cityItemActive}` : styles.cityItem}
             key={item.id}
             onClick={() => handleChangeCity(item)}
           >
@@ -143,13 +139,8 @@ export function Footer({
           </button>
         ))}
       </div>
-      <div
-        className={styles.seeAllWrapper}
-        onClick={() => handleChangeCity(null)}
-      >
-        <button className={`${styles.cityItem} ${styles.seeAllButton}`}>
-          Tümünü Gör
-        </button>
+      <div className={styles.seeAllWrapper} onClick={() => handleChangeCity(null)}>
+        <button className={`${styles.cityItem} ${styles.seeAllButton}`}>Tümünü Gör</button>
         <SShowAllIcon src="/show-all-icon.svg" />
       </div>
     </div>

@@ -1,8 +1,7 @@
-import Others from "../Others";
-import styles from "./Header.module.scss";
+import Others from '../Others';
+import styles from './Header.module.scss';
 
-export const Header = () => {
-  return (
+export const Header = () => (
     <div className={styles.headerRowWrapper}>
       <div className={styles.headerWrapper}>
         <img className={styles.logo} src="/logo.png" alt="logo" />
@@ -10,5 +9,4 @@ export const Header = () => {
       </div>
       <Others />
     </div>
-  );
-};
+);
