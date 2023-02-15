@@ -85,6 +85,7 @@ body {
 }
 
 .leaflet-popup-content {
+  width: 100% !important;
   margin: 0 2rem 0.5rem 0;
 }
 
@@ -95,7 +96,15 @@ body {
 @media screen and (min-width: 576px) {
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 769px) {
+  body {
+    background-color: none;
+    background-image: linear-gradient(to bottom, transparent 80%, #182151 100%),
+      url("/public/header-bg-desktop.jpg");
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+  }
   .hazir-map {
     width: calc(100% - 6rem);
     border-radius: 15px;
@@ -122,8 +131,8 @@ body {
 
 @media screen and (max-width: 768px) {
   .leaflet-popup-content {
-    width: 100% !important;
     display: flex;
+    margin: 0;
   }
 
   .leaflet-popup-content-wrapper {
@@ -145,7 +154,7 @@ body {
 @media screen and (min-width: 576px) and (max-width: 768px) {
 }
 
-@media screen and (min-width: 768px) and (max-width: 992px) {
+@media screen and (min-width: 769px) and (max-width: 992px) {
 }
 
 @media screen and (min-width: 992px) and (max-width: 1200px) {

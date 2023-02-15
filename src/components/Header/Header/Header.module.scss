@@ -7,7 +7,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.5rem;
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
     margin-bottom: 2.5rem;
   }
 }
@@ -15,7 +15,7 @@
 .logo {
   aspect-ratio: auto;
   height: 40px;
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
     height: 86px;
   }
 }
@@ -27,7 +27,7 @@
   max-width: 8.75rem;
   margin-left: 0.75rem;
 
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
     font-size: 3rem;
     max-width: 18.75rem;
     margin-left: 2rem;
