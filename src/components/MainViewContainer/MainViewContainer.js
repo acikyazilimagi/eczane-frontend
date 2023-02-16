@@ -23,9 +23,6 @@ const CENTER_LNG = 38.322966;
 const ZOOM = 6;
 const MIN_ZOOM = 7;
 
-const LEFT_TOP_BOUND = [34.325514, 28.939165];
-const RIGHT_BOTTOM_BOUND = [41.57364, 42.770324];
-
 const MainViewContaier = () => {
   const { data: fetchedData } = useFetch(
     "https://eczaneapi.afetharita.com/api/locations"
@@ -156,7 +153,6 @@ const MainViewContaier = () => {
             zoom={ZOOM} //ZOOM NE KADAR YAKINDA OLMASINI
             minZoom={MIN_ZOOM}
             tap={L.Browser.safari && L.Browser.mobile}
-            maxBounds={[LEFT_TOP_BOUND, RIGHT_BOTTOM_BOUND]}
           >
             <Control position="topright">
               <button
@@ -193,7 +189,7 @@ const MainViewContaier = () => {
                         key={station.id}
                         item={station}
                         districtMap={districtMap}
-                        styleName = {'popup'}
+                        styleName={"popup"}
                       />
                     </Popup>
                   </Marker>
