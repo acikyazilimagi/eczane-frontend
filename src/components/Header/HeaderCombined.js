@@ -13,7 +13,7 @@ export const HeaderCombined = ({
   hasVetData,
 }) => {
   return (
-    <Block styleName={styles.bgImage}>
+    <Block styleName={styles.mobileBgImage}>
       <div className={styles.headerCombinedWrapper}>
         <Header />
         <HeaderRow

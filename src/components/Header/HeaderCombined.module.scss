@@ -1,7 +1,7 @@
 $header-color: #182151;
 $transparent: transparent;
 
-.bgImage {
+.mobileBgImage {
   background-image: linear-gradient(
       to bottom,
       $transparent 80%,
@@ -11,6 +11,9 @@ $transparent: transparent;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  @media screen and (min-width: 769px) {
+    background-image: none;
+  }
 }
 
 .headerCombinedWrapper {
