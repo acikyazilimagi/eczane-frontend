@@ -1,49 +1,20 @@
-<<<<<<< HEAD:src/components/Header/HeaderRow.styled.js
-import styled from "@emotion/styled";
-import { BREAKPOINTS } from "../../utils/styled";
-
-export const SHeaderRowWrapper = styled.div``;
-
-export const SFlex = styled.div`
-  min-height: 1.875rem;
-  display: flex;
-  justify-content: space-between;
-
-  & > *:not(:last-child) {
-    margin-right: 1.825rem;
-  }
-`;
-
-export const SButton = styled.button`
-  background-color: ${(props) => (props.selected ? "F83B3B" : "#fff")};
-  padding: 0.25rem;
-
-  color: ${(props) => (props.selected ? "#fff" : "#111A42")};
-=======
 .button {
   background-color: #fff;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   color: #111a42;
->>>>>>> main:src/components/Header/HeaderRow.module.scss
   border: none;
-  font-size: 0.75rem;
+  font-size: 0.6rem;
   cursor: pointer;
   font-family: "Roboto", sans-serif;
 
-<<<<<<< HEAD:src/components/Header/HeaderRow.styled.js
-  @media ${BREAKPOINTS.MD.min} {
-    padding: 0.5rem 0.75rem;
-    font-size: 1.5rem;
-=======
   &.selected {
     background-color: #f83b3b;
     color: #fff;
   }
 
   @media (min-width: 769px) {
-    padding: 1rem 1.5rem;
+    padding: 0 0.5rem;
     font-size: 1.75rem;
->>>>>>> main:src/components/Header/HeaderRow.module.scss
   }
 }
 

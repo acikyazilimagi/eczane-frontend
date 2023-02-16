@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { useWindowSize } from "../../utils/hooks";
 import styles from "./HeaderRow.module.scss";
 import SearchBar from "./SearchBar";
 
@@ -55,7 +54,13 @@ const FilterRow = ({
       buttonDisabled: !hasVetData,
     },
     {
-      label: "Psikolojik Destek",
+      label: (
+        <>
+          Psikolojik
+          <br />
+          Destek
+        </>
+      ),
       click: setPsikolojikDestek,
       selected: filter === FILTER.PSIKOLOJIK_DESTEK,
       disabled: !hasPsychData,
@@ -140,27 +145,21 @@ export const HeaderRow = ({
             Listede
           </button>
         </div>
-        {isXLarge && (
-          <FilterRow
-            filter={filter}
-            setFilter={setFilter}
-            hasVetData={hasVetData}
-          />
-        )}
         <SearchBar
           searchBarVal={searchBarVal}
           setSearchBarVal={setSearchbarVal}
         />
       </div>
-      {!isXLarge && (
-        <div className={styles.filterNextRowWrapper}>
-          <FilterRow
-            filter={filter}
-            setFilter={setFilter}
-            hasVetData={hasVetData}
-          />
-        </div>
-      )}
+
+      <div className={styles.filterNextRowWrapper}>
+        <FilterRow
+          filter={filter}
+          setFilter={setFilter}
+          hasVetData={hasVetData}
+          hasPsychData={hasPsychData}
+          hasDiyalizData={hasDiyalizData}
+        />
+      </div>
     </div>
   );
 };
