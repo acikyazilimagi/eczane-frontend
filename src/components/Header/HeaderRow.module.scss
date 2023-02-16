@@ -1,0 +1,109 @@
+.button {
+  background-color: #fff;
+  padding: 0.5rem 1rem;
+  color: #111a42;
+  border: none;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+
+  &.selected {
+    background-color: #f83b3b;
+    color: #fff;
+  }
+
+  @media (min-width: 769px) {
+    padding: 1rem 1.5rem;
+    font-size: 1.75rem;
+  }
+}
+
+.filterButton {
+  @extend .button;
+  border-radius: 0.625rem;
+  color: #fff;
+  background-color: unset;
+  flex-grow: 1;
+  cursor: pointer;
+
+  &.buttonDisabled {
+    color: #888;
+    cursor: not-allowed;
+  }
+
+  &.selected {
+    background-color: #f83b3b;
+  }
+}
+
+.filterWrapper {
+  display: flex;
+  justify-content: center;
+  //@media (min-width: 769px) {
+  //}
+}
+
+.filterFlex {
+  border-radius: 0.625rem;
+  padding: 2px;
+  border: 1px solid #ffffff;
+  display: flex;
+  align-self: center;
+  @media (min-width: 769px) {
+    width: unset;
+    padding: 4px;
+  }
+}
+
+.filterIconWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 0.75rem;
+  @media (min-width: 769px) {
+    margin: 0 1.5rem;
+  }
+}
+
+.filterSvg {
+  height: 0.75rem;
+  width: 0.75rem;
+  @media (min-width: 769px) {
+    height: 2rem;
+    width: 2rem;
+  }
+}
+
+.flex {
+  min-height: 1.875rem;
+  display: flex;
+  justify-content: space-between;
+
+  & > *:not(:last-child) {
+    margin-right: 1.825rem;
+  }
+}
+
+.toggleGroup {
+  display: flex;
+}
+
+.searchButton {
+  @extend .button;
+  padding: 0.5rem 1rem;
+
+  &:first-of-type {
+    border-radius: 0.625rem 0 0 0.625rem;
+  }
+
+  &:last-of-type {
+    border-radius: 0 0.625rem 0.625rem 0;
+  }
+}
+
+.filterNextRowWrapper {
+  margin-top: 1rem;
+  @media (min-width: 769px) {
+    margin-top: 2rem;
+  }
+}
