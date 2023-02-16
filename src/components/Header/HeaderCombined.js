@@ -3,14 +3,14 @@ import { Header } from "./Header/Header";
 import { HeaderRow } from "./HeaderRow";
 
 const SHeaderCombinedWrapper = styled.div`
-  padding: 1rem 1.5rem;
+  padding: 1rem 0;
   background-image: linear-gradient(to bottom, transparent 80%, #182151 100%),
     url("header-bg-mobile.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   @media (min-width: 769px) {
-    padding: 2.25rem 3rem;
+    padding: 2.25rem 0;
     background-image: none;
   }
 `;
