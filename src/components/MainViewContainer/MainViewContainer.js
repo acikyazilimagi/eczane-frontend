@@ -1,22 +1,20 @@
-import LockIcon from "@mui/icons-material/Lock";
-import LockOpenIcon from "@mui/icons-material/LockOpen";
 import L from "leaflet";
 import React, { useMemo, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import Control from "react-leaflet-custom-control";
-import { FullscreenControl } from "react-leaflet-fullscreen";
 import "react-leaflet-fullscreen/dist/styles.css";
 import MarkerClusterGroup from "react-leaflet-markercluster";
+import { Block } from "../../lib/Block/Block";
 import centers from "../../lib/cityCenters";
 import { hospitalIcon, pharmacyIcon, vetIcon } from "../../lib/Icons";
-import { debounce } from "../../utils/debounce";
 import { useFetch } from "../../utils/hooks";
+import { DragIcon } from "../DragIcon/DragIcon";
 import { Footer } from "../Footer/Footer";
+import { FullScreenIcon } from "../FullScreenIcon/FullScreenIcon";
 import { HeaderCombined } from "../Header/HeaderCombined";
 import { FILTER, SEARCH_AT } from "../Header/HeaderRow";
 import InfoCard from "../InfoCard/InfoCard";
 import ListPage from "../ListPage/ListPage";
-import { SButton, SMapContainer, SPaper } from "./MainViewController.styled";
+import styles from "./MainViewContainer.module.scss";
 
 const CENTER_LAT = 37.683664;
 const CENTER_LNG = 38.322966;
@@ -137,7 +135,7 @@ const MainViewContaier = () => {
   };
 
   return (
-    <SPaper>
+    <div className={styles.mainViewContainerPaper}>
       <HeaderCombined
         setSearchAt={setSearchAt}
         searchAt={searchAt}
@@ -147,57 +145,50 @@ const MainViewContaier = () => {
         setSearchbarVal={setSearchbarVal}
         hasVetData={hasVetData}
       />
+
       {searchAt === SEARCH_AT.HARITA && (
-        <SMapContainer>
-          <MapContainer
-            whenCreated={setMapRef}
-            className="hazir-map" //class adı kendinize göre ayarlayabilirsiniz isterseniz
-            center={center} //CENTER BILGINIZ NEREDE İSE ORAYA KOYUNUZ
-            zoom={ZOOM} //ZOOM NE KADAR YAKINDA OLMASINI
-            minZoom={MIN_ZOOM}
-            tap={L.Browser.safari && L.Browser.mobile}
-            maxBounds={[LEFT_TOP_BOUND, RIGHT_BOTTOM_BOUND]}
-          >
-            <Control position="topright">
-              <SButton onClick={debounce(onLockClick, 150)}>
-                {!dragActive ? <LockIcon /> : <LockOpenIcon />}
-              </SButton>
-            </Control>
-            <Control position="topright">
-              <FullscreenControl
-                forceSeparateButton
-                position="topright"
-                content="<img src='fullscreen.png' class='fullscreen-img'/>"
-                title="Tam Ekran"
+        <Block zeroPaddingOnMobile>
+          <div className={styles.mainViewContainerMapContainer}>
+            <MapContainer
+              whenCreated={setMapRef}
+              className="hazir-map" //class adı kendinize göre ayarlayabilirsiniz isterseniz
+              center={center} //CENTER BILGINIZ NEREDE İSE ORAYA KOYUNUZ
+              zoom={ZOOM} //ZOOM NE KADAR YAKINDA OLMASINI
+              minZoom={MIN_ZOOM}
+              tap={L.Browser.safari && L.Browser.mobile}
+              maxBounds={[LEFT_TOP_BOUND, RIGHT_BOTTOM_BOUND]}
+            >
+              <DragIcon dragActive={dragActive} onLockClick={onLockClick} />
+              <FullScreenIcon />
+
+              <TileLayer //Bu kısımda değişikliğe gerek yok
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               />
-            </Control>
 
-            <TileLayer //Bu kısımda değişikliğe gerek yok
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            />
-
-            <MarkerClusterGroup>
-              {searchFilteredData?.map((station, index) => {
-                return (
-                  <Marker
-                    icon={setIconFn(station.typeId, station.subTypeId)}
-                    key={station.id} //key kısmını da kendi datanıza göre ayarlayın mydaya.id gibi
-                    position={[station.latitude, station.longitude]} //Kendi pozisyonunuzu ekleyin buraya stationı değiştirin mydata.adress.latitude mydata.adress.longitude gibi
-                  >
-                    <Popup>
-                      <InfoCard
-                        key={station.id}
-                        item={station}
-                        districtMap={districtMap}
-                      />
-                    </Popup>
-                  </Marker>
-                );
-              })}
-            </MarkerClusterGroup>
-          </MapContainer>
-        </SMapContainer>
+              <MarkerClusterGroup>
+                {searchFilteredData?.map((station, index) => {
+                  return (
+                    <Marker
+                      icon={setIconFn(station.typeId, station.subTypeId)}
+                      key={station.id} //key kısmını da kendi datanıza göre ayarlayın mydaya.id gibi
+                      position={[station.latitude, station.longitude]} //Kendi pozisyonunuzu ekleyin buraya stationı değiştirin mydata.adress.latitude mydata.adress.longitude gibi
+                    >
+                      <Popup>
+                        <InfoCard
+                          key={station.id}
+                          item={station}
+                          districtMap={districtMap}
+                          styleName="popup"
+                        />
+                      </Popup>
+                    </Marker>
+                  );
+                })}
+              </MarkerClusterGroup>
+            </MapContainer>
+          </div>
+        </Block>
       )}
       {searchAt === SEARCH_AT.LISTE && (
         <ListPage
@@ -216,7 +207,7 @@ const MainViewContaier = () => {
         allData={allData}
         hideDistrictSelector={searchAt === SEARCH_AT.HARITA}
       />
-    </SPaper>
+    </div>
   );
 };
 export default MainViewContaier;
