@@ -46,18 +46,31 @@
     transform: scale(1.2);
   }
 }
+ 
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
 
-.description {
-  position: absolute;
-  top: -4rem;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 20rem;
+  top: -4.4rem;
   right: 0rem;
-  background: white;
+  background-color: white;
+  color: #000;
+  text-align: left;
+  border-radius: 6px;
   padding: 0.625rem;
-  border-radius: 0.625rem;
+  font-family: "Roboto", sans-serif; 
+  position: absolute;
+  z-index: 1; 
+  margin-left: -60px;
   box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
-  z-index: 1;
+}
 
-  & > p {
-    font-family: "Roboto", sans-serif;
-  }
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
