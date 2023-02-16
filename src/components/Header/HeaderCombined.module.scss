@@ -1,0 +1,26 @@
+$header-color: #182151;
+$transparent: transparent;
+
+.mobileBgImage {
+  background-image: linear-gradient(
+      to bottom,
+      $transparent 80%,
+      $header-color 100%
+    ),
+    url("../../../public/header-bg-mobile.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  @media screen and (min-width: 769px) {
+    background-image: none;
+  }
+}
+
+.headerCombinedWrapper {
+  padding: 1rem 0;
+
+  @media (min-width: 769px) {
+    padding: 2.25rem 0;
+    background-image: none;
+  }
+}

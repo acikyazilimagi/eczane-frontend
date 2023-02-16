@@ -7,7 +7,7 @@ import vetIconSvg from "../icons/vet-marker.png";
 
 const common = {
   iconSize: [32, 42],
-  iconAnchor: [32, 64],
+  iconAnchor: [18, 22],
   shadowUrl: null,
   shadowSize: null, // size of the shadow
   shadowAnchor: null, // the same for the shadow
