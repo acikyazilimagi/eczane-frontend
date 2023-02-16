@@ -5,7 +5,11 @@ import styles from "./DragIcon.module.scss";
 
 export const DragIcon = ({ dragActive, onLockClick }) => (
   <Control position="topright">
-    <button className={styles.button} onClick={debounce(onLockClick, 150)}>
+    <button
+      type="button"
+      className={styles.button}
+      onClick={debounce(onLockClick, 150)}
+    >
       {!dragActive ? (
         <img src="/Lock.svg" alt="lock-icon" width={20} height={20} />
       ) : (

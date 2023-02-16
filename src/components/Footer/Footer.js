@@ -54,6 +54,7 @@ export function Footer({
               )}
               {selectedCityDistricts?.map((item) => (
                 <button
+                  type="button"
                   className={
                     cityDistrictWithData.indexOf(item.key) === -1
                       ? `${styles.ilceItem} ${styles.ilceDisabled}`
@@ -86,6 +87,7 @@ export function Footer({
         <div className={styles.citiesBox}>
           {allCities?.map((item) => (
             <button
+              type="button"
               className={
                 selectedCity === item.id
                   ? `${styles.cityItem} ${styles.cityItemActive}`
@@ -99,6 +101,7 @@ export function Footer({
           ))}
           {!isDesktop && (
             <button
+              type="button"
               className={`{styles.cityItem} ${styles.seeAllMobile}`}
               onClick={() => handleChangeCity(null)}
             >
@@ -111,7 +114,10 @@ export function Footer({
             className={styles.seeAllWrapper}
             onClick={() => handleChangeCity(null)}
           >
-            <button className={`${styles.cityItem} ${styles.seeAllButton}`}>
+            <button
+              type="button"
+              className={`${styles.cityItem} ${styles.seeAllButton}`}
+            >
               Tümünü Gör
             </button>
             <img

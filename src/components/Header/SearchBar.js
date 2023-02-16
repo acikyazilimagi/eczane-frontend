@@ -12,7 +12,7 @@ function SearchBar({ searchBarVal, setSearchBarVal }) {
         className={styles.input}
       />
       <div className={styles.searchIconWrapper}>
-        <button className={styles.noStyleButton}>
+        <button className={styles.noStyleButton} type="button">
           <img
             src="/search-icon.svg"
             alt="Search Icon"
