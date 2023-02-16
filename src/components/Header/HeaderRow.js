@@ -1,15 +1,6 @@
-import {
-  SFilterButton,
-  SFilterFlex,
-  SFilterIconWrapper,
-  SFilterNextRowWrapper,
-  SFilterSvg,
-  SFilterWrapper,
-  SFlex,
-  SHeaderRowWrapper,
-  SSearchButton,
-  SToggleGroup,
-} from "./HeaderRow.styled";
+import clsx from "clsx";
+import { useWindowSize } from "../../utils/hooks";
+import styles from "./HeaderRow.module.scss";
 import SearchBar from "./SearchBar";
 
 export const SEARCH_AT = {
@@ -80,28 +71,35 @@ const FilterRow = ({
   ];
 
   return (
-    <SFilterWrapper>
-      <SFilterFlex>
+    <div className={styles.filterWrapper}>
+      <div className={styles.filterFlex}>
         {SFilterButtons.map((item) => {
           const { label, click, selected } = item;
           return (
-            <SFilterButton
+            <button
+              key={label}
+              className={clsx(styles.filterButton, {
+                [styles.buttonDisabled]: item.buttonDisabled,
+                [styles.selected]: selected,
+              })}
               type="button"
               onClick={click}
-              selected={selected}
               disabled={item.disabled || false}
-              buttonDisabled={item.buttonDisabled || false}
             >
               {label}
-            </SFilterButton>
+            </button>
           );
         })}
 
-        <SFilterIconWrapper>
-          <SFilterSvg src="/filter-icon.svg" />
-        </SFilterIconWrapper>
-      </SFilterFlex>
-    </SFilterWrapper>
+        <div className={styles.filterIconWrapper}>
+          <img
+            className={styles.filterSvg}
+            src="/filter-icon.svg"
+            alt="filter-icon"
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 
@@ -120,39 +118,49 @@ export const HeaderRow = ({
   const setListe = () => setSearchAt(SEARCH_AT.LISTE);
 
   return (
-    <SHeaderRowWrapper>
-      <SFlex>
-        <SToggleGroup>
-          <SSearchButton
+    <div>
+      <div className={styles.flex}>
+        <div className={styles.toggleGroup}>
+          <button
+            className={clsx(styles.searchButton, {
+              [styles.selected]: searchAt === SEARCH_AT.HARITA,
+            })}
             type="button"
             onClick={setHarita}
-            selected={searchAt === SEARCH_AT.HARITA}
           >
             Haritada
-          </SSearchButton>
-          <SSearchButton
+          </button>
+          <button
+            className={clsx(styles.searchButton, {
+              [styles.selected]: searchAt === SEARCH_AT.LISTE,
+            })}
             type="button"
             onClick={setListe}
-            selected={searchAt === SEARCH_AT.LISTE}
           >
             Listede
-          </SSearchButton>
-        </SToggleGroup>
+          </button>
+        </div>
+        {isXLarge && (
+          <FilterRow
+            filter={filter}
+            setFilter={setFilter}
+            hasVetData={hasVetData}
+          />
+        )}
         <SearchBar
           searchBarVal={searchBarVal}
           setSearchBarVal={setSearchbarVal}
         />
-      </SFlex>
-
-      <SFilterNextRowWrapper>
-        <FilterRow
-          filter={filter}
-          setFilter={setFilter}
-          hasVetData={hasVetData}
-          hasPsychData={hasPsychData}
-          hasDiyalizData={hasDiyalizData}
-        />
-      </SFilterNextRowWrapper>
-    </SHeaderRowWrapper>
+      </div>
+      {!isXLarge && (
+        <div className={styles.filterNextRowWrapper}>
+          <FilterRow
+            filter={filter}
+            setFilter={setFilter}
+            hasVetData={hasVetData}
+          />
+        </div>
+      )}
+    </div>
   );
 };

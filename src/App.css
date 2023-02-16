@@ -106,7 +106,7 @@ body {
     background-size: cover;
   }
   .hazir-map {
-    width: calc(100% - 6rem);
+    width: 100%;
     border-radius: 15px;
   }
 }

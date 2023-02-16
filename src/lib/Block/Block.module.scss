@@ -1,0 +1,23 @@
+.block {
+  display: grid;
+  grid-template-columns: minmax(5vw, calc((100% - 1290px) / 2)) minmax(0, 1fr) minmax(
+      5vw,
+      calc((100% - 1290px) / 2)
+    );
+  grid-template-areas: left center right;
+  align-items: flex-start;
+
+  &:before,
+  &:after {
+    content: "";
+  }
+}
+
+.zeroPad {
+  @media screen and (max-width: 768px) {
+    grid-template-columns: minmax(0, calc((100% - 1290px) / 2)) minmax(0, 1fr) minmax(
+        0,
+        calc((100% - 1290px) / 2)
+      );
+  }
+}
