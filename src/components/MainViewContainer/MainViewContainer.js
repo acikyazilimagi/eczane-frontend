@@ -136,17 +136,16 @@ const MainViewContaier = () => {
 
   return (
     <div className={styles.mainViewContainerPaper}>
-      <Block>
-        <HeaderCombined
-          setSearchAt={setSearchAt}
-          searchAt={searchAt}
-          filter={filter}
-          setFilter={setFilter}
-          searchBarVal={searchBarVal}
-          setSearchbarVal={setSearchbarVal}
-          hasVetData={hasVetData}
-        />
-      </Block>
+      <HeaderCombined
+        setSearchAt={setSearchAt}
+        searchAt={searchAt}
+        filter={filter}
+        setFilter={setFilter}
+        searchBarVal={searchBarVal}
+        setSearchbarVal={setSearchbarVal}
+        hasVetData={hasVetData}
+      />
+
       {searchAt === SEARCH_AT.HARITA && (
         <Block zeroPaddingOnMobile>
           <div className={styles.mainViewContainerMapContainer}>
@@ -192,25 +191,22 @@ const MainViewContaier = () => {
         </Block>
       )}
       {searchAt === SEARCH_AT.LISTE && (
-        <Block>
-          <ListPage
-            data={distFilteredData}
-            cityData={cityData}
-            districtMap={districtMap}
-          />
-        </Block>
-      )}
-      <Block>
-        <Footer
+        <ListPage
+          data={distFilteredData}
           cityData={cityData}
-          selectedCity={selectedCity}
-          handleChangeCity={handleChangeCity}
-          selectedDist={selectedDist}
-          setSelectedDist={setSelectedDist}
-          allData={allData}
-          hideDistrictSelector={searchAt === SEARCH_AT.HARITA}
+          districtMap={districtMap}
         />
-      </Block>
+      )}
+
+      <Footer
+        cityData={cityData}
+        selectedCity={selectedCity}
+        handleChangeCity={handleChangeCity}
+        selectedDist={selectedDist}
+        setSelectedDist={setSelectedDist}
+        allData={allData}
+        hideDistrictSelector={searchAt === SEARCH_AT.HARITA}
+      />
     </div>
   );
 };

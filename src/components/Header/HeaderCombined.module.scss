@@ -1,8 +1,7 @@
 $header-color: #182151;
 $transparent: transparent;
 
-.headerCombinedWrapper {
-  padding: 1rem 0;
+.bgImage {
   background-image: linear-gradient(
       to bottom,
       $transparent 80%,
@@ -12,6 +11,10 @@ $transparent: transparent;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+
+.headerCombinedWrapper {
+  padding: 1rem 0;
 
   @media (min-width: 769px) {
     padding: 2.25rem 0;
