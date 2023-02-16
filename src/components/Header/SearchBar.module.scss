@@ -1,4 +1,4 @@
-.SearchBoxWrapper {
+.searchBoxWrapper {
   position: relative;
   flex-grow: 1;
 
@@ -17,7 +17,7 @@
   }
 }
 
-.Input {
+.input {
   height: 100%;
   border-radius: 0.625rem;
   padding: 0.5rem;
@@ -42,7 +42,7 @@
   }
 }
 
-.SearchIcon {
+.searchIcon {
   height: 0.75rem;
   width: 0.75rem;
 
@@ -52,7 +52,7 @@
   }
 }
 
-.NoStyleButton {
+.noStyleButton {
   background: none;
   color: inherit;
   border: none;
@@ -62,7 +62,7 @@
   outline: inherit;
 }
 
-.SearchIconWrapper {
+.searchIconWrapper {
   position: absolute;
   right: 0.5rem;
   top: 50%;

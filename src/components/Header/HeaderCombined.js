@@ -12,7 +12,7 @@ export const HeaderCombined = ({
   hasVetData,
 }) => {
   return (
-    <div className={styles.HeaderCombinedWrapper}>
+    <div className={styles.headerCombinedWrapper}>
       <Header />
       <HeaderRow
         setSearchAt={setSearchAt}
