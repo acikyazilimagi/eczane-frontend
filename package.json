@@ -28,7 +28,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prettier-fix": "prettier 'src/**/*.(ts|tsx|js|jsx|css|json)' --write",
-    "lint": "eslint --fix --ext .ts,.tsx ./src"
+    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx ./src"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
