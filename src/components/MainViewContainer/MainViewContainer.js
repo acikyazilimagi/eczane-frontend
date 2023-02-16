@@ -1,8 +1,7 @@
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import { Stack } from "@mui/material";
 import L from "leaflet";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import Control from "react-leaflet-custom-control";
 import { FullscreenControl } from "react-leaflet-fullscreen";
@@ -15,9 +14,9 @@ import { useFetch } from "../../utils/hooks";
 import { Footer } from "../Footer/Footer";
 import { HeaderCombined } from "../Header/HeaderCombined";
 import { FILTER, SEARCH_AT } from "../Header/HeaderRow";
-import InfoCard from "../InfoCard";
-import ListPage from "../ListPage";
-import { SButton, SMapContainer, SPaper } from "./MainViewController.styled";
+import InfoCard from "../InfoCard/InfoCard";
+import ListPage from "../ListPage/ListPage";
+import styles from "./MainViewContainer.module.scss";
 
 const CENTER_LAT = 37.683664;
 const CENTER_LNG = 38.322966;
@@ -89,6 +88,16 @@ const MainViewContaier = () => {
     setSelectedDist(null);
   };
 
+  const districtMap = useMemo(() => {
+    console.log("this runs");
+    const theMap = new Map();
+    const allDistricts = cityData?.data?.map((city) => city.districts).flat();
+    allDistricts?.forEach((district) => {
+      theMap.set(district.id, district.key);
+    });
+    return theMap;
+  }, [cityData]);
+
   if (allData === null) {
     return (
       <div className="loading-container">
@@ -101,8 +110,6 @@ const MainViewContaier = () => {
       </div>
     ); //LOADBAR EKLE
   }
-
-  const allDistricts = cityData?.data?.map((city) => city.districts).flat();
 
   const typeFilteredData = allData?.filter(
     (item) => filter === FILTER.HEPSI || item.typeId === filter
@@ -130,7 +137,7 @@ const MainViewContaier = () => {
   };
 
   return (
-    <SPaper>
+    <div className={styles.mainViewContainerPaper}>
       <HeaderCombined
         setSearchAt={setSearchAt}
         searchAt={searchAt}
@@ -140,9 +147,8 @@ const MainViewContaier = () => {
         setSearchbarVal={setSearchbarVal}
         hasVetData={hasVetData}
       />
-
       {searchAt === SEARCH_AT.HARITA && (
-        <SMapContainer>
+        <div className={styles.mainViewContainerMapContainer}>
           <MapContainer
             whenCreated={setMapRef}
             className="hazir-map" //class adı kendinize göre ayarlayabilirsiniz isterseniz
@@ -153,9 +159,12 @@ const MainViewContaier = () => {
             maxBounds={[LEFT_TOP_BOUND, RIGHT_BOTTOM_BOUND]}
           >
             <Control position="topright">
-              <SButton onClick={debounce(onLockClick, 150)}>
+              <button
+                className={styles.mainViewContainerButton}
+                onClick={debounce(onLockClick, 150)}
+              >
                 {!dragActive ? <LockIcon /> : <LockOpenIcon />}
-              </SButton>
+              </button>
             </Control>
             <Control position="topright">
               <FullscreenControl
@@ -180,27 +189,25 @@ const MainViewContaier = () => {
                     position={[station.latitude, station.longitude]} //Kendi pozisyonunuzu ekleyin buraya stationı değiştirin mydata.adress.latitude mydata.adress.longitude gibi
                   >
                     <Popup>
-                      <Stack>
-                        <InfoCard
-                          key={station.id}
-                          item={station}
-                          cityData={cityData}
-                          allDistricts={allDistricts}
-                        />
-                      </Stack>
+                      <InfoCard
+                        key={station.id}
+                        item={station}
+                        districtMap={districtMap}
+                        styleName = {'popup'}
+                      />
                     </Popup>
                   </Marker>
                 );
               })}
             </MarkerClusterGroup>
           </MapContainer>
-        </SMapContainer>
+        </div>
       )}
       {searchAt === SEARCH_AT.LISTE && (
         <ListPage
           data={distFilteredData}
           cityData={cityData}
-          allDistricts={allDistricts}
+          districtMap={districtMap}
         />
       )}
 
@@ -213,7 +220,7 @@ const MainViewContaier = () => {
         allData={allData}
         hideDistrictSelector={searchAt === SEARCH_AT.HARITA}
       />
-    </SPaper>
+    </div>
   );
 };
 export default MainViewContaier;

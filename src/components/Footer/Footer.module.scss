@@ -1,0 +1,249 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.footerContainer {
+  padding-top: 59px;
+  max-width: 1399px;
+  width: 85%;
+  min-width: 340px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  @media screen and (max-width: 768px) {
+    padding-top: 19px;
+    min-width: 325px;
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.IconWrapper {
+  display: none;
+  align-items: center;
+}
+
+.button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.leftIcon {
+  height: 0.75rem;
+  width: 0.75rem;
+  @media (min-width: "768px") {
+    height: 2rem;
+    width: 2rem;
+  }
+  margin: 0 0.5rem;
+}
+
+.rightIcon {
+  @extend .leftIcon;
+  transform: rotate(180deg);
+}
+
+.paragWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (min-width: "768px") {
+    font-size: 2.25rem;
+  }
+}
+
+.parag {
+  font-family: Roboto, sans-serif;
+  font-size: 0.75rem;
+  color: white;
+  @media (min-width: "768px") {
+    font-size: 2.25rem;
+  }
+}
+
+.showAllIcon {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 0.75rem;
+  width: 0.75rem;
+  @media (min-width: "768px") {
+    height: 1.5rem;
+    width: 1.5rem;
+    right: 1rem;
+  }
+}
+
+.ilceBox {
+  padding: 8px 8px;
+  border: 1px solid white;
+  border-radius: 5px;
+  overflow-x: hidden;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin: 0 auto;
+  @media screen and (max-width: 768px) {
+    padding: 0.5rem 0;
+    border: 1px solid white;
+    border-radius: 5px;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: space-between;
+    min-height: 2.25rem;
+  }
+}
+
+.ilceItems {
+  position: relative;
+  padding: 0 15px;
+  flex-grow: 1;
+  @media screen and (max-width: 768px) {
+    overflow-x: auto;
+  }
+}
+
+.ilceItem {
+  font-family: "Roboto", sans-serif;
+  background-color: inherit;
+  outline: none;
+  border: none;
+  color: white;
+  font-size: 2.125rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.625rem;
+  user-select: none;
+  cursor: pointer;
+  @media screen and (max-width: 768px) {
+    background-color: inherit;
+    outline: none;
+    border: none;
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+.citiesBox {
+  padding: 0.875rem 0;
+  gap: 0.625rem;
+  width: 100%;
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: repeat(5, 1fr);
+  @media screen and (max-width: 1280px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  @media (min-width: 310px) and (max-width: 510px) {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+.ilceActive {
+  background-color: #f83b3b;
+  border-radius: 5px;
+}
+
+.ilceDisabled {
+  color: #888;
+  cursor: not-allowed;
+}
+
+.cityItem {
+  font-family: "Roboto", sans-serif;
+  border: none;
+  background-color: inherit;
+  outline: hidden;
+  color: white;
+  font-size: 2rem;
+  border: 1px white solid;
+  border-radius: 0.625rem;
+  padding: 0.4rem;
+  flex-grow: 1;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  @media screen and (max-width: 768px) {
+    flex: 0 1 30%;
+    max-width: 450px;
+    font-size: 0.75rem;
+    width: 110px;
+    padding: 0.325rem;
+  }
+  @media (min-width: 310px) and (max-width: 510px) {
+    max-width: 150px;
+    font-size: 11px;
+    overflow: hidden;
+  }
+}
+
+.cityItemActive {
+  background-color: white;
+  color: inherit;
+}
+
+.leftArrow {
+  background-color: inherit;
+  border: none;
+}
+.rightArrow {
+  background-color: inherit;
+  border: none;
+}
+
+.seeAllWrapper {
+  position: relative;
+}
+
+.seeAllButton {
+  @extend .cityItem;
+  display: block;
+  margin-left: auto;
+  padding-right: 4rem;
+  white-space: nowrap;
+  background: #f83b3b;
+  border: none;
+  border-radius: 0.625rem;
+}
+
+.othersWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+
+  @media screen and (min-width: 769px) {
+    justify-content: flex-start;
+  }
+}
+
+.seeAllMobile {
+  @extend .cityItem;
+  padding: 0;
+  background-color: red !important;
+  border: none !important;
+  outline: none !important;
+}
+
+@media (min-width: 310px) and (max-width: 510px) {
+  .cityItem {
+  }
+}

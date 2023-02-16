@@ -1,35 +1,9 @@
-@font-face {
-  font-family: "SegoeUI";
-  src: url("../public/fonts/SegoeUI.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
 .btnWrapper {
   width: 100vw;
   display: flex;
   justify-content: center;
-}
-
-@font-face {
-  font-family: "SegoeUIBold";
-  src: url("../public/fonts/SegoeUIBold.woff") format("woff");
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "SegoeUIItalic";
-  src: url("../public/fonts/SegoeUIItalic.woff") format("woff");
-  font-weight: normal;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "SegoeUIBoldItalic";
-  src: url("../public/fonts/SegoeUIBoldItalic.woff") format("woff");
-  font-weight: 700;
-  font-style: italic;
 }
 
 * {
@@ -39,6 +13,7 @@
 
 body {
   background-color: #182151;
+  font-family: "Roboto", sans-serif;
 }
 
 #myBtn {
@@ -87,7 +62,7 @@ body {
 }
 
 .leaflet-container {
-  font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font: 12px/1.5 "Roboto", "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
 #root {
@@ -104,13 +79,16 @@ body {
 
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
-  width: 420px;
   background: white;
   color: #333;
   box-shadow: 0 3px 14px rgb(0 0 0 / 40%);
 }
 
-/* Bu kısmı eklemeyi unutmayın class adınıza göre değiştirebilirsinizz ancak MapContainera height ve width vermezseniz göremezsiniz*/
+.leaflet-popup-content {
+  width: 100% !important;
+  margin: 0 2rem 0.5rem 0;
+}
+
 /* Bu kısmı eklemeyi unutmayın class adınıza göre değiştirebilirsinizz ancak MapContainera height ve width vermezseniz göremezsiniz*/
 @media screen and (min-width: 300px) {
 }
@@ -118,7 +96,15 @@ body {
 @media screen and (min-width: 576px) {
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 769px) {
+  body {
+    background-color: none;
+    background-image: linear-gradient(to bottom, transparent 80%, #182151 100%),
+      url("/public/header-bg-desktop.jpg");
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+  }
   .hazir-map {
     width: calc(100% - 6rem);
     border-radius: 15px;
@@ -145,8 +131,8 @@ body {
 
 @media screen and (max-width: 768px) {
   .leaflet-popup-content {
-    width: 100% !important;
     display: flex;
+    margin: 0;
   }
 
   .leaflet-popup-content-wrapper {
@@ -168,7 +154,7 @@ body {
 @media screen and (min-width: 576px) and (max-width: 768px) {
 }
 
-@media screen and (min-width: 768px) and (max-width: 992px) {
+@media screen and (min-width: 769px) and (max-width: 992px) {
 }
 
 @media screen and (min-width: 992px) and (max-width: 1200px) {
