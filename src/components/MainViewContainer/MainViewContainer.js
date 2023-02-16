@@ -1,16 +1,15 @@
 import L from "leaflet";
 import React, { useMemo, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import Control from "react-leaflet-custom-control";
-import { FullscreenControl } from "react-leaflet-fullscreen";
 import "react-leaflet-fullscreen/dist/styles.css";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import { Block } from "../../lib/Block/Block";
 import centers from "../../lib/cityCenters";
 import { hospitalIcon, pharmacyIcon, vetIcon } from "../../lib/Icons";
-import { debounce } from "../../utils/debounce";
 import { useFetch } from "../../utils/hooks";
+import { DragIcon } from "../DragIcon/DragIcon";
 import { Footer } from "../Footer/Footer";
+import { FullScreenIcon } from "../FullScreenIcon/FullScreenIcon";
 import { HeaderCombined } from "../Header/HeaderCombined";
 import { FILTER, SEARCH_AT } from "../Header/HeaderRow";
 import InfoCard from "../InfoCard/InfoCard";
@@ -160,36 +159,8 @@ const MainViewContaier = () => {
               tap={L.Browser.safari && L.Browser.mobile}
               maxBounds={[LEFT_TOP_BOUND, RIGHT_BOTTOM_BOUND]}
             >
-              <Control position="topright">
-                <button
-                  className={styles.mainViewContainerButton}
-                  onClick={debounce(onLockClick, 150)}
-                >
-                  {!dragActive ? (
-                    <img
-                      src="/Lock.svg"
-                      alt="lock-icon"
-                      width={20}
-                      height={20}
-                    />
-                  ) : (
-                    <img
-                      src="/lockOpen.svg"
-                      alt="lock-open-icon"
-                      width={20}
-                      height={20}
-                    />
-                  )}{" "}
-                </button>
-              </Control>
-              <Control position="topright">
-                <FullscreenControl
-                  forceSeparateButton
-                  position="topright"
-                  content="<img src='fullscreen.png' class='fullscreen-img'/>"
-                  title="Tam Ekran"
-                />
-              </Control>
+              <DragIcon dragActive={dragActive} onLockClick={onLockClick} />
+              <FullScreenIcon />
 
               <TileLayer //Bu kısımda değişikliğe gerek yok
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

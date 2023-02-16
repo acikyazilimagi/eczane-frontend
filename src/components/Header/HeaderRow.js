@@ -52,6 +52,7 @@ const FilterRow = ({ filter, setFilter, hasVetData }) => {
           const { label, click, selected } = item;
           return (
             <button
+              key={label}
               className={clsx(styles.filterButton, {
                 [styles.buttonDisabled]: item.buttonDisabled,
                 [styles.selected]: selected,
