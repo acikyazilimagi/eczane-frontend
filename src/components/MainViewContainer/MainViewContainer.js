@@ -1,5 +1,3 @@
-import LockIcon from "@mui/icons-material/Lock";
-import LockOpenIcon from "@mui/icons-material/LockOpen";
 import L from "leaflet";
 import React, { useMemo, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
@@ -163,7 +161,16 @@ const MainViewContaier = () => {
                 className={styles.mainViewContainerButton}
                 onClick={debounce(onLockClick, 150)}
               >
-                {!dragActive ? <LockIcon /> : <LockOpenIcon />}
+                {!dragActive ? (
+                  <img src="/Lock.svg" alt="lock-icon" width={20} height={20} />
+                ) : (
+                  <img
+                    src="/lockOpen.svg"
+                    alt="lock-open-icon"
+                    width={20}
+                    height={20}
+                  />
+                )}
               </button>
             </Control>
             <Control position="topright">
@@ -193,7 +200,7 @@ const MainViewContaier = () => {
                         key={station.id}
                         item={station}
                         districtMap={districtMap}
-                        styleName = {'popup'}
+                        styleName={"popup"}
                       />
                     </Popup>
                   </Marker>
