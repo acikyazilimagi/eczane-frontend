@@ -221,11 +221,13 @@ const MainViewContaier = () => {
         </Block>
       )}
       {searchAt === SEARCH_AT.LISTE && (
-        <ListPage
-          data={distFilteredData}
-          cityData={cityData}
-          districtMap={districtMap}
-        />
+        <Block>
+          <ListPage
+            data={distFilteredData}
+            cityData={cityData}
+            districtMap={districtMap}
+          />
+        </Block>
       )}
       <Block>
         <Footer
