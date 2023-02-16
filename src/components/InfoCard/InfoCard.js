@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"; // ES6
 import { CITIES } from "../../lib/city";
 import styles from "./InfoCard.module.scss";
 
@@ -68,4 +69,11 @@ const InfoCard = ({ item, districtMap, styleName }) => {
     </div>
   );
 };
+
+InfoCard.propTypes = {
+  item: PropTypes.object.isRequired,
+  districtMap: PropTypes.object.isRequired,
+  styleName: PropTypes.string,
+};
+
 export default InfoCard;

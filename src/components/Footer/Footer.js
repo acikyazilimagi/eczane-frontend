@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"; // ES6
 import React from "react";
 import { Block } from "../../lib/Block/Block";
 import { useWindowSize } from "../../utils/hooks";
@@ -128,3 +129,12 @@ export function Footer({
     </Block>
   );
 }
+Footer.propTypes = {
+  cityData: PropTypes.object.isRequired,
+  selectedCity: PropTypes.string.isRequired,
+  handleChangeCity: PropTypes.func.isRequired,
+  selectedDist: PropTypes.string.isRequired,
+  setSelectedDist: PropTypes.func.isRequired,
+  allData: PropTypes.array.isRequired,
+  hideDistrictSelector: PropTypes.bool.isRequired,
+};
