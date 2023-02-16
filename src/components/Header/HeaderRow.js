@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import PropTypes from "prop-types"; // ES6
 import { useWindowSize } from "../../utils/hooks";
 import styles from "./HeaderRow.module.scss";
 import SearchBar from "./SearchBar";
@@ -78,6 +79,12 @@ const FilterRow = ({ filter, setFilter, hasVetData }) => {
   );
 };
 
+FilterRow.propTypes = {
+  filter: PropTypes.string.isRequired,
+  setFilter: PropTypes.func.isRequired,
+  hasVetData: PropTypes.bool.isRequired,
+};
+
 export const HeaderRow = ({
   searchAt,
   setSearchAt,
@@ -138,4 +145,14 @@ export const HeaderRow = ({
       )}
     </div>
   );
+};
+
+HeaderRow.propTypes = {
+  searchAt: PropTypes.string.isRequired,
+  setSearchAt: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
+  setFilter: PropTypes.func.isRequired,
+  searchBarVal: PropTypes.string.isRequired,
+  setSearchbarVal: PropTypes.func.isRequired,
+  hasVetData: PropTypes.bool.isRequired,
 };

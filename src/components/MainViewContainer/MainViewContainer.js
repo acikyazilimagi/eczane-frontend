@@ -48,7 +48,7 @@ const MainViewContaier = () => {
 
   const center = [CENTER_LAT, CENTER_LNG];
 
-  const setIconFn = (type, subType) => {
+  const setIconFn = (type) => {
     switch (type) {
       case FILTER.HASTANE:
         return hospitalIcon;
@@ -167,7 +167,7 @@ const MainViewContaier = () => {
               />
 
               <MarkerClusterGroup>
-                {searchFilteredData?.map((station, index) => {
+                {searchFilteredData?.map((station) => {
                   return (
                     <Marker
                       icon={setIconFn(station.typeId, station.subTypeId)}

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"; // ES6
 import { Block } from "../../lib/Block/Block";
 import { Header } from "./Header/Header";
 import styles from "./HeaderCombined.module.scss";
@@ -28,4 +29,14 @@ export const HeaderCombined = ({
       </div>
     </Block>
   );
+};
+
+HeaderCombined.propTypes = {
+  searchAt: PropTypes.string.isRequired,
+  setSearchAt: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
+  setFilter: PropTypes.func.isRequired,
+  searchBarVal: PropTypes.string.isRequired,
+  setSearchbarVal: PropTypes.func.isRequired,
+  hasVetData: PropTypes.bool.isRequired,
 };

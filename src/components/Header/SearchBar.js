@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"; // ES6
 import styles from "./SearchBar.module.scss";
 
 function SearchBar({ searchBarVal, setSearchBarVal }) {
@@ -11,7 +12,7 @@ function SearchBar({ searchBarVal, setSearchBarVal }) {
         className={styles.input}
       />
       <div className={styles.searchIconWrapper}>
-        <button className={styles.noStyleButton}>
+        <button className={styles.noStyleButton} type="button">
           <img
             src="/search-icon.svg"
             alt="Search Icon"
@@ -22,5 +23,10 @@ function SearchBar({ searchBarVal, setSearchBarVal }) {
     </div>
   );
 }
+
+SearchBar.propTypes = {
+  searchBarVal: PropTypes.string.isRequired,
+  setSearchBarVal: PropTypes.func.isRequired,
+};
 
 export default SearchBar;
