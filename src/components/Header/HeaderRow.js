@@ -1,7 +1,7 @@
-import SearchBar from "./SearchBar";
-import styles from "./HeaderRow.module.scss";
-import { useWindowSize } from "../../utils/hooks";
 import clsx from "clsx";
+import { useWindowSize } from "../../utils/hooks";
+import styles from "./HeaderRow.module.scss";
+import SearchBar from "./SearchBar";
 
 export const SEARCH_AT = {
   HARITA: "harita",
@@ -52,6 +52,7 @@ const FilterRow = ({ filter, setFilter, hasVetData }) => {
           const { label, click, selected } = item;
           return (
             <button
+              key={label}
               className={clsx(styles.filterButton, {
                 [styles.buttonDisabled]: item.buttonDisabled,
                 [styles.selected]: selected,
@@ -66,7 +67,11 @@ const FilterRow = ({ filter, setFilter, hasVetData }) => {
         })}
 
         <div className={styles.filterIconWrapper}>
-          <img className={styles.filterSvg} src="/filter-icon.svg" />
+          <img
+            className={styles.filterSvg}
+            src="/filter-icon.svg"
+            alt="filter-icon"
+          />
         </div>
       </div>
     </div>
