@@ -165,7 +165,21 @@ const MainViewContaier = () => {
                   className={styles.mainViewContainerButton}
                   onClick={debounce(onLockClick, 150)}
                 >
-                  {!dragActive ? <LockIcon /> : <LockOpenIcon />}
+                  {!dragActive ? (
+                    <img
+                      src="/Lock.svg"
+                      alt="lock-icon"
+                      width={20}
+                      height={20}
+                    />
+                  ) : (
+                    <img
+                      src="/lockOpen.svg"
+                      alt="lock-open-icon"
+                      width={20}
+                      height={20}
+                    />
+                  )}{" "}
                 </button>
               </Control>
               <Control position="topright">
