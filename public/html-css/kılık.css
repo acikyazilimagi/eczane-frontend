@@ -1,0 +1,205 @@
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+  *{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+  }
+
+  :root {
+    --yerarkası-tüsü: #112255;
+    --yazı-tüsü: #fff;
+  }
+
+  body{
+    font-family: Roboto, sans-serif;
+    background-color: var(--yerarkası-tüsü);
+  }
+
+  .bet, header, footer
+  {display: grid;}
+
+  .tam-ekran, main, 
+  .damga, .yandaş, .siteler,
+  .düğme, .arama
+  {display:flex;}
+
+  .tam-ekran {    
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  header, footer, main > :not(iframe)
+  {padding: 10px;}
+  
+  .bet {
+    grid-template-rows: 0fr 1fr max-content;
+    height: 100%; 
+  }
+  
+  header {
+    grid-auto-columns: 1fr;
+    grid-template-columns: 0fr 0fr 1fr 1fr;
+    grid-template-rows: 0fr 0fr;
+    gap: 5px;
+    grid-template-areas:
+      "damga damga damga arama"
+      "düğme süzgeç süzgeç süzgeç";
+    background-image: linear-gradient(transparent 80%, rgb(24, 33, 81) 100%), url("/header-bg-mobile.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+  header .damga    {grid-area: damga}
+  header .yandaş   {grid-area: yandaş}
+  header .düğme    {grid-area: düğme}  
+  header .süzgeç   {grid-area: süzgeç}  
+  header .arama    {grid-area: arama}
+
+  .damga {    
+    align-items: center;
+    gap: 10px;
+    color: var(--yazı-tüsü);
+    font-size: 1.5rem;
+  }
+  
+  .damga img {
+    width: 30px;
+  }
+  
+  .yandaş {    
+    align-items: center;
+    justify-content: end;
+    gap: 10px;
+  }
+  
+  .düğme{
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: right;
+  }
+  .düğme button{
+    background-color: #fff;
+    color: #111A42;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+  }
+  .düğme button.etkin{
+    background-color: #F83B3B;
+    color: #fff;
+  }
+
+  .düğme button:first-of-type{
+    border-radius: 0.5rem 0 0 0.5rem;
+  }
+  .düğme button:last-of-type{
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+
+  .süzgeç > .düğme{
+    padding: 1px;
+    border-radius: 0.5rem;
+    /* border: 1px solid rgb(255, 255, 255); */
+    align-self: center;
+  }
+    .süzgeç > .düğme > button{
+      border-radius: 0.5rem;
+      margin-left: auto;
+      
+    }
+    .süzgeç > .düğme > button:not(.etkin){
+      background-color: #fff;
+      color: #182151;
+    }
+    .süzgeç > .düğme > .simge{
+      margin-left: auto;
+      margin-right: 5px;
+    }
+
+  .arama > input{
+    width: 100%;
+    border-radius: 0.625rem;
+    padding: 0.2rem 0.5rem;
+    outline: none;
+    border: 1px solid white;
+    font-size: 0.625rem;
+  }
+
+  footer{
+    overflow: auto;
+    grid-auto-rows: 0fr;
+    max-height: 150px;
+    padding-bottom: 0;
+  }
+
+  .siteler {    
+    flex: 0 0 0;
+    gap: 5px;
+    padding: 5px;
+  }
+  .siteler > a{
+    display: flex;
+  }
+  .siteler img{
+    width: 30px;
+  }
+
+  
+  /* Değişebilir */
+  .il-süzgeçi > .düğme{
+    display: grid; 
+    grid-auto-rows: 1fr; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 5px; 
+  }
+.il-süzgeçi > .düğme > button{
+  background-color: inherit;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  color: #fff;
+  font-size: .75rem;
+  outline: hidden;
+  padding: .325rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+  font-weight: 500;
+  cursor: pointer;
+  
+}
+.il-süzgeçi > .düğme > button.etkin{
+  background-color: #fff;
+  color: inherit;
+}
+
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+
+
