@@ -12,6 +12,14 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 768px) {
+    padding-top: 19px;
+    min-width: 325px;
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .IconWrapper {
@@ -54,7 +62,7 @@
 }
 
 .parag {
-  font-family: SegoeUI, sans-serif;
+  font-family: Roboto, sans-serif;
   font-size: 0.75rem;
   color: white;
   @media (min-width: "768px") {
@@ -85,12 +93,24 @@
   width: 100%;
   align-items: center;
   margin: 0 auto;
+  @media screen and (max-width: 768px) {
+    padding: 0.5rem 0;
+    border: 1px solid white;
+    border-radius: 5px;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: space-between;
+    min-height: 2.25rem;
+  }
 }
 
 .ilceItems {
   position: relative;
   padding: 0 15px;
   flex-grow: 1;
+  @media screen and (max-width: 768px) {
+    overflow-x: auto;
+  }
 }
 
 .ilceItem {
@@ -104,15 +124,38 @@
   border-radius: 0.625rem;
   user-select: none;
   cursor: pointer;
+  @media screen and (max-width: 768px) {
+    background-color: inherit;
+    outline: none;
+    border: none;
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
 }
 
 .citiesBox {
-  padding: 14px 0;
-  gap: 10px;
+  padding: 0.875rem 0;
+  gap: 0.625rem;
   width: 100%;
   display: grid;
   overflow: hidden;
   grid-template-columns: repeat(5, 1fr);
+  @media screen and (max-width: 1280px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  @media (min-width: 310px) and (max-width: 510px) {
+    width: 100%;
+    margin: 0 auto;
+  }
 }
 
 .ilceActive {
@@ -133,12 +176,24 @@
   color: white;
   font-size: 2rem;
   border: 1px white solid;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   padding: 0.4rem;
   flex-grow: 1;
   -webkit-user-select: none;
   user-select: none;
   cursor: pointer;
+  @media screen and (max-width: 768px) {
+    flex: 0 1 30%;
+    max-width: 450px;
+    font-size: 0.75rem;
+    width: 110px;
+    padding: 0.325rem;
+  }
+  @media (min-width: 310px) and (max-width: 510px) {
+    max-width: 150px;
+    font-size: 11px;
+    overflow: hidden;
+  }
 }
 
 .cityItemActive {
@@ -170,17 +225,16 @@
   border-radius: 0.625rem;
 }
 
-@media screen and (max-width: 1280px) {
-  .citiesBox {
-    grid-template-columns: repeat(4, 1fr);
+.othersWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+
+  @media screen and (min-width: 769px) {
+    justify-content: flex-start;
   }
 }
 
-@media screen and (max-width: 1024px) {
-  .citiesBox {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
 .seeAllMobile {
   @extend .cityItem;
   padding: 0;
@@ -189,80 +243,7 @@
   outline: none !important;
 }
 
-@media screen and (max-width: 768px) {
-  .footerContainer {
-    padding-top: 19px;
-    min-width: 325px;
-    max-width: 500px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-  }
-  .ilceBox {
-    padding: 8px 0;
-    border: 1px solid white;
-    border-radius: 5px;
-    overflow-x: hidden;
-    display: flex;
-    justify-content: space-between;
-    min-height: 2.25rem;
-  }
-
-  .ilceItems {
-    overflow-x: auto;
-  }
-
-  .ilceItem {
-    background-color: inherit;
-    outline: none;
-    border: none;
-    color: white;
-    font-size: 0.75rem;
-    padding: 0.5rem 0.75rem;
-  }
-
-  .citiesBox {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 10px;
-  }
-
-  .cityItem {
-    border: none;
-    flex: 0 1 30%;
-    max-width: 450px;
-    background-color: inherit;
-    outline: hidden;
-    color: white;
-    font-size: 0.75rem;
-    border: 1px white solid;
-    border-radius: 10px;
-    width: 110px;
-    padding: 0.325rem;
-  }
-  .cityItemActive {
-    background-color: white;
-    color: inherit;
-  }
-
-  .ilceActive {
-    background-color: #f83b3b;
-    border-radius: 5px;
-  }
-  .ilceDisabled {
-    color: #888;
-    cursor: not-allowed;
-  }
-}
 @media (min-width: 310px) and (max-width: 510px) {
-  .citiesBox {
-    width: 100%;
-    margin: 0 auto;
-  }
   .cityItem {
-    max-width: 150px;
-    font-size: 11px;
-    overflow: hidden;
   }
 }

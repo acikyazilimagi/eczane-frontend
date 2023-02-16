@@ -5,7 +5,7 @@ import yardimLogo from "../../icons/deprem-yardim.svg";
 import { useWindowSize } from "../../utils/hooks";
 import styles from "./Others.module.scss";
 
-const Others = () => {
+export const Others = () => {
   const [isHovering, setIsHovering] = useState("");
   const { isDesktop } = useWindowSize();
 
@@ -30,6 +30,7 @@ const Others = () => {
       >
         <a href="https://afetharita.com/" target="_blank" rel="noreferrer">
           <img
+            className={styles.logoImg}
             id="harita"
             src={haritaLogo}
             alt="afet-harita"
@@ -37,10 +38,20 @@ const Others = () => {
           />
         </a>
         <a href="https://deprem.io/" target="_blank" rel="noreferrer">
-          <img id="io" src={ioLogo} alt="deprem-io" />
+          <img
+            className={styles.logoImg}
+            id="io"
+            src={ioLogo}
+            alt="deprem-io"
+          />
         </a>
         <a href="https://depremyardim.com/" target="_blank" rel="noreferrer">
-          <img id="yardim" src={yardimLogo} alt="deprem-yardim" />
+          <img
+            className={styles.logoImg}
+            id="yardim"
+            src={yardimLogo}
+            alt="deprem-yardim"
+          />
         </a>
       </div>
       {isHovering === "harita" ? (
@@ -62,5 +73,3 @@ const Others = () => {
     </div>
   );
 };
-
-export default Others;

@@ -1,5 +1,6 @@
 import React from "react";
 import { useWindowSize } from "../../utils/hooks";
+import { Others } from "../Others/Others";
 import styles from "./Footer.module.scss";
 
 export function Footer({
@@ -117,6 +118,10 @@ export function Footer({
           />
         </div>
       )}
+
+      <div className={styles.othersWrapper}>
+        <Others />
+      </div>
     </div>
   );
 }
