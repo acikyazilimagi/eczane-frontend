@@ -5,52 +5,43 @@ import yardimLogo from "../../icons/deprem-yardim.svg";
 import styles from "./Others.module.scss";
 
 export const Others = () => {
+  const otherWebsites = [
+    {
+      key: "afet-harita",
+      link: "https://afetharita.com/",
+      text: "Depremzedeleri aramak ve yardım etmek için kullandığımız site.",
+      imgSrc: haritaLogo,
+    },
+    {
+      key: "deprem-io",
+      link: "https://deprem.io/",
+      text: "Afetle ilgili çeşitli konularda bilgi almak için kullandığımız web sitesi.",
+      imgSrc: ioLogo,
+    },
+    {
+      key: "deprem-yardim",
+      link: "https://depremyardim.com/",
+      text: "Depremzedelere erzak yardımı için kullandığımız site.",
+      imgSrc: yardimLogo,
+    },
+  ];
   return (
     <div className={styles.otherWrapper}>
       <h4 className={styles.otherTitle}>Yardımcı Siteler:</h4>
       <div className={styles.logoContainer}>
-        <div className={styles.tooltip}>
-          <a href="https://afetharita.com/" target="_blank" rel="noreferrer">
-            <img
-              className={styles.logoImg}
-              id="harita"
-              src={haritaLogo}
-              alt="afet-harita"
-              rel="noreferrer"
-            />
-          </a>
-          <span className={styles.tooltiptext}>
-            Depremzedeleri aramak ve yardım etmek için kullandığımız site.
-          </span>
-        </div>
-        <div className={styles.tooltip}>
-          <a href="https://deprem.io/" target="_blank" rel="noreferrer">
-            <img
-              className={styles.logoImg}
-              id="io"
-              src={ioLogo}
-              alt="deprem-io"
-            />
-          </a>
-          <span className={styles.tooltiptext}>
-            Afetle ilgili çeşitli konularda bilgi almak için kullandığımız web
-            sitesi.
-          </span>
-        </div>
-        <div className={styles.tooltip}>
-          <a href="https://depremyardim.com/" target="_blank" rel="noreferrer">
-            <img
-              className={styles.logoImg}
-              id="yardim"
-              src={yardimLogo}
-              alt="deprem-yardim"
-            />
-          </a>
-          <span className={styles.tooltiptext}>
-            Afetle ilgili çeşitli konularda bilgi almak için kullandığımız web
-            sitesi.
-          </span>
-        </div>
+        {otherWebsites.map((website) => (
+          <div className={styles.tooltip} key={website.key}>
+            <a href={website.link} target="_blank" rel="noreferrer">
+              <img
+                className={styles.logoImg}
+                src={website.imgSrc}
+                alt={website.key}
+                rel="noreferrer"
+              />
+            </a>
+            <span className={styles.tooltiptext}>{website.text}</span>
+          </div>
+        ))}
       </div>
     </div>
   );

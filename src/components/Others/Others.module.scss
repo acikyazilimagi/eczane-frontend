@@ -46,31 +46,31 @@
     transform: scale(1.2);
   }
 }
- 
+
 .tooltip {
   position: relative;
   display: inline-block;
   border-bottom: 1px dotted black;
-
 }
 
 .tooltip .tooltiptext {
+  position: absolute;
   visibility: hidden;
   width: 20rem;
   top: -4.4rem;
-  right: 0rem;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: white;
   color: #000;
-  text-align: left;
   border-radius: 6px;
   padding: 0.625rem;
-  font-family: "Roboto", sans-serif; 
-  position: absolute;
-  z-index: 1; 
-  margin-left: -60px;
+  font-family: "Roboto", sans-serif;
+  z-index: 1;
   box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
 }
 
 .tooltip:hover .tooltiptext {
-  visibility: visible;
+  @media screen and (min-width: 769px) {
+    visibility: visible;
+  }
 }
