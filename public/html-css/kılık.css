@@ -17,6 +17,24 @@
     background-color: var(--yerarkası-tüsü);
   }
 
+  .dolp-germe, header, main, footer{
+    display: flex;
+  }
+  .dolp-germe{
+    flex-direction: column;
+    height: 100vh;
+  }
+  header, footer{
+    flex: 0 0 0;
+  }
+  main{
+    flex: 1 0 0;
+  }
+
+  .damga img{
+    width: 30px;
+  }
+  /*
   .bet, header, footer
   {display: grid;}
 
@@ -101,7 +119,7 @@
   .süzgeç > .düğme{
     padding: 1px;
     border-radius: 0.5rem;
-    /* border: 1px solid rgb(255, 255, 255); */
+    border: 1px solid rgb(255, 255, 255);
     align-self: center;
   }
     .süzgeç > .düğme > button{
@@ -147,7 +165,10 @@
   }
 
   
-  /* Değişebilir */
+
+
+
+
   .il-süzgeçi > .düğme{
     display: grid; 
     grid-auto-rows: 1fr; 
@@ -192,7 +213,7 @@
   border-radius: 6px;
   padding: 5px 0;
 
-  /* Position the tooltip */
+
   position: absolute;
   z-index: 1;
 }
@@ -200,6 +221,6 @@
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
-
+*/
 
 
