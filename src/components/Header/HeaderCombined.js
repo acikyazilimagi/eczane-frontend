@@ -34,7 +34,7 @@ export const HeaderCombined = ({
 HeaderCombined.propTypes = {
   searchAt: PropTypes.string.isRequired,
   setSearchAt: PropTypes.func.isRequired,
-  filter: PropTypes.string.isRequired,
+  filter: PropTypes.number.isRequired,
   setFilter: PropTypes.func.isRequired,
   searchBarVal: PropTypes.string.isRequired,
   setSearchbarVal: PropTypes.func.isRequired,
