@@ -172,14 +172,12 @@
   font-family: "Roboto", sans-serif;
   border: none;
   background-color: inherit;
-  outline: hidden;
   color: white;
   font-size: 2rem;
   border: 1px white solid;
   border-radius: 0.625rem;
   padding: 0.4rem;
   flex-grow: 1;
-  -webkit-user-select: none;
   user-select: none;
   cursor: pointer;
   @media screen and (max-width: 768px) {
@@ -241,9 +239,4 @@
   background-color: red !important;
   border: none !important;
   outline: none !important;
-}
-
-@media (min-width: 310px) and (max-width: 510px) {
-  .cityItem {
-  }
 }
