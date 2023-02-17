@@ -22,21 +22,53 @@
 
   .dolp-germe, header, main, footer{
     display: flex;
+    flex-wrap: wrap;
   }
   .dolp-germe{
     flex-direction: column;
     height: 100vh;
   }
-  header, footer{
+  header, footer, damga{
     flex: 0 0 0;
+  }
+  header{
+    justify-content: space-between;
   }
   main{
     flex: 1 0 0;
   }
 
-  .damga img{
+  /* DAMGA */
+  damga a{
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  damga img{
     width: 30px;
   }
+
+  /* ARAMA */
+
+  arama input{
+    width: 100%;
+  }
+
+  /* SEÇEK */
+
+  seçek{
+    break-before: always;
+  }
+
+  düğmeler{
+    display: grid;
+    grid-template-columns: repeat(var(--küçük-germede-düğmeler), 1fr);
+    gap: var(--gap-1);
+    width: 100%;
+  }
+  düğmeler > button{
+    width:100%;
+  }
+
   @media screen and (min-width:768px) {
     arama{
       order: 1;
@@ -45,6 +77,7 @@
       grid-template-columns: repeat(var(--ortanca-germede-düğmeler), 1fr);
     }
   }
+
 
   /*
   .bet, header, footer
