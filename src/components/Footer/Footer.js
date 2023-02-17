@@ -137,10 +137,10 @@ export function Footer({
 }
 Footer.propTypes = {
   cityData: PropTypes.object,
-  selectedCity: PropTypes.string.isRequired,
+  selectedCity: PropTypes.number,
   handleChangeCity: PropTypes.func.isRequired,
-  selectedDist: PropTypes.string.isRequired,
+  selectedDist: PropTypes.number,
   setSelectedDist: PropTypes.func.isRequired,
-  allData: PropTypes.array.isRequired,
+  allData: PropTypes.array,
   hideDistrictSelector: PropTypes.bool.isRequired,
 };

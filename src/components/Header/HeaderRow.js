@@ -10,7 +10,7 @@ export const SEARCH_AT = {
 };
 
 export const FILTER = {
-  HEPSI: "Hepsi",
+  HEPSI: 0,
   HASTANE: 1,
   ECZANE: 2,
   VETERINER: 4,
@@ -80,7 +80,7 @@ const FilterRow = ({ filter, setFilter, hasVetData }) => {
 };
 
 FilterRow.propTypes = {
-  filter: PropTypes.string.isRequired,
+  filter: PropTypes.number.isRequired,
   setFilter: PropTypes.func.isRequired,
   hasVetData: PropTypes.bool.isRequired,
 };
@@ -150,7 +150,7 @@ export const HeaderRow = ({
 HeaderRow.propTypes = {
   searchAt: PropTypes.string.isRequired,
   setSearchAt: PropTypes.func.isRequired,
-  filter: PropTypes.string.isRequired,
+  filter: PropTypes.number.isRequired,
   setFilter: PropTypes.func.isRequired,
   searchBarVal: PropTypes.string.isRequired,
   setSearchbarVal: PropTypes.func.isRequired,
