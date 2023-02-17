@@ -14,7 +14,7 @@ function SearchBar({ searchBarVal, setSearchBarVal }) {
       <div className={styles.searchIconWrapper}>
         <button className={styles.noStyleButton} type="button">
           <img
-            src="/search-icon.svg"
+            src="/icons/search-icon.svg"
             alt="Search Icon"
             className={styles.searchIcon}
           />
