@@ -7,7 +7,7 @@ export const Block = ({ children, styleName, zeroPaddingOnMobile }) => {
     <div
       className={clsx(styles.block, {
         [styleName]: !!styleName,
-        [styles.zeroPad]: zeroPaddingOnMobile,
+        [styles.zeroPadOnMobile]: zeroPaddingOnMobile,
       })}
     >
       {children}
