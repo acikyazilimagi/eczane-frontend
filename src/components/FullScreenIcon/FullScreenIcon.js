@@ -6,7 +6,7 @@ export const FullScreenIcon = () => (
     <FullscreenControl
       forceSeparateButton
       position="topright"
-      content="<img src='fullscreen.png' class='fullscreen-img'/>"
+      content="<img src='fullscreen.svg' class='fullscreen-img'/>"
       title="Tam Ekran"
     />
   </Control>
