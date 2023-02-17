@@ -11,6 +11,8 @@
     --yerarkası-tüsü: #112255;
     --yazı-tüsü: #fff;
     --gap-1: 10px;
+    --küçük-germede-düğmeler: 3;
+    --ortanca-germede-düğmeler: 4;
   }
 
   body{
