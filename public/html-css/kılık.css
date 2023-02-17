@@ -10,6 +10,7 @@
   :root {
     --yerarkası-tüsü: #112255;
     --yazı-tüsü: #fff;
+    --gap-1: 10px;
   }
 
   body{
