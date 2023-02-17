@@ -1,9 +1,9 @@
 import L from "leaflet";
-import hospitalIcon2Svg from "../icons/hospital-marker-2.png";
-import hospitalIconSvg from "../icons/hospital-marker.png";
-import pharmacyIcon2Svg from "../icons/pharmacy-marker-2.png";
-import pharmacyIconSvg from "../icons/pharmacy-marker.png";
-import vetIconSvg from "../icons/vet-marker.png";
+import hospitalIcon2Svg from "../icons/hospital-marker-2.svg";
+import hospitalIconSvg from "../icons/hospital-marker.svg";
+import pharmacyIcon2Svg from "../icons/pharmacy-marker-2.svg";
+import pharmacyIconSvg from "../icons/pharmacy-marker.svg";
+import vetIconSvg from "../icons/vet-marker.svg";
 
 const common = {
   iconSize: [32, 42],
