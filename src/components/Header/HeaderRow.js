@@ -70,7 +70,7 @@ const FilterRow = ({ filter, setFilter, hasVetData }) => {
         <div className={styles.filterIconWrapper}>
           <img
             className={styles.filterSvg}
-            src="/filter-icon.svg"
+            src="/icons/filter-icon.svg"
             alt="filter-icon"
           />
         </div>
