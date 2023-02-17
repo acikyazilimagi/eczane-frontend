@@ -5,9 +5,10 @@
 - React 17
 - LeafletJS
 - NodeJS v16
-- MaterialUI (kullanıldı ancak yavaş yavaş tüm importları kaldırıyoruz)
 - Prettier
-- TODO: ESLint
+- ESLint
+- Husky
+- module scss
 
 ## Kurulum
 ### Repoyu klonlama
