@@ -1,12 +1,10 @@
 .wrapper {
   font-family: "Roboto", sans-serif;
-  margin: 1.875rem 1rem 0;
   padding-right: 0.5rem;
   height: 500px;
   overflow: auto;
 
   @media (min-width: 769px) {
-    margin: 1.875rem 3rem 0;
     padding-right: 1rem;
   }
 
@@ -44,7 +42,6 @@
     gap: 1.875rem;
     grid-template-columns: 1fr 1fr 1fr;
   }
-
 }
 
 .notFoundText {
