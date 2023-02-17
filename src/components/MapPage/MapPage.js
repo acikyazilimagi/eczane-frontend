@@ -1,13 +1,11 @@
 import L from "leaflet";
 import propTypes from "prop-types";
 import React, { useState } from "react";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import MarkerClusterGroup from "react-leaflet-markercluster";
+import { MapContainer, TileLayer } from "react-leaflet";
 import { Block } from "../../lib/Block/Block";
-import { getTypeIcons } from "../../utils/generalFunctions";
 import { DragIcon } from "../DragIcon/DragIcon";
 import { FullScreenIcon } from "../FullScreenIcon/FullScreenIcon";
-import InfoCard from "../InfoCard/InfoCard";
+import { MapMarkerCluster } from "../MapMarkerCluster/MapMarkerCluster";
 import styles from "./MapPage.module.scss";
 
 const ZOOM = 6;
@@ -57,27 +55,10 @@ export const MapPage = ({
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
-
-          <MarkerClusterGroup>
-            {searchFilteredData?.map((station) => {
-              return (
-                <Marker
-                  icon={getTypeIcons(station.typeId)}
-                  key={station.id}
-                  position={[station.latitude, station.longitude]}
-                >
-                  <Popup>
-                    <InfoCard
-                      key={station.id}
-                      item={station}
-                      districtMap={districtMap}
-                      styleName="popup"
-                    />
-                  </Popup>
-                </Marker>
-              );
-            })}
-          </MarkerClusterGroup>
+          <MapMarkerCluster
+            searchFilteredData={searchFilteredData}
+            districtMap={districtMap}
+          />
         </MapContainer>
       </div>
     </Block>
