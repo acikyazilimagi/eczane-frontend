@@ -1,6 +1,6 @@
 import React from "react";
 import haritaLogo from "../../icons/afet-harita.svg";
-import ioLogo from "../../icons/deprem-io.svg";
+import ioLogo from "../../icons/deprem_io.svg";
 import yardimLogo from "../../icons/deprem-yardim.svg";
 import styles from "./Others.module.scss";
 
