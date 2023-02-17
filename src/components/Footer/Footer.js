@@ -136,7 +136,7 @@ export function Footer({
   );
 }
 Footer.propTypes = {
-  cityData: PropTypes.object.isRequired,
+  cityData: PropTypes.object,
   selectedCity: PropTypes.string.isRequired,
   handleChangeCity: PropTypes.func.isRequired,
   selectedDist: PropTypes.string.isRequired,
