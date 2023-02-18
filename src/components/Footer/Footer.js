@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"; // ES6
 import React from "react";
 import { Block } from "../../lib/Block/Block";
 import { useWindowSize } from "../../utils/hooks";
@@ -37,13 +38,7 @@ export function Footer({
         {!hideDistrictSelector && (
           <div className={styles.ilceBox}>
             <div className={styles.IconWrapper}>
-              <div className={styles.button}>
-                <img
-                  className={styles.leftIcon}
-                  src="/left-icon.svg"
-                  alt="sol-ok"
-                />
-              </div>
+              <div className={`${styles.button} left`}></div>
             </div>
             <div className={styles.ilceItems}>
               {noCitySelected && (
@@ -53,6 +48,7 @@ export function Footer({
               )}
               {selectedCityDistricts?.map((item) => (
                 <button
+                  type="button"
                   className={
                     cityDistrictWithData.indexOf(item.key) === -1
                       ? `${styles.ilceItem} ${styles.ilceDisabled}`
@@ -71,13 +67,7 @@ export function Footer({
               ))}
             </div>
             <div className={styles.IconWrapper}>
-              <div className={styles.button}>
-                <img
-                  className={styles.rightIcon}
-                  src="/left-icon.svg"
-                  alt="sol-ok"
-                />
-              </div>
+              <div className={`${styles.button} right`}></div>
             </div>
           </div>
         )}
@@ -85,6 +75,7 @@ export function Footer({
         <div className={styles.citiesBox}>
           {allCities?.map((item) => (
             <button
+              type="button"
               className={
                 selectedCity === item.id
                   ? `${styles.cityItem} ${styles.cityItemActive}`
@@ -98,7 +89,8 @@ export function Footer({
           ))}
           {!isDesktop && (
             <button
-              className={`{styles.cityItem} ${styles.seeAllMobile}`}
+              type="button"
+              className={`${styles.cityItem} ${styles.seeAllMobile}`}
               onClick={() => handleChangeCity(null)}
             >
               Tümünü Gör
@@ -110,14 +102,12 @@ export function Footer({
             className={styles.seeAllWrapper}
             onClick={() => handleChangeCity(null)}
           >
-            <button className={`${styles.cityItem} ${styles.seeAllButton}`}>
+            <button
+              type="button"
+              className={`${styles.cityItem} ${styles.seeAllButton}`}
+            >
               Tümünü Gör
             </button>
-            <img
-              className={styles.showAllIcon}
-              src="/show-all-icon.svg"
-              alt="hepsini-gör-icon"
-            />
           </div>
         )}
 
@@ -128,3 +118,12 @@ export function Footer({
     </Block>
   );
 }
+Footer.propTypes = {
+  cityData: PropTypes.object,
+  selectedCity: PropTypes.number,
+  handleChangeCity: PropTypes.func.isRequired,
+  selectedDist: PropTypes.number,
+  setSelectedDist: PropTypes.func.isRequired,
+  allData: PropTypes.array,
+  hideDistrictSelector: PropTypes.bool.isRequired,
+};

@@ -47,17 +47,28 @@
   }
 }
 
-.description {
-  position: absolute;
-  top: -4rem;
-  right: 0rem;
-  background: white;
-  padding: 0.625rem;
-  border-radius: 0.625rem;
-  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
-  z-index: 1;
-
-  & > p {
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  .tooltiptext {
+    position: absolute;
+    visibility: hidden;
+    width: 25rem;
+    top: -5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    color: #000;
+    border-radius: 6px;
+    padding: 0.625rem;
     font-family: "Roboto", sans-serif;
+    z-index: 1;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+  }
+  &:hover .tooltiptext {
+    @media screen and (min-width: 769px) {
+      visibility: visible;
+    }
   }
 }

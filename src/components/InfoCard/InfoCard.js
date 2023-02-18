@@ -1,71 +1,70 @@
+import clsx from "clsx";
+import PropTypes from "prop-types"; // ES6
 import { CITIES } from "../../lib/city";
 import styles from "./InfoCard.module.scss";
+
+const typeIdToClassName = {
+  1: "hastane",
+  2: "eczane",
+  3: "psikolog",
+  4: "veteriner",
+};
+
+const typeIdToName = {
+  1: "Hastane",
+  2: "Eczane",
+  3: "Psikolojik Destek",
+  4: "Veteriner",
+};
 
 const InfoCard = ({ item, districtMap, styleName }) => {
   const cityName = CITIES?.[item.cityId]?.key;
   const districtName = districtMap?.get(item.districtId);
 
+  const googleMapsLink = `https://www.google.com/maps/dir//${item.latitude},${item.longitude}`;
+
   return (
     <div className={`${styles.cardWrapper} ${styleName}`}>
       <div className={styles.cardHeader}>
         <span
-          className={`
-            ${styles.cardHeaderTitle} ${
-            item.typeId === 1
-              ? "hastane"
-              : item.typeId === 2
-              ? "eczane"
-              : item.typeId === 4
-              ? "veteriner"
-              : item.typeId === 3
-              ? "psikolog"
-              : ""
-          }`}
+          className={clsx(
+            styles.cardHeaderTitle,
+            typeIdToClassName[item.typeId]
+          )}
         >
-          {item.typeId === 1
-            ? "Hastane"
-            : item.typeId === 2
-            ? "Eczane"
-            : item.typeId === 4
-            ? "Veteriner"
-            : item.typeId === 3
-            ? "Psikolojik Destek"
-            : "-"}
+          {typeIdToName?.[item.typeId] ?? "-"}
         </span>
       </div>
       <div className={styles.cardOrgName}>
-        <a
-          href={`https://www.google.com/maps/dir//${item.latitude},${item.longitude}`}
-        >
-          {item.name}
-        </a>
+        <a href={googleMapsLink}>{item.name}</a>
         <span className={styles.cardOrgPhone}>
-          {item.phone ? <a href={`tel:${item.phone}`}>{item.phone}</a> : ""}
+          {item.phone && <a href={`tel:${item.phone}`}>{item.phone}</a>}
         </span>
       </div>
       <hr />
       <div className={styles.cardOrgInfo}>
-        {cityName ? (
+        {cityName && (
           <span className={styles.cardOrgLocation}>
-            <a
-              href={`https://www.google.com/maps/dir//${item.latitude},${item.longitude}`}
-            >
+            <a href={googleMapsLink}>
               {cityName} | {districtName}
             </a>
           </span>
-        ) : (
-          ""
         )}
         <div className={styles.cardOrgAddress}>
-          {item.address}
-          {item.additionalAddressDetails !== "" ? (
+          {item?.address ?? "-"}
+          {item?.additionalAddressDetails !== "" && (
             <span>{item.additionalAddressDetails}</span>
-          ) : (
-            ""
           )}
         </div>
       </div>
     </div>
   );
 };
+
+InfoCard.propTypes = {
+  item: PropTypes.object.isRequired,
+  districtMap: PropTypes.object.isRequired,
+  styleName: PropTypes.string,
+};
+
 export default InfoCard;

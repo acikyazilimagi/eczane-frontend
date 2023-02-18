@@ -1,75 +1,57 @@
-import React, { useState } from "react";
+import React from "react";
 import haritaLogo from "../../icons/afet-harita.svg";
-import ioLogo from "../../icons/deprem-io.svg";
 import yardimLogo from "../../icons/deprem-yardim.svg";
-import { useWindowSize } from "../../utils/hooks";
+import ioLogo from "../../icons/deprem_io.svg";
 import styles from "./Others.module.scss";
 
 export const Others = () => {
-  const [isHovering, setIsHovering] = useState("");
-  const { isDesktop } = useWindowSize();
-
-  const handleMouseOver = (event) => {
-    if (isDesktop) {
-      setIsHovering(event.target.id);
-    } else {
-      setIsHovering("");
-    }
-  };
-  const handleMouseOut = () => {
-    setIsHovering("");
-  };
-
+  const otherWebsites = [
+    {
+      key: "afet-harita",
+      link: "https://afetharita.com/",
+      text: "Depremzedeleri aramak ve yardım etmek için kullandığımız site.",
+      imgSrc: haritaLogo,
+      imgSrcSet:
+        "data:image/svg+xml,%3Csvg width='275' height='275' viewBox='0 0 275 275' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M275 137.5C275 213.439 213.439 275 137.5 275C61.5608 275 0 213.439 0 137.5C0 61.5608 61.5608 0 137.5 0C213.439 0 275 61.5608 275 137.5Z' fill='%23D9D9D9'/%3E%3C/svg%3E",
+    },
+    {
+      key: "deprem-io",
+      link: "https://deprem.io/",
+      text: "Afetle ilgili çeşitli konularda bilgi almak için kullandığımız web sitesi.",
+      imgSrc: ioLogo,
+      imgSrcSet:
+        "data:image/svg+xml,%3Csvg width='275' height='275' viewBox='0 0 275 275' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M275 137.5C275 213.439 213.439 275 137.5 275C61.5608 275 0 213.439 0 137.5C0 61.5608 61.5608 0 137.5 0C213.439 0 275 61.5608 275 137.5Z' fill='%23D9D9D9'/%3E%3C/svg%3E",
+    },
+    {
+      key: "deprem-yardim",
+      link: "https://depremyardim.com/",
+      text: "Depremzedelere erzak yardımı için kullandığımız site.",
+      imgSrc: yardimLogo,
+      imgSrcSet:
+        "data:image/svg+xml,%3Csvg width='275' height='275' viewBox='0 0 275 275' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M275 137.5C275 213.439 213.439 275 137.5 275C61.5608 275 0 213.439 0 137.5C0 61.5608 61.5608 0 137.5 0C213.439 0 275 61.5608 275 137.5Z' fill='%23D9D9D9'/%3E%3C/svg%3E",
+    },
+  ];
   return (
     <div className={styles.otherWrapper}>
       <h4 className={styles.otherTitle}>Yardımcı Siteler:</h4>
-      <div
-        className={styles.logoContainer}
-        onMouseOver={(event) => handleMouseOver(event)}
-        onMouseOut={handleMouseOut}
-      >
-        <a href="https://afetharita.com/" target="_blank" rel="noreferrer">
-          <img
-            className={styles.logoImg}
-            id="harita"
-            src={haritaLogo}
-            alt="afet-harita"
-            rel="noreferrer"
-          />
-        </a>
-        <a href="https://deprem.io/" target="_blank" rel="noreferrer">
-          <img
-            className={styles.logoImg}
-            id="io"
-            src={ioLogo}
-            alt="deprem-io"
-          />
-        </a>
-        <a href="https://depremyardim.com/" target="_blank" rel="noreferrer">
-          <img
-            className={styles.logoImg}
-            id="yardim"
-            src={yardimLogo}
-            alt="deprem-yardim"
-          />
-        </a>
+      <div className={styles.logoContainer}>
+        {otherWebsites.map((website) => (
+          <div className={styles.tooltip} key={website.key}>
+            <a href={website.link} target="_blank" rel="noreferrer">
+              <img
+                className={styles.logoImg}
+                src={website.imgSrc}
+                srcSet={website.imgSrcSet}
+                alt={website.key}
+                width="48px"
+                height="48px"
+                rel="noreferrer"
+              />
+            </a>
+            <span className={styles.tooltiptext}>{website.text}</span>
+          </div>
+        ))}
       </div>
-      {isHovering === "harita" ? (
-        <div className={styles.description}>
-          <p>Depremzedeleri aramak ve yardım etmek için kullandığımız site.</p>
-        </div>
-      ) : isHovering === "io" ? (
-        <div className={styles.description}>
-          <p>
-            Afetle ilgili çeşitli konularda bilgi almak için kullandığımız web
-            sitesi.
-          </p>
-        </div>
-      ) : isHovering === "yardim" ? (
-        <div className={styles.description}>
-          <p>Depremzedelere erzak yardımı için kullandığımız site.</p>
-        </div>
-      ) : null}
     </div>
   );
 };

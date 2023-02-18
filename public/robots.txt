@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://saglik.afetharita.com/sitemap.xml
