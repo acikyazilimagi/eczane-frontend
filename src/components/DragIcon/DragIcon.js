@@ -5,13 +5,19 @@ import styles from "./DragIcon.module.scss";
 
 export const DragIcon = ({ dragActive, onLockClick }) => (
   <Control position="topright">
-    <div className={styles.button} onClick={debounce(onLockClick, 150)}>
-      {!dragActive ? (
-        <span className={styles.lockIcon}></span>
-      ) : (
-        <span className={styles.lockOpenIcon}></span>
-      )}
-    </div>
+    <button
+      type="button"
+      className={styles.button}
+      onClick={debounce(onLockClick, 150)}
+    >
+      <div className={styles.iconWrapper}>
+        {!dragActive ? (
+          <span className={styles.lockIcon}></span>
+        ) : (
+          <span className={styles.lockOpenIcon}></span>
+        )}
+      </div>
+    </button>
   </Control>
 );
 DragIcon.propTypes = {

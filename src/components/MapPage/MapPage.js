@@ -14,8 +14,8 @@ const MIN_ZOOM = 7;
 export const CENTER_LAT = 37.683664;
 export const CENTER_LNG = 38.322966;
 
-const LEFT_TOP_BOUND = [34.325514, 28.939165];
-const RIGHT_BOTTOM_BOUND = [41.57364, 42.770324];
+const LEFT_TOP_BOUND = [42, 26];
+const RIGHT_BOTTOM_BOUND = [32, 50];
 
 export const MapPage = ({
   searchFilteredData,
@@ -41,7 +41,7 @@ export const MapPage = ({
       <div className={styles.mainViewContainerMapContainer}>
         <MapContainer
           whenCreated={setMap}
-          className="hazir-map"
+          className={styles.mapContainer}
           center={center}
           zoom={ZOOM}
           minZoom={MIN_ZOOM}
@@ -52,6 +52,7 @@ export const MapPage = ({
           <FullScreenIcon />
 
           <TileLayer
+            detectRetina
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />

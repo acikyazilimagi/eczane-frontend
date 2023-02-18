@@ -1,7 +1,7 @@
 import React from "react";
 import haritaLogo from "../../icons/afet-harita.svg";
-import ioLogo from "../../icons/deprem_io.svg";
 import yardimLogo from "../../icons/deprem-yardim.svg";
+import ioLogo from "../../icons/deprem_io.svg";
 import styles from "./Others.module.scss";
 
 export const Others = () => {
@@ -33,7 +33,7 @@ export const Others = () => {
   ];
   return (
     <div className={styles.otherWrapper}>
-      <h1 className={styles.otherTitle}>Yardımcı Siteler:</h1>
+      <h4 className={styles.otherTitle}>Yardımcı Siteler:</h4>
       <div className={styles.logoContainer}>
         {otherWebsites.map((website) => (
           <div className={styles.tooltip} key={website.key}>
