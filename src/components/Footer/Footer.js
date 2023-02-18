@@ -38,13 +38,7 @@ export function Footer({
         {!hideDistrictSelector && (
           <div className={styles.ilceBox}>
             <div className={styles.IconWrapper}>
-              <div className={styles.button}>
-                <img
-                  className={styles.leftIcon}
-                  src="/left-icon.svg"
-                  alt="sol-ok"
-                />
-              </div>
+              <div className={`${styles.button} left`}></div>
             </div>
             <div className={styles.ilceItems}>
               {noCitySelected && (
@@ -73,13 +67,7 @@ export function Footer({
               ))}
             </div>
             <div className={styles.IconWrapper}>
-              <div className={styles.button}>
-                <img
-                  className={styles.rightIcon}
-                  src="/left-icon.svg"
-                  alt="sol-ok"
-                />
-              </div>
+              <div className={`${styles.button} right`}></div>
             </div>
           </div>
         )}
@@ -102,7 +90,7 @@ export function Footer({
           {!isDesktop && (
             <button
               type="button"
-              className={`{styles.cityItem} ${styles.seeAllMobile}`}
+              className={`${styles.cityItem} ${styles.seeAllMobile}`}
               onClick={() => handleChangeCity(null)}
             >
               Tümünü Gör
@@ -120,11 +108,6 @@ export function Footer({
             >
               Tümünü Gör
             </button>
-            <img
-              className={styles.showAllIcon}
-              src="/show-all-icon.svg"
-              alt="hepsini-gör-icon"
-            />
           </div>
         )}
 
