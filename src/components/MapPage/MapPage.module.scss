@@ -1,0 +1,17 @@
+.mainViewContainerMapContainer {
+  display: flex;
+  height: 500px;
+  border-radius: 17px;
+  position: relative;
+}
+
+.mapContainer {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  @media screen and (min-width: 769px) {
+    border-radius: 15px;
+  }
+}
