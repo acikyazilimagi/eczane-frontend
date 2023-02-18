@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import PropTypes from "prop-types"; // ES6
 import { useWindowSize } from "../../utils/hooks";
 import styles from "./HeaderRow.module.scss";
 import SearchBar from "./SearchBar";
@@ -9,7 +10,7 @@ export const SEARCH_AT = {
 };
 
 export const FILTER = {
-  HEPSI: "Hepsi",
+  HEPSI: 0,
   HASTANE: 1,
   ECZANE: 2,
   VETERINER: 4,
@@ -69,13 +70,19 @@ const FilterRow = ({ filter, setFilter, hasVetData }) => {
         <div className={styles.filterIconWrapper}>
           <img
             className={styles.filterSvg}
-            src="/filter-icon.svg"
+            src="/icons/filter-icon.svg"
             alt="filter-icon"
           />
         </div>
       </div>
     </div>
   );
+};
+
+FilterRow.propTypes = {
+  filter: PropTypes.number.isRequired,
+  setFilter: PropTypes.func.isRequired,
+  hasVetData: PropTypes.bool.isRequired,
 };
 
 export const HeaderRow = ({
@@ -138,4 +145,14 @@ export const HeaderRow = ({
       )}
     </div>
   );
+};
+
+HeaderRow.propTypes = {
+  searchAt: PropTypes.string.isRequired,
+  setSearchAt: PropTypes.func.isRequired,
+  filter: PropTypes.number.isRequired,
+  setFilter: PropTypes.func.isRequired,
+  searchBarVal: PropTypes.string.isRequired,
+  setSearchbarVal: PropTypes.func.isRequired,
+  hasVetData: PropTypes.bool.isRequired,
 };
