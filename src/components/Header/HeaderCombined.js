@@ -27,8 +27,8 @@ export const HeaderCombined = ({
           searchBarVal={searchBarVal}
           setSearchbarVal={setSearchbarVal}
           hasVetData={hasVetData}
-          hasDiyalizData={hasDiyalizData}
           hasPsychData={hasPsychData}
+          hasDiyalizData={hasDiyalizData}
         />
       </div>
     </Block>
