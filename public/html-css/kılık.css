@@ -1,6 +1,5 @@
   @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-
   *{
    margin: 0;
    padding: 0;
@@ -11,6 +10,8 @@
     --yerarkası-tüsü: #112255;
     --yazı-tüsü: #fff;
     --gap-1: 5px;
+    --düğme-yüksekliği: 28px;
+    --kırak-yarı-çapı: 10px;
     --küçük-germede-düğmeler: 3;
     --ortanca-germede-düğmeler: 4;
   }
@@ -26,6 +27,7 @@
 
   body{
     font-family: Roboto, sans-serif;
+    font-weight: 400;
     background-color: var(--yerarkası-tüsü);
     background-image: linear-gradient(180deg,transparent 80%,#182151),url(../header-bg-mobile.jpg);
     background-position: center;
@@ -36,6 +38,9 @@
   .dolp-germe, header, main, footer{
     display: flex;
     flex-wrap: wrap;
+  }
+  header, main, header{
+    padding: 10px;
   }
   .dolp-germe{
     flex-direction: column;
@@ -49,10 +54,14 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--gap-1);
-    padding: 10px;
   }
   main, arama, damga{
     flex: 1 0 0;
+  }
+  arama{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
   }
 
   /* DAMGA */
@@ -65,8 +74,8 @@
     flex-wrap: nowrap;
     align-items: center;
     color: #fff;
-font-size: 1rem;
-text-decoration: none;
+    font-size: 1rem;
+    text-decoration: none;
 
   }
   damga img{
@@ -82,10 +91,22 @@ text-decoration: none;
   arama input{
     width: 100%;
     min-width: 150px;
-    border-radius: .625rem;
-    font-size: 0.9rem;
+    height: var(--düğme-yüksekliği);
+    border-radius: var(--kırak-yarı-çapı);
+    font-size: 10px;
+    
     outline: none;
-    padding: .3rem;
+    padding: 8px;
+  }
+
+  arama > .arama-simgesi{
+    background-image: url(../search-icon.svg);
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+    padding: 8px 16px 8px 8px;
+    height: 28px;
   }
 
   /* SEÇEK */
@@ -93,31 +114,36 @@ text-decoration: none;
   seçek{
     display: flex;
     align-items: center;
-
   }
 
   seçek button{
     background-color: #fff;
     color: #111a42;
-    padding: .45rem .3rem;
+    min-width: 74px;
+    height: var(--düğme-yüksekliği);
+    padding: 8px 16px;
+    font-size: 11px;
+    line-height: 100%;
   }
-  seçek button:first-of-type{
-    border-radius: .625rem 0 0 .625rem;
+  seçek button:first-of-type, arama input:first-of-type{
+    border-radius: var(--kırak-yarı-çapı) 0 0 var(--kırak-yarı-çapı);
   }
-  seçek button:last-of-type{
-    border-radius: 0 .625rem .625rem 0;
+  seçek button:last-of-type, arama i:last-of-type{
+    border-radius: 0 var(--kırak-yarı-çapı) var(--kırak-yarı-çapı) 0;
   }
+
+
 
   /* SÜZGEÇ */
 
   süzgeç{
     display: flex; 
     border: 1px solid #fff;
-    border-radius: .4rem;
+    border-radius: var(--kırak-yarı-çapı);
     padding: 2px;
   }
   süzgeç button{
-    border-radius: .3rem;
+    border-radius: var(--kırak-yarı-çapı);
     background-color: initial;
     color: #fff;
     flex-grow: 1;
@@ -156,11 +182,27 @@ text-decoration: none;
     background-color: #f83b3b;
     color: #fff;
   }
-  
-  @media screen and (min-width:768px) {
+  @media screen and (min-width:390px) {
+    header{
+      gap: 32px 10px;
+    }
     damga{
       break-after: always;
     }
+    seçek{
+      order: 0;
+    }
+    arama{
+      break-after:initial;
+      order: 1;
+    }
+    süzgeç{
+      flex: 1 0 0;
+      order: 2;
+    }
+  }
+  @media screen and (min-width:768px) {
+
     arama{
       order: 1;
     }
