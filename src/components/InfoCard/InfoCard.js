@@ -16,7 +16,7 @@ const typeIdToName = {
   2: "Eczane",
   3: "Psikolojik Destek",
   4: "Veteriner",
-  5: "Diyaliz Destek"
+  5: "Diyaliz Destek",
 };
 
 const InfoCard = ({ item, districtMap, styleName }) => {

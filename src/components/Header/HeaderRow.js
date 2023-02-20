@@ -18,7 +18,13 @@ export const FILTER = {
   DIYALIZ: 5,
 };
 
-const FilterRow = ({ filter, setFilter, hasVetData, hasPsikologData, hasDiyalizData }) => {
+const FilterRow = ({
+  filter,
+  setFilter,
+  hasVetData,
+  hasPsikologData,
+  hasDiyalizData,
+}) => {
   const setHepsi = () => setFilter(FILTER.HEPSI);
   const setHastane = () => setFilter(FILTER.HASTANE);
   const setEczane = () => setFilter(FILTER.ECZANE);
@@ -114,7 +120,7 @@ export const HeaderRow = ({
   setSearchbarVal,
   hasVetData,
   hasPsikologData,
-  hasDiyalizData
+  hasDiyalizData,
 }) => {
   const setHarita = () => setSearchAt(SEARCH_AT.HARITA);
   const setListe = () => setSearchAt(SEARCH_AT.LISTE);
