@@ -2,6 +2,9 @@
 
 ## Dışardan Katkı Sağlamak İçin
 [https://github.com/acikkaynak/eczane-frontend/issues](https://github.com/acikkaynak/eczane-frontend/issues) üzerinden `to-do` ve `help-wanted` label'larının mevcut olduğu herhangi bir issue altında direkt assign talep edebilirsiniz. Issues sıklıkla kontrol ediliyor. Çok gecikme yaşamadan katkı sağlamaya başlayabilirsiniz. Teşekkürler. 
+
+https://github.com/acikkaynak/eczane-frontend/blob/main/AcikKaynakPR.md Açık Kaynak PR açma kılavuzunu da okumanız tavsiye olunur.
+
 ## CSS standartlari
 - Site genelinde kullanılan style'lar hariç düz css dosyaları kullanmayalım. MUI kesinlikle kullanmıyoruz. Dokunduğunuz dosyaların MUI kısımlarını temizlemek faydalı olur. module.scss'e aktarıyoruz.
 - Çok küçük değerler haricinde px yerine rem kullanalım. Bu browser'ında yüksek font kullanan insanlar için (yaşlılar özellikle) kolaylık sağlayacak. px kullanırsak anlam ifade etmez.
