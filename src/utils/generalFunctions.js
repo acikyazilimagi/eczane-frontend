@@ -9,6 +9,10 @@ export const getTypeIcons = (type) => {
       return pharmacyIcon;
     case FILTER.VETERINER:
       return vetIcon;
+    case FILTER.PSIKOLOG:
+      return psikologIcon;
+    case FILTER.DIYALIZ:
+      return diyalizIcon
     default:
       return hospitalIcon;
   }
