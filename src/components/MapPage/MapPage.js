@@ -47,6 +47,8 @@ export const MapPage = ({
           minZoom={MIN_ZOOM}
           tap={L.Browser.safari && L.Browser.mobile}
           maxBounds={[LEFT_TOP_BOUND, RIGHT_BOTTOM_BOUND]}
+          maxBoundsViscosity={1}
+          preferCanvas
         >
           <DragIcon dragActive={dragActive} onLockClick={onLockClick} />
           <FullScreenIcon />
