@@ -13,14 +13,24 @@ export const FILTER = {
   HEPSI: 0,
   HASTANE: 1,
   ECZANE: 2,
+  PSIKOLOG: 3,
   VETERINER: 4,
+  DIYALIZ: 5,
 };
 
-const FilterRow = ({ filter, setFilter, hasVetData }) => {
+const FilterRow = ({
+  filter,
+  setFilter,
+  hasVetData,
+  hasPsikologData,
+  hasDiyalizData,
+}) => {
   const setHepsi = () => setFilter(FILTER.HEPSI);
   const setHastane = () => setFilter(FILTER.HASTANE);
   const setEczane = () => setFilter(FILTER.ECZANE);
   const setVeteriner = () => setFilter(FILTER.VETERINER);
+  const setPsikolog = () => setFilter(FILTER.PSIKOLOG);
+  const setDiyaliz = () => setFilter(FILTER.DIYALIZ);
 
   const SFilterButtons = [
     {
@@ -44,6 +54,20 @@ const FilterRow = ({ filter, setFilter, hasVetData }) => {
       selected: filter === FILTER.VETERINER,
       disabled: !hasVetData,
       buttonDisabled: !hasVetData,
+    },
+    {
+      label: "Psikolojik Destek",
+      click: setPsikolog,
+      selected: filter === FILTER.PSIKOLOG,
+      disabled: !hasPsikologData,
+      buttonDisabled: !hasPsikologData,
+    },
+    {
+      label: "Diyaliz Destek",
+      click: setDiyaliz,
+      selected: filter === FILTER.DIYALIZ,
+      disabled: !hasDiyalizData,
+      buttonDisabled: !hasDiyalizData,
     },
   ];
   return (
@@ -83,6 +107,8 @@ FilterRow.propTypes = {
   filter: PropTypes.number.isRequired,
   setFilter: PropTypes.func.isRequired,
   hasVetData: PropTypes.bool.isRequired,
+  hasPsikologData: PropTypes.bool.isRequired,
+  hasDiyalizData: PropTypes.bool.isRequired,
 };
 
 export const HeaderRow = ({
@@ -93,6 +119,8 @@ export const HeaderRow = ({
   searchBarVal,
   setSearchbarVal,
   hasVetData,
+  hasPsikologData,
+  hasDiyalizData,
 }) => {
   const setHarita = () => setSearchAt(SEARCH_AT.HARITA);
   const setListe = () => setSearchAt(SEARCH_AT.LISTE);
@@ -140,6 +168,8 @@ export const HeaderRow = ({
             filter={filter}
             setFilter={setFilter}
             hasVetData={hasVetData}
+            hasPsikologData={hasPsikologData}
+            hasDiyalizData={hasDiyalizData}
           />
         </div>
       )}
@@ -155,4 +185,6 @@ HeaderRow.propTypes = {
   searchBarVal: PropTypes.string.isRequired,
   setSearchbarVal: PropTypes.func.isRequired,
   hasVetData: PropTypes.bool.isRequired,
+  hasPsikologData: PropTypes.bool.isRequired,
+  hasDiyalizData: PropTypes.bool.isRequired,
 };

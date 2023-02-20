@@ -8,6 +8,7 @@ const typeIdToClassName = {
   2: "eczane",
   3: "psikolog",
   4: "veteriner",
+  5: "diyaliz",
 };
 
 const typeIdToName = {
@@ -15,6 +16,7 @@ const typeIdToName = {
   2: "Eczane",
   3: "Psikolojik Destek",
   4: "Veteriner",
+  5: "Diyaliz Destek",
 };
 
 const InfoCard = ({ item, districtMap, styleName }) => {
