@@ -26,6 +26,13 @@ Bu kaynak size ait olmayan açık kaynaklı bir repo'ya PR açmanız için adım
 
 - Geliştirme tamamlandığında, fork'ladığımız repoda kendi branch'imize push'luyoruz ve ana repo'da main'den önde olup olmadığımızı kontrol ederek (sync adımı), ana reponun adresine gidiyoruz. Ana reponun adresinde zaten fork'lanmış bir repodaki hareketi github algıladığı için, PR açmamız için bizi büyük bir yeşil buton karşılıyor ve burada fork'lanan reponun branch'inden, ana reponun ana branch'ine (main) PR'ımızı açıyoruz.
 - PR'ımız merge'lendiğinde, sync ederek devam ediyoruz.
+- Açılan PR'larda sağ altta yer alan `Allow edit by maintainers`ı işaretleyiniz.
+ 
+<img width="432" alt="image" src="https://user-images.githubusercontent.com/10429728/220184287-699a3d4e-5fe8-4c4e-9692-1230fbab3957.png">
+
+
+
+
 
 ## Dikkat Edilmesi Gereken Hususlar
 
