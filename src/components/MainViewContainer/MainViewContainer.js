@@ -9,6 +9,12 @@ import ListPage from "../ListPage/ListPage";
 import { CENTER_LAT, CENTER_LNG, MapPage } from "../MapPage/MapPage";
 import styles from "./MainViewContainer.module.scss";
 
+const FILTER_IDS = [
+  176, 271, 74, 142, 141, 45, 25, 8, 225, 228, 273, 171, 231, 237, 241, 276,
+  274, 234, 275, 58, 262, 277, 278, 82, 104, 97, 144, 143, 270, 279, 280,
+];
+const FILTER_FILTER_IDS = true;
+
 const MainViewContaier = () => {
   const { data: fetchedData } = useFetch(
     "https://eczaneapi.afetharita.com/api/locations"
@@ -61,7 +67,11 @@ const MainViewContaier = () => {
     return theMap;
   }, [cityData]);
 
-  const typeFilteredData = allData?.filter(
+  const staticFilteredData = FILTER_FILTER_IDS
+    ? allData?.filter((item) => !FILTER_IDS.includes(item.id))
+    : allData;
+
+  const typeFilteredData = staticFilteredData?.filter(
     (item) => filter === FILTER.HEPSI || item.typeId === filter
   );
   const searchFilteredData = typeFilteredData?.filter(
@@ -79,7 +89,9 @@ const MainViewContaier = () => {
       ? cityFilteredData
       : cityFilteredData?.filter((item) => item.districtId === selectedDist);
 
-  const hasVetData = allData?.some((item) => item.typeId === FILTER.VETERINER);
+  const hasVetData = staticFilteredData?.some(
+    (item) => item.typeId === FILTER.VETERINER
+  );
 
   return (
     <div className={styles.mainViewContainerPaper}>
@@ -115,7 +127,7 @@ const MainViewContaier = () => {
         handleChangeCity={handleChangeCity}
         selectedDist={selectedDist}
         setSelectedDist={setSelectedDist}
-        allData={allData}
+        allData={staticFilteredData}
         hideDistrictSelector={searchAt === SEARCH_AT.HARITA}
       />
     </div>
