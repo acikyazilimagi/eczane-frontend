@@ -14,8 +14,8 @@ const MIN_ZOOM = 7;
 export const CENTER_LAT = 37.683664;
 export const CENTER_LNG = 38.322966;
 
-const LEFT_TOP_BOUND = [42, 26];
-const RIGHT_BOTTOM_BOUND = [32, 50];
+const LEFT_TOP_BOUND = [43, 25];
+const RIGHT_BOTTOM_BOUND = [35, 45];
 
 export const MapPage = ({
   searchFilteredData,
