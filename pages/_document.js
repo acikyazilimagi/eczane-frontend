@@ -22,20 +22,8 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head></Head>
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    );
-  }
-}
-
-export default MyDocument;
-
-/*
-   <meta charset="utf-8" />
+        <Head>
+          <meta charset="utf-8" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -61,4 +49,14 @@ export default MyDocument;
             name="description"
             content="Depremden etkilenen bölgelerde sağlık hizmetlerinin verildiği noktaların bilgilerini içeren bir platform."
           />
-*/
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
+}
+
+export default MyDocument;
