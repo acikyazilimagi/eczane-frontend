@@ -1,16 +1,14 @@
 import React from "react";
-import haritaLogo from "../../icons/afet-harita.svg";
-import yardimLogo from "../../icons/deprem-yardim.svg";
-import ioLogo from "../../icons/deprem_io.svg";
+
 import styles from "./Others.module.scss";
 
-export const Others = () => {
+const Others = () => {
   const otherWebsites = [
     {
       key: "afet-harita",
       link: "https://afetharita.com/",
       text: "Depremzedeleri aramak ve yardım etmek için kullandığımız site.",
-      imgSrc: haritaLogo,
+      imgSrc: "/icons/afet-harita.svg",
       imgSrcSet:
         "data:image/svg+xml,%3Csvg width='275' height='275' viewBox='0 0 275 275' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M275 137.5C275 213.439 213.439 275 137.5 275C61.5608 275 0 213.439 0 137.5C0 61.5608 61.5608 0 137.5 0C213.439 0 275 61.5608 275 137.5Z' fill='%23D9D9D9'/%3E%3C/svg%3E",
     },
@@ -18,7 +16,7 @@ export const Others = () => {
       key: "deprem-io",
       link: "https://deprem.io/",
       text: "Afetle ilgili çeşitli konularda bilgi almak için kullandığımız web sitesi.",
-      imgSrc: ioLogo,
+      imgSrc: "/icons/deprem-io.svg",
       imgSrcSet:
         "data:image/svg+xml,%3Csvg width='275' height='275' viewBox='0 0 275 275' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M275 137.5C275 213.439 213.439 275 137.5 275C61.5608 275 0 213.439 0 137.5C0 61.5608 61.5608 0 137.5 0C213.439 0 275 61.5608 275 137.5Z' fill='%23D9D9D9'/%3E%3C/svg%3E",
     },
@@ -26,7 +24,7 @@ export const Others = () => {
       key: "deprem-yardim",
       link: "https://depremyardim.com/",
       text: "Depremzedelere erzak yardımı için kullandığımız site.",
-      imgSrc: yardimLogo,
+      imgSrc: "/icons/deprem-yardim.svg",
       imgSrcSet:
         "data:image/svg+xml,%3Csvg width='275' height='275' viewBox='0 0 275 275' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M275 137.5C275 213.439 213.439 275 137.5 275C61.5608 275 0 213.439 0 137.5C0 61.5608 61.5608 0 137.5 0C213.439 0 275 61.5608 275 137.5Z' fill='%23D9D9D9'/%3E%3C/svg%3E",
     },
@@ -55,3 +53,5 @@ export const Others = () => {
     </div>
   );
 };
+
+export default Others;

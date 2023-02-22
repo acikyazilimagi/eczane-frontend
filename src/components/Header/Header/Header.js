@@ -1,6 +1,6 @@
 import styles from "./Header.module.scss";
 
-export const Header = () => {
+const Header = () => {
   return (
     <div className={styles.headerRowWrapper}>
       <div className={styles.headerWrapper}>
@@ -17,3 +17,5 @@ export const Header = () => {
     </div>
   );
 };
+
+export default Header;

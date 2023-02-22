@@ -1,22 +1,28 @@
 import React, { useMemo, useState } from "react";
-import "react-leaflet-fullscreen/dist/styles.css";
-import centers from "../../lib/cityCenters";
-import { useFetch } from "../../utils/hooks";
-import { Footer } from "../Footer/Footer";
-import { HeaderCombined } from "../Header/HeaderCombined";
-import { FILTER, SEARCH_AT } from "../Header/HeaderRow";
-import ListPage from "../ListPage/ListPage";
-import { CENTER_LAT, CENTER_LNG, MapPage } from "../MapPage/MapPage";
-import styles from "./MainViewContainer.module.scss";
+import dynamic from "next/dynamic";
 
-const MainViewContaier = () => {
-  const { data: fetchedData } = useFetch(
-    "https://eczaneapi.afetharita.com/api/locations"
-  );
+import centers from "../src/lib/cityCenters";
+import Footer from "../src/components/Footer/Footer";
+import HeaderCombined from "../src/components/Header/HeaderCombined";
+import ListPage from "../src/components/ListPage/ListPage";
+
+import axios from "axios";
+import propTypes from "prop-types"; // ES6
+
+import {
+  CENTER_LAT,
+  CENTER_LNG,
+  SEARCH_AT,
+  FILTER,
+} from "../src/utils/constants.js";
+
+const MapPage = dynamic(() => import("../src/components/MapPage/MapPage"), {
+  loading: () => <p>loading...</p>,
+  ssr: false,
+});
+
+const Homepage = ({ fetchedData, cityData }) => {
   const allData = fetchedData?.data;
-  const { data: cityData } = useFetch(
-    "https://eczaneapi.afetharita.com/api/cityWithDistricts"
-  );
 
   const [map, setMap] = useState();
 
@@ -82,7 +88,7 @@ const MainViewContaier = () => {
   const hasVetData = allData?.some((item) => item.typeId === FILTER.VETERINER);
 
   return (
-    <div className={styles.mainViewContainerPaper}>
+    <div className="mainViewContainerPaper">
       <HeaderCombined
         setSearchAt={setSearchAt}
         searchAt={searchAt}
@@ -121,4 +127,27 @@ const MainViewContaier = () => {
     </div>
   );
 };
-export default MainViewContaier;
+
+export async function getServerSideProps() {
+  const fetchedData = await axios.get(
+    "https://eczaneapi.afetharita.com/api/locations"
+  );
+
+  const cityData = await axios.get(
+    "https://eczaneapi.afetharita.com/api/cityWithDistricts"
+  );
+
+  return {
+    props: {
+      fetchedData: fetchedData.data,
+      cityData: cityData.data,
+    },
+  };
+}
+
+Homepage.propTypes = {
+  fetchedData: propTypes.object,
+  cityData: propTypes.object,
+};
+
+export default Homepage;

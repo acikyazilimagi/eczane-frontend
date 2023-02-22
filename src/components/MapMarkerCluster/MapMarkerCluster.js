@@ -4,7 +4,7 @@ import MarkerClusterGroup from "react-leaflet-markercluster";
 import { getTypeIcons } from "../../utils/generalFunctions";
 import InfoCard from "../InfoCard/InfoCard";
 
-export const MapMarkerCluster = ({ searchFilteredData, districtMap }) => {
+const MapMarkerCluster = ({ searchFilteredData, districtMap }) => {
   return (
     <MarkerClusterGroup>
       {searchFilteredData?.map((station) => {
@@ -33,3 +33,5 @@ MapMarkerCluster.propTypes = {
   searchFilteredData: propTypes.array,
   districtMap: propTypes.object,
 };
+
+export default MapMarkerCluster;

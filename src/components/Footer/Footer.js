@@ -1,11 +1,11 @@
 import PropTypes from "prop-types"; // ES6
 import React from "react";
-import { Block } from "../../lib/Block/Block";
+import Block from "../../lib/Block/Block";
 import { useWindowSize } from "../../utils/hooks";
-import { Others } from "../Others/Others";
+import Others from "../Others/Others";
 import styles from "./Footer.module.scss";
 
-export function Footer({
+const Footer = ({
   cityData,
   selectedCity,
   handleChangeCity,
@@ -13,7 +13,7 @@ export function Footer({
   setSelectedDist,
   allData,
   hideDistrictSelector,
-}) {
+}) => {
   const { isDesktop } = useWindowSize();
 
   const noCitySelected = !selectedCity;
@@ -117,7 +117,7 @@ export function Footer({
       </div>
     </Block>
   );
-}
+};
 Footer.propTypes = {
   cityData: PropTypes.object,
   selectedCity: PropTypes.number,
@@ -127,3 +127,5 @@ Footer.propTypes = {
   allData: PropTypes.array,
   hideDistrictSelector: PropTypes.bool.isRequired,
 };
+
+export default Footer;

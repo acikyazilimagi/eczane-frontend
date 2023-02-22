@@ -1,4 +1,4 @@
-import { FILTER } from "../components/Header/HeaderRow";
+import { FILTER } from "./constants";
 import {
   hospitalIcon,
   pharmacyIcon,
