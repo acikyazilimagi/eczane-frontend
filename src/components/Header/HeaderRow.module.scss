@@ -21,6 +21,8 @@
 .filterButton {
   @extend .button;
   border-radius: 0.625rem;
+  padding: 0.5rem;
+  font-size: 0.75rem;
   color: #fff;
   background-color: unset;
   flex-grow: 1;
@@ -33,6 +35,10 @@
 
   &.selected {
     background-color: #f83b3b;
+  }
+  @media (min-width: 769px) {
+    padding: 1rem;
+    font-size: 1.25rem;
   }
 }
 
@@ -56,10 +62,13 @@
 }
 
 .filterIconWrapper {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   margin: 0 0.75rem;
+  @media (min-width: 426px) {
+    display: flex;
+  }
   @media (min-width: 769px) {
     margin: 0 1.5rem;
   }
