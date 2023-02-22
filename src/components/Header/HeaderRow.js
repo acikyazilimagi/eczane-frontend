@@ -86,7 +86,12 @@ const FilterRow = ({
               onClick={click}
               disabled={item.disabled || false}
             >
-              {label}
+              {label.split(" ").map((word, i) => (
+                <>
+                  <span key={word}>{word}</span>
+                  {i !== label.split(" ").length - 1 && <br />}
+                </>
+              ))}
             </button>
           );
         })}
