@@ -12,7 +12,7 @@ export default function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>Afet Sağlık</title>
-        <meta charset="utf-8" />
+        <meta charSet="utf-8" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -27,3 +27,8 @@ export default function MyApp({ Component, pageProps }) {
     </>
   );
 }
+
+MyApp.propTypes = {
+  Component: PropTypes.elementType.isRequired,
+  pageProps: PropTypes.object.isRequired,
+};
