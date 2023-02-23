@@ -23,13 +23,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta charset="utf-8" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-          />
-          <meta name="theme-color" content="#000000" />
-          <link rel="shortcut icon" href="./logo.png" />
+          <link rel="shortcut icon" href="icons/logo.svg" />
           <link
             rel="stylesheet"
             href="https://unpkg.com/leaflet/dist/leaflet.css"
@@ -43,11 +37,6 @@ class MyDocument extends Document {
           <link
             href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
             rel="stylesheet"
-          />
-          <title>Afet Sağlık</title>
-          <meta
-            name="description"
-            content="Depremden etkilenen bölgelerde sağlık hizmetlerinin verildiği noktaların bilgilerini içeren bir platform."
           />
         </Head>
         <body>
