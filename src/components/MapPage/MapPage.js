@@ -37,8 +37,8 @@ const FullScreenIcon = dynamic(
 const ZOOM = 6;
 const MIN_ZOOM = 7;
 
-const LEFT_TOP_BOUND = [42, 26];
-const RIGHT_BOTTOM_BOUND = [32, 50];
+const LEFT_TOP_BOUND = [43, 25];
+const RIGHT_BOTTOM_BOUND = [35, 45];
 
 const MapPage = ({ searchFilteredData, districtMap, setMap, handleLock }) => {
   const [dragActive, setDragActive] = useState(true);

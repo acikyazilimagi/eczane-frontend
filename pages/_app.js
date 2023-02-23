@@ -3,7 +3,7 @@ import "leaflet/dist/leaflet.css";
 import "react-leaflet-fullscreen/dist/styles.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import "leaflet.markercluster/dist/MarkerCluster.css";
-import PropTypes from "prop-types"; // ES6
+import PropTypes from "prop-types";
 
 import Head from "next/head";
 
@@ -27,8 +27,3 @@ export default function MyApp({ Component, pageProps }) {
     </>
   );
 }
-
-MyApp.propTypes = {
-  Component: PropTypes.Component,
-  pageProps: PropTypes.object,
-};
