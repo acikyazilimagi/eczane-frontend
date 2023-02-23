@@ -36,8 +36,8 @@ npm start
 Aşağıdaki kısımdan portu, kendi bilgisayarınızda hangi portta açmak istiyorsanız onunla değiştirin. Örneğin: 3000
 
 ```
-docker build -t eczane-frontend
-docker run -dp <port>:80 --rm --name eczane-frontend eczane-frontend
+docker build -t eczane-frontend .
+docker run -dp 127.0.0.1:<local_port>:80 --rm --name eczane-frontend eczane-frontend
 ```
 
 ## Back-End Projesi: [eczane-backend](https://github.com/acikkaynak/eczane-backend)
