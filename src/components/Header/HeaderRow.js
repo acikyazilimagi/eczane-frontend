@@ -1,10 +1,9 @@
 import clsx from "clsx";
 import PropTypes from "prop-types"; // ES6
-import { useWindowSize } from "../../utils/hooks";
 import styles from "./HeaderRow.module.scss";
 import SearchBar from "./SearchBar";
 
-import { SEARCH_AT, FILTER } from "../../utils/constants";
+import { FILTER, SEARCH_AT } from "../../utils/constants";
 
 const FilterRow = ({
   filter,
@@ -118,8 +117,6 @@ const HeaderRow = ({
   const setHarita = () => setSearchAt(SEARCH_AT.HARITA);
   const setListe = () => setSearchAt(SEARCH_AT.LISTE);
 
-  const { isXLarge } = useWindowSize();
-
   return (
     <div>
       <div className={styles.flex}>
@@ -143,29 +140,20 @@ const HeaderRow = ({
             Listede
           </button>
         </div>
-        {isXLarge && (
-          <FilterRow
-            filter={filter}
-            setFilter={setFilter}
-            hasVetData={hasVetData}
-          />
-        )}
         <SearchBar
           searchBarVal={searchBarVal}
           setSearchBarVal={setSearchbarVal}
         />
       </div>
-      {!isXLarge && (
-        <div className={styles.filterNextRowWrapper}>
-          <FilterRow
-            filter={filter}
-            setFilter={setFilter}
-            hasVetData={hasVetData}
-            hasPsikologData={hasPsikologData}
-            hasDiyalizData={hasDiyalizData}
-          />
-        </div>
-      )}
+      <div className={styles.filterNextRowWrapper}>
+        <FilterRow
+          filter={filter}
+          setFilter={setFilter}
+          hasVetData={hasVetData}
+          hasPsikologData={hasPsikologData}
+          hasDiyalizData={hasDiyalizData}
+        />
+      </div>
     </div>
   );
 };
