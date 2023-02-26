@@ -1,6 +1,3 @@
-export const CENTER_LAT = 37.683664;
-export const CENTER_LNG = 38.322966;
-
 export const SEARCH_AT = {
   HARITA: "harita",
   LISTE: "liste",

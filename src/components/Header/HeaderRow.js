@@ -19,7 +19,7 @@ const FilterRow = ({
   const setPsikolog = () => setFilter(FILTER.PSIKOLOG);
   const setDiyaliz = () => setFilter(FILTER.DIYALIZ);
 
-  const SFilterButtons = [
+  const filterButtonList = [
     {
       label: "Hepsi",
       click: setHepsi,
@@ -60,7 +60,7 @@ const FilterRow = ({
   return (
     <div className={styles.filterWrapper}>
       <div className={styles.filterFlex}>
-        {SFilterButtons.map((item) => {
+        {filterButtonList.map((item) => {
           const { label, click, selected } = item;
           return (
             <button
@@ -100,7 +100,7 @@ FilterRow.propTypes = {
   setFilter: PropTypes.func.isRequired,
   hasVetData: PropTypes.bool.isRequired,
   hasPsikologData: PropTypes.bool.isRequired,
-  hasDiyalizData: PropTypes.bool.isRequired,
+  hasDiyalizData: PropTypes.bool,
 };
 
 const HeaderRow = ({

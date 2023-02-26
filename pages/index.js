@@ -1,20 +1,15 @@
-import React, { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
+import React, { useMemo, useState } from "react";
 
-import centers from "../src/lib/cityCenters";
 import Footer from "../src/components/Footer/Footer";
 import HeaderCombined from "../src/components/Header/HeaderCombined";
 import ListPage from "../src/components/ListPage/ListPage";
+import centers from "../src/lib/cityCenters";
 
 import axios from "axios";
 import propTypes from "prop-types"; // ES6
 
-import {
-  CENTER_LAT,
-  CENTER_LNG,
-  SEARCH_AT,
-  FILTER,
-} from "../src/utils/constants.js";
+import { FILTER, SEARCH_AT } from "../src/utils/constants.js";
 
 const MapPage = dynamic(() => import("../src/components/MapPage/MapPage"), {
   loading: () => <p>loading...</p>,
@@ -22,6 +17,20 @@ const MapPage = dynamic(() => import("../src/components/MapPage/MapPage"), {
 });
 
 const Homepage = ({ fetchedData, cityData }) => {
+  const latlongsSum = fetchedData?.data?.reduce(
+    (acc, curr) => {
+      acc.latitude += curr.latitude;
+      acc.longitude += curr.longitude;
+      return acc;
+    },
+    { latitude: 0, longitude: 0 }
+  );
+  const len = fetchedData?.data?.length;
+  const centerLatLong = {
+    latitude: latlongsSum.latitude / len,
+    longitude: latlongsSum.longitude / len,
+  };
+
   const allData = fetchedData?.data;
 
   const [map, setMap] = useState();
@@ -48,7 +57,7 @@ const Homepage = ({ fetchedData, cityData }) => {
     if (city == null) {
       setSelectedCity(null);
       setSelectedDist(null);
-      map.flyTo([CENTER_LAT, CENTER_LNG], 7);
+      map.flyTo([centerLatLong.latitude, centerLatLong.longitude], 7);
       return;
     }
     const lat = centers[city.key]?.lat;
@@ -105,6 +114,7 @@ const Homepage = ({ fetchedData, cityData }) => {
           districtMap={districtMap}
           setMap={setMap}
           handleLock={handleLock}
+          centerLatLong={centerLatLong}
         />
       )}
       {searchAt === SEARCH_AT.LISTE && (
