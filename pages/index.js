@@ -9,6 +9,7 @@ import centers from "../src/lib/cityCenters";
 import axios from "axios";
 import propTypes from "prop-types"; // ES6
 
+import { calculateCenter } from "../src/utils/calculateCenter";
 import { FILTER, SEARCH_AT } from "../src/utils/constants.js";
 
 const MapPage = dynamic(() => import("../src/components/MapPage/MapPage"), {
@@ -17,19 +18,7 @@ const MapPage = dynamic(() => import("../src/components/MapPage/MapPage"), {
 });
 
 const Homepage = ({ fetchedData, cityData }) => {
-  const latlongsSum = fetchedData?.data?.reduce(
-    (acc, curr) => {
-      acc.latitude += curr.latitude;
-      acc.longitude += curr.longitude;
-      return acc;
-    },
-    { latitude: 0, longitude: 0 }
-  );
-  const len = fetchedData?.data?.length;
-  const centerLatLong = {
-    latitude: latlongsSum.latitude / len,
-    longitude: latlongsSum.longitude / len,
-  };
+  const centerLatLong = calculateCenter(fetchedData);
 
   const allData = fetchedData?.data;
 
