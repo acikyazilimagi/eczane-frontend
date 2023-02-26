@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"; // ES6
 import styles from "./SearchBar.module.scss";
 
-function SearchBar({ searchBarVal, setSearchBarVal }) {
+const SearchBar = ({ searchBarVal, setSearchBarVal }) => {
   return (
     <div className={styles.searchBoxWrapper}>
       <input
@@ -22,7 +22,7 @@ function SearchBar({ searchBarVal, setSearchBarVal }) {
       </div>
     </div>
   );
-}
+};
 
 SearchBar.propTypes = {
   searchBarVal: PropTypes.string.isRequired,

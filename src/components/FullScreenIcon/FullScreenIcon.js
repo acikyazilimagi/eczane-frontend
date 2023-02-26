@@ -1,7 +1,7 @@
 import Control from "react-leaflet-custom-control";
 import { FullscreenControl } from "react-leaflet-fullscreen";
 
-export const FullScreenIcon = () => (
+const FullScreenIcon = () => (
   <Control position="topright">
     <FullscreenControl
       forceSeparateButton
@@ -11,3 +11,5 @@ export const FullScreenIcon = () => (
     />
   </Control>
 );
+
+export default FullScreenIcon;
