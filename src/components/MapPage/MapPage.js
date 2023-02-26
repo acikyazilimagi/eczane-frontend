@@ -1,28 +1,46 @@
 import L from "leaflet";
+
 import propTypes from "prop-types";
 import React, { useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
-import { Block } from "../../lib/Block/Block";
-import { DragIcon } from "../DragIcon/DragIcon";
-import { FullScreenIcon } from "../FullScreenIcon/FullScreenIcon";
-import { MapMarkerCluster } from "../MapMarkerCluster/MapMarkerCluster";
+import Block from "../../lib/Block/Block";
+
+import { CENTER_LAT, CENTER_LNG } from "../../utils/constants";
+import DragIcon from "../DragIcon/DragIcon";
+import FullScreenIcon from "../FullScreenIcon/FullScreenIcon";
+import MapMarkerCluster from "../MapMarkerCluster/MapMarkerCluster";
 import styles from "./MapPage.module.scss";
+
+import "react-leaflet-fullscreen/dist/styles.css";
+
+/* const MapMarkerCluster = dynamic(
+  () => import("../MapMarkerCluster/MapMarkerCluster"),
+  {
+    loading: () => <p>loading...</p>,
+    ssr: false,
+  }
+);
+
+const DragIcon = dynamic(() => import("../DragIcon/DragIcon"), {
+  loading: () => <p>loading...</p>,
+  ssr: false,
+});
+
+const FullScreenIcon = dynamic(
+  () => import("../FullScreenIcon/FullScreenIcon"),
+  {
+    loading: () => <p>loading...</p>,
+    ssr: false,
+  }
+); */
 
 const ZOOM = 6;
 const MIN_ZOOM = 7;
 
-export const CENTER_LAT = 37.683664;
-export const CENTER_LNG = 38.322966;
-
 const LEFT_TOP_BOUND = [43, 25];
 const RIGHT_BOTTOM_BOUND = [35, 45];
 
-export const MapPage = ({
-  searchFilteredData,
-  districtMap,
-  setMap,
-  handleLock,
-}) => {
+const MapPage = ({ searchFilteredData, districtMap, setMap, handleLock }) => {
   const [dragActive, setDragActive] = useState(true);
 
   const center = [CENTER_LAT, CENTER_LNG];
@@ -74,3 +92,5 @@ MapPage.propTypes = {
   setMap: propTypes.func,
   handleLock: propTypes.func,
 };
+
+export default MapPage;

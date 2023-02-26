@@ -1,10 +1,10 @@
 import PropTypes from "prop-types"; // ES6
-import { Block } from "../../lib/Block/Block";
-import { Header } from "./Header/Header";
+import Block from "../../lib/Block/Block";
+import Header from "./Header/Header";
 import styles from "./HeaderCombined.module.scss";
-import { HeaderRow } from "./HeaderRow";
+import HeaderRow from "./HeaderRow";
 
-export const HeaderCombined = ({
+const HeaderCombined = ({
   searchAt,
   setSearchAt,
   filter,
@@ -40,3 +40,5 @@ HeaderCombined.propTypes = {
   setSearchbarVal: PropTypes.func.isRequired,
   hasVetData: PropTypes.bool.isRequired,
 };
+
+export default HeaderCombined;

@@ -2,7 +2,7 @@ import clsx from "clsx";
 import PropTypes from "prop-types"; // ES6
 import styles from "./Block.module.scss";
 
-export const Block = ({ children, styleName, zeroPaddingOnMobile }) => {
+const Block = ({ children, styleName, zeroPaddingOnMobile }) => {
   return (
     <div
       className={clsx(styles.block, {
@@ -20,3 +20,5 @@ Block.propTypes = {
   styleName: PropTypes.string,
   zeroPaddingOnMobile: PropTypes.bool,
 };
+
+export default Block;

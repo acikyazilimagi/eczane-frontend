@@ -3,7 +3,7 @@ import Control from "react-leaflet-custom-control";
 import { debounce } from "../../utils/debounce";
 import styles from "./DragIcon.module.scss";
 
-export const DragIcon = ({ dragActive, onLockClick }) => (
+const DragIcon = ({ dragActive, onLockClick }) => (
   <Control position="topright">
     <button
       type="button"
@@ -20,7 +20,10 @@ export const DragIcon = ({ dragActive, onLockClick }) => (
     </button>
   </Control>
 );
+
 DragIcon.propTypes = {
   dragActive: PropTypes.bool.isRequired,
   onLockClick: PropTypes.func.isRequired,
 };
+
+export default DragIcon;

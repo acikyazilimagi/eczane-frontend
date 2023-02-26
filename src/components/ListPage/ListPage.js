@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"; // ES6
-import { Block } from "../../lib/Block/Block";
+import Block from "../../lib/Block/Block";
 import InfoCard from "../InfoCard/InfoCard";
 import styles from "./ListPage.module.scss";
 
