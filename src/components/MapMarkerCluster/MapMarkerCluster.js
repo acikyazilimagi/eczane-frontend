@@ -6,7 +6,7 @@ import InfoCard from "../InfoCard/InfoCard";
 
 const MapMarkerCluster = ({ searchFilteredData, districtMap }) => {
   return (
-    <MarkerClusterGroup>
+    <MarkerClusterGroup disableClusteringAtZoom={12}>
       {searchFilteredData?.map((station) => {
         return (
           <Marker
