@@ -137,7 +137,7 @@ const Homepage = ({ fetchedData, cityData, typeData }) => {
   );
 };
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const fetchedData = await axios.get(
     "https://eczaneapi.afetharita.com/api/locations"
   );
@@ -156,6 +156,7 @@ export async function getServerSideProps() {
       cityData: cityData.data,
       typeData: typeData.data,
     },
+    revalidate: 10,
   };
 }
 

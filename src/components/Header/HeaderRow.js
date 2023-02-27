@@ -1,3 +1,4 @@
+import React from "react";
 import clsx from "clsx";
 import PropTypes from "prop-types"; // ES6
 import styles from "./HeaderRow.module.scss";
@@ -12,11 +13,13 @@ const FilterRow = ({ filter, setFilter, hasDataObj }) => {
 
   const newButtonList = [
     {
+      id: 0,
       label: "Hepsi",
       click: () => setFilter(HEPSI_ID),
       selected: filter === HEPSI_ID,
     },
     ...typeData.map((item) => ({
+      id: item.id,
       label: item.name,
       click: () => setFilter(item.id),
       selected: filter === item.id,
@@ -27,30 +30,27 @@ const FilterRow = ({ filter, setFilter, hasDataObj }) => {
   return (
     <div className={styles.filterWrapper}>
       <div className={styles.filterFlex}>
-        {newButtonList.map((item) => {
-          const { label, click, selected } = item;
-          return (
-            <button
-              key={label}
-              className={clsx(styles.filterButton, {
-                [styles.buttonDisabled]: item.disabled,
-                [styles.selected]: selected,
-              })}
-              type="button"
-              onClick={click}
-              disabled={item.disabled || false}
-            >
-              {label?.split(" ").map((word, i) => (
-                <>
-                  <span key={word}>{word}</span>
-                  {i !== label.split(" ").length - 1 && <br />}
-                </>
-              ))}
-            </button>
-          );
-        })}
+        {newButtonList.map((item) => (
+          <button
+            key={item?.id?.toString()}
+            className={clsx(styles.filterButton, {
+              [styles.buttonDisabled]: item.disabled,
+              [styles.selected]: item.selected,
+            })}
+            type="button"
+            onClick={item.click}
+            disabled={item.disabled || false}
+          >
+            {item?.label?.split(" ").map((word, i) => (
+              <>
+                <span key={word}>{word}</span>
+                {i !== item?.label.split(" ").length - 1 && <br />}
+              </>
+            ))}
+          </button>
+        ))}
 
-        <div className={styles.filterIconWrapper}>
+        <div className={styles.filterIconWrapper} key="icon">
           <img
             className={styles.filterSvg}
             src="/icons/filter-icon.svg"
@@ -65,7 +65,7 @@ const FilterRow = ({ filter, setFilter, hasDataObj }) => {
 FilterRow.propTypes = {
   filter: PropTypes.number.isRequired,
   setFilter: PropTypes.func.isRequired,
-  hasDataObj: PropTypes.object.isRequired,
+  hasDataObj: PropTypes.array.isRequired,
 };
 
 const HeaderRow = ({
@@ -126,7 +126,7 @@ HeaderRow.propTypes = {
   setFilter: PropTypes.func.isRequired,
   searchBarVal: PropTypes.string.isRequired,
   setSearchbarVal: PropTypes.func.isRequired,
-  hasDataObj: PropTypes.object.isRequired,
+  hasDataObj: PropTypes.array.isRequired,
 };
 
 export default HeaderRow;

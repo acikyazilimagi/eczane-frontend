@@ -38,7 +38,7 @@ HeaderCombined.propTypes = {
   setFilter: PropTypes.func.isRequired,
   searchBarVal: PropTypes.string.isRequired,
   setSearchbarVal: PropTypes.func.isRequired,
-  hasDataObj: PropTypes.object.isRequired,
+  hasDataObj: PropTypes.array.isRequired,
 };
 
 export default HeaderCombined;
