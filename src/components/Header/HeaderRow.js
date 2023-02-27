@@ -1,89 +1,56 @@
+import React from "react";
 import clsx from "clsx";
 import PropTypes from "prop-types"; // ES6
 import styles from "./HeaderRow.module.scss";
 import SearchBar from "./SearchBar";
 
-import { FILTER, SEARCH_AT } from "../../utils/constants";
+import { useContext } from "react";
+import { TypeDataContext } from "../../lib/typeDataContext";
+import { HEPSI_ID, SEARCH_AT } from "../../utils/constants";
 
-const FilterRow = ({
-  filter,
-  setFilter,
-  hasVetData,
-  hasPsikologData,
-  hasDiyalizData,
-}) => {
-  const setHepsi = () => setFilter(FILTER.HEPSI);
-  const setHastane = () => setFilter(FILTER.HASTANE);
-  const setEczane = () => setFilter(FILTER.ECZANE);
-  const setVeteriner = () => setFilter(FILTER.VETERINER);
-  const setPsikolog = () => setFilter(FILTER.PSIKOLOG);
-  const setDiyaliz = () => setFilter(FILTER.DIYALIZ);
+const FilterRow = ({ filter, setFilter, hasDataObj }) => {
+  const { data: typeData } = useContext(TypeDataContext);
 
-  const SFilterButtons = [
+  const newButtonList = [
     {
+      id: 0,
       label: "Hepsi",
-      click: setHepsi,
-      selected: filter === FILTER.HEPSI,
+      click: () => setFilter(HEPSI_ID),
+      selected: filter === HEPSI_ID,
     },
-    {
-      label: "Hastane",
-      click: setHastane,
-      selected: filter === FILTER.HASTANE,
-    },
-    {
-      label: "Eczane",
-      click: setEczane,
-      selected: filter === FILTER.ECZANE,
-    },
-    {
-      label: "Veteriner",
-      click: setVeteriner,
-      selected: filter === FILTER.VETERINER,
-      disabled: !hasVetData,
-      buttonDisabled: !hasVetData,
-    },
-    {
-      label: "Psikolojik Destek",
-      click: setPsikolog,
-      selected: filter === FILTER.PSIKOLOG,
-      disabled: !hasPsikologData,
-      buttonDisabled: !hasPsikologData,
-    },
-    {
-      label: "Diyaliz Destek",
-      click: setDiyaliz,
-      selected: filter === FILTER.DIYALIZ,
-      disabled: !hasDiyalizData,
-      buttonDisabled: !hasDiyalizData,
-    },
+    ...typeData.map((item) => ({
+      id: item.id,
+      label: item.name,
+      click: () => setFilter(item.id),
+      selected: filter === item.id,
+      disabled: !hasDataObj.find((data) => data.typeId === item.id)?.hasData,
+    })),
   ];
+
   return (
     <div className={styles.filterWrapper}>
       <div className={styles.filterFlex}>
-        {SFilterButtons.map((item) => {
-          const { label, click, selected } = item;
-          return (
-            <button
-              key={label}
-              className={clsx(styles.filterButton, {
-                [styles.buttonDisabled]: item.buttonDisabled,
-                [styles.selected]: selected,
-              })}
-              type="button"
-              onClick={click}
-              disabled={item.disabled || false}
-            >
-              {label.split(" ").map((word, i) => (
-                <>
-                  <span key={word}>{word}</span>
-                  {i !== label.split(" ").length - 1 && <br />}
-                </>
-              ))}
-            </button>
-          );
-        })}
+        {newButtonList.map((item) => (
+          <button
+            key={item?.id?.toString()}
+            className={clsx(styles.filterButton, {
+              [styles.buttonDisabled]: item.disabled,
+              [styles.selected]: item.selected,
+            })}
+            type="button"
+            onClick={item.click}
+            disabled={item.disabled || false}
+          >
+            {item?.label?.split(" ").map((word, i) => (
+              <>
+                <span key={word}>{word}</span>
+                {i !== item?.label.split(" ").length - 1 && <br />}
+              </>
+            ))}
+          </button>
+        ))}
 
-        <div className={styles.filterIconWrapper}>
+        <div className={styles.filterIconWrapper} key="icon">
           <img
             className={styles.filterSvg}
             src="/icons/filter-icon.svg"
@@ -98,9 +65,7 @@ const FilterRow = ({
 FilterRow.propTypes = {
   filter: PropTypes.number.isRequired,
   setFilter: PropTypes.func.isRequired,
-  hasVetData: PropTypes.bool.isRequired,
-  hasPsikologData: PropTypes.bool.isRequired,
-  hasDiyalizData: PropTypes.bool.isRequired,
+  hasDataObj: PropTypes.array.isRequired,
 };
 
 const HeaderRow = ({
@@ -110,9 +75,7 @@ const HeaderRow = ({
   setFilter,
   searchBarVal,
   setSearchbarVal,
-  hasVetData,
-  hasPsikologData,
-  hasDiyalizData,
+  hasDataObj,
 }) => {
   const setHarita = () => setSearchAt(SEARCH_AT.HARITA);
   const setListe = () => setSearchAt(SEARCH_AT.LISTE);
@@ -149,9 +112,7 @@ const HeaderRow = ({
         <FilterRow
           filter={filter}
           setFilter={setFilter}
-          hasVetData={hasVetData}
-          hasPsikologData={hasPsikologData}
-          hasDiyalizData={hasDiyalizData}
+          hasDataObj={hasDataObj}
         />
       </div>
     </div>
@@ -165,9 +126,7 @@ HeaderRow.propTypes = {
   setFilter: PropTypes.func.isRequired,
   searchBarVal: PropTypes.string.isRequired,
   setSearchbarVal: PropTypes.func.isRequired,
-  hasVetData: PropTypes.bool.isRequired,
-  hasPsikologData: PropTypes.bool.isRequired,
-  hasDiyalizData: PropTypes.bool.isRequired,
+  hasDataObj: PropTypes.array.isRequired,
 };
 
 export default HeaderRow;

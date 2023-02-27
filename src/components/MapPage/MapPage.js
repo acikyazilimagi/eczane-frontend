@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import Block from "../../lib/Block/Block";
 
-import { CENTER_LAT, CENTER_LNG } from "../../utils/constants";
 import DragIcon from "../DragIcon/DragIcon";
 import FullScreenIcon from "../FullScreenIcon/FullScreenIcon";
 import MapMarkerCluster from "../MapMarkerCluster/MapMarkerCluster";
@@ -37,13 +36,32 @@ const FullScreenIcon = dynamic(
 const ZOOM = 6;
 const MIN_ZOOM = 7;
 
-const LEFT_TOP_BOUND = [43, 25];
-const RIGHT_BOTTOM_BOUND = [35, 45];
+// bunu gelen datanin varyansina gore ayarlarsak efsane olur
+const LAT_BOUND_THRESHOLD = 4;
+const LONG_BOUND_THRESHOLD = 10;
 
-const MapPage = ({ searchFilteredData, districtMap, setMap, handleLock }) => {
+const MapPage = ({
+  searchFilteredData,
+  districtMap,
+  setMap,
+  handleLock,
+  centerLatLong,
+}) => {
   const [dragActive, setDragActive] = useState(true);
 
-  const center = [CENTER_LAT, CENTER_LNG];
+  const center = [
+    centerLatLong?.latitude ?? 40,
+    centerLatLong?.longitude ?? 35,
+  ];
+
+  const leftTopBound = [
+    centerLatLong?.latitude - LAT_BOUND_THRESHOLD,
+    centerLatLong?.longitude - LONG_BOUND_THRESHOLD,
+  ];
+  const rightBottomBound = [
+    centerLatLong?.latitude + LAT_BOUND_THRESHOLD,
+    centerLatLong?.longitude + LONG_BOUND_THRESHOLD,
+  ];
 
   const toggleDragActive = () => {
     setDragActive((active) => !active);
@@ -64,7 +82,7 @@ const MapPage = ({ searchFilteredData, districtMap, setMap, handleLock }) => {
           zoom={ZOOM}
           minZoom={MIN_ZOOM}
           tap={L.Browser.safari && L.Browser.mobile}
-          maxBounds={[LEFT_TOP_BOUND, RIGHT_BOTTOM_BOUND]}
+          maxBounds={[leftTopBound, rightBottomBound]}
           maxBoundsViscosity={1}
           preferCanvas
         >
@@ -91,6 +109,7 @@ MapPage.propTypes = {
   districtMap: propTypes.object,
   setMap: propTypes.func,
   handleLock: propTypes.func,
+  centerLatLong: propTypes.object.isRequired,
 };
 
 export default MapPage;

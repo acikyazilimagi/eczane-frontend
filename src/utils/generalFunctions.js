@@ -1,23 +1,24 @@
-import { FILTER } from "./constants";
 import {
+  diyalizIcon,
   hospitalIcon,
   pharmacyIcon,
-  vetIcon,
   psikologIcon,
-  diyalizIcon,
+  vetIcon,
 } from "../lib/Icons";
+import { HEPSI_ID } from "./constants";
 
+// FIXME: This is a temporary solution. We should use a better way to get the icons.
 export const getTypeIcons = (type) => {
   switch (type) {
-    case FILTER.HASTANE:
+    case HEPSI_ID:
       return hospitalIcon;
-    case FILTER.ECZANE:
+    case 1:
       return pharmacyIcon;
-    case FILTER.VETERINER:
+    case 4:
       return vetIcon;
-    case FILTER.PSIKOLOG:
+    case 3:
       return psikologIcon;
-    case FILTER.DIYALIZ:
+    case 5:
       return diyalizIcon;
     default:
       return hospitalIcon;

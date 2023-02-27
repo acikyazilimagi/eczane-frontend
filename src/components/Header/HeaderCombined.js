@@ -11,7 +11,7 @@ const HeaderCombined = ({
   setFilter,
   searchBarVal,
   setSearchbarVal,
-  hasVetData,
+  hasDataObj,
 }) => {
   return (
     <Block styleName={styles.mobileBgImage}>
@@ -24,7 +24,7 @@ const HeaderCombined = ({
           setFilter={setFilter}
           searchBarVal={searchBarVal}
           setSearchbarVal={setSearchbarVal}
-          hasVetData={hasVetData}
+          hasDataObj={hasDataObj}
         />
       </div>
     </Block>
@@ -38,7 +38,7 @@ HeaderCombined.propTypes = {
   setFilter: PropTypes.func.isRequired,
   searchBarVal: PropTypes.string.isRequired,
   setSearchbarVal: PropTypes.func.isRequired,
-  hasVetData: PropTypes.bool.isRequired,
+  hasDataObj: PropTypes.array.isRequired,
 };
 
 export default HeaderCombined;

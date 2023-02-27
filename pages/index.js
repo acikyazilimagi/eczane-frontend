@@ -1,33 +1,32 @@
-import React, { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
+import React, { useMemo, useState } from "react";
 
-import centers from "../src/lib/cityCenters";
 import Footer from "../src/components/Footer/Footer";
 import HeaderCombined from "../src/components/Header/HeaderCombined";
 import ListPage from "../src/components/ListPage/ListPage";
+import centers from "../src/lib/cityCenters";
 
 import axios from "axios";
 import propTypes from "prop-types"; // ES6
 
-import {
-  CENTER_LAT,
-  CENTER_LNG,
-  SEARCH_AT,
-  FILTER,
-} from "../src/utils/constants.js";
+import { TypeDataContext } from "../src/lib/typeDataContext";
+import { calculateCenter } from "../src/utils/calculateCenter";
+import { HEPSI_ID, SEARCH_AT } from "../src/utils/constants.js";
 
 const MapPage = dynamic(() => import("../src/components/MapPage/MapPage"), {
   loading: () => <p>loading...</p>,
   ssr: false,
 });
 
-const Homepage = ({ fetchedData, cityData }) => {
+const Homepage = ({ fetchedData, cityData, typeData }) => {
+  const centerLatLong = calculateCenter(fetchedData);
+
   const allData = fetchedData?.data;
 
   const [map, setMap] = useState();
 
   const [searchAt, setSearchAt] = useState(SEARCH_AT.HARITA);
-  const [filter, setFilter] = useState(FILTER.HEPSI);
+  const [filter, setFilter] = useState(HEPSI_ID);
   const [searchBarVal, setSearchbarVal] = useState("");
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedDist, setSelectedDist] = useState(null);
@@ -48,7 +47,7 @@ const Homepage = ({ fetchedData, cityData }) => {
     if (city == null) {
       setSelectedCity(null);
       setSelectedDist(null);
-      map.flyTo([CENTER_LAT, CENTER_LNG], 7);
+      map.flyTo([centerLatLong.latitude, centerLatLong.longitude], 7);
       return;
     }
     const lat = centers[city.key]?.lat;
@@ -68,7 +67,7 @@ const Homepage = ({ fetchedData, cityData }) => {
   }, [cityData]);
 
   const typeFilteredData = allData?.filter(
-    (item) => filter === FILTER.HEPSI || item.typeId === filter
+    (item) => filter === HEPSI_ID || item.typeId === filter
   );
   const searchFilteredData = typeFilteredData?.filter(
     (item) =>
@@ -85,34 +84,44 @@ const Homepage = ({ fetchedData, cityData }) => {
       ? cityFilteredData
       : cityFilteredData?.filter((item) => item.districtId === selectedDist);
 
-  const hasVetData = allData?.some((item) => item.typeId === FILTER.VETERINER);
+  const hasDataObj = typeData?.data?.map((type) => {
+    const dataExists = allData?.some((item) => item.typeId === type.id);
+    return { typeId: type.id, hasData: dataExists };
+  });
 
   return (
     <div className="mainViewContainerPaper">
-      <HeaderCombined
-        setSearchAt={setSearchAt}
-        searchAt={searchAt}
-        filter={filter}
-        setFilter={setFilter}
-        searchBarVal={searchBarVal}
-        setSearchbarVal={setSearchbarVal}
-        hasVetData={!!hasVetData}
-      />
+      <TypeDataContext.Provider value={typeData}>
+        <HeaderCombined
+          setSearchAt={setSearchAt}
+          searchAt={searchAt}
+          filter={filter}
+          setFilter={setFilter}
+          searchBarVal={searchBarVal}
+          setSearchbarVal={setSearchbarVal}
+          hasDataObj={hasDataObj}
+        />
+      </TypeDataContext.Provider>
 
       {searchAt === SEARCH_AT.HARITA && (
-        <MapPage
-          searchFilteredData={searchFilteredData}
-          districtMap={districtMap}
-          setMap={setMap}
-          handleLock={handleLock}
-        />
+        <TypeDataContext.Provider value={typeData}>
+          <MapPage
+            searchFilteredData={searchFilteredData}
+            districtMap={districtMap}
+            setMap={setMap}
+            handleLock={handleLock}
+            centerLatLong={centerLatLong}
+          />
+        </TypeDataContext.Provider>
       )}
       {searchAt === SEARCH_AT.LISTE && (
-        <ListPage
-          data={distFilteredData}
-          cityData={cityData}
-          districtMap={districtMap}
-        />
+        <TypeDataContext.Provider value={typeData}>
+          <ListPage
+            data={distFilteredData}
+            cityData={cityData}
+            districtMap={districtMap}
+          />
+        </TypeDataContext.Provider>
       )}
 
       <Footer
@@ -128,7 +137,7 @@ const Homepage = ({ fetchedData, cityData }) => {
   );
 };
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const fetchedData = await axios.get(
     "https://eczaneapi.afetharita.com/api/locations"
   );
@@ -137,17 +146,24 @@ export async function getServerSideProps() {
     "https://eczaneapi.afetharita.com/api/cityWithDistricts"
   );
 
+  const typeData = await axios.get(
+    "https://eczaneapi.afetharita.com/api/types"
+  );
+
   return {
     props: {
       fetchedData: fetchedData.data,
       cityData: cityData.data,
+      typeData: typeData.data,
     },
+    revalidate: 10,
   };
 }
 
 Homepage.propTypes = {
   fetchedData: propTypes.object,
   cityData: propTypes.object,
+  typeData: propTypes.object,
 };
 
 export default Homepage;
