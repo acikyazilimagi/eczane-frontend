@@ -1,8 +1,8 @@
 import dynamic from "next/dynamic";
 import React, { useMemo, useState } from "react";
 
-import Footer from "../src/components/Footer/Footer";
-import HeaderCombined from "../src/components/Header/HeaderCombined";
+import "../i18n";
+
 import ListPage from "../src/components/ListPage/ListPage";
 import centers from "../src/lib/cityCenters";
 
@@ -15,6 +15,17 @@ import { HEPSI_ID, SEARCH_AT } from "../src/utils/constants.js";
 
 const MapPage = dynamic(() => import("../src/components/MapPage/MapPage"), {
   loading: () => <p>loading...</p>,
+  ssr: false,
+});
+
+const HeaderCombined = dynamic(
+  () => import("../src/components/Header/HeaderCombined"),
+  {
+    ssr: false,
+  }
+);
+
+const Footer = dynamic(() => import("../src/components/Footer/Footer"), {
   ssr: false,
 });
 
@@ -102,7 +113,6 @@ const Homepage = ({ fetchedData, cityData, typeData }) => {
           hasDataObj={hasDataObj}
         />
       </TypeDataContext.Provider>
-
       {searchAt === SEARCH_AT.HARITA && (
         <TypeDataContext.Provider value={typeData}>
           <MapPage

@@ -4,14 +4,17 @@ import "react-leaflet-fullscreen/dist/styles.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 import Head from "next/head";
 
 export default function MyApp({ Component, pageProps }) {
+  const { t } = useTranslation();
+
   return (
     <>
       <Head>
-        <title>Afet Sağlık</title>
+        <title>{t("common:title")}</title>
         <meta charSet="utf-8" />
         <meta
           name="viewport"

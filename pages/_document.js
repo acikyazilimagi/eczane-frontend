@@ -21,7 +21,13 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html
+        lang={
+          typeof window !== "undefined"
+            ? window.localStorage.getItem("i18nextLng")
+            : "TR"
+        }
+      >
         <Head>
           <link rel="shortcut icon" href="icons/logo.svg" />
           <link

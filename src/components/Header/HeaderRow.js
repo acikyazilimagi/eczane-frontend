@@ -3,6 +3,7 @@ import clsx from "clsx";
 import PropTypes from "prop-types"; // ES6
 import styles from "./HeaderRow.module.scss";
 import SearchBar from "./SearchBar";
+import { useTranslation } from "next-i18next";
 
 import { useContext } from "react";
 import { TypeDataContext } from "../../lib/typeDataContext";
@@ -10,17 +11,27 @@ import { HEPSI_ID, SEARCH_AT } from "../../utils/constants";
 
 const FilterRow = ({ filter, setFilter, hasDataObj }) => {
   const { data: typeData } = useContext(TypeDataContext);
+  const { t } = useTranslation();
 
   const newButtonList = [
     {
       id: 0,
-      label: "Hepsi",
+      label: t("common:allBtn"),
       click: () => setFilter(HEPSI_ID),
       selected: filter === HEPSI_ID,
     },
     ...typeData.map((item) => ({
       id: item.id,
-      label: item.name,
+      label:
+        item.name === "Hastane"
+          ? t("common:hospitalBtn")
+          : item.name === "Eczane"
+          ? t("common:pharmacyBtn")
+          : item.name === "Veteriner"
+          ? t("common:vetBtn")
+          : item.name === "Psikolojik Destek"
+          ? t("common:psychologistBtn")
+          : "",
       click: () => setFilter(item.id),
       selected: filter === item.id,
       disabled: !hasDataObj.find((data) => data.typeId === item.id)?.hasData,
@@ -80,6 +91,7 @@ const HeaderRow = ({
   const setHarita = () => setSearchAt(SEARCH_AT.HARITA);
   const setListe = () => setSearchAt(SEARCH_AT.LISTE);
 
+  const { t } = useTranslation();
   return (
     <div>
       <div className={styles.flex}>
@@ -91,7 +103,7 @@ const HeaderRow = ({
             type="button"
             onClick={setHarita}
           >
-            Haritada
+            {t("common:mapBtn")}
           </button>
           <button
             className={clsx(styles.searchButton, {
@@ -100,7 +112,7 @@ const HeaderRow = ({
             type="button"
             onClick={setListe}
           >
-            Listede
+            {t("common:listBtn")}
           </button>
         </div>
         <SearchBar

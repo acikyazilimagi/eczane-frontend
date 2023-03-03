@@ -4,6 +4,7 @@ import Block from "../../lib/Block/Block";
 import { useWindowSize } from "../../utils/hooks";
 import Others from "../Others/Others";
 import styles from "./Footer.module.scss";
+import { useTranslation } from "next-i18next";
 
 const Footer = ({
   cityData,
@@ -31,6 +32,7 @@ const Footer = ({
       return !!distData;
     })
     .map((i) => i.key);
+  const { t } = useTranslation();
 
   return (
     <Block>
@@ -43,7 +45,7 @@ const Footer = ({
             <div className={styles.ilceItems}>
               {noCitySelected && (
                 <div className={styles.paragWrapper}>
-                  <p className={styles.parag}>Şehir Seçiniz</p>
+                  <p className={styles.parag}>{t("common:chooseACity")}</p>
                 </div>
               )}
               {selectedCityDistricts?.map((item) => (
@@ -93,7 +95,7 @@ const Footer = ({
               className={`${styles.cityItem} ${styles.seeAllMobile}`}
               onClick={() => handleChangeCity(null)}
             >
-              Tümünü Gör
+              {t("common:showAll")}
             </button>
           )}
         </div>
@@ -106,7 +108,7 @@ const Footer = ({
               type="button"
               className={`${styles.cityItem} ${styles.seeAllButton}`}
             >
-              Tümünü Gör
+              {t("common:showAll")}
             </button>
           </div>
         )}

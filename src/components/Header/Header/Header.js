@@ -1,6 +1,22 @@
 import styles from "./Header.module.scss";
+import React, { useState } from "react";
+import Select from "react-select";
+import { useTranslation } from "next-i18next";
+import "../../../../i18n";
 
 const Header = () => {
+  const { t, i18n } = useTranslation();
+  const [selectedOption, setSelectedOption] = useState(localStorage.i18nextLng);
+
+  const handleChangeLang = (lang) => {
+    i18n.changeLanguage(lang.value);
+    setSelectedOption(lang.value);
+  };
+  const options = [
+    { value: "TR", label: "TR" },
+    { value: "EN", label: "EN" },
+  ];
+
   return (
     <div className={styles.headerRowWrapper}>
       <div className={styles.headerWrapper}>
@@ -12,7 +28,14 @@ const Header = () => {
           height="86px"
           alt="logo"
         />
-        <h1 className={styles.logoText}>Afet Sağlık</h1>
+        <h1 className={styles.logoText}>{t("common:title")}</h1>
+      </div>
+      <div className={styles.langWrapper}>
+        <Select
+          options={options}
+          onChange={(event) => handleChangeLang(event)}
+          defaultValue={options.find((item) => item.value === selectedOption)}
+        />
       </div>
     </div>
   );
