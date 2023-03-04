@@ -70,3 +70,35 @@ export function useFetch(url) {
 
   return { data, loading, error };
 }
+
+export function getLocalStorage(key, initialValue) {
+  if (typeof window === "undefined") {
+    return initialValue;
+  }
+  try {
+    const item = window.localStorage.getItem(key);
+    const val = item ?? initialValue;
+    return val;
+  } catch (error) {
+    return initialValue;
+  }
+}
+
+export function useLocalStorage(key, initialValue) {
+  const [storedValue, setStoredValue] = useState(() => {
+    const val = getLocalStorage(key, initialValue);
+    return val;
+  });
+
+  const setValue = (value) => {
+    try {
+      setStoredValue(value);
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem(key, value);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  return [storedValue, setValue];
+}

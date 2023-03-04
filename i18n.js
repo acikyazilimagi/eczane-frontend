@@ -1,9 +1,11 @@
 import i18n from "i18next";
-import Backend from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
+import Backend from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
 import translationEN from "./public/locales/en/common.json";
 import translationTR from "./public/locales/tr/common.json";
+import { LANGUAGE_KEY_LOCAL_STORAGE } from "./src/utils/constants";
+import { getLocalStorage } from "./src/utils/hooks";
 
 const resources = {
   EN: {
@@ -22,10 +24,7 @@ i18n
     resources,
     fallbackLng: "TR",
     localeDetection: false,
-    lng:
-      typeof window !== "undefined"
-        ? window.localStorage.getItem("i18nextLng")
-        : "TR",
+    lng: getLocalStorage(LANGUAGE_KEY_LOCAL_STORAGE, "TR"),
     debug: false,
     preload: true,
     returnNull: false,

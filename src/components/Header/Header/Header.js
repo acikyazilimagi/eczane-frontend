@@ -1,16 +1,21 @@
-import styles from "./Header.module.scss";
-import React, { useState } from "react";
-import Select from "react-select";
 import { useTranslation } from "next-i18next";
+import React from "react";
+import Select from "react-select";
 import "../../../../i18n";
+import { LANGUAGE_KEY_LOCAL_STORAGE } from "../../../utils/constants";
+import { useLocalStorage } from "../../../utils/hooks";
+import styles from "./Header.module.scss";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
-  const [selectedOption, setSelectedOption] = useState(localStorage.i18nextLng);
+  const [storedLanguage, setStoredLanguage] = useLocalStorage(
+    LANGUAGE_KEY_LOCAL_STORAGE,
+    "TR"
+  );
 
   const handleChangeLang = (lang) => {
     i18n.changeLanguage(lang.value);
-    setSelectedOption(lang.value);
+    setStoredLanguage(lang.value);
   };
   const options = [
     { value: "TR", label: "TR" },
@@ -34,7 +39,7 @@ const Header = () => {
         <Select
           options={options}
           onChange={(event) => handleChangeLang(event)}
-          defaultValue={options.find((item) => item.value === selectedOption)}
+          value={options.find((item) => item.value === storedLanguage)}
         />
       </div>
     </div>
