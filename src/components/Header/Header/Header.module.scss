@@ -24,12 +24,20 @@
   font-family: "Roboto", sans-serif;
   color: #fff;
   font-size: 1.5rem;
-  max-width: 8.75rem;
   margin-left: 0.75rem;
 
   @media (min-width: 769px) {
     font-size: 3rem;
-    max-width: 18.75rem;
     margin-left: 2rem;
+  }
+}
+
+.langWrapper {
+  display: flex;
+  align-items: center;
+}
+.flagIcon{
+  &svg{
+    width: 2vw;
   }
 }

@@ -1,4 +1,6 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
+import { LANGUAGE_KEY_LOCAL_STORAGE } from "../src/utils/constants";
+import { getLocalStorage } from "../src/utils/hooks";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -21,7 +23,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang={getLocalStorage(LANGUAGE_KEY_LOCAL_STORAGE, "TR")}>
         <Head>
           <link rel="shortcut icon" href="icons/logo.svg" />
           <link

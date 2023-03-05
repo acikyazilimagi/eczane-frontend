@@ -4,9 +4,11 @@ import { useContext } from "react";
 import { CITIES } from "../../lib/city";
 import { TypeDataContext } from "../../lib/typeDataContext";
 import styles from "./InfoCard.module.scss";
+import { useTranslation } from "next-i18next";
 
 const InfoCard = ({ item, districtMap, styleName }) => {
   const { data: typeData } = useContext(TypeDataContext);
+  const { t } = useTranslation();
 
   const cityName = CITIES?.[item.cityId]?.key;
   const districtName = districtMap?.get(item.districtId);
@@ -19,7 +21,15 @@ const InfoCard = ({ item, districtMap, styleName }) => {
     <div className={`${styles.cardWrapper} ${styleName}`}>
       <div className={styles.cardHeader}>
         <span className={clsx(styles.cardHeaderTitle, typeName.toLowerCase())}>
-          {typeName ?? "-"}
+          {typeName === "Hastane"
+            ? t("common:hospitalBtn")
+            : typeName === "Eczane"
+            ? t("common:pharmacyBtn")
+            : typeName === "Veteriner"
+            ? t("common:vetBtn")
+            : typeName === "Psikolojik Destek"
+            ? t("common:psychologistBtn")
+            : "" ?? "-"}
         </span>
       </div>
       <div className={styles.cardOrgName}>

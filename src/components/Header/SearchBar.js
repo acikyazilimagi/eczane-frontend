@@ -1,12 +1,14 @@
 import PropTypes from "prop-types"; // ES6
 import styles from "./SearchBar.module.scss";
+import { useTranslation } from "next-i18next";
 
 const SearchBar = ({ searchBarVal, setSearchBarVal }) => {
+  const { t } = useTranslation();
   return (
     <div className={styles.searchBoxWrapper}>
       <input
         type="text"
-        placeholder="Ara"
+        placeholder={t("common:search")}
         value={searchBarVal}
         onInput={(e) => setSearchBarVal(e.target.value)}
         className={styles.input}

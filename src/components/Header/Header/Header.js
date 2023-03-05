@@ -1,6 +1,27 @@
+import { useTranslation } from "next-i18next";
+import React from "react";
+import Select from "react-select";
+import "../../../../i18n";
+import { LANGUAGE_KEY_LOCAL_STORAGE } from "../../../utils/constants";
+import { useLocalStorage } from "../../../utils/hooks";
 import styles from "./Header.module.scss";
 
 const Header = () => {
+  const { t, i18n } = useTranslation();
+  const [storedLanguage, setStoredLanguage] = useLocalStorage(
+    LANGUAGE_KEY_LOCAL_STORAGE,
+    "TR"
+  );
+
+  const handleChangeLang = (lang) => {
+    i18n.changeLanguage(lang.value);
+    setStoredLanguage(lang.value);
+  };
+  const options = [
+    { value: "TR", label: "TR" },
+    { value: "EN", label: "EN" },
+  ];
+
   return (
     <div className={styles.headerRowWrapper}>
       <div className={styles.headerWrapper}>
@@ -12,7 +33,14 @@ const Header = () => {
           height="86px"
           alt="logo"
         />
-        <h1 className={styles.logoText}>Afet Sağlık</h1>
+        <h1 className={styles.logoText}>{t("common:title")}</h1>
+      </div>
+      <div className={styles.langWrapper}>
+        <Select
+          options={options}
+          onChange={(event) => handleChangeLang(event)}
+          value={options.find((item) => item.value === storedLanguage)}
+        />
       </div>
     </div>
   );
