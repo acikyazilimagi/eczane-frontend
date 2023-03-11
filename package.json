@@ -34,7 +34,9 @@
     "start": "next start",
     "prettier-fix": "prettier 'src/**/*.(ts|tsx|js|jsx|css|json)' --write",
     "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx ./src",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
@@ -44,8 +46,69 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "react-app/jest",
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:prettier/recommended",
+      "prettier/react-hooks/recommended"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
+    ],
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+      "ecmaVersion": 2021,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "plugins": [
+      "react",
+      "prettier",
+      "react-hooks",
+      "storybook"
+    ],
+    "rules": {
+      "prettier/prettier": "error",
+      "react/prop-types": "off",
+      "react/display-name": "off",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "no-unused-vars": "warn",
+      "no-console": "warn",
+      "no-debugger": "warn",
+      "no-undef": "warn",
+      "no-constant-condition": "warn",
+      "no-empty": "warn",
+      "no-extra-semi": "warn",
+      "no-fallthrough": "warn",
+      "no-inner-declarations": "warn",
+      "no-irregular-whitespace": "warn",
+      "no-unsafe-finally": "warn",
+      "no-unsafe-negation": "warn",
+      "no-unreachable": "warn",
+      "no-unused-expressions": "warn",
+      "no-unused-labels": "warn",
+      "no-useless-escape": "warn",
+      "no-var": "warn",
+      "no-with": "warn",
+      "no-mixed-spaces-and-tabs": "warn",
+      "no-trailing-spaces": "warn",
+      "no-undef-init": "warn",
+      "no-unexpected-multiline": "warn",
+      "no-unreachable-loop": "warn",
+      "no-useless-return": "warn",
+      "no-void": "warn",
+      "no-useless-concat": "warn"
+    }
   },
   "browserslist": {
     "production": [
@@ -61,14 +124,27 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",
+    "@storybook/addon-actions": "^6.5.16",
+    "@storybook/addon-essentials": "^6.5.16",
+    "@storybook/addon-interactions": "^6.5.16",
+    "@storybook/addon-links": "^6.5.16",
+    "@storybook/builder-webpack5": "^6.5.16",
+    "@storybook/manager-webpack5": "^6.5.16",
+    "@storybook/node-logger": "^6.5.16",
+    "@storybook/preset-create-react-app": "^4.1.2",
+    "@storybook/react": "^6.5.16",
+    "@storybook/testing-library": "^0.0.13",
     "babel-eslint": "^10.1.0",
+    "babel-plugin-named-exports-order": "^0.0.2",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-storybook": "^0.6.11",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.2",
-    "prettier": "^2.8.4"
+    "prettier": "^2.8.4",
+    "webpack": "^5.76.1"
   }
 }
