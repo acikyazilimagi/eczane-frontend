@@ -1,0 +1,21 @@
+.button {
+  font-family: "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  color: #ffffff;
+  background-color: transparent;
+  border: none;
+  padding: 0.625rem;
+  border-radius: 1.25rem;
+  font-size: 0.75rem;
+
+  &.backgroundBlue {
+    background-color: #1d204a;
+  }
+
+  &.activeRed {
+    background-color: #f83b3b;
+  }
+  &.activeWhite {
+    background-color: #ffffff;
+  }
+}
