@@ -1,0 +1,103 @@
+.cardWrapper {
+  max-width: 19.75rem;
+  font-family: "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.topWrapper {
+  padding: 0.625rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 1rem 1rem 0 0;
+}
+
+.topLeftWrapper {
+}
+
+.nameWrapper {
+}
+
+.type {
+  margin-bottom: 0.625rem;
+  h4 {
+    margin: 0;
+    color: #9b67c6;
+    font-size: 0.75rem;
+    font-weight: 400;
+  }
+  h2 {
+    margin: 0;
+    color: #182151;
+    font-size: 1.125rem;
+    font-weight: 400;
+  }
+}
+
+.generalType {
+  h4 {
+    margin: 0;
+    font-size: 0.625rem;
+    font-weight: 400;
+    color: #182151;
+    text-transform: uppercase;
+  }
+}
+
+.topRightWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  .timeWrapper {
+    p {
+      margin: 0;
+      color: #182151;
+      font-size: 0.625rem;
+      font-weight: 400;
+      opacity: 0.63;
+    }
+  }
+}
+
+.bottomWrapper {
+  background-color: #eff5ff;
+  border-radius: 0 0 1rem 1rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  .bottomLeftWrapper {
+    max-width: 65%;
+    .addressWrapper {
+      margin-bottom: 0.5rem;
+    }
+    .contactWrapper {
+      margin-bottom: 0.5rem;
+    }
+    .infoWrapper {
+      p {
+        color: #aa0000;
+        font-size: 0.6rem;
+      }
+    }
+    h4 {
+      margin: 0 0 0.5rem 0;
+      font-size: 0.625rem;
+      font-weight: 400;
+      color: #182151;
+      text-transform: uppercase;
+    }
+    p {
+      margin: 0;
+      font-size: 0.75rem;
+      color: #182151;
+      opacity: 0.63;
+      line-height: 0.875rem;
+    }
+  }
+  .bottomRightWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}

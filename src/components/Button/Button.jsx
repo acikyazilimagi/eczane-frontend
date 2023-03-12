@@ -11,8 +11,8 @@ export const Button = ({
   background,
   block,
   variant,
+  bold,
 }) => {
-  console.log(size, radius, activeColor, active);
   return (
     <div>
       <button
@@ -26,11 +26,13 @@ export const Button = ({
           [styles.backgroundBlue]: background === "blue",
           [styles.radiusRight]: radius === "right",
           [styles.radiusLeft]: radius === "left",
+          [styles.sizeTiny]: size === "tiny",
           [styles.sizeSmall]: size === "small",
           [styles.sizeMedium]: size === "medium",
           [styles.sizeLarge]: size === "large",
           [styles.block]: block,
           [styles.text]: variant === "text",
+          [styles.bold]: bold,
         })}
       >
         {label}
@@ -42,11 +44,12 @@ export const Button = ({
 Button.propTypes = {
   background: PropTypes.oneOf(["none", "dark-blue", "blue", "teal"]),
   activeColor: PropTypes.oneOf(["red", "white"]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
+  size: PropTypes.oneOf(["tiny", "small", "medium", "large"]),
   label: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   radius: PropTypes.oneOf(["none", "left", "right", "both"]),
   active: PropTypes.bool,
   block: PropTypes.bool,
   variant: PropTypes.oneOf(["text"]),
+  bold: PropTypes.bool,
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.scss";
+import "./styles/App.scss";
 import MainViewContaier from "./components/MainViewContainer/MainViewContainer";
 
 export default function App() {
