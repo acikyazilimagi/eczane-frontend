@@ -9,6 +9,8 @@ export const Button = ({
   activeColor,
   active,
   background,
+  block,
+  variant,
 }) => {
   console.log(size, radius, activeColor, active);
   return (
@@ -20,6 +22,12 @@ export const Button = ({
           [styles.activeRed]: activeColor === "red" && active,
           [styles.activeWhite]: activeColor === "white" && active,
           [styles.backgroundBlue]: background === "blue",
+          [styles.radiusRight]: radius === "right",
+          [styles.radiusLeft]: radius === "left",
+          [styles.sizeMedium]: size === "medium",
+          [styles.sizeLarge]: size === "large",
+          [styles.block]: block,
+          [styles.text]: variant === "text",
         })}
       >
         {label}
@@ -36,4 +44,6 @@ Button.propTypes = {
   onClick: PropTypes.func,
   radius: PropTypes.oneOf(["none", "left", "right", "both"]),
   active: PropTypes.bool,
+  block: PropTypes.bool,
+  variant: PropTypes.oneOf(["text"]),
 };
