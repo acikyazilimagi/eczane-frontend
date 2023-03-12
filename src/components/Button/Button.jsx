@@ -24,6 +24,7 @@ export const Button = ({
           [styles.backgroundDarkBlue]: background === "dark-blue",
           [styles.backgroundTeal]: background === "teal",
           [styles.backgroundBlue]: background === "blue",
+          [styles.backgroundWhite]: background === "white",
           [styles.radiusRight]: radius === "right",
           [styles.radiusLeft]: radius === "left",
           [styles.sizeTiny]: size === "tiny",
@@ -42,7 +43,7 @@ export const Button = ({
 };
 
 Button.propTypes = {
-  background: PropTypes.oneOf(["none", "dark-blue", "blue", "teal"]),
+  background: PropTypes.oneOf(["none", "white", "dark-blue", "blue", "teal"]),
   activeColor: PropTypes.oneOf(["red", "white"]),
   size: PropTypes.oneOf(["tiny", "small", "medium", "large"]),
   label: PropTypes.string.isRequired,

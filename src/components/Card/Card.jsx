@@ -17,7 +17,7 @@ export const Card = () => {
           </div>
         </div>
         <div className={styles.topRightWrapper}>
-          <Button label="Yuz Yuze" background="teal" size="small" />
+          <Button label="Yuz Yuze" background="white" size="tiny" />
           <div className={styles.timeWrapper}>
             <p>09.00-18.00</p>
           </div>

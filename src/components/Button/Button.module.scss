@@ -18,6 +18,12 @@
   &.backgroundBlue {
     background-color: #407ec2;
   }
+  &.backgroundWhite {
+    background-color: #fff;
+    border: 1.5px solid #182151;
+    color: #182151;
+    backdrop-filter: blur(5px);
+  }
 
   &.activeRed {
     background-color: #f83b3b;
@@ -55,6 +61,6 @@
     text-decoration: underline;
   }
   &.bold {
-    font-size: 700;
+    font-weight: 700;
   }
 }
