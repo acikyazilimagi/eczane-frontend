@@ -1,0 +1,31 @@
+.swiper {
+  display: flex;
+  position: relative;
+  padding: 0 50px;
+  background-color: #1d204a;
+  border-radius: 1.875rem;
+  user-select: none;
+}
+
+:global(.alice-carousel__prev-btn) {
+  position: absolute;
+  left: -2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: block;
+  & > button {
+    margin-right: auto;
+    display: block;
+  }
+}
+:global(.alice-carousel__next-btn) {
+  position: absolute;
+  right: -2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: block;
+  & > button {
+    margin-left: auto;
+    display: block;
+  }
+}

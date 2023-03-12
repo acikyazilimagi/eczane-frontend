@@ -24,6 +24,7 @@ export const Button = ({
           [styles.backgroundBlue]: background === "blue",
           [styles.radiusRight]: radius === "right",
           [styles.radiusLeft]: radius === "left",
+          [styles.sizeSmall]: size === "small",
           [styles.sizeMedium]: size === "medium",
           [styles.sizeLarge]: size === "large",
           [styles.block]: block,
