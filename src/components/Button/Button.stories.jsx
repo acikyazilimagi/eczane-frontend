@@ -43,14 +43,14 @@ const Temp2 = () => (
   >
     <Button
       label="Harita"
-      background="blue"
+      background="dark-blue"
       activeColor="red"
       radius="left"
       size="medium"
     />
     <Button
       label="Liste"
-      background="blue"
+      background="dark-blue"
       activeColor="red"
       radius="right"
       size="medium"
@@ -78,14 +78,14 @@ const CitySelection = () => (
   >
     <Button
       label="Osmaniye"
-      background="blue"
+      background="dark-blue"
       activeColor="white"
       size="large"
       block
     />
     <Button
       label="Kahramanmaras"
-      background="blue"
+      background="dark-blue"
       activeColor="white"
       size="large"
       active
@@ -93,28 +93,28 @@ const CitySelection = () => (
     />
     <Button
       label="Adiyaman"
-      background="blue"
+      background="dark-blue"
       activeColor="white"
       size="large"
       block
     />
     <Button
       label="Malatya"
-      background="blue"
+      background="dark-blue"
       activeColor="white"
       size="large"
       block
     />
     <Button
       label="Diyarbakir"
-      background="blue"
+      background="dark-blue"
       activeColor="white"
       size="large"
       block
     />
     <Button
       label="Osmaniye"
-      background="blue"
+      background="dark-blue"
       activeColor="white"
       size="large"
       block
@@ -128,7 +128,7 @@ CityOptions.args = {
   size: "large",
 };
 
-export const CardButtonTemplate = ({ args }) => {
+const CardButtonTemplate = ({ args }) => {
   return (
     <div
       style={{

@@ -59,6 +59,9 @@
   &.text {
     color: #f83b3b;
     text-decoration: underline;
+    padding: 0;
+    margin: auto;
+    display: block;
   }
   &.bold {
     font-weight: 700;
