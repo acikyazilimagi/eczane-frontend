@@ -7,9 +7,16 @@
   padding: 0.625rem;
   border-radius: 1.25rem;
   font-size: 0.75rem;
+  cursor: pointer;
 
-  &.backgroundBlue {
+  &.backgroundDarkBlue {
     background-color: #1d204a;
+  }
+  &.backgroundTeal {
+    background-color: #349d8f;
+  }
+  &.backgroundBlue {
+    background-color: #407ec2;
   }
 
   &.activeRed {

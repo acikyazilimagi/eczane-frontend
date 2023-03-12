@@ -21,6 +21,8 @@ export const Button = ({
         className={clsx(styles.button, {
           [styles.activeRed]: activeColor === "red" && active,
           [styles.activeWhite]: activeColor === "white" && active,
+          [styles.backgroundDarkBlue]: background === "dark-blue",
+          [styles.backgroundTeal]: background === "teal",
           [styles.backgroundBlue]: background === "blue",
           [styles.radiusRight]: radius === "right",
           [styles.radiusLeft]: radius === "left",
@@ -38,7 +40,7 @@ export const Button = ({
 };
 
 Button.propTypes = {
-  background: PropTypes.oneOf(["none", "blue"]),
+  background: PropTypes.oneOf(["none", "dark-blue", "blue", "teal"]),
   activeColor: PropTypes.oneOf(["red", "white"]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
   label: PropTypes.string.isRequired,

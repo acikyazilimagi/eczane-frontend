@@ -1,4 +1,5 @@
 import { Button } from "./Button";
+import PropTypes from "prop-types";
 
 export default {
   title: "Button",
@@ -125,4 +126,41 @@ const CitySelection = () => (
 export const CityOptions = CitySelection.bind({});
 CityOptions.args = {
   size: "large",
+};
+
+export const CardButtonTemplate = ({ args }) => {
+  return (
+    <div
+      style={{
+        background: "#EFF5FF",
+        height: "500px",
+        padding: "20px",
+      }}
+    >
+      <div
+        style={{
+          width: "100px",
+          marginBottom: "10px",
+        }}
+      >
+        <Button label="Ara" background="teal" {...args} block />
+      </div>
+      <div
+        style={{
+          width: "100px",
+        }}
+      >
+        <Button label="Harita'da Gor" background="blue" block {...args} />
+      </div>
+    </div>
+  );
+};
+
+export const CardButton = CardButtonTemplate.bind({});
+CardButton.args = {
+  size: "small",
+};
+
+CardButtonTemplate.propTypes = {
+  args: PropTypes.object,
 };
