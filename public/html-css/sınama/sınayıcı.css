@@ -1,0 +1,44 @@
+.siteler{background-color: gray;}
+.düğme{background-color: #111A42}
+.süzgeç{background-color: rgb(255, 187, 0);}
+.arama{background-color: red;}
+
+body{
+    background-color: white;
+}
+
+.dolp-germe{
+    background-color: #faf06007;
+}
+
+
+.bet{
+    background-color: #ffffff66;
+    background-image: linear-gradient(135deg,#3dd52980 10%,transparent 0,transparent 50%,#51f63b80 0,#51f63b80 60%,transparent 0,transparent);
+    background-size: 7.07px 7.07px;
+}
+
+
+header{
+    background-color: #60fac71a;
+    background-image: linear-gradient(135deg,#3bf6be80 10%,transparent 0,transparent 50%,#3bf6be80 0,#3bf6be80 60%,transparent 0,transparent);
+    background-size: 7.07px 7.07px;
+    background-repeat: repeat;
+}
+main{
+    background-color: #60a5fa1a;
+    background-image: linear-gradient(135deg,#3b82f680 10%,transparent 0,transparent 50%,#3b82f680 0,#3b82f680 60%,transparent 0,transparent);
+    background-size: 7.07px 7.07px;
+}
+
+footer{
+    background-color: #ed60fa1a;
+    background-image: linear-gradient(135deg,#d73bf680 10%,transparent 0,transparent 50%,#d73bf680 0,#d73bf680 60%,transparent 0,transparent);
+    background-size: 7.07px 7.07px;
+}
+
+damga{
+    background-color: #ff07071a;
+    background-image: linear-gradient(135deg,#f63b3b80 10%,transparent 0,transparent 50%,#f63b3b80 0,#f63b3b80 60%,transparent 0,transparent);
+    background-size: 7.07px 7.07px;
+}
